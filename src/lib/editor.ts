@@ -23,11 +23,15 @@ export function addNode(
   if (kind === 'room' || kind === 'entrance') {
     const floor = b.floors.find((f) => f.id === floorId);
     const half = 3;
+    // Keep the new room's outline inside the floor.
+    const cx = (v: number, max?: number) => Math.min(max ?? Infinity, Math.max(0, v));
+    const x0 = cx(x - half, floor?.width), x1 = cx(x + half, floor?.width);
+    const y0 = cx(y - half, floor?.height), y1 = cx(y + half, floor?.height);
     const polygon: Array<[number, number]> = [
-      [x - half, y - half],
-      [x + half, y - half],
-      [x + half, y + half],
-      [x - half, y + half],
+      [x0, y0],
+      [x1, y0],
+      [x1, y1],
+      [x0, y1],
     ];
     if (floor) {
       return {

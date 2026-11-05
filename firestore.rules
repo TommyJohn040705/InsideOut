@@ -1,0 +1,98 @@
+rules_version = '2';
+
+// InsideOut Firestore security rules.
+//
+// reports/{id}        Waze-style reports. Any signed-in user (anonymous is fine)
+//                     can create one and confirm/clear it by exactly +1.
+//                     Nobody can rewrite or delete them from the client.
+// buildings/{id}      Approved maps everyone sees. Only admins write.
+// mapProposals/{id}   Suggested map edits. Signed-in users create pending
+//                     proposals; only admins approve or reject.
+// admins/{uid}        Admin list, managed in the Firebase console only.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function str(v, max) {
+      return v is string && v.size() <= max;
+    }
+
+    match /reports/{id} {
+      allow read: if true;
+
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(
+             ['buildingId', 'kind', 'targetId', 'note', 'createdAt', 'expiresAt', 'confirmations', 'clears', 'authorUid'])
+        && str(request.resource.data.buildingId, 100)
+        && request.resource.data.kind in ['blocked-corridor', 'elevator-out', 'stairs-closed']
+        && str(request.resource.data.targetId, 200)
+        && (!('note' in request.resource.data) || str(request.resource.data.note, 280))
+        && request.resource.data.confirmations == 1
+        && request.resource.data.clears == 0
+        && request.resource.data.authorUid == request.auth.uid
+        && request.resource.data.createdAt is int
+        && request.resource.data.createdAt <= request.time.toMillis() + 60000
+        && request.resource.data.createdAt >= request.time.toMillis() - 600000
+        && request.resource.data.expiresAt is int
+        && request.resource.data.expiresAt > request.resource.data.createdAt
+        && request.resource.data.expiresAt <= request.resource.data.createdAt + 14400000; // 4 hours
+
+      // Confirm: confirmations +1 and expiry pushed out by at most 2 hours.
+      // Clear: clears +1. Nothing else may change.
+      allow update: if signedIn()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['confirmations', 'clears', 'expiresAt'])
+        && (
+          (request.resource.data.confirmations == resource.data.confirmations + 1
+            && request.resource.data.clears == resource.data.clears
+            && request.resource.data.expiresAt is int
+            && request.resource.data.expiresAt <= request.time.toMillis() + 21600000) // 6 hours max
+          ||
+          (request.resource.data.clears == resource.data.clears + 1
+            && request.resource.data.confirmations == resource.data.confirmations
+            && request.resource.data.expiresAt == resource.data.expiresAt)
+        );
+
+      allow delete: if isAdmin();
+    }
+
+    match /buildings/{id} {
+      allow read: if true;
+      allow write: if isAdmin()
+        && request.resource.data.keys().hasOnly(['name', 'json', 'version', 'updatedAt', 'approvedBy', 'proposalId'])
+        && str(request.resource.data.json, 900000)
+        && request.resource.data.version is int;
+    }
+
+    match /mapProposals/{id} {
+      allow read: if isAdmin() || (signedIn() && resource.data.authorUid == request.auth.uid);
+
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(
+             ['buildingId', 'buildingName', 'json', 'note', 'status', 'authorUid', 'createdAt', 'baseVersion'])
+        && request.resource.data.status == 'pending'
+        && request.resource.data.authorUid == request.auth.uid
+        && str(request.resource.data.buildingId, 100)
+        && str(request.resource.data.buildingName, 200)
+        && str(request.resource.data.json, 900000)
+        && (!('note' in request.resource.data) || str(request.resource.data.note, 500));
+
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'reviewedBy', 'reviewedAt'])
+        && request.resource.data.status in ['approved', 'rejected'];
+
+      allow delete: if isAdmin();
+    }
+
+    match /admins/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow write: if false; // managed in the Firebase console
+    }
+  }
+}

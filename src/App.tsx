@@ -28,6 +28,9 @@ import {
   validateBuilding,
 } from './lib/editor';
 import type { Building, MapEdge, MapNode, Report } from './lib/types';
+import { SyncPanel } from './components/SyncPanel';
+import { loadDirty, loadSyncedVersions, saveDirty, saveSyncedVersions, useSync } from './lib/sync/useSync';
+import { mergeApproved } from './lib/sync/model';
 
 type Mode = 'navigate' | 'ask' | 'report' | 'edit' | 'import';
 
@@ -48,11 +51,23 @@ export default function App() {
     return buildings.some((b) => b.id === saved) ? saved! : buildings[0].id;
   });
   const building = buildings.find((b) => b.id === buildingId) ?? buildings[0];
+  const [dirtyIds, setDirtyIds] = useState<string[]>(() => loadDirty());
+  const [syncedVersions, setSyncedVersions] = useState<Record<string, number>>(() => loadSyncedVersions());
+  /** Applies a map edit to the current building and marks it as changed locally. */
   const setBuilding = useCallback(
-    (update: Building | ((b: Building) => Building)) =>
-      setBuildings((all) => all.map((b) => (b.id === buildingId ? (typeof update === 'function' ? update(b) : update) : b))),
+    (update: Building | ((b: Building) => Building)) => {
+      setBuildings((all) => all.map((b) => (b.id === buildingId ? (typeof update === 'function' ? update(b) : update) : b)));
+      setDirtyIds((d) => (d.includes(buildingId) ? d : [...d, buildingId]));
+    },
     [buildingId],
   );
+  const sync = useSync();
+  const live = sync.status === 'live' && !!sync.backend;
+  const [remoteReports, setRemoteReports] = useState<Report[]>([]);
+  const buildingsRef = useRef(buildings);
+  buildingsRef.current = buildings;
+  const syncRef = useRef({ syncedVersions, dirtyIds });
+  syncRef.current = { syncedVersions, dirtyIds };
 
   const [reports, setReports] = useState<Report[]>(() => loadReports());
   const [mode, setMode] = useState<Mode>('navigate');
@@ -75,6 +90,31 @@ export default function App() {
     if (!saveBuildings(buildings)) setToast('Browser storage is full; recent map edits will not survive a reload. Export JSON to keep them.');
   }, [buildings]);
   useEffect(() => saveActiveBuildingId(buildingId), [buildingId]);
+  useEffect(() => saveDirty(dirtyIds), [dirtyIds]);
+  useEffect(() => saveSyncedVersions(syncedVersions), [syncedVersions]);
+
+  // Approved maps from Firestore replace local copies (unless they have unsent edits).
+  useEffect(() => {
+    if (!live) return;
+    return sync.backend!.subscribeBuildings(
+      (approved) => {
+        const { syncedVersions: v, dirtyIds: d } = syncRef.current;
+        const merged = mergeApproved(buildingsRef.current, approved, v, new Set(d));
+        if (merged.updated.length === 0) return;
+        setBuildings(merged.buildings);
+        setSyncedVersions(merged.syncedVersions);
+        if (merged.updated.includes(buildingId)) setToast('This map was updated with newly approved changes.');
+      },
+      (e) => setToast(`Map sync error: ${e.message}`),
+    );
+  }, [live, sync.backend, buildingId]);
+
+  // Live reports for the current building.
+  useEffect(() => {
+    if (!live) return;
+    setRemoteReports([]);
+    return sync.backend!.subscribeReports(building.id, setRemoteReports, (e) => setToast(`Report sync error: ${e.message}`));
+  }, [live, sync.backend, building.id]);
   useEffect(() => saveReports(reports), [reports]);
   useEffect(() => {
     const t = setInterval(() => setNow(Date.now()), 30_000);
@@ -94,13 +134,22 @@ export default function App() {
 
   const floors = useMemo(() => [...building.floors].sort((a, b) => b.level - a.level), [building.floors]);
   const floor = building.floors.find((f) => f.id === floorId) ?? floors[floors.length - 1];
-  const buildingReports = useMemo(() => reports.filter((r) => !r.buildingId || r.buildingId === building.id), [reports, building.id]);
-  const live = useMemo(() => activeReports(buildingReports, now), [buildingReports, now]);
-  const blocked = useMemo(() => blockedEdgeIds(building, live, now), [building, live, now]);
-  const outShafts = useMemo(
-    () => new Set(live.filter((r) => r.kind === 'elevator-out' || r.kind === 'stairs-closed').map((r) => r.targetId)),
-    [live],
+  const buildingReports = useMemo(
+    () => (live ? remoteReports : reports.filter((r) => !r.buildingId || r.buildingId === building.id)),
+    [live, remoteReports, reports, building.id],
   );
+  const activeNow = useMemo(() => activeReports(buildingReports, now), [buildingReports, now]);
+  const blocked = useMemo(() => blockedEdgeIds(building, activeNow, now), [building, activeNow, now]);
+  const outShafts = useMemo(
+    () => new Set(activeNow.filter((r) => r.kind === 'elevator-out' || r.kind === 'stairs-closed').map((r) => r.targetId)),
+    [activeNow],
+  );
+
+  const reportAction = (fn: () => Promise<unknown>) => fn().catch((e) => setToast(`Could not sync report: ${e instanceof Error ? e.message : e}`));
+  const doConfirm = (id: string) =>
+    live ? reportAction(() => sync.backend!.confirmReport(id)) : setReports((rs) => rs.map((r) => (r.id === id ? confirmReport(r) : r)));
+  const doClear = (id: string) =>
+    live ? reportAction(() => sync.backend!.clearReport(id)) : setReports((rs) => rs.map((r) => (r.id === id ? clearReport(r) : r)));
 
   const result = useMemo(
     () => (fromId && toId ? findRoute(building, { fromId, toId, options: { accessible }, blockedEdges: blocked }) : null),
@@ -220,9 +269,13 @@ export default function App() {
 
   const submitReport = () => {
     if (!reportDraft) return;
-    const existing = live.find((r) => r.kind === reportDraft.kind && r.targetId === reportDraft.targetId);
-    if (existing) setReports((rs) => rs.map((r) => (r.id === existing.id ? confirmReport(r) : r)));
-    else setReports((rs) => [...rs, createReport(reportDraft.kind, reportDraft.targetId, reportNote, Date.now(), building.id)]);
+    const existing = activeNow.find((r) => r.kind === reportDraft.kind && r.targetId === reportDraft.targetId);
+    if (existing) doConfirm(existing.id);
+    else {
+      const r = createReport(reportDraft.kind, reportDraft.targetId, reportNote, Date.now(), building.id);
+      if (live) reportAction(() => sync.backend!.addReport(r));
+      else setReports((rs) => [...rs, r]);
+    }
     setReportDraft(null);
     setReportNote('');
     setNow(Date.now());
@@ -241,6 +294,16 @@ export default function App() {
     a.download = `${building.name.replace(/\W+/g, '-').toLowerCase() || 'building'}.json`;
     a.click();
     URL.revokeObjectURL(a.href);
+  };
+  const [jsonText, setJsonText] = useState<string | null>(null);
+  const copyJson = async () => {
+    const text = JSON.stringify(building, null, 2);
+    try {
+      await navigator.clipboard.writeText(text);
+      setToast('Building JSON copied to the clipboard.');
+    } catch {
+      setJsonText(text); // clipboard blocked: show it so it can be copied by hand
+    }
   };
   const importJson = async (file: File) => {
     try {
@@ -274,6 +337,9 @@ export default function App() {
             </select>
           </div>
         </div>
+        <span className={`sync-pill ${sync.status}`} title={live ? `Synced with Firebase (${sync.backend!.projectId})` : 'Saved on this device only'}>
+          {live ? 'Live' : sync.status === 'connecting' ? 'Connecting' : sync.status === 'error' ? 'Offline' : 'This device'}
+        </span>
         <nav className="modes" aria-label="Mode">
           {(Object.keys(MODE_LABEL) as Mode[]).map((m) => (
             <button
@@ -365,13 +431,13 @@ export default function App() {
               building={building}
               reports={buildingReports}
               now={now}
-              onConfirm={(id) => setReports((rs) => rs.map((r) => (r.id === id ? confirmReport(r) : r)))}
-              onClear={(id) => setReports((rs) => rs.map((r) => (r.id === id ? clearReport(r) : r)))}
+              onConfirm={doConfirm}
+              onClear={doClear}
             />
           )}
-          {(mode === 'navigate' || mode === 'ask') && live.length > 0 && (
+          {(mode === 'navigate' || mode === 'ask') && activeNow.length > 0 && (
             <p className="hint warn">
-              {live.length} live report{live.length > 1 ? 's' : ''} affecting routes. Open <b>Report</b> to view.
+              {activeNow.length} live report{activeNow.length > 1 ? 's' : ''} affecting routes. Open <b>Report</b> to view.
             </p>
           )}
 
@@ -400,6 +466,7 @@ export default function App() {
                 setToId(undefined);
               }}
               onExport={exportJson}
+              onCopy={copyJson}
               onImportJson={importJson}
               onReset={() => {
                 clearSavedBuildings();
@@ -412,6 +479,26 @@ export default function App() {
                 setSelectedId(undefined);
               }}
             />
+          )}
+
+          {mode === 'edit' && (
+            <section className="panel">
+              <SyncPanel
+                status={sync.status}
+                error={sync.error}
+                backend={sync.backend}
+                user={sync.user}
+                building={building}
+                dirty={dirtyIds.includes(building.id)}
+                syncedVersion={syncedVersions[building.id] ?? 0}
+                onToast={setToast}
+                onDiscardLocal={() => {
+                  setDirtyIds((d) => d.filter((x) => x !== building.id));
+                  setSyncedVersions((v) => ({ ...v, [building.id]: 0 }));
+                  setToast('Local changes discarded. The approved map will load.');
+                }}
+              />
+            </section>
           )}
 
           {mode === 'import' && (
@@ -484,6 +571,16 @@ export default function App() {
                   Submit report
                 </button>
                 <button onClick={() => setReportDraft(null)}>Cancel</button>
+              </div>
+            </div>
+          )}
+          {jsonText && (
+            <div className="modal" role="dialog" aria-label="Building JSON">
+              <h3>Building JSON</h3>
+              <p className="muted">Your browser blocked the clipboard. Select all and copy:</p>
+              <textarea className="json-box" readOnly value={jsonText} onFocus={(e) => e.currentTarget.select()} />
+              <div className="row">
+                <button onClick={() => setJsonText(null)}>Close</button>
               </div>
             </div>
           )}

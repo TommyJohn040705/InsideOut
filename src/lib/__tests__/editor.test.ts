@@ -15,6 +15,13 @@ describe('floor plan editor operations', () => {
     expect(r.ok).toBe(true);
   });
 
+  it('keeps a new room outline inside the floor', () => {
+    const { building, node } = addNode(createSampleBuilding(), 'f1', 'room', 59, 29);
+    const poly = building.floors[0].rooms.find((r) => r.nodeId === node.id)!.polygon;
+    expect(Math.max(...poly.map((p) => p[0]))).toBeLessThanOrEqual(60);
+    expect(Math.max(...poly.map((p) => p[1]))).toBeLessThanOrEqual(30);
+  });
+
   it('moves a node and its outline together', () => {
     const b = moveNode(createSampleBuilding(), 'f1-N-10', 12, 5);
     const n = b.nodes.find((x) => x.id === 'f1-N-10')!;

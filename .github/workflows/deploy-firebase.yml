@@ -1,0 +1,45 @@
+name: Deploy to Firebase Hosting + Functions (alternative)
+
+# Optional alternative to Firebase App Hosting (see DEPLOY.md, option B).
+# Needs repository secrets FIREBASE_SERVICE_ACCOUNT and GEMINI_API_KEY and the
+# repository variable FIREBASE_PROJECT_ID.
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: "Hosting channel: 'live' for production, or a preview name like 'pr1'"
+        default: pr-preview
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PROJECT: ${{ vars.FIREBASE_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npm run build:functions && npm --prefix functions ci --omit=dev
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      - name: Store the Gemini key in Secret Manager
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: printf '%s' "$GEMINI_API_KEY" | npx -y firebase-tools@15.35.0 functions:secrets:set GEMINI_API_KEY --data-file=- --project "$PROJECT" --force --non-interactive
+      - name: Deploy rules, indexes and API function
+        run: npx -y firebase-tools@15.35.0 deploy --only firestore,functions --project "$PROJECT" --force --non-interactive
+      - name: Deploy web app
+        run: |
+          if [ "${{ inputs.channel }}" = "live" ]; then
+            npx -y firebase-tools@15.35.0 deploy --only hosting --project "$PROJECT" --non-interactive
+          else
+            npx -y firebase-tools@15.35.0 hosting:channel:deploy "${{ inputs.channel }}" --expires 30d --project "$PROJECT" --non-interactive
+          fi
