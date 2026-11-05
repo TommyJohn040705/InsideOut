@@ -4,6 +4,8 @@ import type { Building, MapEdge, Report, ReportKind } from './types';
 export const DEFAULT_REPORT_TTL_MS = 4 * 60 * 60 * 1000; // 4 hours
 /** Each confirmation extends the report's life by this much. */
 export const CONFIRM_EXTENSION_MS = 2 * 60 * 60 * 1000; // 2 hours
+/** A report never stays active longer than this from now (matches Firestore rules). */
+export const MAX_REPORT_LIFETIME_MS = 6 * 60 * 60 * 1000; // 6 hours
 
 let counter = 0;
 const newId = () => `rpt-${Date.now().toString(36)}-${(counter++).toString(36)}`;
@@ -32,7 +34,7 @@ export function confirmReport(report: Report, now: number = Date.now()): Report 
   return {
     ...report,
     confirmations: report.confirmations + 1,
-    expiresAt: Math.max(report.expiresAt, now) + CONFIRM_EXTENSION_MS,
+    expiresAt: Math.min(Math.max(report.expiresAt, now) + CONFIRM_EXTENSION_MS, now + MAX_REPORT_LIFETIME_MS),
   };
 }
 

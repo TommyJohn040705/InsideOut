@@ -1,0 +1,28 @@
+name: Gemini live check
+
+# Run from the GitHub website: Actions > Gemini live check > Run workflow.
+# Uses the GEMINI_API_KEY repository secret; the key is never printed.
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Gemini model id
+        default: gemini-3.8-flash
+        required: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Call Gemini with a real floor plan and a wayfinding question
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ inputs.model }}
+        run: npm run check:gemini

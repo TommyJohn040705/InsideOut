@@ -1,0 +1,11 @@
+{
+  "name": "insideout-functions",
+  "private": true,
+  "description": "InsideOut API as a Firebase Cloud Function. lib/index.js is built by `npm run build:functions` in the repo root.",
+  "main": "lib/index.js",
+  "type": "commonjs",
+  "engines": { "node": "22" },
+  "dependencies": {
+    "firebase-functions": "^7.4.0"
+  }
+}

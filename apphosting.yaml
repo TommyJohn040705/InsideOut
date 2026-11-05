@@ -1,0 +1,22 @@
+# Firebase App Hosting configuration (browser-only deployment from GitHub).
+# See DEPLOY.md. The Gemini key is a Secret Manager reference, never a value.
+runConfig:
+  minInstances: 0
+  maxInstances: 3
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+scripts:
+  buildCommand: npm run build
+  runCommand: npm start
+
+env:
+  - variable: GEMINI_API_KEY
+    secret: GEMINI_API_KEY
+    availability:
+      - RUNTIME
+  - variable: GEMINI_MODEL
+    value: gemini-3.8-flash
+    availability:
+      - RUNTIME

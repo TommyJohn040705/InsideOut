@@ -36,6 +36,10 @@ function matchesCategory(n: MapNode, cat: (typeof CATEGORY_WORDS)[number]): bool
   return cat.words.some((w) => new RegExp(`\\b${w}`).test(text));
 }
 
+function article(noun: string): string {
+  return /^[aeiou]/i.test(noun) ? 'an' : 'a';
+}
+
 function floorName(b: Building, id: string) {
   return b.floors.find((f) => f.id === id)?.name ?? '';
 }
@@ -54,8 +58,14 @@ export function answerLocally(
   const cat = CATEGORY_WORDS.find((c) => c.words.some((w) => new RegExp(`\\b${w}`).test(q)));
 
   if (cat) {
+    const here = fromId ? building.nodes.find((n) => n.id === fromId) : undefined;
     const candidates = building.nodes.filter((n) => n.kind !== 'corridor' && n.label && n.id !== fromId && matchesCategory(n, cat));
-    if (candidates.length === 0) return { answer: `I could not find a ${cat.noun} in ${building.name}.`, source: 'local' };
+    if (candidates.length === 0) {
+      if (here && matchesCategory(here, cat)) {
+        return { answer: `You are already at ${clean(here.label)}, which is the only ${cat.noun} here.`, destinationId: here.id, source: 'local' };
+      }
+      return { answer: `I could not find ${article(cat.noun)} ${cat.noun} in ${building.name}.`, source: 'local' };
+    }
     if (!fromId) {
       const c = candidates[0];
       return {

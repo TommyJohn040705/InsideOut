@@ -25,6 +25,13 @@ describe('local assistant', () => {
     expect(helix.nodes.find((n) => n.id === a.destinationId)!.category).toBe('restroom');
   });
 
+  it('handles being at the only matching place, with correct grammar', () => {
+    const a = answerLocally(demo, 'take me to the nearest exit', 'f1-S-30');
+    expect(a.answer).toBe('You are already at Main Entrance, which is the only exit here.');
+    const empty = { ...demo, nodes: demo.nodes.filter((n) => n.kind !== 'entrance') };
+    expect(answerLocally(empty, 'nearest exit', 'f1-N-10').answer).toBe('I could not find an exit in Demo Hall.');
+  });
+
   it('builds a directory without corridor points', () => {
     const dir = buildDirectory(demo);
     expect(dir.some((d) => d.name === 'Library' && d.floor === 'Floor 2')).toBe(true);

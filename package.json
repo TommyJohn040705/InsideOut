@@ -11,10 +11,15 @@
     "test": "vitest run",
     "dev:client": "vite",
     "start": "NODE_ENV=production tsx server/index.ts",
-    "test:e2e": "python3 e2e/smoke.py"
+    "test:e2e": "python3 e2e/smoke.py",
+    "check:gemini": "tsx scripts/check-gemini.ts",
+    "build:functions": "esbuild functions/src/index.ts --bundle --platform=node --target=node22 --format=cjs --external:firebase-functions --outfile=functions/lib/index.js",
+    "test:firebase": "npx -y firebase-tools@15.35.0 emulators:exec --only auth,firestore --project demo-insideout \"vitest run -c vitest.firebase.config.ts\"",
+    "test:sync-ui": "bash scripts/sync-ui-test.sh"
   },
   "dependencies": {
     "express": "^4.22.3",
+    "firebase": "^13.2.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "tsx": "^4.23.15"
@@ -26,10 +31,14 @@
     "@types/react-dom": "^19.3.0",
     "@types/supertest": "^7.2.1",
     "@vitejs/plugin-react": "^6.1.2",
+    "esbuild": "^0.28.2",
     "oxlint": "^1.90.0",
     "supertest": "^7.3.1",
     "typescript": "~7.0.2",
     "vite": "^8.3.6",
     "vitest": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

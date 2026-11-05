@@ -27,6 +27,7 @@ interface Props {
   onAddFloor: () => void;
   onDeleteFloor: () => void;
   onExport: () => void;
+  onCopy: () => void;
   onImportJson: (file: File) => void;
   onReset: () => void;
 }
@@ -111,6 +112,7 @@ export function EditorPanel(p: Props) {
         <p className="muted">Edits save automatically in this browser.</p>
         <div className="row">
           <button onClick={p.onExport}>Export JSON</button>
+          <button onClick={p.onCopy}>Copy JSON</button>
           <button onClick={() => fileRef.current?.click()}>Import JSON</button>
           <button className="danger" onClick={p.onReset}>
             Reset to demo

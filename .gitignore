@@ -26,3 +26,12 @@ dist-ssr
 # Local secrets
 .env
 .env.local
+
+# Firebase
+functions/lib
+functions/node_modules
+.firebase
+firebase-debug.log
+firestore-debug.log
+dist-emulator
+__pycache__/
