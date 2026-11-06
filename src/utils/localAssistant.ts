@@ -63,9 +63,9 @@ export function answerLocally(q: string, from: RoomPOI | null, plans: FloorPlanD
       const r = p.rooms.find((x) => (x.roomNumber || '').toUpperCase() === n);
       if (r) {
         const room = withFloor(r, p);
-        const verified = r.purposeVerification === 'verified_official_source' || r.purposeVerification === 'web_lookup_user_approved';
+        const verified = r.purposeVerification === 'verified_official_source' || r.purposeVerification === 'web_lookup_user_approved' || r.purposeVerification === 'staff_reported';
         return {
-          answer: `${r.roomNumber} is on floor ${room.floor}: ${r.name}.${r.purpose && verified ? ` ${r.purpose}` : ' Its purpose is not verified yet.'}`,
+          answer: `${r.roomNumber} is on floor ${room.floor}: ${r.name}.${r.purpose && verified ? ` ${r.purpose}` : ' Its purpose is not verified yet.'}${r.purposeVerification === 'staff_reported' ? ' (reported by staff)' : ''}`,
           room,
           sources: verified && r.sourceUrl ? [{ title: 'Source', url: r.sourceUrl }] : undefined,
         };

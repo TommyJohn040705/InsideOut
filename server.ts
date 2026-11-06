@@ -373,6 +373,35 @@ Reply with ONLY a JSON object, no other text:
   }
 });
 
+/**
+ * POST /api/read-sign  { image: dataUrl } -> { roomNumber, name }
+ * Reads the room number and name printed on a door sign. No web search.
+ */
+app.post('/api/read-sign', async (req: Request, res: Response) => {
+  try {
+    const { image } = req.body || {};
+    if (!image) return res.status(400).json({ error: 'image is required' });
+    if (!process.env.GEMINI_API_KEY) return res.status(503).json({ error: 'GEMINI_API_KEY is not set on the server' });
+    const { mimeType, data } = parseDataUrl(image);
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.8-flash',
+      contents: [{ role: 'user', parts: [
+        { inlineData: { mimeType, data } },
+        { text: 'Read the room sign in this photo. Return JSON {"roomNumber": string, "name": string}. roomNumber is only the number printed on the sign (for example "2108" or "3101A"), without the building code. Use "" for anything you cannot read. Do not guess.' },
+      ] }],
+      config: {
+        responseMimeType: 'application/json',
+        responseSchema: { type: Type.OBJECT, properties: { roomNumber: { type: Type.STRING }, name: { type: Type.STRING } }, required: ['roomNumber'] },
+      },
+    });
+    const parsed = JSON.parse(response.text || '{}');
+    return res.json({ roomNumber: String(parsed.roomNumber || '').replace(/^E\d+[\s-]*/i, '').trim(), name: String(parsed.name || '').trim() });
+  } catch (error: any) {
+    console.error('Error reading sign:', error);
+    return res.status(500).json({ error: error?.message || 'Could not read the sign' });
+  }
+});
+
 // Production static file serving or Dev Vite middleware
 async function setupServer() {
   if (isProduction) {

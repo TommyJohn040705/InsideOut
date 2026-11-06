@@ -32,6 +32,7 @@ export type VerificationStatus =
   | 'verified_official_source'
   | 'unverified_drawing_only'
   | 'web_lookup_user_approved'
+  | 'staff_reported'
   | 'unknown';
 
 export type PhysicalVerification =
@@ -65,6 +66,9 @@ export interface RoomPOI {
   /** web pages found by the room lookup, shown with the purpose */
   sources?: { title: string; url: string }[];
   lookupConfidence?: 'high' | 'medium' | 'low' | 'none';
+  /** small photo added with a staff report (data URL) */
+  photo?: string;
+  reportedAt?: string;
 }
 
 export interface CorridorNode {

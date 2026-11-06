@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import {
   Search, X, ArrowUpDown, Accessibility, Volume2, VolumeX, Play, Pause, RotateCcw, ArrowUp, ArrowLeft, ArrowRight,
   ArrowUpLeft, ArrowUpRight, Flag, CircleDot, ArrowUpFromLine, ArrowDownToLine, Footprints, Clock, MapPin, Navigation2,
-  ExternalLink, Pencil, AlertTriangle, BadgeCheck, CircleHelp, Globe,
+  ExternalLink, Pencil, AlertTriangle, BadgeCheck, CircleHelp, Globe, UserCheck,
 } from 'lucide-react';
 import { ManeuverAction, NavigationRoute, NavigationStep, RoomPOI } from '../types/navigation';
 
@@ -243,6 +243,7 @@ export function RoomCard({ room, onDirections, onStartHere, onEdit, onReport, on
 }) {
   const verified = room.purposeVerification === 'verified_official_source';
   const webApproved = room.purposeVerification === 'web_lookup_user_approved';
+  const staff = room.purposeVerification === 'staff_reported';
   return (
     <div className="space-y-3">
       <div className="flex items-start gap-3">
@@ -261,12 +262,13 @@ export function RoomCard({ room, onDirections, onStartHere, onEdit, onReport, on
         </button>
         <button onClick={onStartHere} className="h-11 px-4 rounded-full ring-1 ring-slate-300 text-slate-800 font-semibold hover:bg-slate-50">Start here</button>
       </div>
-      <div className={cx('text-sm rounded-xl p-3', verified ? 'bg-green-50 text-green-900' : webApproved ? 'bg-blue-50 text-blue-900' : 'bg-slate-50 text-slate-600')}>
+      <div className={cx('text-sm rounded-xl p-3', verified ? 'bg-green-50 text-green-900' : webApproved ? 'bg-blue-50 text-blue-900' : staff ? 'bg-amber-50 text-amber-900' : 'bg-slate-50 text-slate-600')}>
         <p className="flex items-center gap-1.5 font-semibold">
-          {verified ? <BadgeCheck className="w-4 h-4" /> : webApproved ? <Globe className="w-4 h-4" /> : <CircleHelp className="w-4 h-4" />}
-          {verified ? 'Purpose verified' : webApproved ? 'Found online, approved by you' : 'Purpose not verified'}
+          {verified ? <BadgeCheck className="w-4 h-4" /> : webApproved ? <Globe className="w-4 h-4" /> : staff ? <UserCheck className="w-4 h-4" /> : <CircleHelp className="w-4 h-4" />}
+          {verified ? 'Purpose verified' : webApproved ? 'Found online, approved by you' : staff ? `Reported by staff${room.reportedAt ? ` · ${new Date(room.reportedAt).toLocaleDateString()}` : ''}` : 'Purpose not verified'}
         </p>
-        {(verified || webApproved) && room.purpose && <p className="mt-1 leading-snug">{room.purpose}</p>}
+        {(verified || webApproved || staff) && room.purpose && <p className="mt-1 leading-snug">{room.purpose}</p>}
+        {room.photo && <img src={room.photo} alt={`Photo of ${room.roomNumber || room.name}`} className="mt-2 rounded-lg max-h-40 ring-1 ring-black/5" />}
         {webApproved && room.sources && room.sources.length > 0 ? (
           <div className="mt-1 space-y-0.5">
             {room.sources.slice(0, 3).map((s) => (
@@ -280,7 +282,7 @@ export function RoomCard({ room, onDirections, onStartHere, onEdit, onReport, on
         )}
         {!verified && onLookup && (
           <button onClick={onLookup} className="mt-2 h-9 px-3 rounded-full bg-white ring-1 ring-slate-300 text-slate-800 font-semibold inline-flex items-center gap-1.5">
-            <Globe className="w-4 h-4" /> {webApproved ? 'Look up again' : 'Look up online'}
+            <Globe className="w-4 h-4" /> {webApproved || staff ? 'Update info' : 'Look up or add info'}
           </button>
         )}
       </div>

@@ -64,7 +64,7 @@ export function Assistant({ open, onClose, plan, plans, start, accessible, isE5,
     } catch {
       setMsgs((m) => [...m, {
         role: 'bot', offline: true,
-        text: "I can't reach the AI server right now. I can still answer: nearest washroom, elevator, stairs or exit, food, and \"where is room 1234\". To find out what a room is used for, try Look up a room.",
+        text: "I can't reach the AI server right now. I can still answer: nearest washroom, elevator, stairs or exit, food, and \"where is room 1234\". To find out what a room is used for, try Update a room.",
       }]);
     } finally { setBusy(false); }
   };
@@ -100,7 +100,7 @@ export function Assistant({ open, onClose, plan, plans, start, accessible, isE5,
                 )}
                 {m.offline && (
                   <button onClick={() => { onClose(); onLookup(); }} className="mt-2 h-9 px-3 rounded-full ring-1 ring-slate-300 bg-white text-sm font-semibold flex items-center gap-1.5">
-                    <Globe className="w-3.5 h-3.5" /> Look up a room
+                    <Globe className="w-3.5 h-3.5" /> Update a room
                   </button>
                 )}
               </div>

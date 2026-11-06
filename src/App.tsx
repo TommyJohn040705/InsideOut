@@ -9,7 +9,7 @@ import {
   LocateFixed, ChevronLeft, Accessibility, Bath, ArrowUpDown, GraduationCap, FlaskConical, DoorOpen, Globe,
 } from 'lucide-react';
 import { SAMPLE_FLOOR_PLANS } from './data/sampleFloorPlans';
-import { FloorPlanData, RoomPOI, Point, NavigationRoute } from './types/navigation';
+import { FloorPlanData, RoomPOI, Point, NavigationRoute, POICategory } from './types/navigation';
 import { calculateIndoorRoute } from './utils/pathfinding';
 import { speakGuidance } from './utils/speech';
 import { FloorPlanEditorModal } from './components/FloorPlanEditorModal';
@@ -289,9 +289,21 @@ export default function App() {
     };
     updateRoom({ ...room, ...patch });
   };
+  const saveStaff = (room: RoomPOI, info: { name?: string; purpose: string; category?: POICategory; photo?: string }) => {
+    updateRoom({
+      ...room,
+      name: info.name || room.name,
+      purpose: info.purpose,
+      category: info.category || room.category,
+      photo: info.photo || room.photo,
+      purposeVerification: 'staff_reported',
+      reportedAt: new Date().toISOString(),
+      sources: undefined, sourceUrl: undefined, lookupConfidence: undefined,
+    });
+  };
   const updateRoom = (updated: RoomPOI) => {
-    const { id, name, category, purpose, coords, sourceUrl, sources, lookupConfidence, purposeVerification, accessible, notes } = updated;
-    persist(id, { name, category, purpose, coords, sourceUrl, sources, lookupConfidence, purposeVerification, accessible, notes });
+    const { id, name, category, purpose, coords, sourceUrl, sources, lookupConfidence, purposeVerification, accessible, notes, photo, reportedAt } = updated;
+    persist(id, { name, category, purpose, coords, sourceUrl, sources, lookupConfidence, purposeVerification, accessible, notes, photo, reportedAt });
     setPlans((prev) => prev.map((p) => ({ ...p, rooms: p.rooms.map((r) => (r.id === updated.id ? { ...r, ...updated } : r)) })));
     setCurrentPlan((p) => ({ ...p, rooms: p.rooms.map((r) => (r.id === updated.id ? { ...r, ...updated } : r)) }));
     if (inspected?.id === updated.id) setInspected((x) => (x ? { ...x, ...updated } : x));
@@ -320,7 +332,7 @@ export default function App() {
 
   const actions = [
     { label: 'Ask AI', icon: Sparkles, on: () => setIsWayfinderOpen(true) },
-    { label: 'Look up room', icon: Globe, on: () => { setLookupRoom(null); setLookupOpen(true); } },
+    { label: 'Update a room', icon: Globe, on: () => { setLookupRoom(null); setLookupOpen(true); } },
     { label: 'Scan plan', icon: Camera, on: () => setIsCameraOpen(true) },
     { label: 'Upload plan', icon: Upload, on: () => setIsUploadOpen(true) },
     { label: isEditingMode ? 'Done editing' : 'Edit map', icon: Pencil, on: () => setIsEditingMode((v) => !v), active: isEditingMode },
@@ -436,7 +448,8 @@ export default function App() {
         rooms={allRooms}
         initialRoom={lookupRoom}
         onSave={saveLookup}
-        onShowRoom={(r) => { setLookupOpen(false); setInspected(r); showRoom(r); }}
+        onSaveStaff={saveStaff}
+        onShowRoom={(r) => { setLookupOpen(false); const fresh = plansRef.current.flatMap((p) => p.rooms.map((x) => ({ ...x, floor: x.floor ?? p.floorNumber }))).find((x) => x.id === r.id) || r; setInspected(fresh); showRoom(fresh); }}
       />
       <CameraCaptureModal isOpen={isCameraOpen} onClose={() => setIsCameraOpen(false)} onCaptureComplete={handleAddNewFloorPlan}
         onSwitchToUpload={() => { setIsCameraOpen(false); setIsUploadOpen(true); }} />
