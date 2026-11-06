@@ -285,7 +285,7 @@ export function RoomCard({ room, onDirections, onStartHere, onEdit, onReport, on
         )}
         {!verified && onLookup && (
           <button onClick={onLookup} className="mt-2 h-9 px-3 rounded-full bg-white ring-1 ring-slate-300 text-slate-800 font-semibold inline-flex items-center gap-1.5">
-            <Globe className="w-4 h-4" /> {webApproved || staff ? 'Update info' : 'Look up or add info'}
+            <Globe className="w-4 h-4" /> {webApproved || staff ? 'Update this room' : 'Add info about this room'}
           </button>
         )}
       </div>

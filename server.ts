@@ -402,6 +402,82 @@ app.post('/api/read-sign', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * POST /api/contribute
+ * One entry point for anything a person adds: typed text and/or one photo.
+ * Gemini sorts it into changes the person then approves:
+ *   room_update  - what a room is (from a sign photo or a description)
+ *   report       - a problem (elevator out, door locked, hallway blocked, maintenance, wrong info)
+ *   floor_plan   - the photo is a whole floor plan / evacuation map, to be added as a new map
+ * Body: { building, text?, image?, roomNumber?, rooms: [{ n: roomNumber, name }] }
+ */
+app.post('/api/contribute', async (req: Request, res: Response) => {
+  try {
+    const { building, text, image, roomNumber, rooms } = req.body || {};
+    if (!text && !image) return res.status(400).json({ error: 'text or image is required' });
+    if (!process.env.GEMINI_API_KEY) return res.status(503).json({ error: 'GEMINI_API_KEY is not set on the server' });
+
+    const directory = Array.isArray(rooms) ? rooms.slice(0, 600).map((r: any) => `${r.n}: ${r.name}`).join('\n') : '';
+    const parts: any[] = [];
+    if (image) { const { mimeType, data } = parseDataUrl(image); parts.push({ inlineData: { mimeType, data } }); }
+    parts.push({ text: `You help staff keep the indoor map of "${building}" up to date.
+${roomNumber ? `The person opened this from room ${roomNumber}.` : ''}
+${text ? `They wrote: "${text}"` : 'They only sent a photo.'}
+${image ? 'A photo is attached. Decide if it is (a) a room sign or the inside of a room, or (b) a whole floor plan / evacuation map.' : ''}
+
+Room directory (number: current name):
+${directory}
+
+Turn this into a list of changes. Rules:
+- room_update: what a room is or is used for. roomNumber must be a number from the directory. Match descriptions like "the machine shop" to the right number. name is a short room name, purpose is 1 sentence in plain words, category one of classroom, lab, workshop, office, conference, restroom, study, utility, elevator, stairs, other.
+- report: a problem. reportType one of elevator_out, door_locked, hallway_blocked, maintenance, wrong_info, wrong_spot, other. details is a short plain description.
+- floor_plan: only when the photo shows a whole floor plan or evacuation map.
+- One message can contain several changes. Use only what the person said or what is visible. Never invent purposes, hours or equipment.
+- If a room number is mentioned that is not in the directory, still return it; the app will say it is not on the map.
+- If you cannot tell what they mean, return an empty list and explain in "message".` });
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.8-flash',
+      contents: [{ role: 'user', parts }],
+      config: {
+        responseMimeType: 'application/json',
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            message: { type: Type.STRING },
+            changes: {
+              type: Type.ARRAY,
+              items: {
+                type: Type.OBJECT,
+                properties: {
+                  kind: { type: Type.STRING, enum: ['room_update', 'report', 'floor_plan'] },
+                  roomNumber: { type: Type.STRING },
+                  name: { type: Type.STRING },
+                  category: { type: Type.STRING },
+                  purpose: { type: Type.STRING },
+                  reportType: { type: Type.STRING },
+                  details: { type: Type.STRING },
+                },
+                required: ['kind'],
+              },
+            },
+          },
+          required: ['changes'],
+        },
+      },
+    });
+    const parsed = JSON.parse(response.text || '{}');
+    const changes = (Array.isArray(parsed.changes) ? parsed.changes : []).slice(0, 8).map((c: any) => ({
+      ...c,
+      roomNumber: String(c.roomNumber || '').replace(/^E\d+[\s-]*/i, '').trim(),
+    }));
+    return res.json({ message: String(parsed.message || ''), changes });
+  } catch (error: any) {
+    console.error('Error in contribute:', error);
+    return res.status(500).json({ error: error?.message || 'Could not process this update' });
+  }
+});
+
 // Production static file serving or Dev Vite middleware
 async function setupServer() {
   if (isProduction) {

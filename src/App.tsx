@@ -5,7 +5,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  Compass, Sparkles, Camera, Upload, Pencil, Flag, CircleHelp, Plus, Minus, Maximize, Layers, FileImage, Menu, X,
+  Compass, Sparkles, Pencil, CircleHelp, MapPinned, Move, Plus, Minus, Maximize, Layers, FileImage, Menu, X,
   LocateFixed, ChevronLeft, Accessibility, Bath, ArrowUpDown, GraduationCap, FlaskConical, DoorOpen, Globe,
 } from 'lucide-react';
 import { SAMPLE_FLOOR_PLANS } from './data/sampleFloorPlans';
@@ -13,11 +13,9 @@ import { FloorPlanData, RoomPOI, Point, NavigationRoute, POICategory } from './t
 import { calculateIndoorRoute } from './utils/pathfinding';
 import { speakGuidance } from './utils/speech';
 import { FloorPlanEditorModal } from './components/FloorPlanEditorModal';
-import { ReportDiscrepancyModal, RoomReport, loadReports, saveReports, reportLabel } from './components/ReportDiscrepancyModal';
-import { CameraCaptureModal } from './components/CameraCaptureModal';
-import { UploadModal } from './components/UploadModal';
+import { RoomReport, loadReports, saveReports, reportLabel } from './utils/reports';
 import { Assistant } from './components/Assistant';
-import { RoomLookup, LookupResult } from './components/RoomLookup';
+import { UpdateMap, WebResult } from './components/UpdateMap';
 import { Tour, tourSeen } from './components/Tour';
 import { MapView, MapViewHandle } from './components/MapView';
 import {
@@ -91,10 +89,6 @@ export default function App() {
 
   const [isEditingMode, setIsEditingMode] = useState(false);
   const [editingRoom, setEditingRoom] = useState<RoomPOI | null>(null);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [reportingRoom, setReportingRoom] = useState<RoomPOI | null>(null);
-  const [isCameraOpen, setIsCameraOpen] = useState(false);
-  const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isWayfinderOpen, setIsWayfinderOpen] = useState(false);
   const [tourOpen, setTourOpen] = useState(() => !tourSeen());
 
@@ -276,6 +270,7 @@ export default function App() {
   };
 
   // edits
+  const openUpdate = (r: RoomPOI | null) => { setLookupRoom(r); setLookupOpen(true); };
   const persist = (id: string, patch: Partial<RoomPOI>) => {
     try {
       const o = loadOverrides();
@@ -283,7 +278,7 @@ export default function App() {
       localStorage.setItem(OVERRIDES_KEY, JSON.stringify(o));
     } catch { /* storage unavailable: edits last for this visit only */ }
   };
-  const saveLookup = (room: RoomPOI, r: LookupResult) => {
+  const saveLookup = (room: RoomPOI, r: WebResult) => {
     const patch: Partial<RoomPOI> = {
       name: r.name || room.name, category: r.category, purpose: r.purpose,
       sourceUrl: r.sources[0]?.url, sources: r.sources, lookupConfidence: r.confidence,
@@ -334,11 +329,8 @@ export default function App() {
 
   const actions = [
     { label: 'Ask AI', icon: Sparkles, on: () => setIsWayfinderOpen(true) },
-    { label: 'Update a room', icon: Globe, on: () => { setLookupRoom(null); setLookupOpen(true); } },
-    { label: 'Scan plan', icon: Camera, on: () => setIsCameraOpen(true) },
-    { label: 'Upload plan', icon: Upload, on: () => setIsUploadOpen(true) },
-    { label: isEditingMode ? 'Done editing' : 'Edit map', icon: Pencil, on: () => setIsEditingMode((v) => !v), active: isEditingMode },
-    { label: 'Report', icon: Flag, on: () => { setReportingRoom(inspected || endRoom); setIsReportModalOpen(true); } },
+    { label: 'Update the map', icon: MapPinned, on: () => openUpdate(inspected || null) },
+    { label: isEditingMode ? 'Done moving' : 'Move rooms', icon: Move, on: () => setIsEditingMode((v) => !v), active: isEditingMode },
     { label: 'Show the tour', icon: CircleHelp, on: () => setTourOpen(true) },
   ];
 
@@ -416,8 +408,8 @@ export default function App() {
 
   const roomCard = (r: RoomPOI, onClose?: () => void) => (
     <RoomCard room={r} onClose={onClose} onDirections={() => directionsTo(r)} onStartHere={() => startHere(r)}
-      onEdit={() => setEditingRoom(r)} onReport={() => { setReportingRoom(r); setIsReportModalOpen(true); }}
-      onLookup={() => { setLookupRoom(r); setLookupOpen(true); }}
+      onEdit={() => setEditingRoom(r)} onReport={() => openUpdate(r)}
+      onLookup={() => openUpdate(r)}
       reports={reports.filter((x) => x.roomId === r.id).map((x) => ({ id: x.id, label: reportLabel(x.type), details: x.details, createdAt: x.createdAt, confirmations: x.confirmations }))}
       onConfirmReport={(id) => changeReports((l) => l.map((x) => (x.id === id ? { ...x, confirmations: x.confirmations + 1, createdAt: new Date().toISOString() } : x)))}
       onFixReport={(id) => changeReports((l) => l.filter((x) => x.id !== id))} />
@@ -426,7 +418,7 @@ export default function App() {
   const editBanner = isEditingMode && (
     <div data-ui className="bg-amber-50 ring-1 ring-amber-300 text-amber-900 text-sm rounded-xl px-3 py-2 shadow flex items-center gap-2">
       <Pencil className="w-4 h-4 shrink-0" />
-      <span className="flex-1">Edit mode: drag a room label to move it, tap a room to edit its details.</span>
+      <span className="flex-1">Move rooms: drag a room label to where the room really is. Tap a room to edit its details.</span>
       <button onClick={() => setIsEditingMode(false)} className="font-bold">Done</button>
     </div>
   );
@@ -434,7 +426,6 @@ export default function App() {
   const modals = (
     <>
       <FloorPlanEditorModal isOpen={!!editingRoom} room={editingRoom} onClose={() => setEditingRoom(null)} onSaveRoom={(r) => { updateRoom(r); setEditingRoom(null); }} />
-      <ReportDiscrepancyModal isOpen={isReportModalOpen} room={reportingRoom} onClose={() => setIsReportModalOpen(false)} onSubmit={(r) => changeReports((l) => [r, ...l])} />
       <Assistant
         open={isWayfinderOpen}
         onClose={() => setIsWayfinderOpen(false)}
@@ -444,21 +435,20 @@ export default function App() {
         accessible={isAccessibleOnly}
         isE5={buildingId === 'uwaterloo-e5'}
         onGo={(r) => directionsTo(r)}
-        onLookup={() => { setLookupRoom(null); setLookupOpen(true); }}
+        onLookup={() => openUpdate(null)}
       />
-      <RoomLookup
+      <UpdateMap
         open={lookupOpen}
         onClose={() => setLookupOpen(false)}
         buildingName={currentPlan.buildingName || currentPlan.title}
         rooms={allRooms}
         initialRoom={lookupRoom}
-        onSave={saveLookup}
         onSaveStaff={saveStaff}
+        onSaveWeb={saveLookup}
+        onReport={(r) => changeReports((l) => [r, ...l])}
+        onFloorPlan={(img) => handleAddNewFloorPlan(img)}
         onShowRoom={(r) => { setLookupOpen(false); const fresh = plansRef.current.flatMap((p) => p.rooms.map((x) => ({ ...x, floor: x.floor ?? p.floorNumber }))).find((x) => x.id === r.id) || r; setInspected(fresh); showRoom(fresh); }}
       />
-      <CameraCaptureModal isOpen={isCameraOpen} onClose={() => setIsCameraOpen(false)} onCaptureComplete={handleAddNewFloorPlan}
-        onSwitchToUpload={() => { setIsCameraOpen(false); setIsUploadOpen(true); }} />
-      <UploadModal isOpen={isUploadOpen} onClose={() => setIsUploadOpen(false)} onUploadComplete={handleAddNewFloorPlan} />
       <Tour open={tourOpen} onClose={() => setTourOpen(false)} />
     </>
   );

@@ -36,8 +36,8 @@ const STEPS = [
   {
     icon: UserCheck, color: 'bg-green-600 text-white',
     title: 'Keep the map up to date',
-    body: 'Know what a room is used for? Open Update a room, type it, add a photo, and save. It shows as "Reported by staff". You can also search the web for a room.',
-    points: ['Report a problem: a locked door, a broken elevator or a wrong label'],
+    body: 'Open Update the map and type anything or add a photo: what a room is, a problem like a locked door, or a whole floor plan. AI sorts it out and you check it before it saves.',
+    points: ['Room info shows as "Reported by staff"', 'Problems show on the room until someone marks them fixed'],
   },
 ];
 
