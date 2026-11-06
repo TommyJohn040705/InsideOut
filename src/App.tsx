@@ -13,12 +13,12 @@ import { FloorPlanData, RoomPOI, Point, NavigationRoute, POICategory } from './t
 import { calculateIndoorRoute } from './utils/pathfinding';
 import { speakGuidance } from './utils/speech';
 import { FloorPlanEditorModal } from './components/FloorPlanEditorModal';
-import { ReportDiscrepancyModal } from './components/ReportDiscrepancyModal';
+import { ReportDiscrepancyModal, RoomReport, loadReports, saveReports, reportLabel } from './components/ReportDiscrepancyModal';
 import { CameraCaptureModal } from './components/CameraCaptureModal';
 import { UploadModal } from './components/UploadModal';
 import { Assistant } from './components/Assistant';
 import { RoomLookup, LookupResult } from './components/RoomLookup';
-import { HelpModal } from './components/HelpModal';
+import { Tour, tourSeen } from './components/Tour';
 import { MapView, MapViewHandle } from './components/MapView';
 import {
   cx, FloorPicker, NavBanner, NavFooter, RoomCard, RoutePlanner, RouteSummary, SearchInput, SearchResults, StepsList, useRoomSearch, roomTitle,
@@ -65,6 +65,8 @@ export default function App() {
   const [plans, setPlans] = useState<FloorPlanData[]>(INITIAL_PLANS);
   const [currentPlan, setCurrentPlan] = useState<FloorPlanData>(INITIAL_PLANS[0]);
   const [lookupOpen, setLookupOpen] = useState(false);
+  const [reports, setReports] = useState<RoomReport[]>(() => loadReports());
+  const changeReports = (f: (l: RoomReport[]) => RoomReport[]) => setReports((l) => { const n = f(l); saveReports(n); return n; });
   const [lookupRoom, setLookupRoom] = useState<RoomPOI | null>(null);
 
   const [startRoom, setStartRoom] = useState<RoomPOI | null>(null);
@@ -94,7 +96,7 @@ export default function App() {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isWayfinderOpen, setIsWayfinderOpen] = useState(false);
-  const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [tourOpen, setTourOpen] = useState(() => !tourSeen());
 
   const mapRef = useRef<MapViewHandle>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
@@ -337,7 +339,7 @@ export default function App() {
     { label: 'Upload plan', icon: Upload, on: () => setIsUploadOpen(true) },
     { label: isEditingMode ? 'Done editing' : 'Edit map', icon: Pencil, on: () => setIsEditingMode((v) => !v), active: isEditingMode },
     { label: 'Report', icon: Flag, on: () => { setReportingRoom(inspected || endRoom); setIsReportModalOpen(true); } },
-    { label: 'Help', icon: CircleHelp, on: () => setIsHelpOpen(true) },
+    { label: 'Show the tour', icon: CircleHelp, on: () => setTourOpen(true) },
   ];
 
   const mapControls = (
@@ -415,7 +417,10 @@ export default function App() {
   const roomCard = (r: RoomPOI, onClose?: () => void) => (
     <RoomCard room={r} onClose={onClose} onDirections={() => directionsTo(r)} onStartHere={() => startHere(r)}
       onEdit={() => setEditingRoom(r)} onReport={() => { setReportingRoom(r); setIsReportModalOpen(true); }}
-      onLookup={() => { setLookupRoom(r); setLookupOpen(true); }} />
+      onLookup={() => { setLookupRoom(r); setLookupOpen(true); }}
+      reports={reports.filter((x) => x.roomId === r.id).map((x) => ({ id: x.id, label: reportLabel(x.type), details: x.details, createdAt: x.createdAt, confirmations: x.confirmations }))}
+      onConfirmReport={(id) => changeReports((l) => l.map((x) => (x.id === id ? { ...x, confirmations: x.confirmations + 1, createdAt: new Date().toISOString() } : x)))}
+      onFixReport={(id) => changeReports((l) => l.filter((x) => x.id !== id))} />
   );
 
   const editBanner = isEditingMode && (
@@ -429,7 +434,7 @@ export default function App() {
   const modals = (
     <>
       <FloorPlanEditorModal isOpen={!!editingRoom} room={editingRoom} onClose={() => setEditingRoom(null)} onSaveRoom={(r) => { updateRoom(r); setEditingRoom(null); }} />
-      <ReportDiscrepancyModal isOpen={isReportModalOpen} room={reportingRoom} onClose={() => setIsReportModalOpen(false)} />
+      <ReportDiscrepancyModal isOpen={isReportModalOpen} room={reportingRoom} onClose={() => setIsReportModalOpen(false)} onSubmit={(r) => changeReports((l) => [r, ...l])} />
       <Assistant
         open={isWayfinderOpen}
         onClose={() => setIsWayfinderOpen(false)}
@@ -454,7 +459,7 @@ export default function App() {
       <CameraCaptureModal isOpen={isCameraOpen} onClose={() => setIsCameraOpen(false)} onCaptureComplete={handleAddNewFloorPlan}
         onSwitchToUpload={() => { setIsCameraOpen(false); setIsUploadOpen(true); }} />
       <UploadModal isOpen={isUploadOpen} onClose={() => setIsUploadOpen(false)} onUploadComplete={handleAddNewFloorPlan} />
-      <HelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
+      <Tour open={tourOpen} onClose={() => setTourOpen(false)} />
     </>
   );
 
@@ -479,9 +484,9 @@ export default function App() {
           {buildingSelect || <span className="text-sm font-semibold text-slate-600">{currentPlan.buildingName || currentPlan.title}</span>}
           <div className="flex-1" />
           {actions.map((a) => (
-            <button key={a.label} onClick={a.on}
-              className={cx('h-9 px-3 rounded-lg text-sm font-semibold flex items-center gap-1.5', a.active ? 'bg-amber-100 text-amber-900' : 'text-slate-600 hover:bg-slate-100')}>
-              <a.icon className="w-4 h-4" /> {a.label}
+            <button key={a.label} onClick={a.on} title={a.label} aria-label={a.label}
+              className={cx('h-9 px-2.5 rounded-lg text-sm font-semibold flex items-center gap-1.5 whitespace-nowrap', a.active ? 'bg-amber-100 text-amber-900' : 'text-slate-600 hover:bg-slate-100')}>
+              <a.icon className="w-4 h-4" /> <span className="hidden xl:inline">{a.label}</span>
             </button>
           ))}
         </header>

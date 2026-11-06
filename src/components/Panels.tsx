@@ -238,8 +238,11 @@ export function RoutePlanner(props: {
 }
 
 /* ---------------- room card ---------------- */
-export function RoomCard({ room, onDirections, onStartHere, onEdit, onReport, onLookup, onClose }: {
+export interface CardReport { id: string; label: string; details: string; createdAt: string; confirmations: number }
+
+export function RoomCard({ room, onDirections, onStartHere, onEdit, onReport, onLookup, onClose, reports, onConfirmReport, onFixReport }: {
   room: RoomPOI; onDirections: () => void; onStartHere: () => void; onEdit: () => void; onReport: () => void; onLookup?: () => void; onClose?: () => void;
+  reports?: CardReport[]; onConfirmReport?: (id: string) => void; onFixReport?: (id: string) => void;
 }) {
   const verified = room.purposeVerification === 'verified_official_source';
   const webApproved = room.purposeVerification === 'web_lookup_user_approved';
@@ -286,6 +289,21 @@ export function RoomCard({ room, onDirections, onStartHere, onEdit, onReport, on
           </button>
         )}
       </div>
+      {reports && reports.length > 0 && (
+        <div className="space-y-2">
+          {reports.map((r) => (
+            <div key={r.id} className="rounded-xl bg-rose-50 ring-1 ring-rose-200 p-3 text-sm text-rose-900">
+              <p className="font-bold flex items-center gap-1.5"><AlertTriangle className="w-4 h-4" />{r.label}</p>
+              {r.details && <p className="mt-0.5">{r.details}</p>}
+              <p className="text-xs text-rose-700 mt-1">Reported {new Date(r.createdAt).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}{r.confirmations > 1 ? ` · confirmed ${r.confirmations - 1}x` : ''}</p>
+              <div className="flex gap-2 mt-2">
+                <button onClick={() => onConfirmReport?.(r.id)} className="h-9 px-3 rounded-full bg-white ring-1 ring-rose-300 font-semibold">Still there</button>
+                <button onClick={() => onFixReport?.(r.id)} className="h-9 px-3 rounded-full bg-white ring-1 ring-green-300 text-green-800 font-semibold">Fixed</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="flex gap-4 text-sm">
         <button onClick={onEdit} className="flex items-center gap-1.5 text-slate-600 hover:text-slate-900"><Pencil className="w-4 h-4" /> Edit</button>
         <button onClick={onReport} className="flex items-center gap-1.5 text-slate-600 hover:text-slate-900"><AlertTriangle className="w-4 h-4" /> Report a problem</button>
