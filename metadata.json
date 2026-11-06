@@ -1,0 +1,10 @@
+{
+  "name": "Remix FloorNav AI - Smart Indoor Wayfinding",
+  "description": "Capture or upload a floor plan photo, and let AI digitize rooms and hallways to generate turn-by-turn indoor navigation routes to any destination.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
