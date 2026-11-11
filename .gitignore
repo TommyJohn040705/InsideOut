@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# UW-owned floor-plan PDFs: never commit
+data-sources/plantops/pdfs/

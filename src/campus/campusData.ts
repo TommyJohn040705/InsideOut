@@ -32,6 +32,8 @@ export interface CampusFloor {
   filename: string;
   url: string;
   restricted: boolean;
+  /** How the source PDF can be obtained. */
+  access: 'uw_login_required';
   status: FloorStatus;
   /** Floor number in the app's indoor dataset, when this floor has one. */
   indoorFloor?: number;

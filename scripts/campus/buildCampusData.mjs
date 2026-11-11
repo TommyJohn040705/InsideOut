@@ -4,7 +4,10 @@
 // Nothing is invented here: a building with no OSM footprint gets footprint: null,
 // and a manifest row only ever becomes a floor with status "source_found".
 // Run: node scripts/campus/buildCampusData.mjs
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+
+// PDFs a UW account holder saved by hand go here (gitignored). A file present => status "imported".
+const PDF_DIR = 'data-sources/plantops/pdfs';
 
 const osm = JSON.parse(readFileSync('data-sources/osm/uw-campus-osm.json', 'utf8'));
 const manifest = JSON.parse(readFileSync('data-sources/wayfinder/uw_floor_plans_manifest.json', 'utf8'));
@@ -127,7 +130,9 @@ for (const row of manifest) {
     restricted: !!row.restricted,
     // Mapping status ladder: not_sourced < source_found < import_authorized < imported <
     // geometry_extracted < georeferenced < human_reviewed < routing_available < route_verified
-    status: 'source_found',
+    status: existsSync(`${PDF_DIR}/${row.filename}`) ? 'imported' : 'source_found',
+    // Checked 2026-11-10: every plantops.uwaterloo.ca PDF URL redirects to UW single sign-on.
+    access: 'uw_login_required',
   });
 }
 

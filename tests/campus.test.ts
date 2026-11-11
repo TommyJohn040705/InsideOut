@@ -52,7 +52,7 @@ describe('campus database', () => {
 
   it('never marks a floor georeferenced without a georeference file', () => {
     for (const b of BUILDINGS) for (const f of b.floors) {
-      if (f.status !== 'source_found') expect(INDOOR[b.id], `${b.id} ${f.id}`).toBeTruthy();
+      if (f.status !== 'source_found' && f.status !== 'imported') expect(INDOOR[b.id], `${b.id} ${f.id}`).toBeTruthy();
     }
     expect(coverageSummary().georeferencedFloors).toBe(6);
   });

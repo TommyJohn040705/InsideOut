@@ -163,7 +163,7 @@ export function CampusView({ plans, route, destination, isMobile, onOpenIndoor }
               );
             })}
           </div>
-          {!indoor && <p className="text-[11px] text-slate-500 mt-1.5">These are floor-plan documents listed by Plant Operations. None has been imported or mapped yet.</p>}
+          {!indoor && <p className="text-[11px] text-slate-500 mt-1.5">These are floor-plan documents listed by Plant Operations. They need a UW login to download, and none has been mapped yet.</p>}
         </div>
       )}
 

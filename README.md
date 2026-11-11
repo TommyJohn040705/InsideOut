@@ -15,6 +15,8 @@ Indoor and outdoor navigation for the University of Waterloo main campus. Built 
 
 Keys: the Google Maps key is a browser key (`VITE_GOOGLE_MAPS_API_KEY`), restricted by HTTP referrer and to the Maps JavaScript and Directions APIs. `GEMINI_API_KEY` stays server-side. See `.env.example`.
 
+Floor-plan PDFs: every `plantops.uwaterloo.ca` PDF link redirects to UW single sign-on (checked 2026-11-10), so the app does not download them. Someone with a UW account saves them into `data-sources/plantops/pdfs/` (gitignored, original filenames), then `node scripts/campus/buildCampusData.mjs` marks those floors as imported.
+
 Tests: `npm test` (georeferencing maths, E5 fit against the drawing scale, campus database integrity).
 
 What is not verified: every footprint and entrance is unreviewed OpenStreetMap data; the E5 alignment is a footprint fit; no route has been walked; 248 of the 489 listed floor plans are restricted documents and none besides E5 has been imported.
