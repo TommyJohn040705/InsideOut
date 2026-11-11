@@ -35,3 +35,46 @@ export function loadReports(): RoomReport[] {
 export function saveReports(list: RoomReport[]) {
   try { localStorage.setItem(KEY, JSON.stringify(list)); } catch { /* storage blocked */ }
 }
+
+/* ---- Reports that close part of the route -------------------------------------------
+ * Lifecycle ported from InsideOut feature/preview-firebase (src/lib/reports.ts): a report
+ * lapses after a few hours unless someone confirms it again (confirming refreshes createdAt).
+ * Routing only avoids a closure once a second person has confirmed it; a lone report is
+ * shown as a warning instead, so one mistaken tap cannot remove the only step-free route.
+ */
+import type { FloorPlanData, VerticalCirculationLink } from '../types/navigation';
+import type { RouteClosures } from './pathfinding';
+
+export const REPORT_TTL_MS = 4 * 60 * 60 * 1000;
+export const CONFIRMATIONS_TO_CLOSE = 2;
+
+export const isReportActive = (r: RoomReport, now = Date.now()) => now - new Date(r.createdAt).getTime() < REPORT_TTL_MS;
+
+export function routeClosures(reports: RoomReport[], plans: FloorPlanData[], links: VerticalCirculationLink[], now = Date.now()): RouteClosures {
+  const out: RouteClosures = { nodeIds: new Set(), linkIds: new Set(), unconfirmedLinkIds: new Set() };
+  for (const r of reports) {
+    if (!r.roomId || !isReportActive(r, now)) continue;
+    if (r.type !== 'elevator_out' && r.type !== 'hallway_blocked') continue;
+    const confirmed = r.confirmations >= CONFIRMATIONS_TO_CLOSE;
+    const plan = plans.find((p) => p.rooms.some((x) => x.id === r.roomId));
+    const room = plan?.rooms.find((x) => x.id === r.roomId);
+    if (!plan || !room) continue;
+
+    // A report on an elevator or stair room closes that whole shaft.
+    const wanted = r.type === 'elevator_out' ? 'elevator' : 'stairs';
+    const link = links.find((l) => l.type === wanted && l.nodes.some((n) => n.roomId === r.roomId))
+      // e.g. the second elevator car, which is a room but not a stop in the link data
+      || (r.type === 'elevator_out' && room.category === 'elevator' ? links.find((l) => l.type === 'elevator' && l.floorsServed.includes(plan.floorNumber)) : undefined);
+    if (link) { (confirmed ? out.linkIds : out.unconfirmedLinkIds).add(link.id); continue; }
+
+    // A blocked hallway closes the corridor points inside the reported room's outline.
+    if (r.type === 'hallway_blocked' && confirmed) {
+      out.nodeIds.add(room.id);
+      const b = room.bounds;
+      if (b) for (const h of plan.hallways) {
+        if (h.coords.x >= b.x && h.coords.x <= b.x + b.width && h.coords.y >= b.y && h.coords.y <= b.y + b.height) out.nodeIds.add(h.id);
+      }
+    }
+  }
+  return out;
+}

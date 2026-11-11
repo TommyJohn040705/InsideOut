@@ -17,6 +17,8 @@ Keys: the Google Maps key is a browser key (`VITE_GOOGLE_MAPS_API_KEY`), restric
 
 Floor-plan PDFs: every `plantops.uwaterloo.ca` PDF link redirects to UW single sign-on (checked 2026-11-10), so the app does not download them. Someone with a UW account saves them into `data-sources/plantops/pdfs/` (gitignored, original filenames), then `node scripts/campus/buildCampusData.mjs` marks those floors as imported.
 
+Reports and routing: `routeClosures` in `src/utils/reports.ts` (lifecycle ported from InsideOut `feature/preview-firebase`). An "elevator out" or "hallway closed" report expires 4 hours after its last confirmation. One report only adds a warning to the route; once a second person confirms it, routes avoid that shaft or hallway, and the route says so when no other way is mapped. Reports are still stored on the device only.
+
 Tests: `npm test` (georeferencing maths, E5 fit against the drawing scale, campus database integrity).
 
 What is not verified: every footprint and entrance is unreviewed OpenStreetMap data; the E5 alignment is a footprint fit; no route has been walked; 248 of the 489 listed floor plans are restricted documents and none besides E5 has been imported.

@@ -15,7 +15,8 @@ import { FloorPlanData, RoomPOI, Point, NavigationRoute, POICategory } from './t
 import { calculateIndoorRoute } from './utils/pathfinding';
 import { speakGuidance } from './utils/speech';
 import { FloorPlanEditorModal } from './components/FloorPlanEditorModal';
-import { RoomReport, loadReports, saveReports, reportLabel } from './utils/reports';
+import { RoomReport, loadReports, saveReports, reportLabel, routeClosures } from './utils/reports';
+import { E5_VERTICAL_LINKS } from './data/e5/e5DataLoader';
 import { Assistant } from './components/Assistant';
 import { UpdateMap, WebResult } from './components/UpdateMap';
 import { Tour, tourSeen } from './components/Tour';
@@ -246,11 +247,12 @@ export default function App() {
     const sPlan = buildingPlans.find((p) => p.floorNumber === sFloor) || currentPlan;
     const r = calculateIndoorRoute(sPlan, startRoom.coords, startRoom.name, endRoom.coords, endRoom.name, startRoom.id, endRoom.id, {
       isAccessibleOnly, allFloors: buildingPlans, startFloor: sFloor, endFloor: eFloor,
+      closures: routeClosures(reports, buildingPlans, E5_VERTICAL_LINKS),
     });
     setRoute(r);
     setStepIndex(0); stepRef.current = 0; spokenRef.current = -1;
     setWalked(0); walkedRef.current = 0;
-  }, [startRoom, endRoom, isAccessibleOnly, buildingPlans]);
+  }, [startRoom, endRoom, isAccessibleOnly, buildingPlans, reports]);
 
   const stepForDistance = (r: NavigationRoute, d: number) => {
     let idx = 0;

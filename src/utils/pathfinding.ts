@@ -80,6 +80,48 @@ function findPathOnSingleFloor(
   startRoomId?: string,
   endRoomId?: string
 ): Point[] {
+  return findPathCore(floorPlan, startPoint, endPoint, startRoomId, endRoomId) ?? [startPoint, endPoint];
+}
+
+/** Nodes and vertical links closed by confirmed reports (see utils/reports.ts routeClosures). */
+export interface RouteClosures {
+  nodeIds: Set<string>;
+  linkIds: Set<string>;
+  /** Links with a report nobody has confirmed yet: warned about, not avoided. */
+  unconfirmedLinkIds: Set<string>;
+}
+
+/** Path that avoids closed nodes. If no such path exists it says so and routes through the closure. */
+function findPathAvoiding(
+  floorPlan: FloorPlanData,
+  startPoint: Point,
+  endPoint: Point,
+  startRoomId: string | undefined,
+  endRoomId: string | undefined,
+  closures: RouteClosures | undefined,
+  notes: string[]
+): Point[] {
+  if (closures?.nodeIds.size) {
+    const open = findPathCore(floorPlan, startPoint, endPoint, startRoomId, endRoomId, closures.nodeIds);
+    if (open) {
+      const direct = findPathCore(floorPlan, startPoint, endPoint, startRoomId, endRoomId);
+      if (direct && direct.length !== open.length) notes.unshift(`Rerouted on Level ${floorPlan.floorNumber} around a hallway reported closed.`);
+      return open;
+    }
+    notes.unshift(`A hallway on Level ${floorPlan.floorNumber} is reported closed and no other way around it is mapped. This route passes through it.`);
+  }
+  return findPathOnSingleFloor(floorPlan, startPoint, endPoint, startRoomId, endRoomId);
+}
+
+/** Returns null when the two points are not connected. */
+function findPathCore(
+  floorPlan: FloorPlanData,
+  startPoint: Point,
+  endPoint: Point,
+  startRoomId?: string,
+  endRoomId?: string,
+  blocked?: Set<string>
+): Point[] | null {
   const nodes = new Map<string, GraphNode>();
 
   // Add all hallway nodes
@@ -208,6 +250,7 @@ function findPathOnSingleFloor(
 
     for (const neighbor of currentNode.neighbors) {
       if (!unvisited.has(neighbor.id)) continue;
+      if (blocked?.has(neighbor.id) && neighbor.id !== endId) continue;
 
       const alt = shortest + neighbor.weight;
       if (alt < distances.get(neighbor.id)!) {
@@ -226,7 +269,7 @@ function findPathOnSingleFloor(
   }
 
   if (pathIds.length <= 1 || pathIds[0] !== startId) {
-    return [startPoint, endPoint];
+    return null;
   }
 
   const rawPoints = pathIds.map((id) => nodes.get(id)!.coords);
@@ -408,8 +451,10 @@ export function calculateIndoorRoute(
     allFloors?: FloorPlanData[];
     startFloor?: number;
     endFloor?: number;
+    closures?: RouteClosures;
   }
 ): NavigationRoute {
+  const closures = options?.closures;
   const startFloor = options?.startFloor || floorPlan.floorNumber || 1;
   const endFloor = options?.endFloor || floorPlan.floorNumber || 1;
   const isAccessibleOnly = options?.isAccessibleOnly ?? true;
@@ -433,12 +478,14 @@ export function calculateIndoorRoute(
 
   // CASE 1: Both start and destination on the SAME floor
   if (startFloor === endFloor) {
-    const waypoints = findPathOnSingleFloor(
+    const waypoints = findPathAvoiding(
       startFloorPlan,
       startPoint,
       endPoint,
       startRoomId,
-      endRoomId
+      endRoomId,
+      closures,
+      flaggedNotes
     );
 
     const legMetrics = buildLegMetrics(waypoints, startFloorPlan.buildingType);
@@ -505,8 +552,9 @@ export function calculateIndoorRoute(
 
   // CASE 2: MULTI-FLOOR NAVIGATION (BUG 4 FIX: Ordered Legs with Vertical Transition Pause)
   let chosenLink: VerticalCirculationLink | undefined;
+  const openLinks = E5_VERTICAL_LINKS.filter((l) => !closures?.linkIds.has(l.id));
   if (isAccessibleOnly) {
-    chosenLink = E5_VERTICAL_LINKS.find(
+    chosenLink = openLinks.find(
       (l) =>
         l.accessible &&
         l.floorsServed.includes(startFloor) &&
@@ -514,10 +562,10 @@ export function calculateIndoorRoute(
     );
   } else {
     if (startFloor >= 2 && endFloor >= 2) {
-      chosenLink = E5_VERTICAL_LINKS.find((l) => l.id === 'v-link-stair-e');
+      chosenLink = openLinks.find((l) => l.id === 'v-link-stair-e');
     }
     if (!chosenLink) {
-      chosenLink = E5_VERTICAL_LINKS.find(
+      chosenLink = openLinks.find(
         (l) => l.floorsServed.includes(startFloor) && l.floorsServed.includes(endFloor)
       );
     }
@@ -525,6 +573,13 @@ export function calculateIndoorRoute(
 
   if (!chosenLink) {
     chosenLink = E5_VERTICAL_LINKS[0]; // Southeast elevators fallback
+  }
+  if (closures?.linkIds.has(chosenLink.id)) {
+    flaggedNotes.unshift(`${chosenLink.name} is reported out of service and no other ${isAccessibleOnly ? 'step-free ' : ''}way between these floors is mapped.`);
+  } else if (closures?.unconfirmedLinkIds.has(chosenLink.id)) {
+    flaggedNotes.unshift(`Unconfirmed report: ${chosenLink.name} may be out of service.`);
+  } else if (closures?.linkIds.size && E5_VERTICAL_LINKS.some((l) => closures.linkIds.has(l.id) && l.floorsServed.includes(startFloor) && l.floorsServed.includes(endFloor))) {
+    flaggedNotes.unshift(`Using ${chosenLink.name}: another stair or elevator on this route is reported closed.`);
   }
 
   const startVertNode =
@@ -546,12 +601,14 @@ export function calculateIndoorRoute(
   };
 
   // 1. Path on start floor
-  const seg1Waypoints = findPathOnSingleFloor(
+  const seg1Waypoints = findPathAvoiding(
     startFloorPlan,
     startPoint,
     startVertRoom.coords,
     startRoomId,
-    startVertNode.roomId
+    startVertNode.roomId,
+    closures,
+    flaggedNotes
   );
   const leg1Metrics = buildLegMetrics(seg1Waypoints, startFloorPlan.buildingType);
 
@@ -598,12 +655,14 @@ export function calculateIndoorRoute(
   };
 
   // 3. Path on destination floor
-  const seg2Waypoints = findPathOnSingleFloor(
+  const seg2Waypoints = findPathAvoiding(
     endFloorPlan,
     endVertRoom.coords,
     endPoint,
     endVertNode.roomId,
-    endRoomId
+    endRoomId,
+    closures,
+    flaggedNotes
   );
   const leg2Metrics = buildLegMetrics(seg2Waypoints, endFloorPlan.buildingType);
 

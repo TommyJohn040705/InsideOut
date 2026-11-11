@@ -1,12 +1,13 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath } from 'url';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss()],
     worker: { format: 'es' as const },
+    test: { include: ['tests/**/*.test.ts'] },
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('.', import.meta.url)),
