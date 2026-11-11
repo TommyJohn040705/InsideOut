@@ -9,3 +9,6 @@ coverage/
 
 # UW-owned floor-plan PDFs: never commit
 data-sources/plantops/pdfs/
+
+# Separate clone of the Wayfinder repo, kept for reference only
+futurelabs/
