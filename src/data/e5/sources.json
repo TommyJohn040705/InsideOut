@@ -1,0 +1,101 @@
+[
+  {
+    "id": "src-uw-plant-ops",
+    "name": "University of Waterloo Plant Operations Floor Plans",
+    "url": "https://uwaterloo.ca/plant-operations/floor-plans",
+    "domain": "plant-operations",
+    "description": "Primary architectural repository for University of Waterloo facility drawings and floor plans. Source of drawing set 053E5_01FLR through 053E5_06FLR.",
+    "documentType": "architectural_blueprint",
+    "verifiedDate": "2026-11-05"
+  },
+  {
+    "id": "src-uw-map",
+    "name": "University of Waterloo Campus Map & Directions",
+    "url": "https://uwaterloo.ca/map/",
+    "domain": "campus_wayfinding",
+    "description": "Official interactive GIS campus mapping system showing building footprints, entrances, and Ring Road connections.",
+    "documentType": "campus_gis",
+    "verifiedDate": "2026-11-05"
+  },
+  {
+    "id": "src-e5-accessibility",
+    "name": "Engineering 5 (E5) Building Accessibility Guide",
+    "url": "https://uwaterloo.ca/accessibility/getting-around/building-accessibility/engineering-5-e5",
+    "domain": "accessibility",
+    "description": "Details for wheelchair-accessible entrances, barrier-free ramped 2nd-floor main entrance facing Davis Centre, elevator bank on the Southeast side, and washroom accessibility.",
+    "documentType": "accessibility_audit",
+    "verifiedDate": "2026-11-05"
+  },
+  {
+    "id": "src-e3-accessibility",
+    "name": "Engineering 3 (E3) Accessibility & Inter-building Connections",
+    "url": "https://uwaterloo.ca/accessibility/catalogs/building-accessibility/e3-engineering-3",
+    "domain": "accessibility",
+    "description": "Documents pedestrian overpass bridge linking E3 and E5 over Ring Road. Note: Contains conflicting descriptions regarding whether bridge connects via level 3 or level 5.",
+    "documentType": "accessibility_audit",
+    "verifiedDate": "2026-11-05"
+  },
+  {
+    "id": "src-washroom-accessibility",
+    "name": "Faculty of Engineering Washroom Accessibility & Equity Directory",
+    "url": "https://uwaterloo.ca/engineering-equity-diversity/washroom-accessibility-0",
+    "domain": "facilities",
+    "description": "Documents accessible all-gender multi-stall washroom facilities (rooms E5 2901 and 2902) and standard single/multi-stall accessible washrooms.",
+    "documentType": "equity_directory",
+    "verifiedDate": "2026-11-05"
+  },
+  {
+    "id": "src-mme-teaching-facilities",
+    "name": "Mechanical & Mechatronics Engineering Teaching Tools & Facilities",
+    "url": "https://uwaterloo.ca/mechanical-mechatronics-engineering-information-technology/teaching-tools-and-facilities",
+    "domain": "academics",
+    "description": "Inventory of MME specialized departmental rooms including E5 3101, E5 3102, and E5 3052 AV and presentation hardware.",
+    "documentType": "department_inventory",
+    "verifiedDate": "2026-11-05"
+  },
+  {
+    "id": "src-mme-classrooms",
+    "name": "E5-3101, E5-3102, and E5-3052 Facility Specifications",
+    "url": "https://uwaterloo.ca/mechanical-mechatronics-engineering-information-technology/engineering-building-5-e5-3101-3102-and-3052",
+    "domain": "classrooms",
+    "description": "Room capacities: E5 3101 (114 seats), E5 3102 (118 seats), E5 3052 (20 seats seminar room equipped with Crestron video conferencing and smartboards).",
+    "documentType": "room_specifications",
+    "verifiedDate": "2026-11-05"
+  },
+  {
+    "id": "src-mme-gear-lab",
+    "name": "MME Computer Labs & GEAR Computing Facility",
+    "url": "https://uwaterloo.ca/mechanical-mechatronics-engineering-information-technology/computer-labs",
+    "domain": "computer_labs",
+    "description": "Details on the Gear Lab in E5 2108: 50+ high-end engineering computing workstations running SolidWorks, ANSYS, MATLAB, NX, and Abaqus.",
+    "documentType": "lab_directory",
+    "verifiedDate": "2026-11-05"
+  },
+  {
+    "id": "src-sedra-sdc",
+    "name": "Sedra Student Design Centre (SDC) Facilities",
+    "url": "https://uwaterloo.ca/sedra-student-design-centre/facilities",
+    "domain": "student_design",
+    "description": "20,000 sq ft collaborative student design facility on E5 Floors 1 and 2, accommodating 25+ student competition teams, engine test cells, and machine shop annex.",
+    "documentType": "facility_overview",
+    "verifiedDate": "2026-11-05"
+  },
+  {
+    "id": "src-eng-labs",
+    "name": "Faculty of Engineering Labs & Rapid Prototyping Centre",
+    "url": "https://uwaterloo.ca/engineering/labs-and-facilities",
+    "domain": "workshops",
+    "description": "Documents the Engineering Student Machine Shop in E5 1101 and the Rapid Prototyping Centre in E5 2002 (FDM/SLA 3D printing and precision laser cutters).",
+    "documentType": "facility_directory",
+    "verifiedDate": "2026-11-05"
+  },
+  {
+    "id": "src-syde-workshops",
+    "name": "Systems Design Engineering Teaching Laboratories & Workshops",
+    "url": "https://uwaterloo.ca/systems-design-engineering/undergraduate-students/student-life/teaching-laboratory",
+    "domain": "department_labs",
+    "description": "Documents E5 6005 (Systems Design Teaching Laboratory) and E5 6012-6013 (Undergraduate Design Electronics & Fabrication Workshop).",
+    "documentType": "department_specs",
+    "verifiedDate": "2026-11-05"
+  }
+]
