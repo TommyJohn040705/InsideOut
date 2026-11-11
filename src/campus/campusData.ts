@@ -8,6 +8,7 @@ import buildingsJson from '../data/campus/buildings.json';
 import footprintsJson from '../data/campus/footprints.json';
 import entrancesJson from '../data/campus/entrances.json';
 import e5GeorefJson from '../data/campus/georef/E5.json';
+import indoorOsmJson from '../data/campus/indoorOsm.json';
 import { fitGeoref, Georef, GeorefSource, LngLat } from './georef';
 
 export type FloorStatus =
@@ -51,6 +52,8 @@ export interface CampusBuilding {
   entrances: string[];
   floors: CampusFloor[];
   plantOpsNumber: string | null;
+  /** Levels with rooms or corridors surveyed in OpenStreetMap (counts only; geometry is in indoorOsm.json). */
+  osmIndoor: { level: string; label: string | null; rooms: number; paths: number }[];
 }
 
 export interface CampusEntrance {
@@ -117,14 +120,16 @@ export function searchBuildings(q: string, limit = 8): CampusBuilding[] {
   return BUILDINGS.map((b) => [score(b), b] as const).filter(([n]) => n >= 0).sort((a, b) => a[0] - b[0]).slice(0, limit).map(([, b]) => b);
 }
 
-export type BuildingCoverage = 'indoor_draft' | 'floor_plans_listed' | 'outdoor_only' | 'no_footprint';
+export type BuildingCoverage = 'indoor_draft' | 'indoor_osm' | 'floor_plans_listed' | 'outdoor_only' | 'no_footprint';
 export function coverageOf(b: CampusBuilding): BuildingCoverage {
   if (INDOOR[b.id]) return 'indoor_draft';
+  if (b.osmIndoor.some((l) => l.rooms > 0)) return 'indoor_osm';
   if (!b.footprint) return 'no_footprint';
   return b.floors.length ? 'floor_plans_listed' : 'outdoor_only';
 }
 export const COVERAGE_LABEL: Record<BuildingCoverage, string> = {
   indoor_draft: 'Indoor map (draft alignment)',
+  indoor_osm: 'Rooms from OpenStreetMap (unreviewed, no routing)',
   floor_plans_listed: 'Floor plans listed, not yet mapped',
   outdoor_only: 'Outdoor only, no floor plans found',
   no_footprint: 'Floor plans listed, no map footprint',
@@ -142,4 +147,50 @@ export function coverageSummary() {
     georeferencedFloors: floors.filter((f) => f.status === 'georeferenced').length,
     entrances: ENTRANCES.length,
   };
+}
+
+/* ---- Indoor rooms and corridors surveyed in OpenStreetMap ---------------------------- */
+interface OsmLevel {
+  level: string;
+  label: string | null;
+  rooms: { id: string; ref: string | null; name: string | null; kind: string; wheelchair: string | null; ring: LngLat[] }[];
+  paths: { id: string; kind: string; name: string | null; coords: LngLat[] }[];
+  elevators: LngLat[];
+}
+const OSM_INDOOR = indoorOsmJson as unknown as Record<string, Record<string, OsmLevel>>;
+
+/** "Floor 1" when OSM records the building's own floor label, otherwise the raw OSM level. */
+export const osmLevelName = (l: { level: string; label: string | null }) => (l.label ? `Floor ${l.label}` : `OSM level ${l.level}`);
+
+export function osmIndoorGeoJSON(buildingId: string, level: string): GeoJSON.FeatureCollection | null {
+  const l = OSM_INDOOR[buildingId]?.[level];
+  if (!l) return null;
+  return { type: 'FeatureCollection', features: [
+    ...l.rooms.map((r): GeoJSON.Feature => ({ type: 'Feature', properties: { layer: 'room', kind: r.kind, label: r.ref || r.name || '' }, geometry: { type: 'Polygon', coordinates: [r.ring] } })),
+    ...l.paths.map((p): GeoJSON.Feature => ({ type: 'Feature', properties: { layer: 'path', kind: p.kind, label: p.name || '' }, geometry: { type: 'LineString', coordinates: p.coords } })),
+    ...l.elevators.map((e): GeoJSON.Feature => ({ type: 'Feature', properties: { layer: 'elevator', kind: 'elevator', label: '' }, geometry: { type: 'Point', coordinates: e } })),
+  ] };
+}
+
+export interface OsmRoomHit { building: CampusBuilding; level: string; levelName: string; ref: string | null; name: string | null; center: LngLat }
+/** Rooms that carry a room number or name in OpenStreetMap, matched like "DC 1301" or "fishbowl". */
+export function searchOsmRooms(q: string, limit = 6): OsmRoomHit[] {
+  const s = q.trim().toLowerCase();
+  if (s.length < 2) return [];
+  const m = s.match(/^([a-z]+\d*)\s+(\S+)$/);
+  const out: OsmRoomHit[] = [];
+  for (const [id, levels] of Object.entries(OSM_INDOOR)) {
+    const building = byId.get(id);
+    if (!building) continue;
+    if (m && m[1] !== (building.code || '').toLowerCase()) continue;
+    const want = m ? m[2] : s;
+    for (const l of Object.values(levels)) for (const r of l.rooms) {
+      const ref = (r.ref || '').toLowerCase(), name = (r.name || '').toLowerCase();
+      if (!(ref && ref.startsWith(want)) && !(name && name.includes(want))) continue;
+      const cx = r.ring.reduce((a, p) => a + p[0], 0) / r.ring.length, cy = r.ring.reduce((a, p) => a + p[1], 0) / r.ring.length;
+      out.push({ building, level: l.level, levelName: osmLevelName(l), ref: r.ref, name: r.name, center: [cx, cy] });
+      if (out.length >= limit) return out;
+    }
+  }
+  return out;
 }

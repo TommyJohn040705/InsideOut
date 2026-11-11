@@ -69,3 +69,20 @@ describe('campus database', () => {
     expect(ENTRANCES.some((e) => e.buildingId === 'E5')).toBe(true);
   });
 });
+
+describe('OpenStreetMap indoor layer', () => {
+  it('finds a surveyed DC room and places it inside the DC footprint area', async () => {
+    const { searchOsmRooms, osmIndoorGeoJSON } = await import('../src/campus/campusData');
+    const hit = searchOsmRooms('dc 1301')[0];
+    expect(hit.building.id).toBe('DC');
+    expect(distanceM(hit.center, hit.building.center!)).toBeLessThan(150);
+    const fc = osmIndoorGeoJSON('DC', hit.level)!;
+    expect(fc.features.filter((f) => f.properties!.layer === 'room').length).toBeGreaterThan(50);
+  });
+
+  it('does not claim OSM rooms for buildings that have none', () => {
+    const withRooms = BUILDINGS.filter((b) => b.osmIndoor.some((l) => l.rooms > 0)).map((b) => b.id);
+    expect(withRooms).toContain('DC');
+    expect(withRooms).not.toContain('MC');
+  });
+});

@@ -28,6 +28,7 @@ export function createMapLibreAdapter(el: HTMLElement, center: LngLat, zoom: num
     map.on('error', (e) => { if (!map.isStyleLoaded()) reject(e.error); });
     map.on('load', () => {
       map.addSource('footprints', { type: 'geojson', data: empty, promoteId: 'id' });
+      map.addSource('indoor', { type: 'geojson', data: empty });
       map.addSource('route', { type: 'geojson', data: empty });
       map.addSource('markers', { type: 'geojson', data: empty });
       map.addLayer({ id: 'fp-fill', type: 'fill', source: 'footprints', paint: {
@@ -41,6 +42,17 @@ export function createMapLibreAdapter(el: HTMLElement, center: LngLat, zoom: num
       map.addLayer({ id: 'fp-label', type: 'symbol', source: 'footprints', minzoom: 14.5, layout: {
         'text-field': ['get', 'label'], 'text-size': 12, 'text-font': ['Noto Sans Bold'], 'text-allow-overlap': false,
       }, paint: { 'text-color': '#1e293b', 'text-halo-color': '#ffffff', 'text-halo-width': 1.5 } });
+      map.addLayer({ id: 'indoor-room', type: 'fill', source: 'indoor', filter: ['==', ['get', 'layer'], 'room'], paint: {
+        'fill-color': ['match', ['get', 'kind'], 'toilets', '#bae6fd', 'corridor', '#f1f5f9', 'area', '#f1f5f9', '#fef3c7'], 'fill-opacity': 0.95,
+      } });
+      map.addLayer({ id: 'indoor-room-line', type: 'line', source: 'indoor', filter: ['==', ['get', 'layer'], 'room'], paint: { 'line-color': '#78716c', 'line-width': 1 } });
+      map.addLayer({ id: 'indoor-path', type: 'line', source: 'indoor', filter: ['==', ['get', 'layer'], 'path'], paint: {
+        'line-color': ['match', ['get', 'kind'], 'steps', '#b45309', 'bridge', '#7c3aed', 'tunnel', '#7c3aed', '#0f766e'], 'line-width': 2.5, 'line-dasharray': [2, 1],
+      } });
+      map.addLayer({ id: 'indoor-elevator', type: 'circle', source: 'indoor', filter: ['==', ['get', 'layer'], 'elevator'], paint: { 'circle-radius': 5, 'circle-color': '#7c3aed', 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5 } });
+      map.addLayer({ id: 'indoor-label', type: 'symbol', source: 'indoor', minzoom: 18, filter: ['==', ['get', 'layer'], 'room'], layout: {
+        'text-field': ['get', 'label'], 'text-size': 10, 'text-font': ['Noto Sans Regular'],
+      }, paint: { 'text-color': '#1c1917', 'text-halo-color': '#ffffff', 'text-halo-width': 1 } });
       map.addLayer({ id: 'route', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#2563eb', 'line-width': 5 } });
       map.addLayer({ id: 'markers', type: 'circle', source: 'markers', paint: {
         'circle-radius': 6, 'circle-color': ['get', 'color'], 'circle-stroke-color': '#ffffff', 'circle-stroke-width': 2,
@@ -81,6 +93,7 @@ export function createMapLibreAdapter(el: HTMLElement, center: LngLat, zoom: num
           };
           img.src = o.url;
         },
+        setIndoorVector(fc) { src('indoor')?.setData(fc || empty); },
         setRoute(line) {
           src('route')?.setData(line && line.length > 1 ? { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: line } } : empty);
         },

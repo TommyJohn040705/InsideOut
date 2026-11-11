@@ -156,6 +156,66 @@ for (const el of osm.elements) {
   if (best) best.entrances.push(e.id);
 }
 
+// ---- indoor rooms and corridors surveyed in OpenStreetMap ---------------------
+// These are already in real coordinates, so they need no georeferencing. They are community
+// data: unreviewed, incomplete, and not a routing graph.
+const indoorRaw = existsSync('data-sources/osm/uw-campus-indoor.json') ? JSON.parse(readFileSync('data-sources/osm/uw-campus-indoor.json', 'utf8')) : { elements: [] };
+const inRing = (pt, ring) => {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i], [xj, yj] = ring[j];
+    if ((yi > pt[1]) !== (yj > pt[1]) && pt[0] < ((xj - xi) * (pt[1] - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+};
+const buildingAt = (pt) => {
+  let near = null, nearD = 30; // metres: bridges and tunnels sit just outside a footprint
+  for (const b of buildings.values()) for (const poly of b.polys) {
+    if (inRing(pt, poly[0])) return b;
+    const d = distToRing(pt, poly[0]);
+    if (d < nearD) { nearD = d; near = b; }
+  }
+  return near;
+};
+const indoor = {}; // buildingId -> { level -> { label, rooms, paths, elevators } }
+let indoorDropped = 0;
+const levelOf = (id, level, label) => {
+  const lv = ((indoor[id] ||= {})[level] ||= { level, label: null, rooms: [], paths: [], elevators: [] });
+  if (label && !lv.label) lv.label = label;
+  return lv;
+};
+for (const el of indoorRaw.elements) {
+  const t = el.tags || {};
+  if (t.level == null || t.indoor === 'no' || t.indoor === 'wall' || t.highway === 'construction') continue;
+  const levels = String(t.level).split(';').map((x) => x.trim()).filter(Boolean);
+  const labels = t['level:ref'] ? String(t['level:ref']).split(';') : [];
+  if (el.type === 'node') {
+    if (t.highway !== 'elevator') continue;
+    const b = buildingAt([el.lon, el.lat]);
+    if (!b) { indoorDropped++; continue; }
+    for (const lv of levels) levelOf(b.id, lv).elevators.push([el.lon, el.lat]);
+    continue;
+  }
+  if (el.type !== 'way' || !el.geometry) continue;
+  const coords = toRing(el.geometry);
+  const mid = coords[Math.floor(coords.length / 2)];
+  const closed = coords.length > 3 && coords[0][0] === coords.at(-1)[0] && coords[0][1] === coords.at(-1)[1];
+  const b = buildingAt(closed ? centroid([[coords]]) : mid);
+  if (!b) { indoorDropped++; continue; }
+  levels.forEach((lv, i) => {
+    const L = levelOf(b.id, lv, levels.length === labels.length ? labels[i] : labels.length === 1 && levels.length === 1 ? labels[0] : null);
+    if (closed && (t.indoor === 'room' || t.indoor === 'area' || t.indoor === 'corridor')) {
+      L.rooms.push({ id: `osm-way-${el.id}`, ref: t.ref || null, name: t.name || null, kind: t.amenity || t.room || t.indoor, wheelchair: t.wheelchair || null, ring: coords });
+    } else if (t.highway) {
+      L.paths.push({ id: `osm-way-${el.id}`, kind: t.bridge ? 'bridge' : t.tunnel ? 'tunnel' : t.highway, name: t.name || null, coords });
+    }
+  });
+}
+for (const b of buildings.values()) {
+  const lv = indoor[b.id];
+  b.osmIndoor = lv ? Object.values(lv).sort((x, y) => Number(x.level) - Number(y.level)).map((l) => ({ level: l.level, label: l.label, rooms: l.rooms.length, paths: l.paths.length })) : [];
+}
+
 // ---- write ----------------------------------------------------------------
 const out = [];
 for (const b of buildings.values()) {
@@ -177,8 +237,10 @@ mkdirSync('src/data/campus', { recursive: true });
 writeFileSync('src/data/campus/buildings.json', JSON.stringify(out));
 writeFileSync('src/data/campus/footprints.json', JSON.stringify({ type: 'FeatureCollection', features }));
 writeFileSync('src/data/campus/entrances.json', JSON.stringify(entrances));
+writeFileSync('src/data/campus/indoorOsm.json', JSON.stringify(indoor));
 
 const withBoth = out.filter((b) => b.footprint && b.floors.length);
 console.log(`buildings ${out.length} | with footprint ${out.filter((b) => b.footprint).length} | with floor-plan refs ${out.filter((b) => b.floors.length).length} | both ${withBoth.length}`);
 console.log(`floor refs ${out.reduce((n, b) => n + b.floors.length, 0)} (restricted ${out.reduce((n, b) => n + b.floors.filter((f) => f.restricted).length, 0)}) | entrances ${entrances.length} (matched to a building ${entrances.filter((e) => e.buildingId).length})`);
 console.log('manifest codes with no footprint:', out.filter((b) => !b.footprint).map((b) => b.code).join(' '));
+console.log('OSM indoor:', Object.entries(indoor).map(([id, lv]) => `${id}[${Object.values(lv).map((l) => `L${l.level}:${l.rooms.length}r/${l.paths.length}p`).join(' ')}]`).join('  '), '| dropped (no building within 30 m):', indoorDropped);

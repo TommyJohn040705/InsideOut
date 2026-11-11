@@ -44,6 +44,16 @@ export async function createGoogleAdapter(el: HTMLElement, center: LngLat, zoom:
   const route = new g.Polyline({ map, strokeColor: '#2563eb', strokeWeight: 5, strokeOpacity: 0.95, zIndex: 5 });
   const directions = new g.DirectionsRenderer({ map, suppressMarkers: true, preserveViewport: true, polylineOptions: { strokeColor: '#0ea5e9', strokeWeight: 5 } });
 
+  // Indoor rooms and corridors get their own Data layer so they style and clear independently.
+  // shortcut: no room labels on Google yet (the fallback map has them); add markers if needed.
+  const indoorLayer = new g.Data({ map });
+  indoorLayer.setStyle((f) => {
+    const kind = f.getProperty('kind'), layer = f.getProperty('layer');
+    if (layer === 'path') return { strokeColor: kind === 'steps' ? '#b45309' : kind === 'bridge' || kind === 'tunnel' ? '#7c3aed' : '#0f766e', strokeWeight: 2.5, zIndex: 3, clickable: false };
+    if (layer === 'elevator') return { icon: { path: g.SymbolPath.CIRCLE, scale: 5, fillColor: '#7c3aed', fillOpacity: 1, strokeColor: '#fff', strokeWeight: 1.5 }, zIndex: 4, clickable: false };
+    return { fillColor: kind === 'toilets' ? '#bae6fd' : kind === 'corridor' || kind === 'area' ? '#f1f5f9' : '#fef3c7', fillOpacity: 0.95, strokeColor: '#78716c', strokeWeight: 1, zIndex: 2, clickable: false };
+  });
+
   const restyle = () => map.data.setStyle((f) => {
     const on = f.getProperty('id') === selected;
     return { fillColor: on ? '#fbbf24' : '#c7d2fe', fillOpacity: on ? 0.3 : 0.5, strokeColor: on ? '#b45309' : '#6366f1', strokeWeight: on ? 2.5 : 1, zIndex: 1 };
@@ -99,6 +109,10 @@ export async function createGoogleAdapter(el: HTMLElement, center: LngLat, zoom:
       floor = o ? new FloorImage(o) : null;
       floor?.setMap(map);
     },
+    setIndoorVector(fc) {
+      indoorLayer.forEach((f) => indoorLayer.remove(f));
+      if (fc) indoorLayer.addGeoJson(fc);
+    },
     setRoute(line) { route.setPath((line || []).map(ll)); },
     setMarkers(list) {
       markers.forEach((m) => m.setMap(null));
@@ -115,7 +129,7 @@ export async function createGoogleAdapter(el: HTMLElement, center: LngLat, zoom:
     },
     clearWalkingRoute() { directions.set('directions', null); },
     destroy() {
-      floor?.setMap(null); route.setMap(null); directions.setMap(null);
+      floor?.setMap(null); indoorLayer.setMap(null); route.setMap(null); directions.setMap(null);
       [...labels, ...markers].forEach((m) => m.setMap(null));
       g.event.clearInstanceListeners(map);
     },

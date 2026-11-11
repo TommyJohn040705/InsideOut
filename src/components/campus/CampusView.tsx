@@ -9,6 +9,7 @@ import { FloorPlanData, NavigationRoute, RoomPOI } from '../../types/navigation'
 import {
   BUILDINGS, CAMPUS_CENTER, COVERAGE_LABEL, FLOOR_STATUS_LABEL, FOOTPRINTS, INDOOR, CampusBuilding,
   buildingById, buildingLabel, coverageOf, coverageSummary, entrancesOf, searchBuildings,
+  osmIndoorGeoJSON, osmLevelName, searchOsmRooms, OsmRoomHit,
 } from '../../campus/campusData';
 import type { LngLat } from '../../campus/georef';
 import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_MAP_ID, MAP_PROVIDER } from '../../campus/map/config';
@@ -22,7 +23,7 @@ interface Props {
   onOpenIndoor: (appBuildingId: string, floor: number, room?: RoomPOI) => void;
 }
 
-type Hit = { kind: 'building'; b: CampusBuilding } | { kind: 'room'; b: CampusBuilding; room: RoomPOI; floor: number };
+type Hit = { kind: 'building'; b: CampusBuilding } | { kind: 'osmroom'; b: CampusBuilding; r: OsmRoomHit } | { kind: 'room'; b: CampusBuilding; room: RoomPOI; floor: number };
 
 export function CampusView({ plans, route, destination, isMobile, onOpenIndoor }: Props) {
   const el = useRef<HTMLDivElement>(null);
@@ -34,6 +35,9 @@ export function CampusView({ plans, route, destination, isMobile, onOpenIndoor }
   const [query, setQuery] = useState('');
   const [coverageOpen, setCoverageOpen] = useState(false);
   const [user, setUser] = useState<LngLat | null>(null);
+  // OpenStreetMap indoor level being shown, and a room found by search on it.
+  const [osmLevel, setOsmLevel] = useState<string | null>(null);
+  const [osmRoom, setOsmRoom] = useState<OsmRoomHit | null>(null);
   const [walk, setWalk] = useState<string | null>(null);
 
   const selected = selectedId ? buildingById(selectedId) : null;
@@ -74,6 +78,9 @@ export function CampusView({ plans, route, destination, isMobile, onOpenIndoor }
     const b = selectedId ? buildingById(selectedId) : null;
     if (b?.center) adapter.flyTo(b.center, INDOOR[b.id] ? (provider === 'google' ? 19 : 17.8) : provider === 'google' ? 18 : 17, isMobile ? 300 : 0);
     if (b && INDOOR[b.id] && floor == null) setFloor(route?.toFloor ?? destination?.floor ?? 2);
+    // Buildings without our own indoor dataset fall back to what OpenStreetMap has surveyed.
+    const lv = b && !INDOOR[b.id] ? b.osmIndoor : [];
+    setOsmLevel((cur) => (lv.some((l) => l.level === cur) ? cur : (lv.find((l) => l.rooms > 0) || lv[0])?.level ?? null));
   }, [adapter, selectedId]);
 
   // Georeferenced floor image + indoor route + markers.
@@ -88,9 +95,11 @@ export function CampusView({ plans, route, destination, isMobile, onOpenIndoor }
       id: e.id, lngLat: e.position, label: e.name || `${e.kind} entrance`, kind: e.wheelchair === 'yes' ? 'entrance_accessible' : 'entrance',
     }));
     if (g && destination && (destination.floor ?? floor) === floor) markers.push({ id: 'dest', lngLat: g.pctToLngLat(destination.coords), label: destination.roomNumber || destination.name, kind: 'destination' });
+    adapter.setIndoorVector(selected && osmLevel != null && !indoor ? osmIndoorGeoJSON(selected.id, osmLevel) : null);
+    if (osmRoom && selected?.id === osmRoom.building.id && osmRoom.level === osmLevel) markers.push({ id: 'osmroom', lngLat: osmRoom.center, label: osmRoom.ref || osmRoom.name || 'Room', kind: 'destination' });
     if (user) markers.push({ id: 'user', lngLat: user, label: 'You (GPS)', kind: 'user' });
     adapter.setMarkers(markers);
-  }, [adapter, indoor, indoorPlans, floor, route, destination, entrances, user]);
+  }, [adapter, indoor, indoorPlans, floor, route, destination, entrances, user, selected, osmLevel, osmRoom]);
 
   const hits: Hit[] = useMemo(() => {
     const q = query.trim();
@@ -106,12 +115,14 @@ export function CampusView({ plans, route, destination, isMobile, onOpenIndoor }
         if (r.roomNumber?.toUpperCase().startsWith(m[2].toUpperCase())) out.unshift({ kind: 'room', b, room: { ...r, floor: r.floor ?? p.floorNumber }, floor: r.floor ?? p.floorNumber });
       }
     }
+    for (const r of searchOsmRooms(q, 5)) out.unshift({ kind: 'osmroom', b: r.building, r });
     return out.slice(0, 8);
   }, [query, plans]);
 
   const pick = (h: Hit) => {
     setQuery('');
     if (h.kind === 'room') onOpenIndoor(INDOOR[h.b.id].appBuildingId, h.floor, h.room);
+    else if (h.kind === 'osmroom') { setSelectedId(h.b.id); setFloor(null); setWalk(null); setOsmLevel(h.r.level); setOsmRoom(h.r); }
     else { setSelectedId(h.b.id); setFloor(null); setWalk(null); }
   };
 
@@ -167,6 +178,21 @@ export function CampusView({ plans, route, destination, isMobile, onOpenIndoor }
         </div>
       )}
 
+      {!indoor && selected.osmIndoor.length > 0 && (
+        <div>
+          <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-1.5">Surveyed in OpenStreetMap</div>
+          <div className="flex flex-wrap gap-1.5">
+            {selected.osmIndoor.map((l) => (
+              <button key={l.level} onClick={() => setOsmLevel(l.level)} title={`${l.rooms} rooms, ${l.paths} corridors or links`}
+                className={`h-8 px-2.5 rounded-lg text-xs font-bold ${osmLevel === l.level ? 'bg-slate-900 text-white' : 'bg-teal-50 text-teal-800 hover:bg-teal-100'}`}>
+                {osmLevelName(l)}
+              </button>
+            ))}
+          </div>
+          <p className="text-[11px] text-slate-500 mt-1.5">Rooms and corridors drawn by OpenStreetMap volunteers. Unreviewed and incomplete; there is no indoor routing here yet.</p>
+        </div>
+      )}
+
       {georef && (
         <p className="text-[11px] text-amber-800 bg-amber-50 rounded-lg p-2 flex gap-1.5">
           <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-px" />
@@ -213,12 +239,12 @@ export function CampusView({ plans, route, destination, isMobile, onOpenIndoor }
           {hits.length > 0 && (
             <ul className="mt-2 bg-white rounded-2xl shadow-xl ring-1 ring-slate-200 overflow-hidden divide-y divide-slate-100">
               {hits.map((h) => (
-                <li key={h.kind === 'room' ? h.room.id : h.b.id}>
+                <li key={h.kind === 'room' ? h.room.id : h.kind === 'osmroom' ? `${h.b.id}-${h.r.level}-${h.r.ref}-${h.r.name}` : h.b.id}>
                   <button onClick={() => pick(h)} className="w-full text-left px-3 py-2.5 hover:bg-slate-50 flex items-center gap-2.5">
                     <span className="min-w-9 h-7 px-1.5 rounded-md bg-slate-100 text-[11px] font-extrabold flex items-center justify-center">{h.b.code || '·'}</span>
                     <span className="flex-1 min-w-0">
-                      <span className="block text-sm font-bold truncate">{h.kind === 'room' ? `${h.b.code} ${h.room.roomNumber}: ${h.room.name}` : buildingLabel(h.b)}</span>
-                      <span className="block text-[11px] text-slate-500">{h.kind === 'room' ? `Floor ${h.floor}, opens indoor map` : COVERAGE_LABEL[coverageOf(h.b)]}</span>
+                      <span className="block text-sm font-bold truncate">{h.kind === 'room' ? `${h.b.code} ${h.room.roomNumber}: ${h.room.name}` : h.kind === 'osmroom' ? `${h.b.code} ${[h.r.ref, h.r.name].filter(Boolean).join(': ')}` : buildingLabel(h.b)}</span>
+                      <span className="block text-[11px] text-slate-500">{h.kind === 'room' ? `Floor ${h.floor}, opens indoor map` : h.kind === 'osmroom' ? `${h.r.levelName}, from OpenStreetMap (unreviewed)` : COVERAGE_LABEL[coverageOf(h.b)]}</span>
                     </span>
                   </button>
                 </li>
