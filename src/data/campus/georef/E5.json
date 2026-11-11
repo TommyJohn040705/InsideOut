@@ -1,0 +1,20 @@
+{
+  "buildingId": "E5",
+  "floors": [1, 2, 3, 4, 5, 6],
+  "imageSize": [3067, 992],
+  "method": "footprint_corner_fit",
+  "review": "draft_unreviewed",
+  "notes": [
+    "All six E5 floors share one drawing frame (tools/floorplan-tracer/common.py: same scale and crop for every floor), so one transform serves them all.",
+    "Control points are the four corners of the main building body, read from the traced floor 3 outline and matched to OpenStreetMap way 51125806. They are not surveyed points.",
+    "Orientation evidence: the E3 bridge link (room 3818) leaves the drawing at the bottom-right, and E3 lies south-west of E5, so the right edge of the drawing is the south end and the bottom edge is the west wall.",
+    "Scale cross-check: the drawing's stated 1:300 scale gives 0.0346 m/pixel; the fit should land within a few percent of that.",
+    "To promote this to human_reviewed, replace the corner estimates with control points measured on site or from a georeferenced CAD export."
+  ],
+  "controlPoints": [
+    { "px": [353, 69], "lngLat": [-80.540111, 43.473236], "note": "North-east corner of main body (image top-left), OSM node on east wall where the narrower north link begins" },
+    { "px": [2818, 69], "lngLat": [-80.539594, 43.472526], "note": "South-east corner (image top-right)" },
+    { "px": [2818, 912], "lngLat": [-80.539886, 43.472415], "note": "South-west corner (image bottom-right), beside the E3 bridge link" },
+    { "px": [353, 912], "lngLat": [-80.540423, 43.473114], "note": "North-west corner of main body (image bottom-left)" }
+  ]
+}

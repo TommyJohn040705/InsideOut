@@ -1,0 +1,3930 @@
+[
+  {
+    "filename": "155180KING_07FLR.pdf",
+    "buildingNumber": "155180",
+    "buildingCode": "KING",
+    "floorCode": "07",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/155180KING_07FLR.pdf"
+  },
+  {
+    "filename": "047ARC_01FLR.pdf",
+    "buildingNumber": "047",
+    "buildingCode": "ARC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/047ARC_01FLR.pdf"
+  },
+  {
+    "filename": "047ARC_02FLR.pdf",
+    "buildingNumber": "047",
+    "buildingCode": "ARC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/047ARC_02FLR.pdf"
+  },
+  {
+    "filename": "047ARC_03FLR.pdf",
+    "buildingNumber": "047",
+    "buildingCode": "ARC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/047ARC_03FLR.pdf"
+  },
+  {
+    "filename": "009AL_B1FLR.pdf",
+    "buildingNumber": "009",
+    "buildingCode": "AL",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/009AL_B1FLR.pdf"
+  },
+  {
+    "filename": "009AL_01FLR.pdf",
+    "buildingNumber": "009",
+    "buildingCode": "AL",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/009AL_01FLR.pdf"
+  },
+  {
+    "filename": "009AL_02FLR.pdf",
+    "buildingNumber": "009",
+    "buildingCode": "AL",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/009AL_02FLR.pdf"
+  },
+  {
+    "filename": "072E10_01FLR.pdf",
+    "buildingNumber": "072",
+    "buildingCode": "E10",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/072E10_01FLR.pdf"
+  },
+  {
+    "filename": "007B1_B1FLR.pdf",
+    "buildingNumber": "007",
+    "buildingCode": "B1",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/007B1_B1FLR.pdf"
+  },
+  {
+    "filename": "007B1_01FLR.pdf",
+    "buildingNumber": "007",
+    "buildingCode": "B1",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/007B1_01FLR.pdf"
+  },
+  {
+    "filename": "007B1_02FLR.pdf",
+    "buildingNumber": "007",
+    "buildingCode": "B1",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/007B1_02FLR.pdf"
+  },
+  {
+    "filename": "007B1_03FLR.pdf",
+    "buildingNumber": "007",
+    "buildingCode": "B1",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/007B1_03FLR.pdf"
+  },
+  {
+    "filename": "013B2_B1FLR.pdf",
+    "buildingNumber": "013",
+    "buildingCode": "B2",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/013B2_B1FLR.pdf"
+  },
+  {
+    "filename": "013B2_01FLR.pdf",
+    "buildingNumber": "013",
+    "buildingCode": "B2",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/013B2_01FLR.pdf"
+  },
+  {
+    "filename": "013B2_02FLR.pdf",
+    "buildingNumber": "013",
+    "buildingCode": "B2",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/013B2_02FLR.pdf"
+  },
+  {
+    "filename": "013B2_03FLR.pdf",
+    "buildingNumber": "013",
+    "buildingCode": "B2",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/013B2_03FLR.pdf"
+  },
+  {
+    "filename": "040BAU_01FLR.pdf",
+    "buildingNumber": "040",
+    "buildingCode": "BAU",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/040BAU_01FLR.pdf"
+  },
+  {
+    "filename": "032BMH_B1FLR.pdf",
+    "buildingNumber": "032",
+    "buildingCode": "BMH",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/032BMH_B1FLR.pdf"
+  },
+  {
+    "filename": "032BMH_01FLR.pdf",
+    "buildingNumber": "032",
+    "buildingCode": "BMH",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/032BMH_01FLR.pdf"
+  },
+  {
+    "filename": "032BMH_02FLR.pdf",
+    "buildingNumber": "032",
+    "buildingCode": "BMH",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/032BMH_02FLR.pdf"
+  },
+  {
+    "filename": "032BMH_03FLR.pdf",
+    "buildingNumber": "032",
+    "buildingCode": "BMH",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/032BMH_03FLR.pdf"
+  },
+  {
+    "filename": "032BMH_04FLR.pdf",
+    "buildingNumber": "032",
+    "buildingCode": "BMH",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/032BMH_04FLR.pdf"
+  },
+  {
+    "filename": "153UWD_01FLR.pdf",
+    "buildingNumber": "153",
+    "buildingCode": "UWD",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/153UWD_01FLR.pdf"
+  },
+  {
+    "filename": "153UWD_02FLR.pdf",
+    "buildingNumber": "153",
+    "buildingCode": "UWD",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/153UWD_02FLR.pdf"
+  },
+  {
+    "filename": "028C2_B1FLR.pdf",
+    "buildingNumber": "028",
+    "buildingCode": "C2",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/028C2_B1FLR.pdf"
+  },
+  {
+    "filename": "028C2_01FLR.pdf",
+    "buildingNumber": "028",
+    "buildingCode": "C2",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/028C2_01FLR.pdf"
+  },
+  {
+    "filename": "028C2_02FLR.pdf",
+    "buildingNumber": "028",
+    "buildingCode": "C2",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/028C2_02FLR.pdf"
+  },
+  {
+    "filename": "028C2_03FLR.pdf",
+    "buildingNumber": "028",
+    "buildingCode": "C2",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/028C2_03FLR.pdf"
+  },
+  {
+    "filename": "028C2_04FLR.pdf",
+    "buildingNumber": "028",
+    "buildingCode": "C2",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/028C2_04FLR.pdf"
+  },
+  {
+    "filename": "042CIF_01FLR.pdf",
+    "buildingNumber": "042",
+    "buildingCode": "CIF",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/042CIF_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_COMM_CTR_B1FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_COMM_CTR",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/043CLV_COMM_CTR_B1FLR.pdf"
+  },
+  {
+    "filename": "043CLV_COMM_CTR_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_COMM_CTR",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/043CLV_COMM_CTR_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_COMM_CTR_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_COMM_CTR",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/043CLV_COMM_CTR_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_A_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_A",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_A_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_A_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_A",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_A_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_B_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_B",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_B_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_B_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_B",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_B_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_C_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_C",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_C_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_C_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_C",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_C_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_D_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_D",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_D_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_D_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_D",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_D_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_E_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_E",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_E_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_E_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_E",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_E_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_F_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_F",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_F_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_F_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_F",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_F_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_G_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_G",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_G_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_G_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_G",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_G_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_H_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_H",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_H_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_H_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_H",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_H_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_J_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_J",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_J_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_J_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_J",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_J_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_K_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_K",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_K_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_K_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_K",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_K_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_L_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_L",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_L_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_L_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_L",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_L_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_M_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_M",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_M_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_M_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_M",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_M_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_N_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_N",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_N_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_N_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_N",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_N_02FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_P_01FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_P",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_P_01FLR.pdf"
+  },
+  {
+    "filename": "043CLV_BLOCK_P_02FLR.pdf",
+    "buildingNumber": "043",
+    "buildingCode": "CLV_BLOCK_P",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_P_02FLR.pdf"
+  },
+  {
+    "filename": "068CMH_B1FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_B1FLR.pdf"
+  },
+  {
+    "filename": "068CMH_01FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/068CMH_01FLR.pdf"
+  },
+  {
+    "filename": "068CMH_02FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_02FLR.pdf"
+  },
+  {
+    "filename": "068CMH_03FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_03FLR.pdf"
+  },
+  {
+    "filename": "068CMH_04FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "04",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_04FLR.pdf"
+  },
+  {
+    "filename": "068CMH_05FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "05",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_05FLR.pdf"
+  },
+  {
+    "filename": "068CMH_06FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "06",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_06FLR.pdf"
+  },
+  {
+    "filename": "068CMH_07FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "07",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_07FLR.pdf"
+  },
+  {
+    "filename": "068CMH_08FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "08",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_08FLR.pdf"
+  },
+  {
+    "filename": "068CMH_09FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "09",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_09FLR.pdf"
+  },
+  {
+    "filename": "068CMH_10FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "10",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_10FLR.pdf"
+  },
+  {
+    "filename": "068CMH_11FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "11",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_11FLR.pdf"
+  },
+  {
+    "filename": "068CMH_12FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "12",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_12FLR.pdf"
+  },
+  {
+    "filename": "068CMH_13FLR.pdf",
+    "buildingNumber": "068",
+    "buildingCode": "CMH",
+    "floorCode": "13",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_13FLR.pdf"
+  },
+  {
+    "filename": "015COM_B1FLR.pdf",
+    "buildingNumber": "015",
+    "buildingCode": "COM",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/015COM_B1FLR.pdf"
+  },
+  {
+    "filename": "015COM_01FLR.pdf",
+    "buildingNumber": "015",
+    "buildingCode": "COM",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/015COM_01FLR.pdf"
+  },
+  {
+    "filename": "015COM_02FLR.pdf",
+    "buildingNumber": "015",
+    "buildingCode": "COM",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/015COM_02FLR.pdf"
+  },
+  {
+    "filename": "029CPH_B1FLR.pdf",
+    "buildingNumber": "029",
+    "buildingCode": "CPH",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/029CPH_B1FLR.pdf"
+  },
+  {
+    "filename": "029CPH_01FLR.pdf",
+    "buildingNumber": "029",
+    "buildingCode": "CPH",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/029CPH_01FLR.pdf"
+  },
+  {
+    "filename": "029CPH_02FLR.pdf",
+    "buildingNumber": "029",
+    "buildingCode": "CPH",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/029CPH_02FLR.pdf"
+  },
+  {
+    "filename": "029CPH_03FLR.pdf",
+    "buildingNumber": "029",
+    "buildingCode": "CPH",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/029CPH_03FLR.pdf"
+  },
+  {
+    "filename": "029CPH_04FLR.pdf",
+    "buildingNumber": "029",
+    "buildingCode": "CPH",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/029CPH_04FLR.pdf"
+  },
+  {
+    "filename": "037DC_B1FLR.pdf",
+    "buildingNumber": "037",
+    "buildingCode": "DC",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/037DC_B1FLR.pdf"
+  },
+  {
+    "filename": "037DC_01FLR.pdf",
+    "buildingNumber": "037",
+    "buildingCode": "DC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/037DC_01FLR.pdf"
+  },
+  {
+    "filename": "037DC_02FLR.pdf",
+    "buildingNumber": "037",
+    "buildingCode": "DC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/037DC_02FLR.pdf"
+  },
+  {
+    "filename": "037DC_03FLR.pdf",
+    "buildingNumber": "037",
+    "buildingCode": "DC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/037DC_03FLR.pdf"
+  },
+  {
+    "filename": "037DC_PHFLR.pdf",
+    "buildingNumber": "037",
+    "buildingCode": "DC",
+    "floorCode": "PH",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/037DC_PHFLR.pdf"
+  },
+  {
+    "filename": "055DMS_01FLR.pdf",
+    "buildingNumber": "055",
+    "buildingCode": "DMS",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/055DMS_01FLR.pdf"
+  },
+  {
+    "filename": "055DMS_02FLR.pdf",
+    "buildingNumber": "055",
+    "buildingCode": "DMS",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/055DMS_02FLR.pdf"
+  },
+  {
+    "filename": "055DMS_03FLR.pdf",
+    "buildingNumber": "055",
+    "buildingCode": "DMS",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/055DMS_03FLR.pdf"
+  },
+  {
+    "filename": "001DWE_B1FLR.pdf",
+    "buildingNumber": "001",
+    "buildingCode": "DWE",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/001DWE_B1FLR.pdf"
+  },
+  {
+    "filename": "001DWE_01FLR.pdf",
+    "buildingNumber": "001",
+    "buildingCode": "DWE",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/001DWE_01FLR.pdf"
+  },
+  {
+    "filename": "001DWE_02FLR.pdf",
+    "buildingNumber": "001",
+    "buildingCode": "DWE",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/001DWE_02FLR.pdf"
+  },
+  {
+    "filename": "001DWE_03FLR.pdf",
+    "buildingNumber": "001",
+    "buildingCode": "DWE",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/001DWE_03FLR.pdf"
+  },
+  {
+    "filename": "002E2_B1FLR.pdf",
+    "buildingNumber": "002",
+    "buildingCode": "E2",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/002E2_B1FLR.pdf"
+  },
+  {
+    "filename": "002E2_01FLR.pdf",
+    "buildingNumber": "002",
+    "buildingCode": "E2",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/002E2_01FLR.pdf"
+  },
+  {
+    "filename": "002E2_02FLR.pdf",
+    "buildingNumber": "002",
+    "buildingCode": "E2",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/002E2_02FLR.pdf"
+  },
+  {
+    "filename": "002E2_03FLR.pdf",
+    "buildingNumber": "002",
+    "buildingCode": "E2",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/002E2_03FLR.pdf"
+  },
+  {
+    "filename": "002E2_04FLR.pdf",
+    "buildingNumber": "002",
+    "buildingCode": "E2",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/002E2_04FLR.pdf"
+  },
+  {
+    "filename": "003E3_01FLR.pdf",
+    "buildingNumber": "003",
+    "buildingCode": "E3",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/003E3_01FLR.pdf"
+  },
+  {
+    "filename": "003E3_02FLR.pdf",
+    "buildingNumber": "003",
+    "buildingCode": "E3",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/003E3_02FLR.pdf"
+  },
+  {
+    "filename": "003E3_02FLR_MEZ.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "003E3",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/003E3_02FLR_MEZ.pdf"
+  },
+  {
+    "filename": "003E3_03FLR.pdf",
+    "buildingNumber": "003",
+    "buildingCode": "E3",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/003E3_03FLR.pdf"
+  },
+  {
+    "filename": "003E3_04FLR.pdf",
+    "buildingNumber": "003",
+    "buildingCode": "E3",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/003E3_04FLR.pdf"
+  },
+  {
+    "filename": "053E5_01FLR.pdf",
+    "buildingNumber": "053",
+    "buildingCode": "E5",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_01FLR.pdf"
+  },
+  {
+    "filename": "053E5_02FLR.pdf",
+    "buildingNumber": "053",
+    "buildingCode": "E5",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_02FLR.pdf"
+  },
+  {
+    "filename": "053E5_03FLR.pdf",
+    "buildingNumber": "053",
+    "buildingCode": "E5",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_03FLR.pdf"
+  },
+  {
+    "filename": "053E5_04FLR.pdf",
+    "buildingNumber": "053",
+    "buildingCode": "E5",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_04FLR.pdf"
+  },
+  {
+    "filename": "053E5_05FLR.pdf",
+    "buildingNumber": "053",
+    "buildingCode": "E5",
+    "floorCode": "05",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_05FLR.pdf"
+  },
+  {
+    "filename": "053E5_06FLR.pdf",
+    "buildingNumber": "053",
+    "buildingCode": "E5",
+    "floorCode": "06",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_06FLR.pdf"
+  },
+  {
+    "filename": "060E6_01FLR.pdf",
+    "buildingNumber": "060",
+    "buildingCode": "E6",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_01FLR.pdf"
+  },
+  {
+    "filename": "060E6_02FLR.pdf",
+    "buildingNumber": "060",
+    "buildingCode": "E6",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_02FLR.pdf"
+  },
+  {
+    "filename": "060E6_03FLR.pdf",
+    "buildingNumber": "060",
+    "buildingCode": "E6",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_03FLR.pdf"
+  },
+  {
+    "filename": "060E6_04FLR.pdf",
+    "buildingNumber": "060",
+    "buildingCode": "E6",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_04FLR.pdf"
+  },
+  {
+    "filename": "060E6_05FLR.pdf",
+    "buildingNumber": "060",
+    "buildingCode": "E6",
+    "floorCode": "05",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_05FLR.pdf"
+  },
+  {
+    "filename": "060E6_06FLR.pdf",
+    "buildingNumber": "060",
+    "buildingCode": "E6",
+    "floorCode": "06",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_06FLR.pdf"
+  },
+  {
+    "filename": "062EC1_01FLR.pdf",
+    "buildingNumber": "062",
+    "buildingCode": "EC1",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/062EC1_01FLR.pdf"
+  },
+  {
+    "filename": "062EC1_02FLR.pdf",
+    "buildingNumber": "062",
+    "buildingCode": "EC1",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/062EC1_02FLR.pdf"
+  },
+  {
+    "filename": "063EC2_01FLR.pdf",
+    "buildingNumber": "063",
+    "buildingCode": "EC2",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/063EC2_01FLR.pdf"
+  },
+  {
+    "filename": "063EC2_02FLR.pdf",
+    "buildingNumber": "063",
+    "buildingCode": "EC2",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/063EC2_02FLR.pdf"
+  },
+  {
+    "filename": "063EC2_03FLR.pdf",
+    "buildingNumber": "063",
+    "buildingCode": "EC2",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/063EC2_03FLR.pdf"
+  },
+  {
+    "filename": "063EC2_04FLR.pdf",
+    "buildingNumber": "063",
+    "buildingCode": "EC2",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/063EC2_04FLR.pdf"
+  },
+  {
+    "filename": "064EC3_01FLR.pdf",
+    "buildingNumber": "064",
+    "buildingCode": "EC3",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/064EC3_01FLR.pdf"
+  },
+  {
+    "filename": "064EC3_02FLR.pdf",
+    "buildingNumber": "064",
+    "buildingCode": "EC3",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/064EC3_02FLR.pdf"
+  },
+  {
+    "filename": "065EC4_01FLR.pdf",
+    "buildingNumber": "065",
+    "buildingCode": "EC4",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/065EC4_01FLR.pdf"
+  },
+  {
+    "filename": "065EC4_02FLR.pdf",
+    "buildingNumber": "065",
+    "buildingCode": "EC4",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/065EC4_02FLR.pdf"
+  },
+  {
+    "filename": "066EC5_01FLR.pdf",
+    "buildingNumber": "066",
+    "buildingCode": "EC5",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/066EC5_01FLR.pdf"
+  },
+  {
+    "filename": "066EC5_02FLR.pdf",
+    "buildingNumber": "066",
+    "buildingCode": "EC5",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/066EC5_02FLR.pdf"
+  },
+  {
+    "filename": "066EC5_03FLR.pdf",
+    "buildingNumber": "066",
+    "buildingCode": "EC5",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/066EC5_03FLR.pdf"
+  },
+  {
+    "filename": "066EC5_04FLR.pdf",
+    "buildingNumber": "066",
+    "buildingCode": "EC5",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/066EC5_04FLR.pdf"
+  },
+  {
+    "filename": "036ECH_01FLR.pdf",
+    "buildingNumber": "036",
+    "buildingCode": "ECH",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/036ECH_01FLR.pdf"
+  },
+  {
+    "filename": "036ECH_02FLR.pdf",
+    "buildingNumber": "036",
+    "buildingCode": "ECH",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/036ECH_02FLR.pdf"
+  },
+  {
+    "filename": "039EIT_LLFLR.pdf",
+    "buildingNumber": "039",
+    "buildingCode": "EIT",
+    "floorCode": "LL",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_LLFLR.pdf"
+  },
+  {
+    "filename": "039EIT_01FLR.pdf",
+    "buildingNumber": "039",
+    "buildingCode": "EIT",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_01FLR.pdf"
+  },
+  {
+    "filename": "039EIT_02FLR.pdf",
+    "buildingNumber": "039",
+    "buildingCode": "EIT",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_02FLR.pdf"
+  },
+  {
+    "filename": "039EIT_03FLR.pdf",
+    "buildingNumber": "039",
+    "buildingCode": "EIT",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_03FLR.pdf"
+  },
+  {
+    "filename": "039EIT_04FLR.pdf",
+    "buildingNumber": "039",
+    "buildingCode": "EIT",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_04FLR.pdf"
+  },
+  {
+    "filename": "039EIT_05FLR.pdf",
+    "buildingNumber": "039",
+    "buildingCode": "EIT",
+    "floorCode": "05",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_05FLR.pdf"
+  },
+  {
+    "filename": "039EIT_06FLR.pdf",
+    "buildingNumber": "039",
+    "buildingCode": "EIT",
+    "floorCode": "06",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_06FLR.pdf"
+  },
+  {
+    "filename": "039EIT_07FLR.pdf",
+    "buildingNumber": "039",
+    "buildingCode": "EIT",
+    "floorCode": "07",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_07FLR.pdf"
+  },
+  {
+    "filename": "048ERC_01FLR.pdf",
+    "buildingNumber": "048",
+    "buildingCode": "ERC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/048ERC_01FLR.pdf"
+  },
+  {
+    "filename": "048ERC_02FLR.pdf",
+    "buildingNumber": "048",
+    "buildingCode": "ERC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/048ERC_02FLR.pdf"
+  },
+  {
+    "filename": "048ERC_03FLR.pdf",
+    "buildingNumber": "048",
+    "buildingCode": "ERC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/048ERC_03FLR.pdf"
+  },
+  {
+    "filename": "006ESC_B1FLR.pdf",
+    "buildingNumber": "006",
+    "buildingCode": "ESC",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/006ESC_B1FLR.pdf"
+  },
+  {
+    "filename": "006ESC_01FLR.pdf",
+    "buildingNumber": "006",
+    "buildingCode": "ESC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/006ESC_01FLR.pdf"
+  },
+  {
+    "filename": "006ESC_02FLR.pdf",
+    "buildingNumber": "006",
+    "buildingCode": "ESC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/006ESC_02FLR.pdf"
+  },
+  {
+    "filename": "006ESC_03FLR.pdf",
+    "buildingNumber": "006",
+    "buildingCode": "ESC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/006ESC_03FLR.pdf"
+  },
+  {
+    "filename": "006ESC_04FLR.pdf",
+    "buildingNumber": "006",
+    "buildingCode": "ESC",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/006ESC_04FLR.pdf"
+  },
+  {
+    "filename": "010EV1_01FLR.pdf",
+    "buildingNumber": "010",
+    "buildingCode": "EV1",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/010EV1_01FLR.pdf"
+  },
+  {
+    "filename": "010EV1_02FLR.pdf",
+    "buildingNumber": "010",
+    "buildingCode": "EV1",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/010EV1_02FLR.pdf"
+  },
+  {
+    "filename": "010EV1_03FLR.pdf",
+    "buildingNumber": "010",
+    "buildingCode": "EV1",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/010EV1_03FLR.pdf"
+  },
+  {
+    "filename": "010EV1_04FLR.pdf",
+    "buildingNumber": "010",
+    "buildingCode": "EV1",
+    "floorCode": "04",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/010EV1_04FLR.pdf"
+  },
+  {
+    "filename": "010EV1_05FLR.pdf",
+    "buildingNumber": "010",
+    "buildingCode": "EV1",
+    "floorCode": "05",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/010EV1_05FLR.pdf"
+  },
+  {
+    "filename": "034EV2_01FLR.pdf",
+    "buildingNumber": "034",
+    "buildingCode": "EV2",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/034EV2_01FLR.pdf"
+  },
+  {
+    "filename": "034EV2_02FLR.pdf",
+    "buildingNumber": "034",
+    "buildingCode": "EV2",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/034EV2_02FLR.pdf"
+  },
+  {
+    "filename": "034EV2_03FLR.pdf",
+    "buildingNumber": "034",
+    "buildingCode": "EV2",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/034EV2_03FLR.pdf"
+  },
+  {
+    "filename": "057EV3_01FLR.pdf",
+    "buildingNumber": "057",
+    "buildingCode": "EV3",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/057EV3_01FLR.pdf"
+  },
+  {
+    "filename": "057EV3_02FLR.pdf",
+    "buildingNumber": "057",
+    "buildingCode": "EV3",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/057EV3_02FLR.pdf"
+  },
+  {
+    "filename": "057EV3_03FLR.pdf",
+    "buildingNumber": "057",
+    "buildingCode": "EV3",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/057EV3_03FLR.pdf"
+  },
+  {
+    "filename": "057EV3_04FLR.pdf",
+    "buildingNumber": "057",
+    "buildingCode": "EV3",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/057EV3_04FLR.pdf"
+  },
+  {
+    "filename": "035FED_01FLR.pdf",
+    "buildingNumber": "035",
+    "buildingCode": "FED",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/035FED_01FLR.pdf"
+  },
+  {
+    "filename": "035FED_02FLR.pdf",
+    "buildingNumber": "035",
+    "buildingCode": "FED",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/035FED_02FLR.pdf"
+  },
+  {
+    "filename": "132GA_01FLR.pdf",
+    "buildingNumber": "132",
+    "buildingCode": "GA",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/132GA_01FLR.pdf"
+  },
+  {
+    "filename": "104GH_B1FLR.pdf",
+    "buildingNumber": "104",
+    "buildingCode": "GH",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/104GH_B1FLR.pdf"
+  },
+  {
+    "filename": "104GH_01FLR.pdf",
+    "buildingNumber": "104",
+    "buildingCode": "GH",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/104GH_01FLR.pdf"
+  },
+  {
+    "filename": "104GH_02FLR.pdf",
+    "buildingNumber": "104",
+    "buildingCode": "GH",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/104GH_02FLR.pdf"
+  },
+  {
+    "filename": "014GSC_B1FLR.pdf",
+    "buildingNumber": "014",
+    "buildingCode": "GSC",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/014GSC_B1FLR.pdf"
+  },
+  {
+    "filename": "014GSC_01FLR.pdf",
+    "buildingNumber": "014",
+    "buildingCode": "GSC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/014GSC_01FLR.pdf"
+  },
+  {
+    "filename": "014GSC_02FLR.pdf",
+    "buildingNumber": "014",
+    "buildingCode": "GSC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/014GSC_02FLR.pdf"
+  },
+  {
+    "filename": "024HH_B1FLR.pdf",
+    "buildingNumber": "024",
+    "buildingCode": "HH",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/024HH_B1FLR.pdf"
+  },
+  {
+    "filename": "024HH_01FLR.pdf",
+    "buildingNumber": "024",
+    "buildingCode": "HH",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/024HH_01FLR.pdf"
+  },
+  {
+    "filename": "024HH_02FLR.pdf",
+    "buildingNumber": "024",
+    "buildingCode": "HH",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/024HH_02FLR.pdf"
+  },
+  {
+    "filename": "024HH_03FLR.pdf",
+    "buildingNumber": "024",
+    "buildingCode": "HH",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/024HH_03FLR.pdf"
+  },
+  {
+    "filename": "024HH_04FLR.pdf",
+    "buildingNumber": "024",
+    "buildingCode": "HH",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/024HH_04FLR.pdf"
+  },
+  {
+    "filename": "022HS_01FLR.pdf",
+    "buildingNumber": "022",
+    "buildingCode": "HS",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/022HS_01FLR.pdf"
+  },
+  {
+    "filename": "022HS_02FLR.pdf",
+    "buildingNumber": "022",
+    "buildingCode": "HS",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/022HS_02FLR.pdf"
+  },
+  {
+    "filename": "052IHB_B1FLR.pdf",
+    "buildingNumber": "052",
+    "buildingCode": "IHB",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/052IHB_B1FLR.pdf"
+  },
+  {
+    "filename": "052IHB_01FLR.pdf",
+    "buildingNumber": "052",
+    "buildingCode": "IHB",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/052IHB_01FLR.pdf"
+  },
+  {
+    "filename": "052IHB_02FLR.pdf",
+    "buildingNumber": "052",
+    "buildingCode": "IHB",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/052IHB_02FLR.pdf"
+  },
+  {
+    "filename": "052IHB_03FLR.pdf",
+    "buildingNumber": "052",
+    "buildingCode": "IHB",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/052IHB_03FLR.pdf"
+  },
+  {
+    "filename": "008LIB_B1FLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/008LIB_B1FLR.pdf"
+  },
+  {
+    "filename": "008LIB_01FLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_01FLR.pdf"
+  },
+  {
+    "filename": "008LIB_02FLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_02FLR.pdf"
+  },
+  {
+    "filename": "008LIB_03FLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_03FLR.pdf"
+  },
+  {
+    "filename": "008LIB_04FLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_04FLR.pdf"
+  },
+  {
+    "filename": "008LIB_05FLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "05",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_05FLR.pdf"
+  },
+  {
+    "filename": "008LIB_06FLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "06",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_06FLR.pdf"
+  },
+  {
+    "filename": "008LIB_07FLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "07",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_07FLR.pdf"
+  },
+  {
+    "filename": "008LIB_08FLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "08",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_08FLR.pdf"
+  },
+  {
+    "filename": "008LIB_09FLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "09",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_09FLR.pdf"
+  },
+  {
+    "filename": "008LIB_10FLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "10",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_10FLR.pdf"
+  },
+  {
+    "filename": "008LIB_PHFLR.pdf",
+    "buildingNumber": "008",
+    "buildingCode": "LIB",
+    "floorCode": "PH",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_PHFLR.pdf"
+  },
+  {
+    "filename": "056M3_B1FLR.pdf",
+    "buildingNumber": "056",
+    "buildingCode": "M3",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/056M3_B1FLR.pdf"
+  },
+  {
+    "filename": "056M3_01FLR.pdf",
+    "buildingNumber": "056",
+    "buildingCode": "M3",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/056M3_01FLR.pdf"
+  },
+  {
+    "filename": "056M3_02FLR.pdf",
+    "buildingNumber": "056",
+    "buildingCode": "M3",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/056M3_02FLR.pdf"
+  },
+  {
+    "filename": "056M3_03FLR.pdf",
+    "buildingNumber": "056",
+    "buildingCode": "M3",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/056M3_03FLR.pdf"
+  },
+  {
+    "filename": "056M3_04FLR.pdf",
+    "buildingNumber": "056",
+    "buildingCode": "M3",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/056M3_04FLR.pdf"
+  },
+  {
+    "filename": "017MC_B1FLR.pdf",
+    "buildingNumber": "017",
+    "buildingCode": "MC",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_B1FLR.pdf"
+  },
+  {
+    "filename": "017MC_01FLR.pdf",
+    "buildingNumber": "017",
+    "buildingCode": "MC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_01FLR.pdf"
+  },
+  {
+    "filename": "017MC_02FLR.pdf",
+    "buildingNumber": "017",
+    "buildingCode": "MC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_02FLR.pdf"
+  },
+  {
+    "filename": "017MC_03FLR.pdf",
+    "buildingNumber": "017",
+    "buildingCode": "MC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_03FLR.pdf"
+  },
+  {
+    "filename": "017MC_04FLR.pdf",
+    "buildingNumber": "017",
+    "buildingCode": "MC",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_04FLR.pdf"
+  },
+  {
+    "filename": "017MC_05FLR.pdf",
+    "buildingNumber": "017",
+    "buildingCode": "MC",
+    "floorCode": "05",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_05FLR.pdf"
+  },
+  {
+    "filename": "017MC_06FLR.pdf",
+    "buildingNumber": "017",
+    "buildingCode": "MC",
+    "floorCode": "06",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_06FLR.pdf"
+  },
+  {
+    "filename": "017MC_PHFLR.pdf",
+    "buildingNumber": "017",
+    "buildingCode": "MC",
+    "floorCode": "PH",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_PHFLR.pdf"
+  },
+  {
+    "filename": "023MHR_01FLR.pdf",
+    "buildingNumber": "023",
+    "buildingCode": "MHR",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/023MHR_01FLR.pdf"
+  },
+  {
+    "filename": "023MHR_02FLR.pdf",
+    "buildingNumber": "023",
+    "buildingCode": "MHR",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/023MHR_02FLR.pdf"
+  },
+  {
+    "filename": "023MHR_03FLR.pdf",
+    "buildingNumber": "023",
+    "buildingCode": "MHR",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/023MHR_03FLR.pdf"
+  },
+  {
+    "filename": "044MKV_00FLR.pdf",
+    "buildingNumber": "044",
+    "buildingCode": "MKV",
+    "floorCode": "00",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/044MKV_00FLR.pdf"
+  },
+  {
+    "filename": "044MKV_01FLR.pdf",
+    "buildingNumber": "044",
+    "buildingCode": "MKV",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/044MKV_01FLR.pdf"
+  },
+  {
+    "filename": "044MKV_02FLR.pdf",
+    "buildingNumber": "044",
+    "buildingCode": "MKV",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/044MKV_02FLR.pdf"
+  },
+  {
+    "filename": "044MKV_03FLR.pdf",
+    "buildingNumber": "044",
+    "buildingCode": "MKV",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/044MKV_03FLR.pdf"
+  },
+  {
+    "filename": "044MKV_04FLR.pdf",
+    "buildingNumber": "044",
+    "buildingCode": "MKV",
+    "floorCode": "04",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/044MKV_04FLR.pdf"
+  },
+  {
+    "filename": "044MKV_05FLR.pdf",
+    "buildingNumber": "044",
+    "buildingCode": "MKV",
+    "floorCode": "05",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/044MKV_05FLR.pdf"
+  },
+  {
+    "filename": "005ML_B1FLR.pdf",
+    "buildingNumber": "005",
+    "buildingCode": "ML",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/005ML_B1FLR.pdf"
+  },
+  {
+    "filename": "005ML_01FLR.pdf",
+    "buildingNumber": "005",
+    "buildingCode": "ML",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/005ML_01FLR.pdf"
+  },
+  {
+    "filename": "005ML_02FLR.pdf",
+    "buildingNumber": "005",
+    "buildingCode": "ML",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/005ML_02FLR.pdf"
+  },
+  {
+    "filename": "005ML_03FLR.pdf",
+    "buildingNumber": "005",
+    "buildingCode": "ML",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/005ML_03FLR.pdf"
+  },
+  {
+    "filename": "031NH_B1FLR.pdf",
+    "buildingNumber": "031",
+    "buildingCode": "NH",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_B1FLR.pdf"
+  },
+  {
+    "filename": "031NH_01FLR.pdf",
+    "buildingNumber": "031",
+    "buildingCode": "NH",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_01FLR.pdf"
+  },
+  {
+    "filename": "031NH_02FLR.pdf",
+    "buildingNumber": "031",
+    "buildingCode": "NH",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_02FLR.pdf"
+  },
+  {
+    "filename": "031NH_03FLR.pdf",
+    "buildingNumber": "031",
+    "buildingCode": "NH",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_03FLR.pdf"
+  },
+  {
+    "filename": "031NH_04FLR.pdf",
+    "buildingNumber": "031",
+    "buildingCode": "NH",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_04FLR.pdf"
+  },
+  {
+    "filename": "033OPT_01FLR.pdf",
+    "buildingNumber": "033",
+    "buildingCode": "OPT",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/033OPT_01FLR.pdf"
+  },
+  {
+    "filename": "033OPT_02FLR.pdf",
+    "buildingNumber": "033",
+    "buildingCode": "OPT",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/033OPT_02FLR.pdf"
+  },
+  {
+    "filename": "033OPT_03FLR.pdf",
+    "buildingNumber": "033",
+    "buildingCode": "OPT",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/033OPT_03FLR.pdf"
+  },
+  {
+    "filename": "033OPT_04FLR.pdf",
+    "buildingNumber": "033",
+    "buildingCode": "OPT",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/033OPT_04FLR.pdf"
+  },
+  {
+    "filename": "018PAC_B1FLR.pdf",
+    "buildingNumber": "018",
+    "buildingCode": "PAC",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/018PAC_B1FLR.pdf"
+  },
+  {
+    "filename": "018PAC_01FLR.pdf",
+    "buildingNumber": "018",
+    "buildingCode": "PAC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/018PAC_01FLR.pdf"
+  },
+  {
+    "filename": "018PAC_02FLR.pdf",
+    "buildingNumber": "018",
+    "buildingCode": "PAC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/018PAC_02FLR.pdf"
+  },
+  {
+    "filename": "018PAC_03FLR.pdf",
+    "buildingNumber": "018",
+    "buildingCode": "PAC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/018PAC_03FLR.pdf"
+  },
+  {
+    "filename": "030PAS_01FLR.pdf",
+    "buildingNumber": "030",
+    "buildingCode": "PAS",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/030PAS_01FLR.pdf"
+  },
+  {
+    "filename": "030PAS_02FLR.pdf",
+    "buildingNumber": "030",
+    "buildingCode": "PAS",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/030PAS_02FLR.pdf"
+  },
+  {
+    "filename": "030PAS_03FLR.pdf",
+    "buildingNumber": "030",
+    "buildingCode": "PAS",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/030PAS_03FLR.pdf"
+  },
+  {
+    "filename": "030PAS_04FLR.pdf",
+    "buildingNumber": "030",
+    "buildingCode": "PAS",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/030PAS_04FLR.pdf"
+  },
+  {
+    "filename": "030PAS_05FLR.pdf",
+    "buildingNumber": "030",
+    "buildingCode": "PAS",
+    "floorCode": "05",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/030PAS_05FLR.pdf"
+  },
+  {
+    "filename": "049PHR_B1FLR.pdf",
+    "buildingNumber": "049",
+    "buildingCode": "PHR",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_B1FLR.pdf"
+  },
+  {
+    "filename": "049PHR_01FLR.pdf",
+    "buildingNumber": "049",
+    "buildingCode": "PHR",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_01FLR.pdf"
+  },
+  {
+    "filename": "049PHR_02FLR.pdf",
+    "buildingNumber": "049",
+    "buildingCode": "PHR",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_02FLR.pdf"
+  },
+  {
+    "filename": "049PHR_03FLR.pdf",
+    "buildingNumber": "049",
+    "buildingCode": "PHR",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_03FLR.pdf"
+  },
+  {
+    "filename": "049PHR_04FLR.pdf",
+    "buildingNumber": "049",
+    "buildingCode": "PHR",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_04FLR.pdf"
+  },
+  {
+    "filename": "049PHR_05FLR.pdf",
+    "buildingNumber": "049",
+    "buildingCode": "PHR",
+    "floorCode": "05",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_05FLR.pdf"
+  },
+  {
+    "filename": "049PHR_06FLR.pdf",
+    "buildingNumber": "049",
+    "buildingCode": "PHR",
+    "floorCode": "06",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_06FLR.pdf"
+  },
+  {
+    "filename": "049PHR_07FLR.pdf",
+    "buildingNumber": "049",
+    "buildingCode": "PHR",
+    "floorCode": "07",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_07FLR.pdf"
+  },
+  {
+    "filename": "049PHR_08FLR.pdf",
+    "buildingNumber": "049",
+    "buildingCode": "PHR",
+    "floorCode": "08",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/049PHR_08FLR.pdf"
+  },
+  {
+    "filename": "049PHR_09FLR.pdf",
+    "buildingNumber": "049",
+    "buildingCode": "PHR",
+    "floorCode": "09",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/049PHR_09FLR.pdf"
+  },
+  {
+    "filename": "004PHY_B1FLR.pdf",
+    "buildingNumber": "004",
+    "buildingCode": "PHY",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/004PHY_B1FLR.pdf"
+  },
+  {
+    "filename": "004PHY_01FLR.pdf",
+    "buildingNumber": "004",
+    "buildingCode": "PHY",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/004PHY_01FLR.pdf"
+  },
+  {
+    "filename": "004PHY_02FLR.pdf",
+    "buildingNumber": "004",
+    "buildingCode": "PHY",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/004PHY_02FLR.pdf"
+  },
+  {
+    "filename": "004PHY_03FLR.pdf",
+    "buildingNumber": "004",
+    "buildingCode": "PHY",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/004PHY_03FLR.pdf"
+  },
+  {
+    "filename": "004PHY_04FLR.pdf",
+    "buildingNumber": "004",
+    "buildingCode": "PHY",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/004PHY_04FLR.pdf"
+  },
+  {
+    "filename": "067E7_01FLR.pdf",
+    "buildingNumber": "067",
+    "buildingCode": "E7",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_01FLR.pdf"
+  },
+  {
+    "filename": "067E7_02FLR.pdf",
+    "buildingNumber": "067",
+    "buildingCode": "E7",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_02FLR.pdf"
+  },
+  {
+    "filename": "067E7_03FLR.pdf",
+    "buildingNumber": "067",
+    "buildingCode": "E7",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_03FLR.pdf"
+  },
+  {
+    "filename": "067E7_04FLR.pdf",
+    "buildingNumber": "067",
+    "buildingCode": "E7",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_04FLR.pdf"
+  },
+  {
+    "filename": "067E7_05FLR.pdf",
+    "buildingNumber": "067",
+    "buildingCode": "E7",
+    "floorCode": "05",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_05FLR.pdf"
+  },
+  {
+    "filename": "067E7_06FLR.pdf",
+    "buildingNumber": "067",
+    "buildingCode": "E7",
+    "floorCode": "06",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_06FLR.pdf"
+  },
+  {
+    "filename": "067E7_07FLR.pdf",
+    "buildingNumber": "067",
+    "buildingCode": "E7",
+    "floorCode": "07",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_07FLR.pdf"
+  },
+  {
+    "filename": "067E7_08FLR.pdf",
+    "buildingNumber": "067",
+    "buildingCode": "E7",
+    "floorCode": "08",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_08FLR.pdf"
+  },
+  {
+    "filename": "050QNC_0B_CON.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "050QNC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_0B_CON.pdf"
+  },
+  {
+    "filename": "050QNC_0M_MEZ.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "050QNC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_0M_MEZ.pdf"
+  },
+  {
+    "filename": "050QNC_01FLR.pdf",
+    "buildingNumber": "050",
+    "buildingCode": "QNC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_01FLR.pdf"
+  },
+  {
+    "filename": "050QNC_02FLR.pdf",
+    "buildingNumber": "050",
+    "buildingCode": "QNC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_02FLR.pdf"
+  },
+  {
+    "filename": "050QNC_03FLR.pdf",
+    "buildingNumber": "050",
+    "buildingCode": "QNC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_03FLR.pdf"
+  },
+  {
+    "filename": "050QNC_04FLR.pdf",
+    "buildingNumber": "050",
+    "buildingCode": "QNC",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_04FLR.pdf"
+  },
+  {
+    "filename": "050QNC_05FLR.pdf",
+    "buildingNumber": "050",
+    "buildingCode": "QNC",
+    "floorCode": "05",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_05FLR.pdf"
+  },
+  {
+    "filename": "050QNC_06FLR.pdf",
+    "buildingNumber": "050",
+    "buildingCode": "QNC",
+    "floorCode": "06",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_06FLR.pdf"
+  },
+  {
+    "filename": "051RAC_01FLR.pdf",
+    "buildingNumber": "051",
+    "buildingCode": "RAC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/051RAC_01FLR.pdf"
+  },
+  {
+    "filename": "051RAC_02FLR.pdf",
+    "buildingNumber": "051",
+    "buildingCode": "RAC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/051RAC_02FLR.pdf"
+  },
+  {
+    "filename": "051RAC_03FLR.pdf",
+    "buildingNumber": "051",
+    "buildingCode": "RAC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/051RAC_03FLR.pdf"
+  },
+  {
+    "filename": "051RAC_04FLR.pdf",
+    "buildingNumber": "051",
+    "buildingCode": "RAC",
+    "floorCode": "04",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/051RAC_04FLR.pdf"
+  },
+  {
+    "filename": "058RA2_01FLR.pdf",
+    "buildingNumber": "058",
+    "buildingCode": "RA2",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/058RA2_01FLR.pdf"
+  },
+  {
+    "filename": "058RA2_02FLR.pdf",
+    "buildingNumber": "058",
+    "buildingCode": "RA2",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/058RA2_02FLR.pdf"
+  },
+  {
+    "filename": "058RA2_03FLR.pdf",
+    "buildingNumber": "058",
+    "buildingCode": "RA2",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/058RA2_03FLR.pdf"
+  },
+  {
+    "filename": "058RA2_04FLR.pdf",
+    "buildingNumber": "058",
+    "buildingCode": "RA2",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/058RA2_04FLR.pdf"
+  },
+  {
+    "filename": "011RCH_01FLR.pdf",
+    "buildingNumber": "011",
+    "buildingCode": "RCH",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/011RCH_01FLR.pdf"
+  },
+  {
+    "filename": "011RCH_02FLR.pdf",
+    "buildingNumber": "011",
+    "buildingCode": "RCH",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/011RCH_02FLR.pdf"
+  },
+  {
+    "filename": "011RCH_03FLR.pdf",
+    "buildingNumber": "011",
+    "buildingCode": "RCH",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/011RCH_03FLR.pdf"
+  },
+  {
+    "filename": "025REV_CC_01FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_CC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/025REV_CC_01FLR.pdf"
+  },
+  {
+    "filename": "025REV_CC_02FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_CC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/025REV_CC_02FLR.pdf"
+  },
+  {
+    "filename": "025REV_CC_03FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_CC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/025REV_CC_03FLR.pdf"
+  },
+  {
+    "filename": "025REV_NH_01FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_NH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_NH_01FLR.pdf"
+  },
+  {
+    "filename": "025REV_NH_02FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_NH",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_NH_02FLR.pdf"
+  },
+  {
+    "filename": "025REV_NH_03FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_NH",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_NH_03FLR.pdf"
+  },
+  {
+    "filename": "025REV_SH_01FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_SH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_SH_01FLR.pdf"
+  },
+  {
+    "filename": "025REV_SH_02FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_SH",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_SH_02FLR.pdf"
+  },
+  {
+    "filename": "025REV_SH_03FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_SH",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_SH_03FLR.pdf"
+  },
+  {
+    "filename": "025REV_EH_01FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_EH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_EH_01FLR.pdf"
+  },
+  {
+    "filename": "025REV_EH_02FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_EH",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_EH_02FLR.pdf"
+  },
+  {
+    "filename": "025REV_EH_03FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_EH",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_EH_03FLR.pdf"
+  },
+  {
+    "filename": "025REV_WH_01FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_WH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_WH_01FLR.pdf"
+  },
+  {
+    "filename": "025REV_WH_02FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_WH",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_WH_02FLR.pdf"
+  },
+  {
+    "filename": "025REV_WH_03FLR.pdf",
+    "buildingNumber": "025",
+    "buildingCode": "REV_WH",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_WH_03FLR.pdf"
+  },
+  {
+    "filename": "016SCH_B1FLR.pdf",
+    "buildingNumber": "016",
+    "buildingCode": "SCH",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/016SCH_B1FLR.pdf"
+  },
+  {
+    "filename": "016SCH_01FLR.pdf",
+    "buildingNumber": "016",
+    "buildingCode": "SCH",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/016SCH_01FLR.pdf"
+  },
+  {
+    "filename": "016SCH_02FLR.pdf",
+    "buildingNumber": "016",
+    "buildingCode": "SCH",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/016SCH_02FLR.pdf"
+  },
+  {
+    "filename": "016SCH_PHFLR.pdf",
+    "buildingNumber": "016",
+    "buildingCode": "SCH",
+    "floorCode": "PH",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/016SCH_PHFLR.pdf"
+  },
+  {
+    "filename": "019SLC_B1FLR.pdf",
+    "buildingNumber": "019",
+    "buildingCode": "SLC",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/019SLC_B1FLR.pdf"
+  },
+  {
+    "filename": "019SLC_01FLR.pdf",
+    "buildingNumber": "019",
+    "buildingCode": "SLC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/019SLC_01FLR.pdf"
+  },
+  {
+    "filename": "019SLC_02FLR.pdf",
+    "buildingNumber": "019",
+    "buildingCode": "SLC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/019SLC_02FLR.pdf"
+  },
+  {
+    "filename": "019SLC_03FLR.pdf",
+    "buildingNumber": "019",
+    "buildingCode": "SLC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/019SLC_03FLR.pdf"
+  },
+  {
+    "filename": "054STC_B1FLR.pdf",
+    "buildingNumber": "054",
+    "buildingCode": "STC",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_B1FLR.pdf"
+  },
+  {
+    "filename": "054STC_MBFLR.pdf",
+    "buildingNumber": "054",
+    "buildingCode": "STC",
+    "floorCode": "MB",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_MBFLR.pdf"
+  },
+  {
+    "filename": "054STC_01FLR.pdf",
+    "buildingNumber": "054",
+    "buildingCode": "STC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_01FLR.pdf"
+  },
+  {
+    "filename": "054STC_02FLR.pdf",
+    "buildingNumber": "054",
+    "buildingCode": "STC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_02FLR.pdf"
+  },
+  {
+    "filename": "054STC_03FLR.pdf",
+    "buildingNumber": "054",
+    "buildingCode": "STC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_03FLR.pdf"
+  },
+  {
+    "filename": "054STC_04FLR.pdf",
+    "buildingNumber": "054",
+    "buildingCode": "STC",
+    "floorCode": "04",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_04FLR.pdf"
+  },
+  {
+    "filename": "054STC_05FLR.pdf",
+    "buildingNumber": "054",
+    "buildingCode": "STC",
+    "floorCode": "05",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_05FLR.pdf"
+  },
+  {
+    "filename": "045TC_B1FLR.pdf",
+    "buildingNumber": "045",
+    "buildingCode": "TC",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/045TC_B1FLR.pdf"
+  },
+  {
+    "filename": "045TC_01FLR.pdf",
+    "buildingNumber": "045",
+    "buildingCode": "TC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/045TC_01FLR.pdf"
+  },
+  {
+    "filename": "045TC_02FLR.pdf",
+    "buildingNumber": "045",
+    "buildingCode": "TC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/045TC_02FLR.pdf"
+  },
+  {
+    "filename": "045TC_03FLR.pdf",
+    "buildingNumber": "045",
+    "buildingCode": "TC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/045TC_03FLR.pdf"
+  },
+  {
+    "filename": "021TH_B1FLR.pdf",
+    "buildingNumber": "021",
+    "buildingCode": "TH",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/021TH_B1FLR.pdf"
+  },
+  {
+    "filename": "021TH_01FLR.pdf",
+    "buildingNumber": "021",
+    "buildingCode": "TH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/021TH_01FLR.pdf"
+  },
+  {
+    "filename": "021TH_02FLR.pdf",
+    "buildingNumber": "021",
+    "buildingCode": "TH",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/021TH_02FLR.pdf"
+  },
+  {
+    "filename": "061TJB_01FLR.pdf",
+    "buildingNumber": "061",
+    "buildingCode": "TJB",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/061TJB_01FLR.pdf"
+  },
+  {
+    "filename": "061TJB_02FLR.pdf",
+    "buildingNumber": "061",
+    "buildingCode": "TJB",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/061TJB_02FLR.pdf"
+  },
+  {
+    "filename": "027UC_B1FLR.pdf",
+    "buildingNumber": "027",
+    "buildingCode": "UC",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/027UC_B1FLR.pdf"
+  },
+  {
+    "filename": "027UC_01FLR.pdf",
+    "buildingNumber": "027",
+    "buildingCode": "UC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/027UC_01FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_01FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_01FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_02FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_02FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_03FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_03FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_04FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "04",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_04FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_05FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "05",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_05FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_06FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "06",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_06FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_07FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "07",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_07FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_08FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "08",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_08FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_09FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "09",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_09FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_10FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "10",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_10FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_11FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "11",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_11FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_12FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "12",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_12FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_13FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "13",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_13FLR.pdf"
+  },
+  {
+    "filename": "026UWP_BECK_14FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_BECK",
+    "floorCode": "14",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_14FLR.pdf"
+  },
+  {
+    "filename": "026UWP_COMMONS_01FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_COMMONS",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/026UWP_COMMONS_01FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_B1FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_B1FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_01FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_01FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_02FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_02FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_03FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_03FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_04FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "04",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_04FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_05FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "05",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_05FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_06FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "06",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_06FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_07FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "07",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_07FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_08FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "08",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_08FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_09FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "09",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_09FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_10FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "10",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_10FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_11FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "11",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_11FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_12FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "12",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_12FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_13FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "13",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_13FLR.pdf"
+  },
+  {
+    "filename": "026UWP_EBY_14FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_EBY",
+    "floorCode": "14",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_14FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WATERLOO_01FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WATERLOO",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WATERLOO_01FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WATERLOO_02FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WATERLOO",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WATERLOO_02FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WATERLOO_03FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WATERLOO",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WATERLOO_03FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WELLESLEY_B1FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WELLESLEY",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WELLESLEY_B1FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WELLESLEY_01FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WELLESLEY",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WELLESLEY_01FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WELLESLEY_02FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WELLESLEY",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WELLESLEY_02FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WELLESLEY_03FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WELLESLEY",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WELLESLEY_03FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WILMOT_B1FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WILMOT",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WILMOT_B1FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WILMOT_01FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WILMOT",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WILMOT_01FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WILMOT_02FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WILMOT",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WILMOT_02FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WILMOT_03FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WILMOT",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WILMOT_03FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WOOLWICH_01FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WOOLWICH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WOOLWICH_01FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WOOLWICH_02FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WOOLWICH",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WOOLWICH_02FLR.pdf"
+  },
+  {
+    "filename": "026UWP_WOOLWICH_03FLR.pdf",
+    "buildingNumber": "026",
+    "buildingCode": "UWP_WOOLWICH",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WOOLWICH_03FLR.pdf"
+  },
+  {
+    "filename": "020V1_CC_B1FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_CC",
+    "floorCode": "B1",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/020V1_CC_B1FLR.pdf"
+  },
+  {
+    "filename": "020V1_CC_01FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_CC",
+    "floorCode": "01",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/020V1_CC_01FLR.pdf"
+  },
+  {
+    "filename": "020V1_CC_02FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_CC",
+    "floorCode": "02",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/020V1_CC_02FLR.pdf"
+  },
+  {
+    "filename": "020V1_CC_03FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_CC",
+    "floorCode": "03",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/020V1_CC_03FLR.pdf"
+  },
+  {
+    "filename": "020V1_N156_B1FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_N156",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N156_B1FLR.pdf"
+  },
+  {
+    "filename": "020V1_N234_B1FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_N234",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N234_B1FLR.pdf"
+  },
+  {
+    "filename": "020V1_N156_01FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_N156",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N156_01FLR.pdf"
+  },
+  {
+    "filename": "020V1_N234_01FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_N234",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N234_01FLR.pdf"
+  },
+  {
+    "filename": "020V1_N156_02FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_N156",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N156_02FLR.pdf"
+  },
+  {
+    "filename": "020V1_N234_02FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_N234",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N234_02FLR.pdf"
+  },
+  {
+    "filename": "020V1_N156_03FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_N156",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N156_03FLR.pdf"
+  },
+  {
+    "filename": "020V1_N234_03FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_N234",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N234_03FLR.pdf"
+  },
+  {
+    "filename": "020V1_S1234_B1FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_S1234",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S1234_B1FLR.pdf"
+  },
+  {
+    "filename": "020V1_S5678_B1FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_S5678",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S5678_B1FLR.pdf"
+  },
+  {
+    "filename": "020V1_S1234_01FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_S1234",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S1234_01FLR.pdf"
+  },
+  {
+    "filename": "020V1_S5678_01FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_S5678",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S5678_01FLR.pdf"
+  },
+  {
+    "filename": "020V1_S1234_02FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_S1234",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S1234_02FLR.pdf"
+  },
+  {
+    "filename": "020V1_S5678_02FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_S5678",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S5678_02FLR.pdf"
+  },
+  {
+    "filename": "020V1_S1234_03FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_S1234",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S1234_03FLR.pdf"
+  },
+  {
+    "filename": "020V1_S5678_03FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_S5678",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S5678_03FLR.pdf"
+  },
+  {
+    "filename": "020V1_E123_B1FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_E123",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E123_B1FLR.pdf"
+  },
+  {
+    "filename": "020V1_E456_B1FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_E456",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E456_B1FLR.pdf"
+  },
+  {
+    "filename": "020V1_E123_01FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_E123",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E123_01FLR.pdf"
+  },
+  {
+    "filename": "020V1_E456_01FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_E456",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E456_01FLR.pdf"
+  },
+  {
+    "filename": "020V1_E123_02FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_E123",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E123_02FLR.pdf"
+  },
+  {
+    "filename": "020V1_E456_02FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_E456",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E456_02FLR.pdf"
+  },
+  {
+    "filename": "020V1_E123_03FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_E123",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E123_03FLR.pdf"
+  },
+  {
+    "filename": "020V1_E456_03FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_E456",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E456_03FLR.pdf"
+  },
+  {
+    "filename": "020V1_W126_B1FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_W126",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W126_B1FLR.pdf"
+  },
+  {
+    "filename": "020V1_W345_B1FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_W345",
+    "floorCode": "B1",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W345_B1FLR.pdf"
+  },
+  {
+    "filename": "020V1_W126_01FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_W126",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W126_01FLR.pdf"
+  },
+  {
+    "filename": "020V1_W345_01FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_W345",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W345_01FLR.pdf"
+  },
+  {
+    "filename": "020V1_W126_02FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_W126",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W126_02FLR.pdf"
+  },
+  {
+    "filename": "020V1_W345_02FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_W345",
+    "floorCode": "02",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W345_02FLR.pdf"
+  },
+  {
+    "filename": "020V1_W126_03FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_W126",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W126_03FLR.pdf"
+  },
+  {
+    "filename": "020V1_W345_03FLR.pdf",
+    "buildingNumber": "020",
+    "buildingCode": "V1_W345",
+    "floorCode": "03",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W345_03FLR.pdf"
+  },
+  {
+    "filename": "047ARC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "047ARC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/047ARC_RO.pdf"
+  },
+  {
+    "filename": "009AL_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "009AL",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/009AL_RO.pdf"
+  },
+  {
+    "filename": "072E10_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "072E10",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/072E10_RO.pdf"
+  },
+  {
+    "filename": "007B1_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "007B1",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/007B1_RO.pdf"
+  },
+  {
+    "filename": "013B2_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "013B2",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/013B2_RO.pdf"
+  },
+  {
+    "filename": "040BAU_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "040BAU",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/040BAU_RO.pdf"
+  },
+  {
+    "filename": "032BMH_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "032BMH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/032BMH_RO.pdf"
+  },
+  {
+    "filename": "028C2_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "028C2",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/028C2_RO.pdf"
+  },
+  {
+    "filename": "042CIF_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "042CIF",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/042CIF_RO.pdf"
+  },
+  {
+    "filename": "068CMH_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "068CMH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/068CMH_RO.pdf"
+  },
+  {
+    "filename": "015COM_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "015COM",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/015COM_RO.pdf"
+  },
+  {
+    "filename": "029CPH_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "029CPH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/029CPH_RO.pdf"
+  },
+  {
+    "filename": "037DC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "037DC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/037DC_RO.pdf"
+  },
+  {
+    "filename": "055DMS_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "055DMS",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/055DMS_RO.pdf"
+  },
+  {
+    "filename": "001DWE_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "001DWE",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/001DWE_RO.pdf"
+  },
+  {
+    "filename": "002E2_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "002E2",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/002E2_RO.pdf"
+  },
+  {
+    "filename": "003E3_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "003E3",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/003E3_RO.pdf"
+  },
+  {
+    "filename": "053E5_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "053E5",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/053E5_RO.pdf"
+  },
+  {
+    "filename": "060E6_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "060E6",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/060E6_RO.pdf"
+  },
+  {
+    "filename": "067E7_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "067E7",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/067E7_RO.pdf"
+  },
+  {
+    "filename": "062EC1_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "062EC1",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/062EC1_RO.pdf"
+  },
+  {
+    "filename": "063EC2_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "063EC2",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/063EC2_RO.pdf"
+  },
+  {
+    "filename": "064EC3_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "064EC3",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/064EC3_RO.pdf"
+  },
+  {
+    "filename": "065EC4_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "065EC4",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/065EC4_RO.pdf"
+  },
+  {
+    "filename": "066EC5_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "066EC5",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/066EC5_RO.pdf"
+  },
+  {
+    "filename": "036ECH_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "036ECH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/036ECH_RO.pdf"
+  },
+  {
+    "filename": "039EIT_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "039EIT",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/039EIT_RO.pdf"
+  },
+  {
+    "filename": "048ERC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "048ERC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/048ERC_RO.pdf"
+  },
+  {
+    "filename": "006ESC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "006ESC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/006ESC_RO.pdf"
+  },
+  {
+    "filename": "010EV1_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "010EV1",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/010EV1_RO.pdf"
+  },
+  {
+    "filename": "034EV2_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "034EV2",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/034EV2_RO.pdf"
+  },
+  {
+    "filename": "057EV3_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "057EV3",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/057EV3_RO.pdf"
+  },
+  {
+    "filename": "035FED_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "035FED",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/035FED_RO.pdf"
+  },
+  {
+    "filename": "104GH_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "104GH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/104GH_RO.pdf"
+  },
+  {
+    "filename": "014GSC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "014GSC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/014GSC_RO.pdf"
+  },
+  {
+    "filename": "024HH_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "024HH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/024HH_RO.pdf"
+  },
+  {
+    "filename": "022HS_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "022HS",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/022HS_RO.pdf"
+  },
+  {
+    "filename": "052IHB_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "052IHB",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/052IHB_RO.pdf"
+  },
+  {
+    "filename": "008LIB_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "008LIB",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/008LIB_RO.pdf"
+  },
+  {
+    "filename": "056M3_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "056M3",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/056M3_RO.pdf"
+  },
+  {
+    "filename": "017MC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "017MC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/017MC_RO.pdf"
+  },
+  {
+    "filename": "023MHR_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "023MHR",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/023MHR_RO.pdf"
+  },
+  {
+    "filename": "044MKV_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "044MKV",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/044MKV_RO.pdf"
+  },
+  {
+    "filename": "005ML_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "005ML",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/005ML_RO.pdf"
+  },
+  {
+    "filename": "031NH_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "031NH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/031NH_RO.pdf"
+  },
+  {
+    "filename": "033OPT_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "033OPT",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/033OPT_RO.pdf"
+  },
+  {
+    "filename": "018PAC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "018PAC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/018PAC_RO.pdf"
+  },
+  {
+    "filename": "030PAS_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "030PAS",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/030PAS_RO.pdf"
+  },
+  {
+    "filename": "049PHR_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "049PHR",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/049PHR_RO.pdf"
+  },
+  {
+    "filename": "004PHY_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "004PHY",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/004PHY_RO.pdf"
+  },
+  {
+    "filename": "050QNC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "050QNC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/050QNC_RO.pdf"
+  },
+  {
+    "filename": "051RAC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "051RAC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/051RAC_RO.pdf"
+  },
+  {
+    "filename": "058RA2_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "058RA2",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/058RA2_RO.pdf"
+  },
+  {
+    "filename": "011RCH_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "011RCH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/011RCH_RO.pdf"
+  },
+  {
+    "filename": "025REV_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "025REV",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/025REV_RO.pdf"
+  },
+  {
+    "filename": "016SCH_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "016SCH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/016SCH_RO.pdf"
+  },
+  {
+    "filename": "019SLC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "019SLC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/019SLC_RO.pdf"
+  },
+  {
+    "filename": "054STC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "054STC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/054STC_RO.pdf"
+  },
+  {
+    "filename": "045TC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "045TC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/045TC_RO.pdf"
+  },
+  {
+    "filename": "021TH_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "021TH",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/021TH_RO.pdf"
+  },
+  {
+    "filename": "061TJB_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "061TJB",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/061TJB_RO.pdf"
+  },
+  {
+    "filename": "027UC_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "027UC",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/027UC_RO.pdf"
+  },
+  {
+    "filename": "026UWP_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "026UWP",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/026UWP_RO.pdf"
+  },
+  {
+    "filename": "020V1N1_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1N1",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N1_RO.pdf"
+  },
+  {
+    "filename": "020V1N2_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1N2",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N2_RO.pdf"
+  },
+  {
+    "filename": "020V1N3_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1N3",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N3_RO.pdf"
+  },
+  {
+    "filename": "020V1N4_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1N4",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N4_RO.pdf"
+  },
+  {
+    "filename": "020V1N5_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1N5",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N5_RO.pdf"
+  },
+  {
+    "filename": "020V1N6_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1N6",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N6_RO.pdf"
+  },
+  {
+    "filename": "020V1S1_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1S1",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S1_RO.pdf"
+  },
+  {
+    "filename": "020V1S2_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1S2",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S2_RO.pdf"
+  },
+  {
+    "filename": "020V1S3_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1S3",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S3_RO.pdf"
+  },
+  {
+    "filename": "020V1S4_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1S4",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S4_RO.pdf"
+  },
+  {
+    "filename": "020V1S5_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1S5",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S5_RO.pdf"
+  },
+  {
+    "filename": "020V1S6_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1S6",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S6_RO.pdf"
+  },
+  {
+    "filename": "020V1S7_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1S7",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S7_RO.pdf"
+  },
+  {
+    "filename": "020V1E1_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1E1",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E1_RO.pdf"
+  },
+  {
+    "filename": "020V1E2_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1E2",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E2_RO.pdf"
+  },
+  {
+    "filename": "020V1E3_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1E3",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E3_RO.pdf"
+  },
+  {
+    "filename": "020V1E4_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1E4",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E4_RO.pdf"
+  },
+  {
+    "filename": "020V1E5_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1E5",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E5_RO.pdf"
+  },
+  {
+    "filename": "020V1E6_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1E6",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E6_RO.pdf"
+  },
+  {
+    "filename": "020V1W1_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1W1",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W1_RO.pdf"
+  },
+  {
+    "filename": "020V1W2_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1W2",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W2_RO.pdf"
+  },
+  {
+    "filename": "020V1W3_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1W3",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W3_RO.pdf"
+  },
+  {
+    "filename": "020V1W4_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1W4",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W4_RO.pdf"
+  },
+  {
+    "filename": "020V1W5_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1W5",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W5_RO.pdf"
+  },
+  {
+    "filename": "020V1W6_RO.pdf",
+    "buildingNumber": "000",
+    "buildingCode": "020V1W6",
+    "floorCode": "01",
+    "restricted": true,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W6_RO.pdf"
+  },
+  {
+    "filename": "031NH_00FLR.pdf",
+    "buildingNumber": "031",
+    "buildingCode": "NH",
+    "floorCode": "G",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_00FLR.pdf"
+  },
+  {
+    "filename": "017MC_05FLR.pdf",
+    "buildingNumber": "017",
+    "buildingCode": "MC",
+    "floorCode": "05",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_05FLR.pdf"
+  },
+  {
+    "filename": "017MC_06FLR.pdf",
+    "buildingNumber": "017",
+    "buildingCode": "MC",
+    "floorCode": "06",
+    "restricted": false,
+    "url": "https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_06FLR.pdf"
+  }
+]

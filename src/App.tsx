@@ -7,8 +7,9 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Compass, Sparkles, Pencil, CircleHelp, MapPinned, Move, Plus, Minus, Maximize, Layers, FileImage, Menu, X,
   LocateFixed, ChevronLeft, Accessibility, Bath, ArrowUpDown, GraduationCap, FlaskConical, DoorOpen, Globe,
-  Briefcase, Wrench, Printer, Coffee, Tv, ShieldAlert, Phone, CheckCircle2, ChevronRight, AlertTriangle, Navigation2,
+  Briefcase, Wrench, Printer, Coffee, Tv, ShieldAlert, Phone, CheckCircle2, ChevronRight, AlertTriangle, Navigation2, Map as MapIcon,
 } from 'lucide-react';
+import { CampusView } from './components/campus/CampusView';
 import { SAMPLE_FLOOR_PLANS } from './data/sampleFloorPlans';
 import { FloorPlanData, RoomPOI, Point, NavigationRoute, POICategory } from './types/navigation';
 import { calculateIndoorRoute } from './utils/pathfinding';
@@ -71,6 +72,8 @@ export default function App() {
   const isMobile = useIsMobile();
   const [plans, setPlans] = useState<FloorPlanData[]>(INITIAL_PLANS);
   const [currentPlan, setCurrentPlan] = useState<FloorPlanData>(INITIAL_PLANS[0]);
+  // 'campus' = Google Maps campus view, 'indoor' = the floor-plan navigator. Route state is shared.
+  const [view, setView] = useState<'campus' | 'indoor'>('campus');
   const [lookupOpen, setLookupOpen] = useState(false);
   const [reports, setReports] = useState<RoomReport[]>(() => loadReports());
   const changeReports = (f: (l: RoomReport[]) => RoomReport[]) => setReports((l) => { const n = f(l); saveReports(n); return n; });
@@ -608,6 +611,22 @@ export default function App() {
     </select>
   );
 
+  const openIndoor = (appBuildingId: string, floor: number, room?: RoomPOI) => {
+    const p = plansRef.current.find((x) => x.buildingId === appBuildingId && x.floorNumber === (room?.floor ?? floor));
+    if (p) setCurrentPlan(p);
+    setView('indoor');
+    if (room) { setInspected(room); setTimeout(() => showRoom(room), 120); }
+  };
+  if (view === 'campus') {
+    return <CampusView plans={plans} route={route} destination={endRoom} isMobile={isMobile} onOpenIndoor={openIndoor} />;
+  }
+  const campusButton = (
+    <button onClick={() => setView('campus')} title="Back to campus map" aria-label="Back to campus map"
+      className="h-8 px-2.5 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center gap-1.5 hover:bg-slate-800 shrink-0">
+      <MapIcon className="w-3.5 h-3.5" /> <span>Campus</span>
+    </button>
+  );
+
   /* ======================= DESKTOP ======================= */
   if (!isMobile) {
     return (
@@ -623,6 +642,7 @@ export default function App() {
             <span className="text-[10px] text-slate-500 font-medium">Workplace Companion & Navigation</span>
           </div>
           <span className="text-slate-300">|</span>
+          {campusButton}
 
           {/* Role Indicator & Switcher Button */}
           <button
@@ -854,6 +874,7 @@ export default function App() {
             </div>
             {!searchOpen && (
               <div className="pointer-events-auto flex items-center gap-2">
+                {campusButton}
                 <FloorPicker floors={floors} current={currentPlan.floorNumber} onPick={goFloor} routeFloors={routeFloors} />
                 <button
                   onClick={() => setWorkplaceCompanionOpen(true)}
