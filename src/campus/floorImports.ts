@@ -89,3 +89,6 @@ export function importToPlan(f: FloorImport, buildingName: string): FloorPlanDat
     source: 'upload',
   };
 }
+
+/** PDF text items that look like room numbers ("1302", "2108A", "DC 1302"). */
+export const roomNumberLabels = (labels: FloorImport['pdfLabels']) => labels.filter((l) => /^([A-Z]{1,4}\s?)?\d{3,4}[A-Z]?$/.test(l.text));

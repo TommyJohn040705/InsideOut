@@ -125,6 +125,7 @@ export default function App() {
   const [startRoom, setStartRoom] = useState<RoomPOI | null>(null);
   const [endRoom, setEndRoom] = useState<RoomPOI | null>(null);
   const [route, setRoute] = useState<NavigationRoute | null>(null);
+  const [routeError, setRouteError] = useState<string | null>(null);
   const [stepIndex, setStepIndex] = useState(0);
   const [isNavigating, setIsNavigating] = useState(false);
   const [isAccessibleOnly, setIsAccessibleOnly] = useState(true);
@@ -269,7 +270,8 @@ export default function App() {
 
   // default start: building entrance
   useEffect(() => {
-    if (startRoom && (startRoom.buildingId || '') === (currentPlan.buildingId || '')) return;
+    const inHere = (r: RoomPOI | null) => !!r && buildingPlans.some((p) => p.rooms.some((x) => x.id === r.id));
+    if (inHere(startRoom)) { if (endRoom && !inHere(endRoom)) setEndRoom(null); return; }
     const first = buildingPlans.find((p) => p.defaultStartId) || buildingPlans[0];
     const def = first?.rooms.find((r) => r.id === first.defaultStartId) || first?.rooms.find((r) => r.category === 'entrance') || first?.rooms[0] || null;
     setStartRoom(def ? { ...def, floor: def.floor ?? first.floorNumber } : null);
@@ -283,14 +285,18 @@ export default function App() {
 
   // route
   useEffect(() => {
-    if (!startRoom || !endRoom || startRoom.id === endRoom.id) { setRoute(null); return; }
+    if (!startRoom || !endRoom || startRoom.id === endRoom.id) { setRoute(null); setRouteError(null); return; }
     const sFloor = startRoom.floor ?? currentPlan.floorNumber;
     const eFloor = endRoom.floor ?? currentPlan.floorNumber;
     const sPlan = buildingPlans.find((p) => p.floorNumber === sFloor) || currentPlan;
-    const r = calculateIndoorRoute(sPlan, startRoom.coords, startRoom.name, endRoom.coords, endRoom.name, startRoom.id, endRoom.id, {
-      isAccessibleOnly, allFloors: buildingPlans, startFloor: sFloor, endFloor: eFloor,
-      closures: routeClosures(reports, buildingPlans, E5_VERTICAL_LINKS),
-    });
+    let r: NavigationRoute;
+    try {
+      r = calculateIndoorRoute(sPlan, startRoom.coords, startRoom.name, endRoom.coords, endRoom.name, startRoom.id, endRoom.id, {
+        isAccessibleOnly, allFloors: buildingPlans, startFloor: sFloor, endFloor: eFloor,
+        closures: routeClosures(reports, buildingPlans, E5_VERTICAL_LINKS),
+      });
+    } catch (e: any) { setRoute(null); setRouteError(e?.message || 'No route found.'); return; }
+    setRouteError(null);
     setRoute(r);
     setStepIndex(0); stepRef.current = 0; spokenRef.current = -1;
     setWalked(0); walkedRef.current = 0;
@@ -607,7 +613,8 @@ export default function App() {
     </div>
   );
 
-  const planner = (compact: boolean) => (
+  const planner = (compact: boolean) => (<>
+    {routeError && <p role="alert" className="mb-2 text-xs font-semibold text-red-800 bg-red-50 rounded-lg p-2">{routeError}</p>}
     <RoutePlanner
       start={startRoom} end={endRoom} route={route} accessible={isAccessibleOnly} voice={voice}
       onEditStart={() => openSearch('start')} onEditEnd={() => openSearch('dest')} onSwap={swap}
@@ -615,6 +622,7 @@ export default function App() {
       onStart={startNavigation} onOpenScanner={() => setScannerOpen(true)} compactSteps={compact} current={stepIndex}
       onPickStep={(i) => { jumpToStep(i); }}
     />
+  </>
   );
 
   const roomCard = (r: RoomPOI, onClose?: () => void) => (
@@ -742,7 +750,13 @@ export default function App() {
     if (room) { setInspected(room); setTimeout(() => showRoom(room), 120); }
   };
   if (view === 'campus') {
-    return <CampusView plans={plans} route={route} destination={endRoom} isMobile={isMobile} onOpenIndoor={openIndoor} />;
+    return <CampusView plans={plans} imports={floorImports} onImportsChanged={loadImports} route={route} destination={endRoom} isMobile={isMobile} onOpenIndoor={openIndoor}
+      onRouteIndoor={(appBuildingId, s, e, stepFree) => {
+        setIsAccessibleOnly(stepFree);
+        const p = plansRef.current.find((x) => x.buildingId === appBuildingId && x.floorNumber === s.floor);
+        if (p) setCurrentPlan(p);
+        setStartRoom(s); manualLocation(s); setEndRoom(e); setInspected(null); setView('indoor');
+      }} />;
   }
   const campusButton = (
     <button onClick={() => setView('campus')} title="Back to campus map" aria-label="Back to campus map"

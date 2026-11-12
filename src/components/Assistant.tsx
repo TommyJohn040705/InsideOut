@@ -118,7 +118,7 @@ export function Assistant({
             onSwitchFloor(chk.floor);
             const r = findRoom(chk.roomNumber || chk.roomId);
             if (r) onSetStartRoom(r);
-            return { feedback: `Location set to approved checkpoint ${chk.code} (${chk.name}) on Level ${chk.floor}.`, targetRoom: r };
+            return { feedback: `Location set to checkpoint ${chk.code} (${chk.name}) on Level ${chk.floor}.`, targetRoom: r };
           }
         }
         return { feedback: `Set location from checkpoint: ${code}` };

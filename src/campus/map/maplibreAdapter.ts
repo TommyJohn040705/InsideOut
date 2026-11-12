@@ -23,6 +23,8 @@ export function createMapLibreAdapter(el: HTMLElement, center: LngLat, zoom: num
     attributionControl: { compact: true },
   });
   let onClick: (id: string) => void = () => {};
+  let clickCb: ((at: LngLat) => void) | null = null;
+  let floorOpacity = 0.95;
 
   return new Promise((resolve, reject) => {
     map.on('error', (e) => { if (!map.isStyleLoaded()) reject(e.error); });
@@ -60,7 +62,8 @@ export function createMapLibreAdapter(el: HTMLElement, center: LngLat, zoom: num
       map.addLayer({ id: 'marker-label', type: 'symbol', source: 'markers', minzoom: 17, layout: {
         'text-field': ['get', 'label'], 'text-size': 11, 'text-font': ['Noto Sans Regular'], 'text-offset': [0, 1.2], 'text-anchor': 'top',
       }, paint: { 'text-color': '#0f172a', 'text-halo-color': '#ffffff', 'text-halo-width': 1.5 } });
-      map.on('click', 'fp-fill', (e) => { const id = e.features?.[0]?.properties?.id; if (id) onClick(id); });
+      map.on('click', (e) => { if (clickCb) { (e.originalEvent as any)._cp = true; const cb = clickCb; clickCb = null; map.getCanvas().style.cursor = ''; cb([e.lngLat.lng, e.lngLat.lat]); } });
+      map.on('click', 'fp-fill', (e) => { if (clickCb || (e.originalEvent as any)._cp) return; const id = e.features?.[0]?.properties?.id; if (id) onClick(id); });
       map.on('mouseenter', 'fp-fill', () => { map.getCanvas().style.cursor = 'pointer'; });
       map.on('mouseleave', 'fp-fill', () => { map.getCanvas().style.cursor = ''; });
 
@@ -89,10 +92,12 @@ export function createMapLibreAdapter(el: HTMLElement, center: LngLat, zoom: num
             [c.width, c.height] = o.imageSize;
             c.getContext('2d')!.drawImage(img, 0, 0, c.width, c.height);
             map.addSource('floor', { type: 'image', url: c.toDataURL('image/png'), coordinates: o.corners });
-            map.addLayer({ id: 'floor', type: 'raster', source: 'floor', paint: { 'raster-opacity': 0.95, 'raster-fade-duration': 0 } }, 'fp-line');
+            map.addLayer({ id: 'floor', type: 'raster', source: 'floor', paint: { 'raster-opacity': floorOpacity, 'raster-fade-duration': 0 } }, 'fp-line');
           };
           img.src = o.url;
         },
+        setFloorOpacity(n) { floorOpacity = n; if (map.getLayer('floor')) map.setPaintProperty('floor', 'raster-opacity', n); },
+        onMapClick(cb) { clickCb = cb; map.getCanvas().style.cursor = cb ? 'crosshair' : ''; },
         setIndoorVector(fc) { src('indoor')?.setData(fc || empty); },
         setRoute(line) {
           src('route')?.setData(line && line.length > 1 ? { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: line } } : empty);

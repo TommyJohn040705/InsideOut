@@ -213,7 +213,7 @@ export function CameraSignScannerModal({ open, onClose, activeFloor, allRooms, o
           </span>
           <div className="flex-1 min-w-0">
             <h3 className="font-extrabold text-slate-900 text-base">Camera & Checkpoint Wayfinding</h3>
-            <p className="text-xs text-slate-500">Photograph a door sign, elevator plaque, or scan an approved QR checkpoint</p>
+            <p className="text-xs text-slate-500">Photograph a door sign, elevator plaque, or enter a checkpoint code</p>
           </div>
           <button aria-label="Close" onClick={onClose} className="p-2 rounded-full hover:bg-slate-100 text-slate-500">
             <X className="w-5 h-5" />
@@ -244,7 +244,7 @@ export function CameraSignScannerModal({ open, onClose, activeFloor, allRooms, o
               mode === 'simulate' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-800'
             }`}
           >
-            <QrCode className="w-4 h-4" /> Approved QR Codes
+            <QrCode className="w-4 h-4" /> Checkpoint codes
           </button>
         </div>
 
@@ -402,14 +402,14 @@ export function CameraSignScannerModal({ open, onClose, activeFloor, allRooms, o
             </div>
           )}
 
-          {/* Approved QR Checkpoint Simulator */}
+          {/* App-defined checkpoint list */}
           {(mode === 'simulate' || !capturedImage) && (
             <div className="space-y-3 pt-2">
               <div className="flex items-center justify-between">
                 <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  Approved Waterloo E5 Checkpoints
+                  E5 checkpoint codes
                 </p>
-                <span className="text-xs text-blue-600 font-semibold">{E5_CHECKPOINTS.length} Verified</span>
+                <span className="text-xs text-blue-600 font-semibold">{E5_CHECKPOINTS.length} codes</span>
               </div>
               <p className="text-xs text-slate-500">
                 App-defined checkpoint codes (no QR codes are posted in E5 yet). Tap one to set your position there:

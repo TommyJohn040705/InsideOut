@@ -61,7 +61,7 @@ export function E5ValidationModal({ open, onClose, plans, onApplyScenario }: Pro
     {
       id: 'sc-6',
       num: 6,
-      title: 'Simulate Approved QR Checkpoint',
+      title: 'Resolve a checkpoint code',
       description: 'Resolve the app-defined checkpoint code E5-L2-ATRIUM and update coordinates.',
       status: 'idle',
     },
@@ -69,7 +69,7 @@ export function E5ValidationModal({ open, onClose, plans, onApplyScenario }: Pro
       id: 'sc-7',
       num: 7,
       title: 'Dynamic Route Recalculation on Deviation',
-      description: 'Verified location update away from path triggers automatic route recalculation.',
+      description: 'A location update away from the path triggers automatic route recalculation.',
       status: 'idle',
     },
     {
@@ -82,7 +82,7 @@ export function E5ValidationModal({ open, onClose, plans, onApplyScenario }: Pro
     {
       id: 'sc-9',
       num: 9,
-      title: 'Find Nearest Verified Washroom',
+      title: 'Find the nearest washroom',
       description: 'Query assistant to find nearest accessible washrooms on current floor.',
       status: 'idle',
     },
@@ -193,7 +193,7 @@ export function E5ValidationModal({ open, onClose, plans, onApplyScenario }: Pro
     if (atriumChk && atriumChk.coords) {
       updateTest(5, {
         status: 'passed',
-        result: `Resolved approved QR code ${atriumChk.code} to Level ${atriumChk.floor} at (${atriumChk.coords.x}%, ${atriumChk.coords.y}%).`,
+        result: `Resolved checkpoint code ${atriumChk.code} to Level ${atriumChk.floor} at (${atriumChk.coords.x}%, ${atriumChk.coords.y}%).`,
       });
     } else {
       updateTest(5, { status: 'failed', result: 'Could not resolve E5-L2-ATRIUM checkpoint' });

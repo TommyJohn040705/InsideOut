@@ -911,6 +911,7 @@ ${Array.isArray(directory) ? directory.slice(0, 60).map((r: any) => `${r.roomNum
 const store = openStore(path.resolve(__dirname, 'data'));
 // Uploaded drawings may be university-owned: never cached publicly, never indexed.
 app.use('/uploads', (_req, res, next) => { res.set('Cache-Control', 'private, no-store'); res.set('X-Robots-Tag', 'noindex'); next(); }, express.static(store.uploadsDir));
+app.use('/uploads', (_req: Request, res: Response) => res.status(404).json({ error: 'No such file' }));
 
 const STORE_KEYS = new Set(['corrections', 'roomOverrides', 'reports']);
 app.get('/api/store/:key', (req: Request, res: Response) => {
@@ -934,7 +935,8 @@ app.post('/api/floor-imports', (req: Request, res: Response) => {
     if (!b.fileDataUrl || !b.imageDataUrl || !Array.isArray(b.imageSize)) return res.status(400).json({ error: 'The file and its rendered image are required' });
     const id = `${String(b.buildingId).replace(/W/g, '')}-${String(b.floorCode).replace(/W/g, '')}-${Date.now().toString(36)}`;
     const file = store.saveUpload(id, b.fileDataUrl);
-    const image = file.mime.startsWith('image/') ? file : store.saveUpload(`${id}-page1`, b.imageDataUrl);
+    // Rasters are used as-is; PDFs and SVGs get the PNG the browser rendered (Gemini needs a raster).
+    const image = ['image/png', 'image/jpeg', 'image/webp'].includes(file.mime) ? file : store.saveUpload(`${id}-page1`, b.imageDataUrl);
     const rec: FloorImport = {
       id, buildingId: String(b.buildingId), floorCode: String(b.floorCode), floorNumber: Number(b.floorNumber),
       manifestFilename: b.manifestFilename || null, restricted: Boolean(b.restricted), authorization: String(b.authorization).trim(),
@@ -960,7 +962,7 @@ app.post('/api/floor-imports/:id/extract', async (req: Request, res: Response) =
     const out = await analyzeFloorplan(store.readUploadDataUrl(rec.imageUrl.replace('/uploads/', '')), hint, true);
     const updated = store.update((d) => {
       const f = d.floorImports.find((x) => x.id === rec.id)!;
-      f.rooms = (out.rooms || []).map((r: any) => ({ ...r, id: `${rec.id}-${r.id}`, floor: rec.floorNumber, purposeVerification: 'ai_extracted_unreviewed' }));
+      f.rooms = (out.rooms || []).map((r: any) => ({ ...r, id: `${rec.id}-${r.id}`, floor: rec.floorNumber, purposeVerification: 'unverified_drawing_only' }));
       const rid = new Map((out.rooms || []).map((r: any) => [r.id, `${rec.id}-${r.id}`]));
       f.hallways = (out.hallways || []).map((h: any) => ({ ...h, id: `${rec.id}-${h.id}`, connectedTo: (h.connectedTo || []).map((t: string) => rid.get(t) || `${rec.id}-${t}`) }));
       f.extraction = { model: 'gemini-3.8-flash', at: new Date().toISOString(), title: out.title, summary: out.summary };

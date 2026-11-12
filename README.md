@@ -17,11 +17,20 @@ Keys: the Google Maps key is a browser key (`VITE_GOOGLE_MAPS_API_KEY`), restric
 
 Floor-plan PDFs: every `plantops.uwaterloo.ca` PDF link redirects to UW single sign-on (checked 2026-11-10), so the app does not download them. Someone with a UW account saves them into `data-sources/plantops/pdfs/` (gitignored, original filenames), then `node scripts/campus/buildCampusData.mjs` marks those floors as imported.
 
-Reports and routing: `routeClosures` in `src/utils/reports.ts` (lifecycle ported from InsideOut `feature/preview-firebase`). An "elevator out" or "hallway closed" report expires 4 hours after its last confirmation. One report only adds a warning to the route; once a second person confirms it, routes avoid that shaft or hallway, and the route says so when no other way is mapped. Reports are still stored on the device only.
+Reports and routing: `routeClosures` in `src/utils/reports.ts` (lifecycle ported from InsideOut `feature/preview-firebase`). An "elevator out" or "hallway closed" report expires 4 hours after its last confirmation. One report only adds a warning to the route; once a second person confirms it, routes avoid that shaft or hallway, and the route says so when no other way is mapped. Reports are kept on the device and synced to the server store.
 
-Tests: `npm test` (georeferencing maths, E5 fit against the drawing scale, campus database integrity).
+## Directions, floor-plan studio, merged features (feature/insideout-merge)
 
-What is not verified: every footprint and entrance is unreviewed OpenStreetMap data; the E5 alignment is a footprint fit; no route has been walked; 248 of the 489 listed floor plans are restricted documents and none besides E5 has been imported.
+- **Directions** (campus map): any building or room to any other. Indoor route to a door, outdoor walk on the OpenStreetMap path network (`src/data/campus/paths.json`, built by `scripts/campus/fetchOsmPaths.mjs` + `buildPaths.mjs`), indoor route from the door. Step-free mode skips ways tagged steps. A door joins an indoor map only if an indoor entrance room is within 20 m (`DOOR_LINK_M`); the distance is shown. Code: `src/campus/outdoorRoute.ts`, `src/campus/tripPlanner.ts`.
+- **Floor-plan studio** (campus map, "Floor plans"): pick the building and floor from the Plant Operations list, upload a PDF/SVG/PNG/JPEG you are allowed to use, read room numbers from the PDF text layer and/or ask Gemini, edit rooms, click control points (drawing, then map), review, publish. Published floors appear in that building's floor selector and indoor navigator with no building-specific code. Stored in `data/store.json` and `data/uploads/` (gitignored). Status is computed from the record (`importStatus` in `src/campus/floorImports.ts`); routing is only offered when the hallway graph is connected.
+- **From Nov 6 FloorNav**: sign/QR scanner, checkpoints, corrections audit, E5 self-checks, outdoor hand-off, tool-calling assistant, offline banner. See `docs/MERGE.md`.
+- **Shared store**: corrections, room edits and reports sync to the server (`/api/store/:key`) and are pulled on start.
+
+No access control yet: anyone who can reach the server can read uploads and change imports. Do not put restricted drawings on a public deployment until sign-in is added.
+
+Tests: `npm test` (georeferencing maths, E5 fit against the drawing scale, campus database integrity, outdoor/indoor trips, import status, server store, checkpoints).
+
+What is not verified: every footprint, entrance and path is unreviewed OpenStreetMap data; the E5 alignment is a footprint fit; no route has been walked; 248 of the 491 listed floor plans are restricted documents and none besides E5 has been mapped.
 
 # FloorNav (E5 indoor navigator)
 

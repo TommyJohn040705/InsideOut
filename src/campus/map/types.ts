@@ -24,6 +24,10 @@ export interface CampusMapAdapter {
   /** padBottom: pixels hidden by a bottom sheet, so the target stays in view. */
   flyTo(center: LngLat, zoom: number, padBottom?: number): void;
   setFloorOverlay(overlay: FloorOverlay | null): void;
+  /** 0..1, for comparing the plan with the footprint underneath (inspection mode). */
+  setFloorOpacity(opacity: number): void;
+  /** One-shot map click (null cancels), used to place georeferencing control points. */
+  onMapClick(cb: ((at: LngLat) => void) | null): void;
   /** Indoor rooms (polygons), paths (lines) and elevators (points) already in real coordinates. */
   setIndoorVector(fc: GeoJSON.FeatureCollection | null): void;
   setRoute(line: LngLat[] | null): void;

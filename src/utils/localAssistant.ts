@@ -41,9 +41,12 @@ function nearest(cats: string[], from: RoomPOI, plans: FloorPlanData[], accessib
   let best: { r: RoomPOI; m: number; min: number } | null = null;
   for (const { r } of shortlist) {
     const sPlan = plans.find((p) => p.floorNumber === f) || plans[0];
-    const route = calculateIndoorRoute(sPlan, from.coords, from.name, r.coords, r.name, from.id, r.id, {
-      isAccessibleOnly: accessible, allFloors: plans, startFloor: f, endFloor: r.floor ?? f,
-    });
+    let route;
+    try {
+      route = calculateIndoorRoute(sPlan, from.coords, from.name, r.coords, r.name, from.id, r.id, {
+        isAccessibleOnly: accessible, allFloors: plans, startFloor: f, endFloor: r.floor ?? f,
+      });
+    } catch { continue; } // no mapped way between those floors
     if (!best || route.totalDistanceMeters < best.m) best = { r, m: route.totalDistanceMeters, min: route.estimatedWalkTimeMinutes };
   }
   return best;

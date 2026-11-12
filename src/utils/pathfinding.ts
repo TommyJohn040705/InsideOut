@@ -452,6 +452,8 @@ export function calculateIndoorRoute(
     startFloor?: number;
     endFloor?: number;
     closures?: RouteClosures;
+    /** Stairs/elevators joining floors. Defaults to the E5 links for E5 floors and none elsewhere. */
+    verticalLinks?: VerticalCirculationLink[];
   }
 ): NavigationRoute {
   const closures = options?.closures;
@@ -551,8 +553,10 @@ export function calculateIndoorRoute(
   }
 
   // CASE 2: MULTI-FLOOR NAVIGATION (BUG 4 FIX: Ordered Legs with Vertical Transition Pause)
+  const links = options?.verticalLinks ?? (startFloorPlan.buildingId === 'uwaterloo-e5' ? E5_VERTICAL_LINKS : []);
+  if (!links.length) throw new Error(`No stairs or elevators are mapped between floors ${startFloor} and ${endFloor} of ${startFloorPlan.buildingName || 'this building'}.`);
   let chosenLink: VerticalCirculationLink | undefined;
-  const openLinks = E5_VERTICAL_LINKS.filter((l) => !closures?.linkIds.has(l.id));
+  const openLinks = links.filter((l) => !closures?.linkIds.has(l.id));
   if (isAccessibleOnly) {
     chosenLink = openLinks.find(
       (l) =>
@@ -572,13 +576,13 @@ export function calculateIndoorRoute(
   }
 
   if (!chosenLink) {
-    chosenLink = E5_VERTICAL_LINKS[0]; // Southeast elevators fallback
+    chosenLink = links[0]; // first link (E5: Southeast elevators)
   }
   if (closures?.linkIds.has(chosenLink.id)) {
     flaggedNotes.unshift(`${chosenLink.name} is reported out of service and no other ${isAccessibleOnly ? 'step-free ' : ''}way between these floors is mapped.`);
   } else if (closures?.unconfirmedLinkIds.has(chosenLink.id)) {
     flaggedNotes.unshift(`Unconfirmed report: ${chosenLink.name} may be out of service.`);
-  } else if (closures?.linkIds.size && E5_VERTICAL_LINKS.some((l) => closures.linkIds.has(l.id) && l.floorsServed.includes(startFloor) && l.floorsServed.includes(endFloor))) {
+  } else if (closures?.linkIds.size && links.some((l) => closures.linkIds.has(l.id) && l.floorsServed.includes(startFloor) && l.floorsServed.includes(endFloor))) {
     flaggedNotes.unshift(`Using ${chosenLink.name}: another stair or elevator on this route is reported closed.`);
   }
 

@@ -40,7 +40,10 @@ export async function createGoogleAdapter(el: HTMLElement, center: LngLat, zoom:
   let selected: string | null = null;
   let labels: google.maps.Marker[] = [];
   let markers: google.maps.Marker[] = [];
-  let floor: google.maps.OverlayView | null = null;
+  let floor: FloorImage | null = null;
+  let floorOpacity = 0.95;
+  let clickCb: ((at: LngLat) => void) | null = null;
+  map.addListener('click', (e: google.maps.MapMouseEvent) => { if (clickCb && e.latLng) { const cb = clickCb; clickCb = null; map.setOptions({ draggableCursor: null }); cb([e.latLng.lng(), e.latLng.lat()]); } });
   const route = new g.Polyline({ map, strokeColor: '#2563eb', strokeWeight: 5, strokeOpacity: 0.95, zIndex: 5 });
   const directions = new g.DirectionsRenderer({ map, suppressMarkers: true, preserveViewport: true, polylineOptions: { strokeColor: '#0ea5e9', strokeWeight: 5 } });
 
@@ -67,7 +70,7 @@ export async function createGoogleAdapter(el: HTMLElement, center: LngLat, zoom:
     constructor(private o: FloorOverlay) {
       super();
       this.img.src = o.url;
-      Object.assign(this.img.style, { position: 'absolute', left: '0', top: '0', transformOrigin: '0 0', width: `${o.imageSize[0]}px`, height: `${o.imageSize[1]}px`, maxWidth: 'none', pointerEvents: 'none', opacity: '0.95' });
+      Object.assign(this.img.style, { position: 'absolute', left: '0', top: '0', transformOrigin: '0 0', width: `${o.imageSize[0]}px`, height: `${o.imageSize[1]}px`, maxWidth: 'none', pointerEvents: 'none', opacity: String(floorOpacity) });
     }
     onAdd() { this.getPanes()!.overlayLayer.appendChild(this.img); }
     onRemove() { this.img.remove(); }
@@ -86,7 +89,8 @@ export async function createGoogleAdapter(el: HTMLElement, center: LngLat, zoom:
       map.data.forEach((f) => map.data.remove(f));
       map.data.addGeoJson(fc, { idPropertyName: 'id' });
       restyle();
-      map.data.addListener('click', (e: google.maps.Data.MouseEvent) => onClick(String(e.feature.getProperty('id'))));
+      // While placing a control point, a click on a footprint is a point, not a selection.
+      map.data.addListener('click', (e: google.maps.Data.MouseEvent) => { if (clickCb && e.latLng) { const cb = clickCb; clickCb = null; map.setOptions({ draggableCursor: null }); cb([e.latLng.lng(), e.latLng.lat()]); return; } onClick(String(e.feature.getProperty('id'))); });
       labels.forEach((m) => m.setMap(null));
       labels = [];
       map.data.forEach((f) => {
@@ -104,6 +108,8 @@ export async function createGoogleAdapter(el: HTMLElement, center: LngLat, zoom:
     },
     setSelected(id) { selected = id; restyle(); },
     flyTo(c, z, padBottom = 0) { map.setZoom(z); map.panTo(ll(c)); if (padBottom) map.panBy(0, padBottom / 2); },
+    setFloorOpacity(n) { floorOpacity = n; if (floor) floor.img.style.opacity = String(n); },
+    onMapClick(cb) { clickCb = cb; map.setOptions({ draggableCursor: cb ? 'crosshair' : null }); },
     setFloorOverlay(o) {
       floor?.setMap(null);
       floor = o ? new FloorImage(o) : null;
