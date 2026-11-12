@@ -32,7 +32,7 @@ import { UpdateMap, WebResult } from './components/UpdateMap';
 import { Tour, tourSeen } from './components/Tour';
 import { MapView, MapViewHandle } from './components/MapView';
 import {
-  cx, FloorPicker, NavBanner, NavFooter, RoomCard, RoutePlanner, RouteSummary, SearchInput, SearchResults, StepsList, useRoomSearch, roomTitle,
+  cx, buildingCode, FloorPicker, NavBanner, NavFooter, RoomCard, RoutePlanner, RouteSummary, SearchInput, SearchResults, StepsList, useRoomSearch, roomTitle,
 } from './components/Panels';
 import { MicButton } from './components/MicButton';
 import { OnboardingRoleModal } from './components/OnboardingRoleModal';
@@ -775,7 +775,7 @@ export default function App() {
           </div>
           <div className="flex flex-col">
             <span className="font-extrabold text-base tracking-tight leading-none text-slate-900">
-              Waterloo StaffNav <span className="text-amber-600 font-bold">E5</span>
+              Waterloo StaffNav <span className="text-amber-600 font-bold">{buildingCode(currentPlan)}</span>
             </span>
             <span className="text-[10px] text-slate-500 font-medium">Workplace Companion & Navigation</span>
           </div>

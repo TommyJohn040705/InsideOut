@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { buildingCode } from './Panels';
 import { AlertTriangle, X, Check, Phone, Building2 } from 'lucide-react';
 import { REPORT_TYPES, RoomReport } from '../utils/reports';
 import { RoomPOI } from '../types/navigation';
@@ -43,7 +44,7 @@ export function WorkplaceIssueModal({
     const report: RoomReport = {
       id: `rep-${Date.now()}`,
       roomId: selectedRoomId || null,
-      roomLabel: selectedRoom ? (selectedRoom.roomNumber ? `E5 ${selectedRoom.roomNumber}` : selectedRoom.name) : 'General E5 Facility',
+      roomLabel: selectedRoom ? (selectedRoom.roomNumber ? `${buildingCode(selectedRoom)} ${selectedRoom.roomNumber}` : selectedRoom.name) : 'General E5 Facility',
       floor: selectedRoom?.floor ?? null,
       type: reportType,
       details: details.trim(),
@@ -115,7 +116,7 @@ export function WorkplaceIssueModal({
                   .slice(0, 150)
                   .map((r) => (
                     <option key={r.id} value={r.id}>
-                      {r.roomNumber ? `E5 ${r.roomNumber}` : r.name} (Floor {r.floor} · {r.name})
+                      {r.roomNumber ? `${buildingCode(r)} ${r.roomNumber}` : r.name} (Floor {r.floor} · {r.name})
                     </option>
                   ))}
               </select>

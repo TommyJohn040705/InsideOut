@@ -17,6 +17,9 @@ const CAT_LABEL: Record<string, string> = {
 };
 export const catLabel = (c: string) => CAT_LABEL[c] || 'Room';
 
+/** Building code for labels: imported floors carry "import-<CODE>", E5's own rooms have no prefix. */
+export const buildingCode = (r: { buildingId?: string } | null | undefined) => (r?.buildingId?.startsWith('import-') ? r.buildingId.slice(7) : 'E5');
+
 export function roomTitle(r: RoomPOI) {
   return r.roomNumber && !r.name.includes(r.roomNumber) ? `${r.roomNumber} · ${r.name}` : r.name;
 }
@@ -277,7 +280,7 @@ export function RoomCard({ room, onDirections, onStartHere, onEdit, onReport, on
     <div className="space-y-3">
       <div className="flex items-start gap-3">
         <div className="min-w-0 flex-1">
-          <h2 className="text-xl font-extrabold text-slate-900 leading-tight">{room.roomNumber ? `E5 ${room.roomNumber}` : room.name}</h2>
+          <h2 className="text-xl font-extrabold text-slate-900 leading-tight">{room.roomNumber ? `${buildingCode(room)} ${room.roomNumber}` : room.name}</h2>
           <p className="text-[15px] text-slate-700 mt-0.5">{room.name}</p>
           <p className="text-sm text-slate-500 mt-1">Floor {room.floor} · {catLabel(room.category)}{room.accessible ? ' · Accessible' : ''}</p>
         </div>

@@ -34,6 +34,32 @@ const NAME_ALIASES = {
 };
 // OSM refs that differ from the Plant Operations code.
 const REF_ALIASES = { PSE: 'E7', UWP: 'UWP_COMMONS', V1: 'V1_CC' };
+NAME_ALIASES['Ron Eydt Village'] = 'REV';
+NAME_ALIASES['Mackenzie King Village'] = 'MKV'; // second OSM way of MKV without the ref // three OSM ways, one tagged ref=REV
+
+// Names that identify a building only near a known anchor (checked 2026-11-12 in OSM):
+// lettered "Block X" ways sit around the Columbia Lake Village Community Centre (Plant Operations
+// CLV_BLOCK_X); "East 1".."West 6" around the Village 1 Central Complex (V1E1..V1W6).
+const NEAR_ALIASES = [
+  { re: /^Block ([A-HJ-NP])$/, code: (m) => `CLV_BLOCK_${m[1]}`, anchor: 'Columbia Lake Village Community Centre', withinM: 350 },
+  { re: /^(East|North|South|West) (\d)$/, code: (m) => `V1${m[1][0]}${m[2]}`, anchor: 'Student Village 1 Central Complex', withinM: 300 },
+];
+
+// One Plant Operations drawing set covering several buildings: its sheets attach to each.
+const PLAN_GROUPS = {
+  V1_E123: ['V1E1', 'V1E2', 'V1E3'], V1_E456: ['V1E4', 'V1E5', 'V1E6'],
+  V1_N156: ['V1N1', 'V1N5', 'V1N6'], V1_N234: ['V1N2', 'V1N3', 'V1N4'],
+  V1_S1234: ['V1S1', 'V1S2', 'V1S3', 'V1S4'], V1_S5678: ['V1S5', 'V1S6', 'V1S7', 'V1S8'],
+  V1_W126: ['V1W1', 'V1W2', 'V1W6'], V1_W345: ['V1W3', 'V1W4', 'V1W5'],
+};
+// Separately drawn wings of one OSM building: sheets attach to it, labelled with the wing.
+const WINGS = { REV_CC: ['REV', 'CC'], REV_EH: ['REV', 'EH'], REV_NH: ['REV', 'NH'], REV_SH: ['REV', 'SH'], REV_WH: ['REV', 'WH'] };
+// What is known about codes that still have no building on the main-campus map.
+const UNMATCHED_NOTES = {
+  ARC: 'School of Architecture, Cambridge (OSM way/68126301): not on the main campus.',
+  UWP: 'Roof plan for the whole UW Place complex; no single building to attach it to.',
+};
+const DEFAULT_UNMATCHED = 'No building with this code or a matching name was found in OpenStreetMap around Waterloo (searched 2026-11-12). Location not verified.';
 
 const close = (ring) => {
   const a = ring[0], b = ring[ring.length - 1];
@@ -84,6 +110,12 @@ function distToRing(pt, ring) {
 }
 
 // ---- footprints -----------------------------------------------------------
+const anchorAt = {};
+for (const el of osm.elements) if (el.tags?.building && el.tags.name && el.geometry) anchorAt[el.tags.name] ||= [el.geometry[0].lon, el.geometry[0].lat];
+const nearAnchor = (el, a) => {
+  const at = anchorAt[a.anchor], p = el.geometry?.[0];
+  return !!(at && p && Math.hypot((p.lon - at[0]) * MX, (p.lat - at[1]) * MY) <= a.withinM);
+};
 const features = [];
 const buildings = new Map(); // key -> building record
 const keyOf = (code, osmId) => code || `osm-${osmId}`;
@@ -96,11 +128,12 @@ for (const el of osm.elements) {
   let code = null, codeSource = null;
   if (t.ref) { code = REF_ALIASES[t.ref] || t.ref; codeSource = 'osm_ref'; }
   else if (NAME_ALIASES[t.name]) { code = NAME_ALIASES[t.name]; codeSource = 'name_alias'; }
+  else for (const a of NEAR_ALIASES) { const m = (t.name || '').match(a.re); if (m && nearAnchor(el, a)) { code = a.code(m); codeSource = 'name_near_anchor'; break; } }
   const key = keyOf(code, el.id);
   const b = buildings.get(key) || {
     id: key, code, codeSource, name: t.name || null, osmIds: [], levels: t['building:levels'] ? Number(t['building:levels']) : null,
     footprint: { source: 'OpenStreetMap', license: 'ODbL 1.0', fetchedAt: osm.fetchedAt, validation: 'unreviewed' },
-    polys: [], entrances: [], floors: [], plantOpsNumber: null,
+    polys: [], entrances: [], floors: [], plantOpsNumber: null, osmKind: t.building, osmOperator: t.operator || null, osmAmenity: t.amenity || null,
   };
   b.osmIds.push(`${el.type}/${el.id}`);
   b.polys.push(...polys);
@@ -112,14 +145,21 @@ for (const el of osm.elements) {
 // Manifest codes come in two spellings ("053E5" and "E5"); strip the building number.
 const normCode = (c) => c.replace(/^\d{3,}/, '');
 for (const row of manifest) {
-  const code = normCode(row.buildingCode);
+  const raw = normCode(row.buildingCode);
+  const targets = (PLAN_GROUPS[raw] || []).filter((t) => buildings.get(t)?.polys.length);
+  if (targets.length) { for (const t of targets) addFloor(buildings.get(t), row, { sharedWith: targets.filter((x) => x !== t), drawingSet: raw }); continue; }
+  const wing = WINGS[raw] && buildings.get(WINGS[raw][0])?.polys.length ? WINGS[raw] : null;
+  const code = wing ? wing[0] : raw;
   let b = buildings.get(code);
   if (!b) {
     b = { id: code, code, codeSource: 'plant_ops_manifest', name: null, osmIds: [], levels: null, footprint: null, polys: [], entrances: [], floors: [], plantOpsNumber: null };
     buildings.set(code, b);
   }
+  addFloor(b, row, wing ? { wing: wing[1] } : {});
+}
+function addFloor(b, row, extra) {
   if (/^\d+$/.test(row.buildingNumber) && row.buildingNumber !== '000') b.plantOpsNumber = row.buildingNumber;
-  if (b.floors.some((f) => f.filename === row.filename)) continue;
+  if (b.floors.some((f) => f.filename === row.filename)) return;
   // The manifest's floorCode is wrong for roof plans; the filename suffix is authoritative.
   const floorCode = (row.filename.match(/_([A-Z0-9]+?)(?:FLR)?.pdf$/i) || [])[1] || row.floorCode;
   b.floors.push({
@@ -133,6 +173,7 @@ for (const row of manifest) {
     status: existsSync(`${PDF_DIR}/${row.filename}`) ? 'imported' : 'source_found',
     // Checked 2026-11-10: every plantops.uwaterloo.ca PDF URL redirects to UW single sign-on.
     access: 'uw_login_required',
+    ...extra,
   });
 }
 
@@ -216,11 +257,28 @@ for (const b of buildings.values()) {
   b.osmIndoor = lv ? Object.values(lv).sort((x, y) => Number(x.level) - Number(y.level)).map((l) => ({ level: l.level, label: l.label, rooms: l.rooms.length, paths: l.paths.length })) : [];
 }
 
+// ---- why a building has no plans, or no place on the map ---------------------
+const COLLEGES = /Conrad Grebel|St\. Jerome|Renison|United College|Skén:nen/i;
+const COLLEGE_CODES = new Set(['CGR', 'STJ', 'REN', 'UTD', 'SJ2']);
+const RT_PARK = /Accelerator|OpenText|SAP|evolv1|innoTECH|Cora Building|R&T Park|Autonomous Vehicle|University Gates/i;
+const MINOR = new Set(['shed', 'roof', 'service', 'garage', 'bridge', 'no', 'greenhouse', 'kiosk', 'carport']);
+const MAIN = { west: -80.575, south: 43.458, east: -80.525, north: 43.486 }; // = CAMPUS_BOUNDS in the app
+function planNote(b, center) {
+  if (center && (center[0] < MAIN.west || center[0] > MAIN.east || center[1] < MAIN.south || center[1] > MAIN.north)) return { kind: 'off_main_campus', note: 'Outside the main campus.' };
+  if (b.osmOperator && !/Waterloo/i.test(b.osmOperator)) return { kind: 'not_uw', note: `Operated by ${b.osmOperator}, not the University of Waterloo.` };
+  if (COLLEGE_CODES.has(b.code) || COLLEGES.test(b.name || '')) return { kind: 'affiliated_college', note: 'Affiliated or federated college: its plans are not in the Plant Operations list. Ask the college.' };
+  if (RT_PARK.test(b.name || '')) return { kind: 'rt_park_tenant', note: 'Not a University of Waterloo building (Research and Technology Park tenant or private residence).' };
+  if (/^Block \d+$/.test(b.name || '')) return { kind: 'residence_no_plans', note: 'Columbia Lake Village townhouse: no plans listed by Plant Operations.' };
+  if (MINOR.has(b.osmKind) || b.osmAmenity === 'shelter' || b.osmAmenity === 'bicycle_parking' || b.osmAmenity === 'parking') return { kind: 'minor_structure', note: `Minor structure (${b.osmAmenity || b.osmKind}); no indoor map needed.` };
+  if (!b.name && !b.code) return { kind: 'unidentified', note: 'Unnamed building in OpenStreetMap; identify it before looking for plans.' };
+  return { kind: 'plans_missing', note: 'No Plant Operations floor plan is listed. Ask Plant Operations whether one exists.' };
+}
+
 // ---- write ----------------------------------------------------------------
 const out = [];
 for (const b of buildings.values()) {
   b.floors.sort((x, y) => x.floorCode.localeCompare(y.floorCode));
-  const { polys, ...rest } = b;
+  const { polys, osmKind, osmOperator, osmAmenity, ...rest } = b;
   if (polys.length) {
     rest.center = centroid(polys);
     features.push({
@@ -229,6 +287,8 @@ for (const b of buildings.values()) {
       geometry: polys.length === 1 ? { type: 'Polygon', coordinates: polys[0] } : { type: 'MultiPolygon', coordinates: polys },
     });
   } else rest.center = null;
+  if (!rest.floors.length) rest.gap = planNote(b, rest.center);
+  else if (!polys.length) rest.gap = { kind: 'no_footprint', note: UNMATCHED_NOTES[b.id] || DEFAULT_UNMATCHED };
   out.push(rest);
 }
 out.sort((a, b) => (a.code || a.name || a.id).localeCompare(b.code || b.name || b.id));
@@ -241,6 +301,9 @@ writeFileSync('src/data/campus/indoorOsm.json', JSON.stringify(indoor));
 
 const withBoth = out.filter((b) => b.footprint && b.floors.length);
 console.log(`buildings ${out.length} | with footprint ${out.filter((b) => b.footprint).length} | with floor-plan refs ${out.filter((b) => b.floors.length).length} | both ${withBoth.length}`);
-console.log(`floor refs ${out.reduce((n, b) => n + b.floors.length, 0)} (restricted ${out.reduce((n, b) => n + b.floors.filter((f) => f.restricted).length, 0)}) | entrances ${entrances.length} (matched to a building ${entrances.filter((e) => e.buildingId).length})`);
+const docs = [...new Map(out.flatMap((b) => b.floors).map((f) => [f.filename, f])).values()];
+console.log(`floor documents ${docs.length} (restricted ${docs.filter((f) => f.restricted).length}) | entrances ${entrances.length} (matched to a building ${entrances.filter((e) => e.buildingId).length})`);
+const gaps = {}; for (const b of out) if (b.gap) gaps[b.gap.kind] = (gaps[b.gap.kind] || 0) + 1;
+console.log('gaps by kind:', JSON.stringify(gaps));
 console.log('manifest codes with no footprint:', out.filter((b) => !b.footprint).map((b) => b.code).join(' '));
 console.log('OSM indoor:', Object.entries(indoor).map(([id, lv]) => `${id}[${Object.values(lv).map((l) => `L${l.level}:${l.rooms.length}r/${l.paths.length}p`).join(' ')}]`).join('  '), '| dropped (no building within 30 m):', indoorDropped);

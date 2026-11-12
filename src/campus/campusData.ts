@@ -38,7 +38,25 @@ export interface CampusFloor {
   status: FloorStatus;
   /** Floor number in the app's indoor dataset, when this floor has one. */
   indoorFloor?: number;
+  /** Separately drawn wing of this building (Ron Eydt Village: CC, EH, NH, SH, WH). */
+  wing?: string;
+  /** Drawing set that covers several buildings (Village 1: V1_E123 covers East 1-3). */
+  drawingSet?: string;
+  sharedWith?: string[];
 }
+
+export type GapKind = 'off_main_campus' | 'not_uw' | 'affiliated_college' | 'rt_park_tenant' | 'residence_no_plans' | 'minor_structure' | 'unidentified' | 'plans_missing' | 'no_footprint';
+export const GAP_LABEL: Record<GapKind, string> = {
+  plans_missing: 'UW building, no plans listed',
+  no_footprint: 'Plans listed, not on the map',
+  residence_no_plans: 'Residence, no plans listed',
+  affiliated_college: 'Affiliated college',
+  rt_park_tenant: 'Not a UW building',
+  not_uw: 'Not a UW building',
+  minor_structure: 'Minor structure',
+  unidentified: 'Unidentified in OSM',
+  off_main_campus: 'Off the main campus',
+};
 
 export interface CampusBuilding {
   id: string;
@@ -52,6 +70,8 @@ export interface CampusBuilding {
   entrances: string[];
   floors: CampusFloor[];
   plantOpsNumber: string | null;
+  /** Why this building has no plans or no map position (built by scripts/campus/buildCampusData.mjs). */
+  gap?: { kind: GapKind; note: string };
   /** Levels with rooms or corridors surveyed in OpenStreetMap (counts only; geometry is in indoorOsm.json). */
   osmIndoor: { level: string; label: string | null; rooms: number; paths: number }[];
 }
@@ -136,7 +156,10 @@ export const COVERAGE_LABEL: Record<BuildingCoverage, string> = {
 };
 
 export function coverageSummary() {
-  const floors = BUILDINGS.flatMap((b) => b.floors);
+  // Village 1 drawing sets are attached to every house they cover; count each document once.
+  const floors = [...new Map(BUILDINGS.flatMap((b) => b.floors).map((f) => [f.filename, f])).values()];
+  const gaps: Partial<Record<GapKind, number>> = {};
+  for (const b of BUILDINGS) if (b.gap) gaps[b.gap.kind] = (gaps[b.gap.kind] || 0) + 1;
   return {
     buildings: BUILDINGS.length,
     withFootprint: BUILDINGS.filter((b) => b.footprint).length,
@@ -146,6 +169,7 @@ export function coverageSummary() {
     restrictedFloors: floors.filter((f) => f.restricted).length,
     georeferencedFloors: floors.filter((f) => f.status === 'georeferenced').length,
     entrances: ENTRANCES.length,
+    gaps,
   };
 }
 

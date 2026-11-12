@@ -56,3 +56,14 @@ describe('server store', () => {
     expect(() => openStore(dir).read()).toThrow(); // a corrupt store is never silently emptied
   });
 });
+
+describe('imported floors never route through walls', () => {
+  it('drops hallways until the floor is reviewed and connected, and routing then refuses', async () => {
+    const { calculateIndoorRoute } = await import('../src/utils/pathfinding');
+    const rec = { ...base, rooms: [room('a'), { ...room('b'), coords: { x: 80, y: 80 } }], hallways: [{ id: 'h1', coords: { x: 1, y: 1 }, connectedTo: ['a', 'b'] }], controlPoints: e5.controlPoints as FloorImport['controlPoints'] };
+    const plan = importToPlan(rec, 'Davis Centre'); // not reviewed
+    expect(plan.hallways).toEqual([]);
+    expect(() => calculateIndoorRoute(plan, plan.rooms[0].coords, 'a', plan.rooms[1].coords, 'b', 'a', 'b')).toThrow(/No hallway network/);
+    expect(importToPlan({ ...rec, reviewed: true }, 'Davis Centre').hallways).toHaveLength(1);
+  });
+});

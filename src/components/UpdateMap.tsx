@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { buildingCode } from './Panels';
 import {
   Camera, X, Check, Loader2, AlertTriangle, Globe, Send, MapPinned, Flag, Map as MapIcon, Sparkles, ExternalLink, Trash2,
 } from 'lucide-react';
@@ -125,7 +126,7 @@ export function UpdateMap(props: Props) {
     if (it.kind === 'report') {
       onReport({
         id: `rep-${Date.now()}`, roomId: room?.id || null,
-        roomLabel: room ? `E5 ${room.roomNumber || room.name}` : 'General', floor: room?.floor ?? null,
+        roomLabel: room ? `${buildingCode(room)} ${room.roomNumber || room.name}` : 'General', floor: room?.floor ?? null,
         type: it.reportType || 'other', details: it.details || '', createdAt: new Date().toISOString(), confirmations: 1,
       });
       patch(it.id, { state: 'saved' });
@@ -167,7 +168,7 @@ export function UpdateMap(props: Props) {
           <span className="w-9 h-9 rounded-xl bg-green-50 text-green-700 flex items-center justify-center"><MapPinned className="w-5 h-5" /></span>
           <div className="flex-1 min-w-0">
             <p className="font-extrabold text-slate-900">Update the map</p>
-            <p className="text-xs text-slate-500 truncate">{initialRoom ? `E5 ${initialRoom.roomNumber || ''} · ${initialRoom.name}` : buildingName}</p>
+            <p className="text-xs text-slate-500 truncate">{initialRoom ? `${buildingCode(initialRoom)} ${initialRoom.roomNumber || ''} · ${initialRoom.name}` : buildingName}</p>
           </div>
           <button aria-label="Close" onClick={onClose} className="p-2 rounded-full hover:bg-slate-100 text-slate-500"><X className="w-5 h-5" /></button>
         </div>
@@ -242,7 +243,7 @@ export function UpdateMap(props: Props) {
                   <div className="flex-1 min-w-0">
                     {it.kind === 'room_update' && (
                       <>
-                        <p className="font-bold text-slate-900">Update {room ? `E5 ${room.roomNumber}` : `room ${it.roomNumber || '?'}`}</p>
+                        <p className="font-bold text-slate-900">Update {room ? `${buildingCode(room)} ${room.roomNumber}` : `room ${it.roomNumber || '?'}`}</p>
                         {it.name && <p className="text-[15px] text-slate-800">{it.name}{it.category && CATS.includes(String(it.category)) ? <span className="text-slate-500"> · {catLabel(String(it.category))}</span> : null}</p>}
                         {it.purpose && it.purpose !== it.name && <p className="text-sm text-slate-600">{it.purpose}</p>}
                       </>
@@ -250,7 +251,7 @@ export function UpdateMap(props: Props) {
                     {it.kind === 'report' && (
                       <>
                         <p className="font-bold text-slate-900">{reportLabel(it.reportType || 'other')}</p>
-                        <p className="text-sm text-slate-600">{room ? `E5 ${room.roomNumber} · ${room.name}` : 'No room given: saved as a general report'}</p>
+                        <p className="text-sm text-slate-600">{room ? `${buildingCode(room)} ${room.roomNumber} · ${room.name}` : 'No room given: saved as a general report'}</p>
                         {it.details && <p className="text-sm text-slate-600">"{it.details}"</p>}
                       </>
                     )}

@@ -465,6 +465,8 @@ export function calculateIndoorRoute(
   // BUG 6 FIX: Always retrieve the correct floor graph by startFloor from allFloors
   const startFloorPlan = allFloors.find((f) => f.floorNumber === startFloor) || floorPlan;
   const endFloorPlan = allFloors.find((f) => f.floorNumber === endFloor) || floorPlan;
+  // Without a hallway network the only possible line goes through walls: refuse instead.
+  for (const p of [startFloorPlan, endFloorPlan]) if (!p.hallways?.length) throw new Error(`No hallway network is mapped on floor ${p.floorNumber} of ${p.buildingName || 'this building'}, so there is no indoor route yet.`);
 
   const flaggedNotes: string[] = [];
   if (

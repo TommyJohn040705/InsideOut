@@ -32,6 +32,8 @@ export interface FloorImport {
   rooms: RoomPOI[];
   hallways: CorridorNode[];
   controlPoints: ControlPoint[];
+  /** Set when the control points were copied from another floor of the same drawing series. */
+  alignmentFrom?: string;
   reviewed: boolean;
   reviewedAt?: string;
   published: boolean;
@@ -85,7 +87,8 @@ export function importToPlan(f: FloorImport, buildingName: string): FloorPlanDat
     summary: f.extraction?.summary || '',
     imageUrl: f.imageUrl,
     rooms: f.rooms.map((r) => ({ ...r, floor: f.floorNumber, buildingId: importAppBuildingId(f.buildingId) })),
-    hallways: f.hallways,
+    // Hallways only count once the floor is reviewed and its graph is connected; otherwise no routing.
+    hallways: importStatus(f) === 'routing_available' ? f.hallways : [],
     source: 'upload',
   };
 }

@@ -8,7 +8,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Search, X, Layers, DoorOpen, Lock, LocateFixed, Footprints, Accessibility, AlertTriangle, BarChart3, ChevronRight, FileText, Eye, Navigation2, ArrowUpDown } from 'lucide-react';
 import { FloorPlanData, NavigationRoute, RoomPOI } from '../../types/navigation';
 import {
-  BUILDINGS, CAMPUS_CENTER, COVERAGE_LABEL, FLOOR_STATUS_LABEL, FOOTPRINTS, INDOOR, CampusBuilding, CampusFloor,
+  BUILDINGS, CAMPUS_CENTER, COVERAGE_LABEL, GAP_LABEL, FLOOR_STATUS_LABEL, FOOTPRINTS, INDOOR, CampusBuilding, CampusFloor,
   buildingById, buildingLabel, coverageOf, coverageSummary, entrancesOf, searchBuildings,
   osmIndoorGeoJSON, osmLevelName, searchOsmRooms, OsmRoomHit,
 } from '../../campus/campusData';
@@ -32,7 +32,7 @@ interface Props {
   onRouteIndoor: (appBuildingId: string, start: RoomPOI, end: RoomPOI, stepFree: boolean) => void;
 }
 
-type Hit = { kind: 'building'; b: CampusBuilding } | { kind: 'osmroom'; b: CampusBuilding; r: OsmRoomHit } | { kind: 'room'; b: CampusBuilding; room: RoomPOI; floor: number };
+type Hit = { kind: 'building'; b: CampusBuilding } | { kind: 'floor'; b: CampusBuilding; f: CampusFloor; mapped: number | null } | { kind: 'osmroom'; b: CampusBuilding; r: OsmRoomHit } | { kind: 'room'; b: CampusBuilding; room: RoomPOI; floor: number };
 
 /** Basements first, then numbered floors, mezzanine/concourse, penthouse, roof. */
 const floorOrder = (code: string) => {
@@ -42,7 +42,7 @@ const floorOrder = (code: string) => {
 };
 const floorLabel = (code: string) => code.replace(/^0(\d)$/, '$1');
 
-const hitLabel = (h: Hit) => h.kind === 'room' ? `${h.b.code} ${h.room.roomNumber || ''} ${h.room.name}`.trim() : h.kind === 'osmroom' ? `${h.b.code} ${[h.r.ref, h.r.name].filter(Boolean).join(': ')}` : buildingLabel(h.b);
+const hitLabel = (h: Hit) => h.kind === 'floor' ? `${h.b.code} floor ${h.f.wing ? h.f.wing + ' ' : ''}${floorLabel(h.f.floorCode)}` : h.kind === 'room' ? `${h.b.code} ${h.room.roomNumber || ''} ${h.room.name}`.trim() : h.kind === 'osmroom' ? `${h.b.code} ${[h.r.ref, h.r.name].filter(Boolean).join(': ')}` : buildingLabel(h.b);
 const toTripEnd = (h: Hit): TripEnd => h.kind === 'room' ? { buildingId: h.b.id, room: h.room, label: hitLabel(h) } : h.kind === 'osmroom' ? { buildingId: h.b.id, at: h.r.center, label: hitLabel(h) } : { buildingId: h.b.id, label: hitLabel(h) };
 
 export function CampusView({ plans, imports, onImportsChanged, route, destination, isMobile, onOpenIndoor, onRouteIndoor }: Props) {
@@ -82,10 +82,10 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
     const importFloor = (f: CampusFloor) => imports.find((x) => x.published && x.buildingId === selected.id && x.manifestFilename === f.filename)?.floorNumber;
     const out = selected.floors.map((f) => {
       const n = f.indoorFloor ?? importFloor(f) ?? (siteFloors.includes(floorOrder(f.floorCode)) ? floorOrder(f.floorCode) : undefined);
-      return { key: f.id, code: f.floorCode, floor: n ?? null, restricted: f.restricted, title: `${f.filename}: ${f.restricted ? 'restricted document, ' : ''}${FLOOR_STATUS_LABEL[f.status]}` };
+      return { key: f.id, code: f.floorCode, wing: f.wing || '', floor: n ?? null, restricted: f.restricted, title: `${f.filename}: ${f.restricted ? 'restricted document, ' : ''}${FLOOR_STATUS_LABEL[f.status]}` };
     });
-    for (const n of siteFloors) if (!out.some((c) => c.floor === n)) out.push({ key: `site-${n}`, code: String(n), floor: n, restricted: false, title: 'Mapped floor (not in the Plant Operations list)' });
-    return out.sort((a, b) => floorOrder(a.code) - floorOrder(b.code));
+    for (const n of siteFloors) if (!out.some((c) => c.floor === n)) out.push({ key: `site-${n}`, code: String(n), wing: '', floor: n, restricted: false, title: 'Mapped floor (not in the Plant Operations list)' });
+    return out.sort((a, b) => a.wing.localeCompare(b.wing) || floorOrder(a.code) - floorOrder(b.code));
   }, [selected, siteFloors, imports]);
 
   // Create the map once. If Google fails to load, say so and use the fallback.
@@ -166,7 +166,19 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
         if (r.roomNumber?.toUpperCase().startsWith(m[2].toUpperCase())) out.unshift({ kind: 'room', b, room: { ...r, floor: r.floor ?? p.floorNumber }, floor: r.floor ?? p.floorNumber });
       }
     }
-    for (const r of searchOsmRooms(q, 5)) out.unshift({ kind: 'osmroom', b: r.building, r });
+    // OpenStreetMap rooms only for buildings without their own indoor map.
+    for (const r of searchOsmRooms(q, 5)) if (!sites[r.building.id]) out.unshift({ kind: 'osmroom', b: r.building, r });
+    // "DC 2", "MC B1", "REV EH 3", "E5 floor 4": a floor from the Plant Operations catalogue.
+    const fm = q.match(/^([a-z][a-z0-9_]*)\s+(?:floor\s+)?(?:([a-z]{2})\s+)?(b\d|\d{1,2}|mez|con|ph|ro)$/i);
+    const fb = fm && BUILDINGS.find((x) => (x.code || '').toUpperCase() === fm[1].toUpperCase() && x.footprint);
+    if (fm && fb) {
+      const code = /^\d$/.test(fm[3]) ? `0${fm[3]}` : fm[3].toUpperCase();
+      const s = sites[fb.id];
+      for (const fl of fb.floors) if (fl.floorCode === code && (!fm[2] || fl.wing === fm[2].toUpperCase())) {
+        const n = fl.indoorFloor ?? imports.find((x) => x.published && x.buildingId === fb.id && x.manifestFilename === fl.filename)?.floorNumber ?? null;
+        out.unshift({ kind: 'floor', b: fb, f: fl, mapped: s && n != null && s.georef(n) ? n : null });
+      }
+    }
     return out.slice(0, 8);
   };
   const hits = useMemo(() => search(query), [query, sites]);
@@ -175,6 +187,7 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
   const pick = (h: Hit) => {
     setQuery('');
     if (h.kind === 'room') onOpenIndoor(sites[h.b.id].appBuildingId, h.floor, h.room);
+    else if (h.kind === 'floor') { setSelectedId(h.b.id); setFloor(h.mapped); setWalk(h.mapped == null ? `${hitLabel(h)} (${h.f.filename}) is listed by Plant Operations but not mapped yet${h.f.restricted ? '; it is a restricted document' : ''}.` : null); }
     else if (h.kind === 'osmroom') { setSelectedId(h.b.id); setFloor(null); setWalk(null); setOsmLevel(h.r.level); setOsmRoom(h.r); }
     else { setSelectedId(h.b.id); setFloor(null); setWalk(null); }
   };
@@ -238,13 +251,16 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
             {chips.map((c) => (
               <button key={c.key} disabled={c.floor == null} onClick={() => setFloor(c.floor)} title={c.title} aria-pressed={c.floor != null && floor === c.floor}
                 className={`h-8 min-w-8 px-2.5 rounded-lg text-xs font-bold flex items-center justify-center gap-1 ${c.floor != null ? (floor === c.floor ? 'bg-slate-900 text-white' : 'bg-indigo-50 text-indigo-800 hover:bg-indigo-100') : 'bg-slate-100 text-slate-400'}`}>
-                {c.restricted && <Lock className="w-3 h-3" />}{floorLabel(c.code)}
+                {c.restricted && <Lock className="w-3 h-3" />}{c.wing && <span className="opacity-60">{c.wing}</span>}{floorLabel(c.code)}
               </button>
             ))}
           </div>
+          {selected.floors.some((f) => f.drawingSet) && <p className="text-[11px] text-slate-500 mt-1.5">Plant Operations draws this building on a shared sheet ({[...new Set(selected.floors.map((f) => f.drawingSet).filter(Boolean))].join(', ')}) that also covers {[...new Set(selected.floors.flatMap((f) => f.sharedWith || []))].join(', ')}.</p>}
           {!siteFloors.length && <p className="text-[11px] text-slate-500 mt-1.5">Floor-plan documents listed by Plant Operations (UW login needed to download). None is mapped yet; import one in the floor-plan studio.</p>}
         </div>
       )}
+
+      {selected.gap && <p className="text-[11px] text-slate-600 bg-slate-50 rounded-lg p-2"><b>No indoor map:</b> {selected.gap.note}</p>}
 
       {!site && selected.osmIndoor.length > 0 && (
         <div>
@@ -371,12 +387,12 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
           {hits.length > 0 && (
             <ul className="mt-2 bg-white rounded-2xl shadow-xl ring-1 ring-slate-200 overflow-hidden divide-y divide-slate-100">
               {hits.map((h) => (
-                <li key={h.kind === 'room' ? h.room.id : h.kind === 'osmroom' ? `${h.b.id}-${h.r.level}-${h.r.ref}-${h.r.name}` : h.b.id} className="flex items-center">
+                <li key={h.kind === 'floor' ? `${h.b.id}-${h.f.id}` : h.kind === 'room' ? h.room.id : h.kind === 'osmroom' ? `${h.b.id}-${h.r.level}-${h.r.ref}-${h.r.name}` : h.b.id} className="flex items-center">
                   <button onClick={() => pick(h)} className="flex-1 min-w-0 text-left px-3 py-2.5 hover:bg-slate-50 flex items-center gap-2.5">
                     <span className="min-w-9 h-7 px-1.5 rounded-md bg-slate-100 text-[11px] font-extrabold flex items-center justify-center">{h.b.code || '·'}</span>
                     <span className="flex-1 min-w-0">
                       <span className="block text-sm font-bold truncate">{h.kind === 'room' ? `${h.b.code} ${h.room.roomNumber}: ${h.room.name}` : hitLabel(h)}</span>
-                      <span className="block text-[11px] text-slate-500">{h.kind === 'room' ? `Floor ${h.floor}, opens the indoor navigator` : h.kind === 'osmroom' ? `${h.r.levelName}, from OpenStreetMap (unreviewed)` : COVERAGE_LABEL[coverageOf(h.b)]}</span>
+                      <span className="block text-[11px] text-slate-500">{h.kind === 'floor' ? (h.mapped != null ? 'Mapped floor: shows it on the map' : `Floor plan ${h.f.filename}: not mapped yet`) : h.kind === 'room' ? `Floor ${h.floor}, opens the indoor navigator` : h.kind === 'osmroom' ? `${h.r.levelName}, from OpenStreetMap (unreviewed)` : COVERAGE_LABEL[coverageOf(h.b)]}</span>
                     </span>
                   </button>
                   <button aria-label={`Directions to ${hitLabel(h)}`} title="Directions" onClick={() => { setQuery(''); openTripTo(toTripEnd(h)); }} className="px-3 h-12 text-blue-700"><Navigation2 className="w-4 h-4" /></button>
@@ -425,20 +441,21 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
                 <div key={l as string} className="bg-slate-50 rounded-xl p-2"><div className="text-xl font-extrabold">{n}</div><div className="text-[11px] text-slate-600">{l}</div></div>
               ))}
             </div>
+            <p className="text-[11px] text-slate-600 mb-1">Gaps: {Object.entries(sum.gaps).map(([k, n]) => `${n} ${GAP_LABEL[k as keyof typeof GAP_LABEL].toLowerCase()}`).join(' · ')}.</p>
             <p className="text-[11px] text-slate-500 mb-2">A listed floor plan is a document reference, not a finished indoor map. {Object.keys(sites).length} of {sum.buildings} buildings have an indoor map; none has been physically route-verified.</p>
             <div className="overflow-y-auto">
               <table className="w-full text-xs">
                 <thead className="text-left text-slate-500 sticky top-0 bg-white"><tr><th className="py-1">Building</th><th>Footprint</th><th>Plans</th><th>Restricted</th><th>Entrances</th><th>Indoor status</th></tr></thead>
                 <tbody>
-                  {BUILDINGS.filter((b) => b.code).map((b) => {
+                  {BUILDINGS.filter((b) => b.code || b.name).map((b) => {
                     const im = importsOf(b.id);
                     return (
                       <tr key={b.id} className="border-t border-slate-100 hover:bg-slate-50 cursor-pointer" onClick={() => { if (b.center) { setSelectedId(b.id); setFloor(null); setCoverageOpen(false); } }}>
                         <td className="py-1 font-bold">{b.code} <span className="font-normal text-slate-500">{b.name}</span></td>
                         <td>{b.footprint ? 'OSM' : 'none'}</td><td>{b.floors.length}</td><td>{b.floors.filter((f) => f.restricted).length}</td><td>{b.entrances.length}</td>
-                        <td>{INDOOR[b.id] ? 'Georeferenced (draft), routing from traced drawings'
+                        <td title={b.gap?.note}>{INDOOR[b.id] ? 'Georeferenced (draft), routing from traced drawings'
                           : im.length ? im.map((f) => `${f.floorCode}: ${FLOOR_STATUS_LABEL[importStatus(f)]}${f.published ? '' : ' (unpublished)'}`).join('; ')
-                          : b.osmIndoor.some((l) => l.rooms > 0) ? 'OSM rooms only, no routing' : b.floors.length ? 'Source found' : 'Not sourced'}</td>
+                          : b.gap ? GAP_LABEL[b.gap.kind] : b.osmIndoor.some((l) => l.rooms > 0) ? 'OSM rooms only, no routing' : 'Plans listed, not imported'}</td>
                       </tr>
                     );
                   })}

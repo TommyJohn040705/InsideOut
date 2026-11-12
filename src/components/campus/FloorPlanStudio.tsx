@@ -11,6 +11,8 @@ import { FloorImport, georefOfImport, graphProblems, importStatus, roomNumberLab
 import type { CampusMapAdapter, FloorOverlay } from '../../campus/map/types';
 import type { ControlPoint, Px } from '../../campus/georef';
 import type { POICategory, RoomPOI } from '../../types/navigation';
+import { BulkImport } from './BulkImport';
+import { FloorCatalogue } from './FloorCatalogue';
 
 interface Props {
   buildingId: string | null;
@@ -44,6 +46,7 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
   const [err, setErr] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [pendingPx, setPendingPx] = useState<Px | null>(null);
+  const [tab, setTab] = useState<'single' | 'bulk' | 'catalogue'>('single');
   const imgRef = useRef<HTMLImageElement>(null);
 
   const rec = imports.find((f) => f.id === openId) || null;
@@ -51,6 +54,8 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
   const manifestFloor = b?.floors.find((f) => f.floorCode === floorCode) || null;
   const g = rec ? georefOfImport(rec) : null;
   const problems = rec ? graphProblems(rec.rooms, rec.hallways) : [];
+  // Other floors of this building drawn on the same sheet frame and not yet aligned.
+  const siblings = rec ? imports.filter((x) => x.buildingId === rec.buildingId && x.id !== rec.id && x.imageSize[0] === rec.imageSize[0] && x.imageSize[1] === rec.imageSize[1] && x.controlPoints.length < 2) : [];
 
   useEffect(() => { if (buildingId) setBId(buildingId); }, [buildingId]);
   useEffect(() => { const n = floorNumberOf(floorCode); setFloorNumber(Number.isNaN(n) ? '' : String(n)); }, [floorCode]);
@@ -127,6 +132,15 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
         {busy && <p role="status" className="text-xs font-semibold text-indigo-800 bg-indigo-50 rounded-lg p-2">{busy}</p>}
 
         {!rec && (
+          <div role="tablist" className="flex gap-1 bg-slate-100 rounded-xl p-1">
+            {([['single', 'One floor'], ['bulk', 'Bulk import'], ['catalogue', 'Catalogue']] as const).map(([k, l]) => (
+              <button key={k} role="tab" aria-selected={tab === k} onClick={() => setTab(k)} className={`flex-1 h-8 rounded-lg text-xs font-bold ${tab === k ? 'bg-white shadow text-slate-900' : 'text-slate-600'}`}>{l}</button>
+            ))}
+          </div>
+        )}
+        {!rec && tab === 'bulk' && <BulkImport imports={imports} onChanged={onChanged} />}
+        {!rec && tab === 'catalogue' && <FloorCatalogue imports={imports} onOpen={(id) => { setOpenId(id); }} onImport={(b, code) => { setBId(b); setFloorCode(code); setTab('single'); }} />}
+        {!rec && tab === 'single' && (
           <>
             <label className="block">
               <span className="text-[11px] font-bold text-slate-500 uppercase">Building</span>
@@ -203,6 +217,11 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
                   ))}</ul>
                 </div>
               ) : <div className="text-xs text-slate-500">Not aligned yet ({rec.controlPoints.length} of 2 control points).</div>}
+              {rec.alignmentFrom && <p className="mt-1 text-[11px] text-amber-900 bg-amber-50 rounded-lg p-2">Control points copied from floor {imports.find((x) => x.id === rec.alignmentFrom)?.floorCode || rec.alignmentFrom} (same building, same sheet size). Check the overlay before reviewing; replace them if this sheet is framed differently.</p>}
+              {g && siblings.length > 0 && (
+                <button disabled={!!busy} onClick={() => run(`Copying alignment to ${siblings.length} floors…`, async () => { for (const s of siblings) await api(`/api/floor-imports/${s.id}`, { method: 'PATCH', body: JSON.stringify({ controlPoints: rec.controlPoints, alignmentFrom: rec.id }) }); })}
+                  className="mt-1 text-[11px] font-bold text-indigo-700">Copy this alignment to {siblings.length} other unaligned floor{siblings.length > 1 ? 's' : ''} of {rec.buildingId} with the same sheet size</button>
+              )}
             </section>
 
             <section>

@@ -11,9 +11,11 @@ const label = (b) => `${b.code || b.id}${b.name ? ` – ${b.name}` : ''}`;
 
 const withPlans = buildings.filter((b) => b.floors.length).sort((a, z) => (a.code || a.id).localeCompare(z.code || z.id));
 const onMap = withPlans.filter((b) => b.footprint), offMap = withPlans.filter((b) => !b.footprint);
-const all = withPlans.flatMap((b) => b.floors);
+// Village 1 drawing sets are listed under every house they cover; count each document once.
+const uniq = (fl) => [...new Map(fl.map((f) => [f.filename, f])).values()];
+const all = uniq(withPlans.flatMap((b) => b.floors));
 const noPlans = buildings.filter((b) => b.footprint && !b.floors.length).sort((a, z) => (a.code || a.name || a.id).localeCompare(z.code || z.name || z.id));
-const n = (bs) => bs.reduce((s, b) => s + b.floors.length, 0), r = (bs) => bs.reduce((s, b) => s + b.floors.filter((f) => f.restricted).length, 0);
+const n = (bs) => uniq(bs.flatMap((b) => b.floors)).length, r = (bs) => uniq(bs.flatMap((b) => b.floors)).filter((f) => f.restricted).length;
 
 const csv = [['on_campus_map', 'building', 'name', 'floor', 'filename', 'restricted', 'status', 'url']];
 const section = (bs, on) => bs.map((b) => {

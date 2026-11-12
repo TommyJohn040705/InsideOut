@@ -1,6 +1,7 @@
 import express, { type Request, type Response } from 'express';
 import { createServer as createViteServer } from 'vite';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { GoogleGenAI, Type } from '@google/genai';
@@ -925,6 +926,21 @@ app.put('/api/store/:key', (req: Request, res: Response) => {
   return res.json({ ok: true });
 });
 
+// PDFs a UW account holder saved into data-sources/plantops/pdfs (gitignored) for bulk import.
+const PLANTOPS_DIR = path.resolve(__dirname, 'data-sources', 'plantops', 'pdfs');
+app.get('/api/plantops-folder', (_req: Request, res: Response) => {
+  let names: string[] = [];
+  try { names = fs.readdirSync(PLANTOPS_DIR).filter((n) => /\.(pdf|png|jpe?g|svg|webp)$/i.test(n)); } catch { /* folder missing */ }
+  return res.json(names.map((name) => ({ name, size: fs.statSync(path.join(PLANTOPS_DIR, name)).size })));
+});
+app.get('/api/plantops-folder/:name', (req: Request, res: Response) => {
+  const name = path.basename(req.params.name);
+  const file = path.join(PLANTOPS_DIR, name);
+  if (!fs.existsSync(file)) return res.status(404).json({ error: 'No such file' });
+  res.set('Cache-Control', 'private, no-store');
+  return res.sendFile(file);
+});
+
 app.get('/api/floor-imports', (_req: Request, res: Response) => res.json(store.read().floorImports));
 
 app.post('/api/floor-imports', (req: Request, res: Response) => {
@@ -983,7 +999,7 @@ app.patch('/api/floor-imports/:id', (req: Request, res: Response) => {
     if (!f) return null;
     if (Array.isArray(b.rooms)) { f.rooms = b.rooms; f.reviewed = false; }
     if (Array.isArray(b.hallways)) { f.hallways = b.hallways; f.reviewed = false; }
-    if (Array.isArray(b.controlPoints)) { f.controlPoints = b.controlPoints; f.reviewed = false; }
+    if (Array.isArray(b.controlPoints)) { f.controlPoints = b.controlPoints; f.alignmentFrom = typeof b.alignmentFrom === 'string' ? b.alignmentFrom : undefined; f.reviewed = false; }
     if (typeof b.reviewed === 'boolean') { f.reviewed = b.reviewed; f.reviewedAt = b.reviewed ? new Date().toISOString() : undefined; }
     if (typeof b.published === 'boolean') f.published = b.published && f.controlPoints.length >= 2;
     return f;
