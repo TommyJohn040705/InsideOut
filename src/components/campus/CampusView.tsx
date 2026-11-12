@@ -5,7 +5,7 @@
  * (E5's traced drawings or a published floor-plan import), never from per-building UI.
  */
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Search, X, Layers, DoorOpen, Lock, LocateFixed, Footprints, Accessibility, AlertTriangle, BarChart3, ChevronRight, FileText, Eye, Navigation2, ArrowUpDown } from 'lucide-react';
+import { Search, X, Layers, DoorOpen, Lock, LocateFixed, Footprints, Accessibility, AlertTriangle, BarChart3, ChevronRight, FileText, Eye, Navigation2, ArrowUpDown, ExternalLink } from 'lucide-react';
 import { FloorPlanData, NavigationRoute, RoomPOI } from '../../types/navigation';
 import {
   BUILDINGS, CAMPUS_CENTER, COVERAGE_LABEL, GAP_LABEL, FLOOR_STATUS_LABEL, FOOTPRINTS, INDOOR, CampusBuilding, CampusFloor,
@@ -82,9 +82,9 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
     const importFloor = (f: CampusFloor) => imports.find((x) => x.published && x.buildingId === selected.id && x.manifestFilename === f.filename)?.floorNumber;
     const out = selected.floors.map((f) => {
       const n = f.indoorFloor ?? importFloor(f) ?? (siteFloors.includes(floorOrder(f.floorCode)) ? floorOrder(f.floorCode) : undefined);
-      return { key: f.id, code: f.floorCode, wing: f.wing || '', floor: n ?? null, restricted: f.restricted, title: `${f.filename}: ${f.restricted ? 'restricted document, ' : ''}${FLOOR_STATUS_LABEL[f.status]}` };
+      return { key: f.id, code: f.floorCode, wing: f.wing || '', floor: n ?? null, restricted: f.restricted, url: f.url as string | null, filename: f.filename as string | null, title: `${f.filename}: ${f.restricted ? 'restricted document, ' : ''}${FLOOR_STATUS_LABEL[f.status]}` };
     });
-    for (const n of siteFloors) if (!out.some((c) => c.floor === n)) out.push({ key: `site-${n}`, code: String(n), wing: '', floor: n, restricted: false, title: 'Mapped floor (not in the Plant Operations list)' });
+    for (const n of siteFloors) if (!out.some((c) => c.floor === n)) out.push({ key: `site-${n}`, code: String(n), wing: '', floor: n, restricted: false, url: null, filename: null, title: 'Mapped floor (not in the Plant Operations list)' });
     return out.sort((a, b) => a.wing.localeCompare(b.wing) || floorOrder(a.code) - floorOrder(b.code));
   }, [selected, siteFloors, imports]);
 
@@ -248,15 +248,22 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
         <div>
           <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-1.5 flex items-center gap-1"><Layers className="w-3.5 h-3.5" /> Floors ({siteFloors.length} mapped, {selected.floors.length} plans listed)</div>
           <div className="flex flex-wrap gap-1.5" role="group" aria-label="Floor selector">
-            {chips.map((c) => (
-              <button key={c.key} disabled={c.floor == null} onClick={() => setFloor(c.floor)} title={c.title} aria-pressed={c.floor != null && floor === c.floor}
-                className={`h-8 min-w-8 px-2.5 rounded-lg text-xs font-bold flex items-center justify-center gap-1 ${c.floor != null ? (floor === c.floor ? 'bg-slate-900 text-white' : 'bg-indigo-50 text-indigo-800 hover:bg-indigo-100') : 'bg-slate-100 text-slate-400'}`}>
+            {chips.map((c) => c.floor != null ? (
+              <button key={c.key} onClick={() => setFloor(c.floor)} title={c.title} aria-pressed={floor === c.floor}
+                className={`h-8 min-w-8 px-2.5 rounded-lg text-xs font-bold flex items-center justify-center gap-1 ${floor === c.floor ? 'bg-slate-900 text-white' : 'bg-indigo-50 text-indigo-800 hover:bg-indigo-100'}`}>
                 {c.restricted && <Lock className="w-3 h-3" />}{c.wing && <span className="opacity-60">{c.wing}</span>}{floorLabel(c.code)}
               </button>
+            ) : (
+              // Not on the map yet: the button opens the Plant Operations PDF (UW login; restricted ones need permission).
+              <a key={c.key} href={c.url || undefined} target="_blank" rel="noreferrer" title={`Open ${c.filename} at Plant Operations (UW login${c.restricted ? '; restricted: needs permission' : ''})`}
+                className="h-8 min-w-8 px-2.5 rounded-lg text-xs font-bold flex items-center justify-center gap-1 bg-slate-100 text-slate-600 hover:bg-slate-200 ring-1 ring-dashed ring-slate-300">
+                {c.restricted && <Lock className="w-3 h-3" />}{c.wing && <span className="opacity-60">{c.wing}</span>}{floorLabel(c.code)}<ExternalLink className="w-3 h-3 opacity-60" />
+              </a>
             ))}
           </div>
+          {(() => { const cur = chips.find((c) => c.floor != null && c.floor === floor && c.url); return cur ? <a href={cur.url!} target="_blank" rel="noreferrer" className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-indigo-700"><ExternalLink className="w-3 h-3" /> Original PDF of this floor ({cur.filename}, UW login)</a> : null; })()}
           {selected.floors.some((f) => f.drawingSet) && <p className="text-[11px] text-slate-500 mt-1.5">Plant Operations draws this building on a shared sheet ({[...new Set(selected.floors.map((f) => f.drawingSet).filter(Boolean))].join(', ')}) that also covers {[...new Set(selected.floors.flatMap((f) => f.sharedWith || []))].join(', ')}.</p>}
-          {!siteFloors.length && <p className="text-[11px] text-slate-500 mt-1.5">Floor-plan documents listed by Plant Operations (UW login needed to download). None is mapped yet; import one in the floor-plan studio.</p>}
+          {!siteFloors.length && <p className="text-[11px] text-slate-500 mt-1.5">Grey floors are not on the map yet: tap one to open its Plant Operations PDF (sign in with your UW account). To put it on the map, import it under Floor plans.</p>}
         </div>
       )}
 
