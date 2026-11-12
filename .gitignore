@@ -12,3 +12,6 @@ data-sources/plantops/pdfs/
 
 # Separate clone of the Wayfinder repo, kept for reference only
 futurelabs/
+
+# Runtime store: imported floor plans (may be university-owned) and corrections
+data/

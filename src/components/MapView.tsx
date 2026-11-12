@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { FloorPlanData, NavigationRoute, Point, RoomPOI } from '../types/navigation';
+import { FloorPlanData, IndoorLocationState, NavigationRoute, Point, RoomPOI } from '../types/navigation';
 import { EMERGENCY_POINTS, EmergencyPoint } from '../data/waterlooStaffData';
 
 export interface MapViewHandle {
@@ -22,6 +22,10 @@ interface MapViewProps {
   showOriginal: boolean;
   showGraph: boolean;
   showSafetyOverlay?: boolean;
+  /** Last known position (picked room, checkpoint or sign scan); shown when not walking a route. */
+  locationState?: IndoorLocationState | null;
+  /** Tapping the floor-change badge switches to that floor. */
+  onSwitchFloorRequest?: (floor: number) => void;
   editing: boolean;
   onTapRoom: (room: RoomPOI) => void;
   onTapEmpty?: (p: Point) => void;
@@ -59,7 +63,7 @@ function legPointAt(pts: { x: number; y: number }[], frac: number) {
 export const MapView = React.forwardRef<MapViewHandle, MapViewProps>(function MapView(props, ref) {
   const {
     plan, route, walkedMeters, showWalker, followWalker, onUserMoved, startRoom, endRoom, selectedRoom,
-    showOriginal, showGraph, showSafetyOverlay, editing, onTapRoom, onTapEmpty, onMoveRoom,
+    showOriginal, showGraph, showSafetyOverlay, locationState, onSwitchFloorRequest, editing, onTapRoom, onTapEmpty, onMoveRoom,
   } = props;
   const pad = props.padding || { top: 16, right: 16, bottom: 16, left: 16 };
   const boxRef = useRef<HTMLDivElement>(null);
@@ -420,8 +424,9 @@ export const MapView = React.forwardRef<MapViewHandle, MapViewProps>(function Ma
         {vertical && (() => {
           const q = S(toNat(vertical.coords));
           return (
-            <div className="absolute" style={{ left: q.x, top: q.y, transform: 'translate(-50%, -50%)' }}>
-              <div className="px-2 py-1 rounded-full bg-purple-600 text-white text-[11px] font-bold shadow-md whitespace-nowrap">
+            <div className="absolute pointer-events-auto" style={{ left: q.x, top: q.y, transform: 'translate(-50%, -50%)' }}>
+              <div role="button" title="Tap to switch to that floor" onClick={(e) => { e.stopPropagation(); if (vertical.floorChange) onSwitchFloorRequest?.(vertical.floorChange.toFloor); }}
+                className="px-2 py-1 rounded-full bg-purple-600 text-white text-[11px] font-bold shadow-md whitespace-nowrap cursor-pointer hover:bg-purple-700">
                 {vertical.floorChange ? `${vertical.action === 'take-elevator' ? 'Elevator' : 'Stairs'} to L${vertical.floorChange.toFloor}` : 'Change floor'}
               </div>
             </div>
@@ -470,6 +475,19 @@ export const MapView = React.forwardRef<MapViewHandle, MapViewProps>(function Ma
             </div>
           );
         })}
+
+        {/* Position marker. A sign scan is only an estimate, so it gets a dashed ring with no distance figure. */}
+        {locationState && !showWalker && locationState.floor === plan.floorNumber && (() => {
+          const q = S(toNat(locationState.coords));
+          const label = locationState.source === 'qr_checkpoint' ? `Checkpoint ${locationState.checkpointCode}` : locationState.source === 'sign_camera' ? 'Near this sign (estimate)' : 'Your chosen start';
+          return (
+            <div className="absolute pointer-events-none" style={{ left: q.x, top: q.y, transform: 'translate(-50%, -50%)' }} title={label}>
+              {locationState.status === 'estimated' && <div className="absolute -inset-5 rounded-full border-2 border-dashed border-sky-400/70 bg-sky-400/10" />}
+              <div className="relative w-5 h-5 rounded-full bg-blue-600 ring-4 ring-white shadow-lg" />
+              <div className="absolute left-1/2 top-6 -translate-x-1/2 px-1.5 py-0.5 rounded bg-white/90 text-[10px] font-bold text-blue-800 whitespace-nowrap shadow">{label}</div>
+            </div>
+          );
+        })()}
 
         {walker && showWalker && walkerHere && (() => {
           const q = S(walker!.p);

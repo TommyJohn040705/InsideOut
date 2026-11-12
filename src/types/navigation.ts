@@ -191,3 +191,102 @@ export interface WayfinderQueryResponse {
   suggestedStartId?: string;
 }
 
+export type LocationStatus = 'confirmed' | 'estimated' | 'unavailable' | 'manual';
+export type LocationSource = 'qr_checkpoint' | 'sign_camera' | 'manual_room' | 'manual_point' | 'simulated_walk';
+
+export interface IndoorLocationState {
+  status: LocationStatus;
+  accuracyRadiusMeters: number; // e.g. 1.2m for confirmed QR, 5.0m for estimated sign, 0 for precise pin
+  source: LocationSource;
+  coords: Point;
+  floor: number;
+  roomName?: string;
+  roomNumber?: string;
+  roomId?: string;
+  checkpointId?: string;
+  checkpointCode?: string;
+  heading?: number;
+  updatedAt: number;
+}
+
+export interface QRCheckpoint {
+  id: string;
+  code: string; // e.g. "E5-L2-ATRIUM"
+  name: string;
+  floor: number;
+  coords: Point;
+  roomId?: string;
+  roomNumber?: string;
+  description: string;
+  verifiedOfficial: boolean;
+}
+
+export type CorrectionIssueType =
+  | 'incorrect_room'
+  | 'missing_door'
+  | 'blocked_corridor'
+  | 'elevator_outage'
+  | 'facility_description'
+  | 'faulty_qr'
+  | 'other';
+
+export interface MapCorrectionSuggestion {
+  id: string;
+  type: CorrectionIssueType;
+  title: string;
+  description: string;
+  floor: number;
+  roomId?: string;
+  roomNumber?: string;
+  coords?: Point;
+  status: 'pending' | 'approved' | 'rejected' | 'reverted';
+  createdAt: string;
+  author: string;
+  proposedChanges?: {
+    name?: string;
+    purpose?: string;
+    category?: POICategory;
+    accessible?: boolean;
+    coords?: Point;
+  };
+  originalSnapshot?: {
+    name?: string;
+    purpose?: string;
+    category?: POICategory;
+    accessible?: boolean;
+    coords?: Point;
+  };
+  reviewNotes?: string;
+  reviewedAt?: string;
+}
+
+export interface SignCandidateMatch {
+  roomId: string;
+  roomNumber: string;
+  name: string;
+  floor: number;
+  category: POICategory;
+  coords: Point;
+  confidence: 'high' | 'medium' | 'low';
+  score: number;
+  reason?: string;
+}
+
+export interface SignRecognitionResult {
+  rawText: string;
+  detectedType: 'room_number' | 'directional_sign' | 'elevator_label' | 'restroom_label' | 'qr_code' | 'general_text';
+  qrCode?: string;
+  extractedRoomNumber?: string;
+  extractedName?: string;
+  isUniqueMatch: boolean;
+  candidates: SignCandidateMatch[];
+}
+
+export interface ValidationScenario {
+  id: string;
+  scenarioNumber: number;
+  title: string;
+  description: string;
+  runStatus: 'idle' | 'running' | 'passed' | 'failed';
+  details?: string;
+}

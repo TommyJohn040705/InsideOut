@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { ManeuverAction, NavigationRoute, NavigationStep, RoomPOI } from '../types/navigation';
 import { CLASSROOM_SPECS } from '../data/waterlooStaffData';
-import { Tv, Mic, Laptop } from 'lucide-react';
+import { Tv, Mic, Laptop, ScanLine } from 'lucide-react';
 
 export const cx = (...a: (string | false | null | undefined)[]) => a.filter(Boolean).join(' ');
 
@@ -199,7 +199,7 @@ export function StepsList({ route, current, onPick }: { route: NavigationRoute; 
 export function RoutePlanner(props: {
   start: RoomPOI | null; end: RoomPOI | null; route: NavigationRoute | null; accessible: boolean; voice: boolean;
   onEditStart: () => void; onEditEnd: () => void; onSwap: () => void; onToggleAccessible: () => void; onToggleVoice: () => void;
-  onStart: () => void; compactSteps?: boolean; current: number; onPickStep?: (i: number) => void;
+  onStart: () => void; onOpenScanner?: () => void; compactSteps?: boolean; current: number; onPickStep?: (i: number) => void;
 }) {
   const { start, end, route } = props;
   const [showSteps, setShowSteps] = useState(!props.compactSteps);
@@ -218,6 +218,11 @@ export function RoutePlanner(props: {
           <button onClick={props.onEditEnd} className="w-full h-11 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-left text-[15px] truncate">
             {end ? <span className="text-slate-900">{roomTitle(end)} <span className="text-slate-400">· L{end.floor}</span></span> : <span className="text-slate-400">Choose destination</span>}
           </button>
+          {props.onOpenScanner && (
+            <button onClick={props.onOpenScanner} className="text-xs font-semibold text-blue-700 flex items-center gap-1 px-1">
+              <ScanLine className="w-3.5 h-3.5" /> Set start by scanning a sign or QR code
+            </button>
+          )}
         </div>
         <button onClick={props.onSwap} aria-label="Swap start and destination" className="self-center p-2 rounded-full hover:bg-slate-100 text-slate-600">
           <ArrowUpDown className="w-5 h-5" />

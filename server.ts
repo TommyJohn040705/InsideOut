@@ -4,6 +4,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { GoogleGenAI, Type } from '@google/genai';
+import { openStore } from './server/store';
+import type { FloorImport } from './src/campus/floorImports';
 
 dotenv.config();
 
@@ -49,13 +51,8 @@ function parseDataUrl(dataUrl: string): { mimeType: string; data: string } {
  * POST /api/analyze-floorplan
  * Analyzes an uploaded or camera-captured floor plan photo using Gemini 3.8 Flash
  */
-app.post('/api/analyze-floorplan', async (req: Request, res: Response) => {
-  try {
-    const { image, buildingTypeHint } = req.body;
-    if (!image) {
-      return res.status(400).json({ error: 'Image data is required' });
-    }
-
+/** strict: return only what Gemini found (no placeholder hallways). Used by the floor-plan importer. */
+async function analyzeFloorplan(image: string, buildingTypeHint?: string, strict = false) {
     const { mimeType, data } = parseDataUrl(image);
 
     const imagePart = {
@@ -166,8 +163,8 @@ Respond in structured JSON strictly matching the requested format.`,
     const text = response.text || '{}';
     const parsedData = JSON.parse(text);
 
-    // Provide default fallback hallway nodes if AI returned empty hallways
-    if (!parsedData.hallways || parsedData.hallways.length === 0) {
+    // Provide default fallback hallway nodes if AI returned empty hallways (photo flow only)
+    if (!strict && (!parsedData.hallways || parsedData.hallways.length === 0)) {
       const roomCoords = parsedData.rooms?.map((r: any) => r.coords) || [];
       const avgY = roomCoords.length ? roomCoords.reduce((a: number, b: any) => a + b.y, 0) / roomCoords.length : 50;
       parsedData.hallways = [
@@ -183,6 +180,16 @@ Respond in structured JSON strictly matching the requested format.`,
       }
     }
 
+    return parsedData;
+}
+
+app.post('/api/analyze-floorplan', async (req: Request, res: Response) => {
+  try {
+    const { image, buildingTypeHint } = req.body;
+    if (!image) {
+      return res.status(400).json({ error: 'Image data is required' });
+    }
+    const parsedData = await analyzeFloorplan(image, buildingTypeHint);
     return res.json({
       id: `floorplan-${Date.now()}`,
       imageUrl: image,
@@ -536,6 +543,462 @@ app.post('/api/transcribe', async (req: Request, res: Response) => {
       transcript: '',
     });
   }
+});
+
+/**
+ * GET /api/health
+ * Health check endpoint reporting server & Gemini readiness
+ */
+app.get('/api/health', (_req: Request, res: Response) => {
+  const geminiConfigured = Boolean(process.env.GEMINI_API_KEY);
+  return res.json({
+    status: 'ok',
+    geminiConfigured,
+    model: 'gemini-3.8-flash',
+    service: 'InsideOut API',
+    timestamp: new Date().toISOString(),
+  });
+});
+
+/**
+ * POST /api/recognize-sign
+ * Camera-assisted wayfinding: recognizes door signs, elevator plaques, directional signs, or QR codes.
+ */
+app.post('/api/recognize-sign', async (req: Request, res: Response) => {
+  try {
+    const { image, candidateRooms, floorHint } = req.body || {};
+    if (!image) {
+      return res.status(400).json({ error: 'Image is required' });
+    }
+    if (!process.env.GEMINI_API_KEY) {
+      return res.status(503).json({ error: 'GEMINI_API_KEY is not set on the server' });
+    }
+
+    const { mimeType, data } = parseDataUrl(image);
+
+    const promptText = `You are an expert OCR and indoor wayfinding vision system for the University of Waterloo Engineering 5 (E5) building.
+Analyze this photo taken inside the building by a person walking.
+The photo may depict:
+- A room number door plaque (e.g., "3101", "2108", "E5 2002", "1101")
+- A directional corridor sign with room ranges or arrows (e.g., "Rooms 3001-3050 ->", "Elevators / Stairs")
+- An elevator bank call plaque (e.g., "Elevator 1801 / Southeast Bank", "Level 2")
+- A washroom door sign (e.g., "All-Gender Washroom", "Men", "Women")
+- A QR code or printed barcode checkpoint (e.g., "E5-L2-ATRIUM", "E5-3101")
+${floorHint ? `Current active floor context: Level ${floorHint}.` : ''}
+
+Extract with high fidelity:
+1. rawText: All visible text in the photo.
+2. detectedType: Exactly one of "room_number", "directional_sign", "elevator_label", "restroom_label", "qr_code", "general_text".
+3. extractedRoomNumber: Just the 4-digit room number if visible (e.g., "3101", "2108", "2002"), stripped of "E5" or prefix. Empty string if not found.
+4. extractedName: The room or facility name if printed (e.g. "Department Lecture Hall", "Gear Computer Lab", "Rapid Prototyping").
+5. qrCode: Any QR payload or text like "E5-L2-..." or "QR: ..." if present.
+6. confidenceScore: Number from 0.0 to 1.0 indicating how clear and unambiguous the reading is.
+
+Return strictly valid JSON.`;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.8-flash',
+      contents: [{
+        role: 'user',
+        parts: [
+          { inlineData: { mimeType, data } },
+          { text: promptText },
+        ],
+      }],
+      config: {
+        responseMimeType: 'application/json',
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            rawText: { type: Type.STRING },
+            detectedType: {
+              type: Type.STRING,
+              description: 'One of room_number, directional_sign, elevator_label, restroom_label, qr_code, general_text',
+            },
+            extractedRoomNumber: { type: Type.STRING },
+            extractedName: { type: Type.STRING },
+            qrCode: { type: Type.STRING },
+            confidenceScore: { type: Type.NUMBER },
+          },
+          required: ['rawText', 'detectedType', 'extractedRoomNumber', 'confidenceScore'],
+        },
+      },
+    });
+
+    const parsed = JSON.parse(response.text || '{}');
+    const rawNumber = String(parsed.extractedRoomNumber || '')
+      .replace(/^E\d+[\s-]*/i, '')
+      .trim();
+    const cleanQr = String(parsed.qrCode || '').trim();
+
+    // Match candidate against candidateRooms if provided
+    const roomsList: any[] = Array.isArray(candidateRooms) ? candidateRooms : [];
+    const matches: any[] = [];
+
+    if (rawNumber) {
+      for (const r of roomsList) {
+        const num = String(r.roomNumber || '').toUpperCase();
+        if (num === rawNumber.toUpperCase()) {
+          matches.push({
+            roomId: r.id,
+            roomNumber: r.roomNumber,
+            name: r.name,
+            floor: r.floor,
+            category: r.category,
+            coords: r.coords,
+            confidence: 'high',
+            score: 98,
+            reason: `Exact room number match (${r.roomNumber})`,
+          });
+        } else if (num.startsWith(rawNumber.toUpperCase()) || rawNumber.toUpperCase().startsWith(num)) {
+          matches.push({
+            roomId: r.id,
+            roomNumber: r.roomNumber,
+            name: r.name,
+            floor: r.floor,
+            category: r.category,
+            coords: r.coords,
+            confidence: 'medium',
+            score: 75,
+            reason: `Partial room number match (${r.roomNumber})`,
+          });
+        }
+      }
+    }
+
+    // Name keyword matching
+    if (parsed.extractedName && matches.length === 0) {
+      const q = parsed.extractedName.toLowerCase();
+      for (const r of roomsList) {
+        if (r.name.toLowerCase().includes(q) || q.includes(r.name.toLowerCase())) {
+          matches.push({
+            roomId: r.id,
+            roomNumber: r.roomNumber,
+            name: r.name,
+            floor: r.floor,
+            category: r.category,
+            coords: r.coords,
+            confidence: 'medium',
+            score: 70,
+            reason: `Matches sign title "${parsed.extractedName}"`,
+          });
+        }
+      }
+    }
+
+    const isUniqueMatch = matches.length === 1 && matches[0].confidence === 'high';
+
+    return res.json({
+      rawText: parsed.rawText || '',
+      detectedType: parsed.detectedType || 'general_text',
+      extractedRoomNumber: rawNumber,
+      extractedName: parsed.extractedName || '',
+      qrCode: cleanQr,
+      confidenceScore: parsed.confidenceScore || 0.5,
+      isUniqueMatch,
+      candidates: matches.slice(0, 5),
+    });
+  } catch (error: any) {
+    console.error('Error in /api/recognize-sign:', error);
+    return res.status(500).json({ error: error?.message || 'Failed to recognize sign photo' });
+  }
+});
+
+/**
+ * POST /api/assistant-chat
+ * Structured tool-calling agent for natural indoor wayfinding
+ */
+app.post('/api/assistant-chat', async (req: Request, res: Response) => {
+  try {
+    const { message, currentState, buildingFacts, directory } = req.body || {};
+    if (!message) {
+      return res.status(400).json({ error: 'message is required' });
+    }
+    if (!process.env.GEMINI_API_KEY) {
+      return res.status(503).json({ error: 'GEMINI_API_KEY is not configured on server' });
+    }
+
+    const toolDeclarations = [
+      {
+        name: 'getCurrentIndoorPosition',
+        description: 'Get the user current indoor position, active floor, and current starting room.',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {},
+        },
+      },
+      {
+        name: 'setPositionFromCheckpoint',
+        description: 'Update the user position using a verified QR checkpoint code (e.g. E5-L2-ATRIUM, E5-L2-MAIN-ENTRANCE).',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {
+            checkpointCode: { type: Type.STRING, description: 'QR checkpoint code, e.g. E5-L2-MAIN-ENTRANCE or E5-3101' },
+          },
+          required: ['checkpointCode'],
+        },
+      },
+      {
+        name: 'setManualPosition',
+        description: 'Set the user starting location to a specific room in the building.',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {
+            roomNumberOrId: { type: Type.STRING, description: 'Room number (e.g. "2108", "2811") or room ID' },
+            floor: { type: Type.NUMBER, description: 'Optional floor number (1-6)' },
+          },
+          required: ['roomNumberOrId'],
+        },
+      },
+      {
+        name: 'findRoom',
+        description: 'Search the building directory for a room by number, name, or keywords.',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {
+            query: { type: Type.STRING, description: 'Room number or keyword, e.g. "3101" or "Machine Shop"' },
+            floor: { type: Type.NUMBER, description: 'Optional floor filter (1-6)' },
+          },
+          required: ['query'],
+        },
+      },
+      {
+        name: 'findNearestFacility',
+        description: 'Find the nearest facility (restroom, elevator, stairs, entrance) from the user current location.',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {
+            category: { type: Type.STRING, description: 'One of restroom, elevator, stairs, entrance, dining, lab, workshop' },
+            accessibleOnly: { type: Type.BOOLEAN, description: 'Require wheelchair barrier-free accessible facilities' },
+          },
+          required: ['category'],
+        },
+      },
+      {
+        name: 'selectDestination',
+        description: 'Select a room as the target destination to plan a route.',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {
+            roomNumberOrId: { type: Type.STRING, description: 'Target destination room number (e.g. "3101") or ID' },
+          },
+          required: ['roomNumberOrId'],
+        },
+      },
+      {
+        name: 'calculateIndoorRoute',
+        description: 'Calculate an indoor route to a destination and start guidance.',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {
+            destinationRoomNumberOrId: { type: Type.STRING, description: 'Destination room number (e.g. "3101")' },
+            startRoomNumberOrId: { type: Type.STRING, description: 'Optional starting room number or ID' },
+            accessibleOnly: { type: Type.BOOLEAN, description: 'Whether to require elevators only (no stairs)' },
+          },
+          required: ['destinationRoomNumberOrId'],
+        },
+      },
+      {
+        name: 'rerouteFromCurrentPosition',
+        description: 'Recalculate the navigation route when user took a wrong hallway or deviated from path.',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {
+            currentLocationHint: { type: Type.STRING, description: 'Description or room near where the user is now' },
+            newDestination: { type: Type.STRING, description: 'Optional new destination room number' },
+          },
+        },
+      },
+      {
+        name: 'getCurrentNavigationStep',
+        description: 'Get details about current turn-by-turn guidance step, remaining meters, and next instruction.',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {},
+        },
+      },
+      {
+        name: 'showFloor',
+        description: 'Switch the map view to display a specific floor level (1 to 6).',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {
+            floorNumber: { type: Type.NUMBER, description: 'Floor level 1 through 6' },
+          },
+          required: ['floorNumber'],
+        },
+      },
+      {
+        name: 'getRoomInformation',
+        description: 'Get verified purpose, department, accessibility, and details for a room.',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {
+            roomNumberOrId: { type: Type.STRING, description: 'Room number (e.g. "3101") or ID' },
+          },
+          required: ['roomNumberOrId'],
+        },
+      },
+      {
+        name: 'reportMapIssue',
+        description: 'Report an issue with the map such as a locked door, elevator outage, or faulty checkpoint.',
+        parameters: {
+          type: Type.OBJECT,
+          properties: {
+            issueType: { type: Type.STRING, description: 'elevator_outage, door_locked, hallway_blocked, wrong_info, faulty_qr, other' },
+            roomNumberOrId: { type: Type.STRING, description: 'Associated room number or ID' },
+            details: { type: Type.STRING, description: 'Description of the problem' },
+          },
+          required: ['issueType', 'details'],
+        },
+      },
+    ];
+
+    const systemPrompt = `You are FloorNav AI, the trusted indoor navigation assistant for University of Waterloo Engineering 5 (E5).
+You have real-time access to the interactive map via structured tool calls.
+When a user asks you to navigate, locate a room, find facilities, switch floors, or report an issue, CALL THE RELEVANT TOOL.
+Rules:
+- E5 has 6 floors: Level 1 (Sedra SDC & Machine Shop), Level 2 (Main Ring Road Entrance, Gear Lab 2108, Rapid Proto 2002), Level 3 (Classrooms 3101/3102, E3 Bridge 3818), Level 4 (ECE), Level 5 (Dean Suite), Level 6 (SYDE/BME).
+- E5 room numbers are 4 digits where the first digit is the floor number (e.g. 2108 is Floor 2, 3101 is Floor 3).
+- Vertical circulation: Southeast elevator bank connects all 6 floors and is wheelchair-accessible.
+- Do NOT invent rooms, hallways, elevators, or coordinates. Use the directory and call the tools.
+- Keep conversational answers concise, professional, and clear (1-3 plain sentences, no markdown).
+
+Current App State:
+${JSON.stringify(currentState || {}, null, 2)}
+
+Verified E5 Building Facts:
+${Array.isArray(buildingFacts) ? buildingFacts.slice(0, 15).join('\n') : ''}
+
+Directory sample:
+${Array.isArray(directory) ? directory.slice(0, 60).map((r: any) => `${r.roomNumber || r.id}: ${r.name} (L${r.floor})`).join(', ') : ''}
+`;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.8-flash',
+      contents: [
+        { role: 'user', parts: [{ text: `${systemPrompt}\n\nUser request: "${message}"` }] },
+      ],
+      config: {
+        tools: [{ functionDeclarations: toolDeclarations as any }],
+      },
+    });
+
+    const candidate = response.candidates?.[0];
+    const functionCalls = candidate?.content?.parts?.filter((p: any) => p.functionCall).map((p: any) => p.functionCall) || [];
+    const textPart = candidate?.content?.parts?.find((p: any) => p.text)?.text || '';
+
+    const toolCalls = functionCalls.map((fc: any) => ({
+      name: fc.name,
+      args: fc.args || {},
+    }));
+
+    return res.json({
+      answer: textPart || (toolCalls.length > 0 ? 'Executing request on the map...' : 'How can I help you navigate E5?'),
+      toolCalls,
+    });
+  } catch (error: any) {
+    console.error('Error in /api/assistant-chat:', error?.message || error);
+    return res.status(503).json({
+      error: error?.message || 'Assistant service unavailable',
+      offline: true,
+    });
+  }
+});
+
+
+/* ---------------- Persistent store: imported floor plans and corrections ---------------- */
+const store = openStore(path.resolve(__dirname, 'data'));
+// Uploaded drawings may be university-owned: never cached publicly, never indexed.
+app.use('/uploads', (_req, res, next) => { res.set('Cache-Control', 'private, no-store'); res.set('X-Robots-Tag', 'noindex'); next(); }, express.static(store.uploadsDir));
+
+const STORE_KEYS = new Set(['corrections', 'roomOverrides', 'reports']);
+app.get('/api/store/:key', (req: Request, res: Response) => {
+  if (!STORE_KEYS.has(req.params.key)) return res.status(404).json({ error: 'Unknown store key' });
+  return res.json(store.read().kv[req.params.key] ?? null);
+});
+app.put('/api/store/:key', (req: Request, res: Response) => {
+  if (!STORE_KEYS.has(req.params.key)) return res.status(404).json({ error: 'Unknown store key' });
+  if (req.body == null || typeof req.body !== 'object') return res.status(400).json({ error: 'Expected JSON' });
+  store.update((d) => { d.kv[req.params.key] = req.body; });
+  return res.json({ ok: true });
+});
+
+app.get('/api/floor-imports', (_req: Request, res: Response) => res.json(store.read().floorImports));
+
+app.post('/api/floor-imports', (req: Request, res: Response) => {
+  try {
+    const b = req.body || {};
+    if (!b.buildingId || !b.floorCode || !Number.isFinite(Number(b.floorNumber))) return res.status(400).json({ error: 'buildingId, floorCode and floorNumber are required' });
+    if (!String(b.authorization || '').trim()) return res.status(400).json({ error: 'Say who authorized use of this document' });
+    if (!b.fileDataUrl || !b.imageDataUrl || !Array.isArray(b.imageSize)) return res.status(400).json({ error: 'The file and its rendered image are required' });
+    const id = `${String(b.buildingId).replace(/W/g, '')}-${String(b.floorCode).replace(/W/g, '')}-${Date.now().toString(36)}`;
+    const file = store.saveUpload(id, b.fileDataUrl);
+    const image = file.mime.startsWith('image/') ? file : store.saveUpload(`${id}-page1`, b.imageDataUrl);
+    const rec: FloorImport = {
+      id, buildingId: String(b.buildingId), floorCode: String(b.floorCode), floorNumber: Number(b.floorNumber),
+      manifestFilename: b.manifestFilename || null, restricted: Boolean(b.restricted), authorization: String(b.authorization).trim(),
+      sourceName: String(b.fileName || file.name), sourceMime: file.mime,
+      fileUrl: `/uploads/${file.name}`, imageUrl: `/uploads/${image.name}`, imageSize: [Number(b.imageSize[0]), Number(b.imageSize[1])],
+      uploadedAt: new Date().toISOString(),
+      pdfLabels: Array.isArray(b.pdfLabels) ? b.pdfLabels.slice(0, 2000) : [],
+      extraction: null, rooms: [], hallways: [], controlPoints: [], reviewed: false, published: false,
+    };
+    store.update((d) => { d.floorImports.push(rec); });
+    return res.json(rec);
+  } catch (e: any) {
+    return res.status(400).json({ error: e?.message || 'Import failed' });
+  }
+});
+
+app.post('/api/floor-imports/:id/extract', async (req: Request, res: Response) => {
+  const rec = store.read().floorImports.find((f) => f.id === req.params.id);
+  if (!rec) return res.status(404).json({ error: 'No such import' });
+  if (!process.env.GEMINI_API_KEY) return res.status(503).json({ error: 'GEMINI_API_KEY is not set on the server, so AI extraction is unavailable. You can still add rooms by hand.' });
+  try {
+    const hint = `University of Waterloo building ${rec.buildingId}, floor ${rec.floorCode}. Room labels printed on the drawing: ${rec.pdfLabels.slice(0, 150).map((l) => l.text).join(', ')}`;
+    const out = await analyzeFloorplan(store.readUploadDataUrl(rec.imageUrl.replace('/uploads/', '')), hint, true);
+    const updated = store.update((d) => {
+      const f = d.floorImports.find((x) => x.id === rec.id)!;
+      f.rooms = (out.rooms || []).map((r: any) => ({ ...r, id: `${rec.id}-${r.id}`, floor: rec.floorNumber, purposeVerification: 'ai_extracted_unreviewed' }));
+      const rid = new Map((out.rooms || []).map((r: any) => [r.id, `${rec.id}-${r.id}`]));
+      f.hallways = (out.hallways || []).map((h: any) => ({ ...h, id: `${rec.id}-${h.id}`, connectedTo: (h.connectedTo || []).map((t: string) => rid.get(t) || `${rec.id}-${t}`) }));
+      f.extraction = { model: 'gemini-3.8-flash', at: new Date().toISOString(), title: out.title, summary: out.summary };
+      f.reviewed = false;
+      return f;
+    });
+    return res.json(updated);
+  } catch (e: any) {
+    console.error('extract failed', e);
+    return res.status(500).json({ error: e?.message || 'Extraction failed' });
+  }
+});
+
+app.patch('/api/floor-imports/:id', (req: Request, res: Response) => {
+  const b = req.body || {};
+  const out = store.update((d) => {
+    const f = d.floorImports.find((x) => x.id === req.params.id);
+    if (!f) return null;
+    if (Array.isArray(b.rooms)) { f.rooms = b.rooms; f.reviewed = false; }
+    if (Array.isArray(b.hallways)) { f.hallways = b.hallways; f.reviewed = false; }
+    if (Array.isArray(b.controlPoints)) { f.controlPoints = b.controlPoints; f.reviewed = false; }
+    if (typeof b.reviewed === 'boolean') { f.reviewed = b.reviewed; f.reviewedAt = b.reviewed ? new Date().toISOString() : undefined; }
+    if (typeof b.published === 'boolean') f.published = b.published && f.controlPoints.length >= 2;
+    return f;
+  });
+  return out ? res.json(out) : res.status(404).json({ error: 'No such import' });
+});
+
+app.delete('/api/floor-imports/:id', (req: Request, res: Response) => {
+  const gone = store.update((d) => {
+    const f = d.floorImports.find((x) => x.id === req.params.id);
+    d.floorImports = d.floorImports.filter((x) => x.id !== req.params.id);
+    return f;
+  });
+  if (!gone) return res.status(404).json({ error: 'No such import' });
+  store.removeUpload(gone.fileUrl.replace('/uploads/', ''));
+  if (gone.imageUrl !== gone.fileUrl) store.removeUpload(gone.imageUrl.replace('/uploads/', ''));
+  return res.json({ ok: true });
 });
 
 // Production static file serving or Dev Vite middleware

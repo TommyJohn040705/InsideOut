@@ -1,4 +1,4 @@
-/** Problem reports, saved on this device. Shown on the room until someone marks them fixed. */
+/** Problem reports, saved on this device and synced to the server store. Shown on the room until someone marks them fixed. */
 
 export interface RoomReport {
   id: string;
@@ -34,6 +34,7 @@ export function loadReports(): RoomReport[] {
 }
 export function saveReports(list: RoomReport[]) {
   try { localStorage.setItem(KEY, JSON.stringify(list)); } catch { /* storage blocked */ }
+  pushStore('reports', list);
 }
 
 /* ---- Reports that close part of the route -------------------------------------------
@@ -43,6 +44,7 @@ export function saveReports(list: RoomReport[]) {
  * shown as a warning instead, so one mistaken tap cannot remove the only step-free route.
  */
 import type { FloorPlanData, VerticalCirculationLink } from '../types/navigation';
+import { pushStore } from './serverStore';
 import type { RouteClosures } from './pathfinding';
 
 export const REPORT_TTL_MS = 4 * 60 * 60 * 1000;

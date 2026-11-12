@@ -8,10 +8,20 @@ import {
   Compass, Sparkles, Pencil, CircleHelp, MapPinned, Move, Plus, Minus, Maximize, Layers, FileImage, Menu, X,
   LocateFixed, ChevronLeft, Accessibility, Bath, ArrowUpDown, GraduationCap, FlaskConical, DoorOpen, Globe,
   Briefcase, Wrench, Printer, Coffee, Tv, ShieldAlert, Phone, CheckCircle2, ChevronRight, AlertTriangle, Navigation2, Map as MapIcon,
+  ScanLine, ClipboardCheck, ListChecks, WifiOff,
 } from 'lucide-react';
 import { CampusView } from './components/campus/CampusView';
 import { SAMPLE_FLOOR_PLANS } from './data/sampleFloorPlans';
-import { FloorPlanData, RoomPOI, Point, NavigationRoute, POICategory } from './types/navigation';
+import { FloorPlanData, RoomPOI, Point, NavigationRoute, POICategory, IndoorLocationState, QRCheckpoint } from './types/navigation';
+import { CameraSignScannerModal } from './components/CameraSignScannerModal';
+import { GoogleMapsHandoffModal } from './components/GoogleMapsHandoffModal';
+import { CorrectionsAuditModal } from './components/CorrectionsAuditModal';
+import { E5ValidationModal } from './components/E5ValidationModal';
+import { resolveCheckpoint } from './data/e5/checkpoints';
+import { hydrateSuggestions } from './utils/auditLog';
+import { pullStore, pushStore } from './utils/serverStore';
+import { FloorImport, importToPlan } from './campus/floorImports';
+import { buildingById } from './campus/campusData';
 import { calculateIndoorRoute } from './utils/pathfinding';
 import { speakGuidance } from './utils/speech';
 import { FloorPlanEditorModal } from './components/FloorPlanEditorModal';
@@ -79,6 +89,38 @@ export default function App() {
   const [reports, setReports] = useState<RoomReport[]>(() => loadReports());
   const changeReports = (f: (l: RoomReport[]) => RoomReport[]) => setReports((l) => { const n = f(l); saveReports(n); return n; });
   const [lookupRoom, setLookupRoom] = useState<RoomPOI | null>(null);
+  // Where the user is. Only a checkpoint or sign scan says more than "you picked this spot";
+  // no accuracy figure is shown because nothing here measures one.
+  const [locationState, setLocationState] = useState<IndoorLocationState | null>(null);
+  const [scannerOpen, setScannerOpen] = useState(false);
+  const [handoffOpen, setHandoffOpen] = useState(false);
+  const [auditModalOpen, setAuditModalOpen] = useState(false);
+  const [validationModalOpen, setValidationModalOpen] = useState(false);
+  const [floorImports, setFloorImports] = useState<FloorImport[]>([]);
+  const [isOffline, setIsOffline] = useState(() => typeof navigator !== 'undefined' && !navigator.onLine);
+
+  // Shared map data from the server: imported floors, room edits, reports, corrections.
+  const loadImports = () => fetch('/api/floor-imports').then((r) => (r.ok ? r.json() : [])).then((l) => setFloorImports(Array.isArray(l) ? l : [])).catch(() => {});
+  useEffect(() => {
+    loadImports();
+    hydrateSuggestions();
+    pullStore<Overrides>('roomOverrides').then((o) => {
+      if (!o || !Object.keys(o).length) return;
+      try { localStorage.setItem(OVERRIDES_KEY, JSON.stringify(o)); } catch { /* storage blocked */ }
+      setPlans((prev) => applyOverrides(prev, o));
+      setCurrentPlan((p) => applyOverrides([p], o)[0]);
+    });
+    pullStore<RoomReport[]>('reports').then((l) => { if (Array.isArray(l)) { setReports(l); try { localStorage.setItem('floornav.reports.v1', JSON.stringify(l)); } catch { /* */ } } });
+    const on = () => setIsOffline(false), off = () => setIsOffline(true);
+    window.addEventListener('online', on); window.addEventListener('offline', off);
+    fetch('/api/health').then((r) => setIsOffline(!r.ok)).catch(() => setIsOffline(true));
+    return () => { window.removeEventListener('online', on); window.removeEventListener('offline', off); };
+  }, []);
+  // Published imports become ordinary floors of an "import-<building>" building.
+  useEffect(() => {
+    const imported = floorImports.filter((f) => f.published).map((f) => importToPlan(f, buildingById(f.buildingId)?.name || f.buildingId));
+    setPlans((prev) => [...prev.filter((p) => !p.id.startsWith('import-')), ...imported]);
+  }, [floorImports]);
 
   const [startRoom, setStartRoom] = useState<RoomPOI | null>(null);
   const [endRoom, setEndRoom] = useState<RoomPOI | null>(null);
@@ -352,13 +394,14 @@ export default function App() {
     setTimeout(() => mapRef.current?.fitPoints(pts, 8), 160);
   };
   const pickFromSearch = (r: RoomPOI) => {
-    if (searchTarget === 'start') { setStartRoom(r); setSearchTarget('dest'); }
+    if (searchTarget === 'start') { setStartRoom(r); manualLocation(r); setSearchTarget('dest'); }
     else { setInspected(r); }
     setQuery(''); setSearchOpen(false); setSheetFull(false);
     showRoom(r);
   };
   const directionsTo = (r: RoomPOI) => { setEndRoom(r); setInspected(null); setSheetFull(false); if (startRoom) goFloor(startRoom.floor ?? currentPlan.floorNumber); };
-  const startHere = (r: RoomPOI) => { setStartRoom(r); setInspected(null); };
+  const manualLocation = (r: RoomPOI) => setLocationState({ status: 'manual', accuracyRadiusMeters: 0, source: 'manual_room', coords: r.coords, floor: r.floor ?? currentPlan.floorNumber, roomId: r.id, roomNumber: r.roomNumber, roomName: r.name, updatedAt: Date.now() });
+  const startHere = (r: RoomPOI) => { setStartRoom(r); manualLocation(r); setInspected(null); };
   const swap = () => { const s = startRoom; setStartRoom(endRoom); setEndRoom(s); };
   const openSearch = (t: SearchTarget) => { setSearchTarget(t); setSearchOpen(true); setQuery(''); setInspected(null); setSheetFull(true); };
 
@@ -377,6 +420,7 @@ export default function App() {
       const o = loadOverrides();
       o[id] = { ...(o[id] || {}), ...patch };
       localStorage.setItem(OVERRIDES_KEY, JSON.stringify(o));
+      pushStore('roomOverrides', o);
     } catch { /* storage unavailable: edits last for this visit only */ }
   };
   const saveLookup = (room: RoomPOI, r: WebResult) => {
@@ -425,6 +469,52 @@ export default function App() {
     setCurrentPlan(newPlan);
   };
 
+  /* ---- Position from QR checkpoints and sign photos (from the Nov 6 FloorNav) ---- */
+  const recenterOnUser = () => {
+    if (!locationState) return;
+    if (locationState.floor !== currentPlan.floorNumber) goFloor(locationState.floor);
+    setTimeout(() => mapRef.current?.focusPoint(locationState.coords, 0.45), 160);
+  };
+  const handleConfirmCheckpoint = (chk: QRCheckpoint | { roomId: string; roomNumber: string; name: string; floor: number; coords: Point }) => {
+    const isQr = 'code' in chk;
+    // Use the room's own position when the room exists; checkpoint coordinates are only a fallback.
+    const room = allRooms.find((r) => r.id === chk.roomId) || allRooms.find((r) => chk.roomNumber && r.roomNumber === chk.roomNumber);
+    const floor = room?.floor ?? chk.floor;
+    const coords = room?.coords ?? chk.coords;
+    setLocationState({
+      status: isQr ? 'confirmed' : 'estimated', accuracyRadiusMeters: 0, source: isQr ? 'qr_checkpoint' : 'sign_camera',
+      coords, floor, roomId: room?.id, roomNumber: room?.roomNumber ?? chk.roomNumber, roomName: room?.name ?? chk.name,
+      checkpointCode: isQr ? chk.code : undefined, updatedAt: Date.now(),
+    });
+    setStartRoom(room || { id: `pos-${Date.now()}`, name: chk.name, roomNumber: chk.roomNumber, category: 'other', coords, floor });
+    if (floor !== currentPlan.floorNumber) goFloor(floor);
+    // The route effect recalculates from the new start; say so when guiding.
+    if (isNavigating && voice) speakGuidance(`Position updated at ${room?.roomNumber || chk.name}. Route updated.`);
+    setTimeout(() => mapRef.current?.focusPoint(coords, 0.45), 160);
+  };
+  const handleSelectEntrance = (entranceId: string, floor: number) => {
+    const e = allRooms.find((r) => r.id === entranceId);
+    if (!e) return;
+    goFloor(floor);
+    startHere(e);
+  };
+  const applyValidationScenario = (num: number) => {
+    const byNum = (n: string) => allRooms.find((r) => r.roomNumber === n);
+    switch (num) {
+      case 1: { const e = byNum('2811'); if (e) { goFloor(2); startHere(e); setEndRoom(null); showRoom(e); } break; }
+      case 2: recenterOnUser(); break;
+      case 3: { const r = byNum('3101'); if (r) { setInspected(r); showRoom(r); } break; }
+      case 4: { const s = byNum('2811'), d = byNum('3101'); if (s && d) { startHere(s); setEndRoom(d); goFloor(2); } break; }
+      case 5: startNavigation(); setPlaying(false); break;
+      case 6: { const chk = resolveCheckpoint('E5-L2-ATRIUM'); if (chk) handleConfirmCheckpoint(chk); break; }
+      case 7: { const g = byNum('2108'); if (g) handleConfirmCheckpoint({ roomId: g.id, roomNumber: '2108', name: g.name, floor: g.floor ?? 2, coords: g.coords }); break; }
+      case 8: setIsAccessibleOnly((v) => !v); break;
+      case 9: setIsWayfinderOpen(true); break;
+      case 10: setScannerOpen(true); break;
+      case 11: setIsOffline(true); break;
+    }
+  };
+
   const routeFloors = route ? route.floorSegments.map((s) => s.floor) : [];
   const floors = buildingPlans.map((p) => p.floorNumber);
 
@@ -432,6 +522,9 @@ export default function App() {
     { label: 'Workplace Companion', icon: Briefcase, on: () => setWorkplaceCompanionOpen(true), active: workplaceCompanionOpen },
     { label: 'Report Issue', icon: AlertTriangle, on: () => { setIssueRoomId(inspected?.id || null); setWorkplaceIssueOpen(true); } },
     { label: 'Ask AI', icon: Sparkles, on: () => setIsWayfinderOpen(true) },
+    { label: 'Scan a sign or QR', icon: ScanLine, on: () => setScannerOpen(true) },
+    { label: 'Corrections & review', icon: ClipboardCheck, on: () => setAuditModalOpen(true) },
+    ...(buildingId === 'uwaterloo-e5' ? [{ label: 'E5 self-checks', icon: ListChecks, on: () => setValidationModalOpen(true) }, { label: 'Outside? Walk to E5', icon: Navigation2, on: () => setHandoffOpen(true) }] : []),
     { label: 'Update the map', icon: MapPinned, on: () => openUpdate(inspected || null) },
     { label: isEditingMode ? 'Done moving' : 'Move rooms', icon: Move, on: () => setIsEditingMode((v) => !v), active: isEditingMode },
     { label: 'Show the tour', icon: CircleHelp, on: () => setTourOpen(true) },
@@ -450,6 +543,10 @@ export default function App() {
         </button>
       ) : (
         <button aria-label="Fit map" onClick={() => mapRef.current?.fit()} onDoubleClick={frameView} className="w-11 h-11 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 flex items-center justify-center text-slate-700"><Maximize className="w-5 h-5" /></button>
+      )}
+      {locationState && !isNavigating && (
+        <button aria-label="Show my position" title="Show my position" onClick={recenterOnUser}
+          className="w-11 h-11 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 flex items-center justify-center text-blue-600"><LocateFixed className="w-5 h-5" /></button>
       )}
       <button
         aria-label={safetyOverlayActive ? 'Hide safety overlay' : 'Show safety & emergency overlay'}
@@ -489,6 +586,8 @@ export default function App() {
       showOriginal={showOriginal}
       showGraph={showGraph}
       showSafetyOverlay={safetyOverlayActive}
+      locationState={locationState}
+      onSwitchFloorRequest={goFloor}
       editing={isEditingMode}
       onTapRoom={onTapRoom}
       onTapEmpty={() => { setInspected(null); setSheetFull(false); }}
@@ -513,7 +612,7 @@ export default function App() {
       start={startRoom} end={endRoom} route={route} accessible={isAccessibleOnly} voice={voice}
       onEditStart={() => openSearch('start')} onEditEnd={() => openSearch('dest')} onSwap={swap}
       onToggleAccessible={() => setIsAccessibleOnly((v) => !v)} onToggleVoice={() => setVoice((v) => !v)}
-      onStart={startNavigation} compactSteps={compact} current={stepIndex}
+      onStart={startNavigation} onOpenScanner={() => setScannerOpen(true)} compactSteps={compact} current={stepIndex}
       onPickStep={(i) => { jumpToStep(i); }}
     />
   );
@@ -535,6 +634,12 @@ export default function App() {
     </div>
   );
 
+  const offlineBanner = isOffline && (
+    <div data-ui role="status" className="bg-amber-600 text-white text-xs px-3 py-1.5 rounded-full shadow flex items-center gap-1.5 self-start">
+      <WifiOff className="w-3.5 h-3.5" /> Offline: saved maps and routing still work; AI, sign reading and syncing do not.
+    </div>
+  );
+
   const modals = (
     <>
       <FloorPlanEditorModal isOpen={!!editingRoom} room={editingRoom} onClose={() => setEditingRoom(null)} onSaveRoom={(r) => { updateRoom(r); setEditingRoom(null); }} />
@@ -544,11 +649,28 @@ export default function App() {
         plan={currentPlan}
         plans={buildingPlans}
         start={startRoom}
+        destination={endRoom}
+        route={route}
+        locationState={locationState}
         accessible={isAccessibleOnly}
         isE5={buildingId === 'uwaterloo-e5'}
         onGo={(r) => directionsTo(r)}
+        onSetStartRoom={(r) => startHere(r)}
+        onSwitchFloor={(f) => goFloor(f)}
+        onSetCheckpoint={(code) => { const chk = resolveCheckpoint(code); if (chk) handleConfirmCheckpoint(chk); }}
+        onReroute={() => { if (locationState?.roomId) { const r = allRooms.find((x) => x.id === locationState.roomId); if (r) setStartRoom({ ...r }); } }}
         onLookup={() => openUpdate(null)}
+        onReportIssue={(issue) => changeReports((l) => [{
+          id: `rep-${Date.now()}`, roomId: issue.roomId || null,
+          roomLabel: issue.roomId ? (allRooms.find((r) => r.id === issue.roomId)?.name || issue.roomId) : (currentPlan.buildingName || 'Building'),
+          floor: currentPlan.floorNumber, type: issue.type as RoomReport['type'], details: issue.details, createdAt: new Date().toISOString(), confirmations: 1,
+        }, ...l])}
       />
+      <CameraSignScannerModal open={scannerOpen} onClose={() => setScannerOpen(false)} activeFloor={currentPlan.floorNumber} allRooms={allRooms} onConfirmCheckpoint={handleConfirmCheckpoint} />
+      <GoogleMapsHandoffModal open={handoffOpen} onClose={() => setHandoffOpen(false)} targetDestination={endRoom} onSelectEntrance={handleSelectEntrance} />
+      <CorrectionsAuditModal open={auditModalOpen} onClose={() => setAuditModalOpen(false)} activeFloor={currentPlan.floorNumber} allRooms={allRooms}
+        onApplyOverride={(roomId, patch) => { const r = allRooms.find((x) => x.id === roomId); if (r) updateRoom({ ...r, ...patch }); }} />
+      <E5ValidationModal open={validationModalOpen} onClose={() => setValidationModalOpen(false)} plans={buildingPlans} onApplyScenario={applyValidationScenario} />
       <UpdateMap
         open={lookupOpen}
         onClose={() => setLookupOpen(false)}
@@ -800,7 +922,7 @@ export default function App() {
                   voice={voice} onVoice={() => setVoice((v) => !v)} />
               </div>
             )}
-            {isEditingMode && <div className="absolute top-16 left-4 right-24">{editBanner}</div>}
+            {(isEditingMode || isOffline) && <div className="absolute top-16 left-4 right-24 flex flex-col gap-2">{editBanner}{offlineBanner}</div>}
           </main>
         </div>
         {modals}
@@ -919,7 +1041,7 @@ export default function App() {
                 </div>
               </div>
             )}
-            {editBanner && <div className="pointer-events-auto">{editBanner}</div>}
+            {(editBanner || offlineBanner) && <div className="pointer-events-auto flex flex-col gap-2">{editBanner}{offlineBanner}</div>}
           </>
         )}
       </div>
