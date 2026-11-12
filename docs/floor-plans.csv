@@ -1,0 +1,490 @@
+on_campus_map,building,name,floor,filename,restricted,status,url
+yes,AL,Arts Lecture Hall,B1,009AL_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/009AL_B1FLR.pdf
+yes,AL,Arts Lecture Hall,01,009AL_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/009AL_01FLR.pdf
+yes,AL,Arts Lecture Hall,02,009AL_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/009AL_02FLR.pdf
+yes,AL,Arts Lecture Hall,RO,009AL_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/009AL_RO.pdf
+yes,B1,Biology 1,B1,007B1_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/007B1_B1FLR.pdf
+yes,B1,Biology 1,01,007B1_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/007B1_01FLR.pdf
+yes,B1,Biology 1,02,007B1_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/007B1_02FLR.pdf
+yes,B1,Biology 1,03,007B1_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/007B1_03FLR.pdf
+yes,B1,Biology 1,RO,007B1_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/007B1_RO.pdf
+yes,B2,Biology 2,B1,013B2_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/013B2_B1FLR.pdf
+yes,B2,Biology 2,01,013B2_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/013B2_01FLR.pdf
+yes,B2,Biology 2,02,013B2_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/013B2_02FLR.pdf
+yes,B2,Biology 2,03,013B2_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/013B2_03FLR.pdf
+yes,B2,Biology 2,RO,013B2_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/013B2_RO.pdf
+yes,BAU,Bauer Warehouse,01,040BAU_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/040BAU_01FLR.pdf
+yes,BAU,Bauer Warehouse,RO,040BAU_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/040BAU_RO.pdf
+yes,BMH,B.C. Matthews Hall,B1,032BMH_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/032BMH_B1FLR.pdf
+yes,BMH,B.C. Matthews Hall,01,032BMH_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/032BMH_01FLR.pdf
+yes,BMH,B.C. Matthews Hall,02,032BMH_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/032BMH_02FLR.pdf
+yes,BMH,B.C. Matthews Hall,03,032BMH_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/032BMH_03FLR.pdf
+yes,BMH,B.C. Matthews Hall,04,032BMH_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/032BMH_04FLR.pdf
+yes,BMH,B.C. Matthews Hall,RO,032BMH_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/032BMH_RO.pdf
+yes,C2,Chemistry 2,B1,028C2_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/028C2_B1FLR.pdf
+yes,C2,Chemistry 2,01,028C2_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/028C2_01FLR.pdf
+yes,C2,Chemistry 2,02,028C2_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/028C2_02FLR.pdf
+yes,C2,Chemistry 2,03,028C2_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/028C2_03FLR.pdf
+yes,C2,Chemistry 2,04,028C2_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/028C2_04FLR.pdf
+yes,C2,Chemistry 2,RO,028C2_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/028C2_RO.pdf
+yes,CIF,Columbia Icefield,01,042CIF_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/042CIF_01FLR.pdf
+yes,CIF,Columbia Icefield,RO,042CIF_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/042CIF_RO.pdf
+yes,CLV_COMM_CTR,Columbia Lake Village Community Centre,B1,043CLV_COMM_CTR_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/043CLV_COMM_CTR_B1FLR.pdf
+yes,CLV_COMM_CTR,Columbia Lake Village Community Centre,01,043CLV_COMM_CTR_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/043CLV_COMM_CTR_01FLR.pdf
+yes,CLV_COMM_CTR,Columbia Lake Village Community Centre,02,043CLV_COMM_CTR_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/043CLV_COMM_CTR_02FLR.pdf
+yes,CMH,Claudette Millar Hall,B1,068CMH_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_B1FLR.pdf
+yes,CMH,Claudette Millar Hall,01,068CMH_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/068CMH_01FLR.pdf
+yes,CMH,Claudette Millar Hall,02,068CMH_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_02FLR.pdf
+yes,CMH,Claudette Millar Hall,03,068CMH_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_03FLR.pdf
+yes,CMH,Claudette Millar Hall,04,068CMH_04FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_04FLR.pdf
+yes,CMH,Claudette Millar Hall,05,068CMH_05FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_05FLR.pdf
+yes,CMH,Claudette Millar Hall,06,068CMH_06FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_06FLR.pdf
+yes,CMH,Claudette Millar Hall,07,068CMH_07FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_07FLR.pdf
+yes,CMH,Claudette Millar Hall,08,068CMH_08FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_08FLR.pdf
+yes,CMH,Claudette Millar Hall,09,068CMH_09FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_09FLR.pdf
+yes,CMH,Claudette Millar Hall,10,068CMH_10FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_10FLR.pdf
+yes,CMH,Claudette Millar Hall,11,068CMH_11FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_11FLR.pdf
+yes,CMH,Claudette Millar Hall,12,068CMH_12FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_12FLR.pdf
+yes,CMH,Claudette Millar Hall,13,068CMH_13FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/068CMH_13FLR.pdf
+yes,CMH,Claudette Millar Hall,RO,068CMH_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/068CMH_RO.pdf
+yes,COM,Commisary,B1,015COM_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/015COM_B1FLR.pdf
+yes,COM,Commisary,01,015COM_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/015COM_01FLR.pdf
+yes,COM,Commisary,02,015COM_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/015COM_02FLR.pdf
+yes,COM,Commisary,RO,015COM_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/015COM_RO.pdf
+yes,CPH,Carl A. Pollock Hall,B1,029CPH_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/029CPH_B1FLR.pdf
+yes,CPH,Carl A. Pollock Hall,01,029CPH_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/029CPH_01FLR.pdf
+yes,CPH,Carl A. Pollock Hall,02,029CPH_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/029CPH_02FLR.pdf
+yes,CPH,Carl A. Pollock Hall,03,029CPH_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/029CPH_03FLR.pdf
+yes,CPH,Carl A. Pollock Hall,04,029CPH_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/029CPH_04FLR.pdf
+yes,CPH,Carl A. Pollock Hall,RO,029CPH_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/029CPH_RO.pdf
+yes,DC,William G. Davis Computer Research Centre,B1,037DC_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/037DC_B1FLR.pdf
+yes,DC,William G. Davis Computer Research Centre,01,037DC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/037DC_01FLR.pdf
+yes,DC,William G. Davis Computer Research Centre,02,037DC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/037DC_02FLR.pdf
+yes,DC,William G. Davis Computer Research Centre,03,037DC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/037DC_03FLR.pdf
+yes,DC,William G. Davis Computer Research Centre,PH,037DC_PHFLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/037DC_PHFLR.pdf
+yes,DC,William G. Davis Computer Research Centre,RO,037DC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/037DC_RO.pdf
+yes,DWE,Douglas Wright Engineering Building,B1,001DWE_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/001DWE_B1FLR.pdf
+yes,DWE,Douglas Wright Engineering Building,01,001DWE_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/001DWE_01FLR.pdf
+yes,DWE,Douglas Wright Engineering Building,02,001DWE_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/001DWE_02FLR.pdf
+yes,DWE,Douglas Wright Engineering Building,03,001DWE_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/001DWE_03FLR.pdf
+yes,DWE,Douglas Wright Engineering Building,RO,001DWE_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/001DWE_RO.pdf
+yes,E2,Engineering 2,B1,002E2_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/002E2_B1FLR.pdf
+yes,E2,Engineering 2,01,002E2_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/002E2_01FLR.pdf
+yes,E2,Engineering 2,02,002E2_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/002E2_02FLR.pdf
+yes,E2,Engineering 2,03,002E2_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/002E2_03FLR.pdf
+yes,E2,Engineering 2,04,002E2_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/002E2_04FLR.pdf
+yes,E2,Engineering 2,RO,002E2_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/002E2_RO.pdf
+yes,E3,Engineering 3,01,003E3_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/003E3_01FLR.pdf
+yes,E3,Engineering 3,MEZ,003E3_02FLR_MEZ.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/003E3_02FLR_MEZ.pdf
+yes,E3,Engineering 3,02,003E3_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/003E3_02FLR.pdf
+yes,E3,Engineering 3,03,003E3_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/003E3_03FLR.pdf
+yes,E3,Engineering 3,04,003E3_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/003E3_04FLR.pdf
+yes,E3,Engineering 3,RO,003E3_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/003E3_RO.pdf
+yes,E5,Engineering 5,01,053E5_01FLR.pdf,no,Mapped (draft alignment),https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_01FLR.pdf
+yes,E5,Engineering 5,02,053E5_02FLR.pdf,no,Mapped (draft alignment),https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_02FLR.pdf
+yes,E5,Engineering 5,03,053E5_03FLR.pdf,no,Mapped (draft alignment),https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_03FLR.pdf
+yes,E5,Engineering 5,04,053E5_04FLR.pdf,no,Mapped (draft alignment),https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_04FLR.pdf
+yes,E5,Engineering 5,05,053E5_05FLR.pdf,no,Mapped (draft alignment),https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_05FLR.pdf
+yes,E5,Engineering 5,06,053E5_06FLR.pdf,no,Mapped (draft alignment),https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/053E5_06FLR.pdf
+yes,E5,Engineering 5,RO,053E5_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/053E5_RO.pdf
+yes,E6,Engineering 6,01,060E6_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_01FLR.pdf
+yes,E6,Engineering 6,02,060E6_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_02FLR.pdf
+yes,E6,Engineering 6,03,060E6_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_03FLR.pdf
+yes,E6,Engineering 6,04,060E6_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_04FLR.pdf
+yes,E6,Engineering 6,05,060E6_05FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_05FLR.pdf
+yes,E6,Engineering 6,06,060E6_06FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/060E6_06FLR.pdf
+yes,E6,Engineering 6,RO,060E6_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/060E6_RO.pdf
+yes,E7,Pearl Sullivan Engineering Building,01,067E7_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_01FLR.pdf
+yes,E7,Pearl Sullivan Engineering Building,02,067E7_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_02FLR.pdf
+yes,E7,Pearl Sullivan Engineering Building,03,067E7_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_03FLR.pdf
+yes,E7,Pearl Sullivan Engineering Building,04,067E7_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_04FLR.pdf
+yes,E7,Pearl Sullivan Engineering Building,05,067E7_05FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_05FLR.pdf
+yes,E7,Pearl Sullivan Engineering Building,06,067E7_06FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_06FLR.pdf
+yes,E7,Pearl Sullivan Engineering Building,07,067E7_07FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_07FLR.pdf
+yes,E7,Pearl Sullivan Engineering Building,08,067E7_08FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/067E7_08FLR.pdf
+yes,E7,Pearl Sullivan Engineering Building,RO,067E7_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/067E7_RO.pdf
+yes,EC1,East Campus 1,01,062EC1_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/062EC1_01FLR.pdf
+yes,EC1,East Campus 1,02,062EC1_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/062EC1_02FLR.pdf
+yes,EC1,East Campus 1,RO,062EC1_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/062EC1_RO.pdf
+yes,EC2,East Campus 2,01,063EC2_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/063EC2_01FLR.pdf
+yes,EC2,East Campus 2,02,063EC2_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/063EC2_02FLR.pdf
+yes,EC2,East Campus 2,03,063EC2_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/063EC2_03FLR.pdf
+yes,EC2,East Campus 2,04,063EC2_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/063EC2_04FLR.pdf
+yes,EC2,East Campus 2,RO,063EC2_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/063EC2_RO.pdf
+yes,EC3,East Campus 3,01,064EC3_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/064EC3_01FLR.pdf
+yes,EC3,East Campus 3,02,064EC3_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/064EC3_02FLR.pdf
+yes,EC3,East Campus 3,RO,064EC3_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/064EC3_RO.pdf
+yes,EC4,East Campus 4,01,065EC4_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/065EC4_01FLR.pdf
+yes,EC4,East Campus 4,02,065EC4_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/065EC4_02FLR.pdf
+yes,EC4,East Campus 4,RO,065EC4_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/065EC4_RO.pdf
+yes,EC5,East Campus 5,01,066EC5_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/066EC5_01FLR.pdf
+yes,EC5,East Campus 5,02,066EC5_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/066EC5_02FLR.pdf
+yes,EC5,East Campus 5,03,066EC5_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/066EC5_03FLR.pdf
+yes,EC5,East Campus 5,04,066EC5_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/066EC5_04FLR.pdf
+yes,EC5,East Campus 5,RO,066EC5_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/066EC5_RO.pdf
+yes,ECH,East Campus Hall,01,036ECH_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/036ECH_01FLR.pdf
+yes,ECH,East Campus Hall,02,036ECH_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/036ECH_02FLR.pdf
+yes,ECH,East Campus Hall,RO,036ECH_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/036ECH_RO.pdf
+yes,EIT,Centre for Environmental and Information Technology,01,039EIT_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_01FLR.pdf
+yes,EIT,Centre for Environmental and Information Technology,02,039EIT_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_02FLR.pdf
+yes,EIT,Centre for Environmental and Information Technology,03,039EIT_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_03FLR.pdf
+yes,EIT,Centre for Environmental and Information Technology,04,039EIT_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_04FLR.pdf
+yes,EIT,Centre for Environmental and Information Technology,05,039EIT_05FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_05FLR.pdf
+yes,EIT,Centre for Environmental and Information Technology,06,039EIT_06FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_06FLR.pdf
+yes,EIT,Centre for Environmental and Information Technology,07,039EIT_07FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_07FLR.pdf
+yes,EIT,Centre for Environmental and Information Technology,LL,039EIT_LLFLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/039EIT_LLFLR.pdf
+yes,EIT,Centre for Environmental and Information Technology,RO,039EIT_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/039EIT_RO.pdf
+yes,ERC,Energy Research Centre,01,048ERC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/048ERC_01FLR.pdf
+yes,ERC,Energy Research Centre,02,048ERC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/048ERC_02FLR.pdf
+yes,ERC,Energy Research Centre,03,048ERC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/048ERC_03FLR.pdf
+yes,ERC,Energy Research Centre,RO,048ERC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/048ERC_RO.pdf
+yes,ESC,Earth Sciences & Chemistry,B1,006ESC_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/006ESC_B1FLR.pdf
+yes,ESC,Earth Sciences & Chemistry,01,006ESC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/006ESC_01FLR.pdf
+yes,ESC,Earth Sciences & Chemistry,02,006ESC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/006ESC_02FLR.pdf
+yes,ESC,Earth Sciences & Chemistry,03,006ESC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/006ESC_03FLR.pdf
+yes,ESC,Earth Sciences & Chemistry,04,006ESC_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/006ESC_04FLR.pdf
+yes,ESC,Earth Sciences & Chemistry,RO,006ESC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/006ESC_RO.pdf
+yes,EV1,Environment 1,01,010EV1_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/010EV1_01FLR.pdf
+yes,EV1,Environment 1,02,010EV1_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/010EV1_02FLR.pdf
+yes,EV1,Environment 1,03,010EV1_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/010EV1_03FLR.pdf
+yes,EV1,Environment 1,04,010EV1_04FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/010EV1_04FLR.pdf
+yes,EV1,Environment 1,05,010EV1_05FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/010EV1_05FLR.pdf
+yes,EV1,Environment 1,RO,010EV1_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/010EV1_RO.pdf
+yes,EV2,Environment 2,01,034EV2_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/034EV2_01FLR.pdf
+yes,EV2,Environment 2,02,034EV2_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/034EV2_02FLR.pdf
+yes,EV2,Environment 2,03,034EV2_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/034EV2_03FLR.pdf
+yes,EV2,Environment 2,RO,034EV2_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/034EV2_RO.pdf
+yes,EV3,Environment 3,01,057EV3_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/057EV3_01FLR.pdf
+yes,EV3,Environment 3,02,057EV3_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/057EV3_02FLR.pdf
+yes,EV3,Environment 3,03,057EV3_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/057EV3_03FLR.pdf
+yes,EV3,Environment 3,04,057EV3_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/057EV3_04FLR.pdf
+yes,EV3,Environment 3,RO,057EV3_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/057EV3_RO.pdf
+yes,FED,Federation Hall,01,035FED_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/035FED_01FLR.pdf
+yes,FED,Federation Hall,02,035FED_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/035FED_02FLR.pdf
+yes,FED,Federation Hall,RO,035FED_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/035FED_RO.pdf
+yes,GH,Graduate House,B1,104GH_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/104GH_B1FLR.pdf
+yes,GH,Graduate House,01,104GH_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/104GH_01FLR.pdf
+yes,GH,Graduate House,02,104GH_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/104GH_02FLR.pdf
+yes,GH,Graduate House,RO,104GH_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/104GH_RO.pdf
+yes,GSC,General Services Complex,B1,014GSC_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/014GSC_B1FLR.pdf
+yes,GSC,General Services Complex,01,014GSC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/014GSC_01FLR.pdf
+yes,GSC,General Services Complex,02,014GSC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/014GSC_02FLR.pdf
+yes,GSC,General Services Complex,RO,014GSC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/014GSC_RO.pdf
+yes,HH,J. G. Hagey Hall of the Humanities,B1,024HH_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/024HH_B1FLR.pdf
+yes,HH,J. G. Hagey Hall of the Humanities,01,024HH_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/024HH_01FLR.pdf
+yes,HH,J. G. Hagey Hall of the Humanities,02,024HH_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/024HH_02FLR.pdf
+yes,HH,J. G. Hagey Hall of the Humanities,03,024HH_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/024HH_03FLR.pdf
+yes,HH,J. G. Hagey Hall of the Humanities,04,024HH_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/024HH_04FLR.pdf
+yes,HH,J. G. Hagey Hall of the Humanities,RO,024HH_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/024HH_RO.pdf
+yes,HS,Health Services,01,022HS_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/022HS_01FLR.pdf
+yes,HS,Health Services,02,022HS_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/022HS_02FLR.pdf
+yes,HS,Health Services,RO,022HS_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/022HS_RO.pdf
+yes,LIB,Dana Porter Library,B1,008LIB_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/008LIB_B1FLR.pdf
+yes,LIB,Dana Porter Library,01,008LIB_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_01FLR.pdf
+yes,LIB,Dana Porter Library,02,008LIB_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_02FLR.pdf
+yes,LIB,Dana Porter Library,03,008LIB_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_03FLR.pdf
+yes,LIB,Dana Porter Library,04,008LIB_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_04FLR.pdf
+yes,LIB,Dana Porter Library,05,008LIB_05FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_05FLR.pdf
+yes,LIB,Dana Porter Library,06,008LIB_06FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_06FLR.pdf
+yes,LIB,Dana Porter Library,07,008LIB_07FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_07FLR.pdf
+yes,LIB,Dana Porter Library,08,008LIB_08FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_08FLR.pdf
+yes,LIB,Dana Porter Library,09,008LIB_09FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_09FLR.pdf
+yes,LIB,Dana Porter Library,10,008LIB_10FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_10FLR.pdf
+yes,LIB,Dana Porter Library,PH,008LIB_PHFLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/008LIB_PHFLR.pdf
+yes,LIB,Dana Porter Library,RO,008LIB_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/008LIB_RO.pdf
+yes,M3,Mathematics 3,B1,056M3_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/056M3_B1FLR.pdf
+yes,M3,Mathematics 3,01,056M3_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/056M3_01FLR.pdf
+yes,M3,Mathematics 3,02,056M3_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/056M3_02FLR.pdf
+yes,M3,Mathematics 3,03,056M3_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/056M3_03FLR.pdf
+yes,M3,Mathematics 3,04,056M3_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/056M3_04FLR.pdf
+yes,M3,Mathematics 3,RO,056M3_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/056M3_RO.pdf
+yes,MC,Mathematics & Computer,B1,017MC_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_B1FLR.pdf
+yes,MC,Mathematics & Computer,01,017MC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_01FLR.pdf
+yes,MC,Mathematics & Computer,02,017MC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_02FLR.pdf
+yes,MC,Mathematics & Computer,03,017MC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_03FLR.pdf
+yes,MC,Mathematics & Computer,04,017MC_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_04FLR.pdf
+yes,MC,Mathematics & Computer,05,017MC_05FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_05FLR.pdf
+yes,MC,Mathematics & Computer,06,017MC_06FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_06FLR.pdf
+yes,MC,Mathematics & Computer,PH,017MC_PHFLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/017MC_PHFLR.pdf
+yes,MC,Mathematics & Computer,RO,017MC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/017MC_RO.pdf
+yes,MHR,Minota Hagey Residence,01,023MHR_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/023MHR_01FLR.pdf
+yes,MHR,Minota Hagey Residence,02,023MHR_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/023MHR_02FLR.pdf
+yes,MHR,Minota Hagey Residence,03,023MHR_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/023MHR_03FLR.pdf
+yes,MHR,Minota Hagey Residence,RO,023MHR_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/023MHR_RO.pdf
+yes,MKV,Mackenzie King Village,00,044MKV_00FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/044MKV_00FLR.pdf
+yes,MKV,Mackenzie King Village,01,044MKV_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/044MKV_01FLR.pdf
+yes,MKV,Mackenzie King Village,02,044MKV_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/044MKV_02FLR.pdf
+yes,MKV,Mackenzie King Village,03,044MKV_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/044MKV_03FLR.pdf
+yes,MKV,Mackenzie King Village,04,044MKV_04FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/044MKV_04FLR.pdf
+yes,MKV,Mackenzie King Village,05,044MKV_05FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/044MKV_05FLR.pdf
+yes,MKV,Mackenzie King Village,RO,044MKV_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/044MKV_RO.pdf
+yes,ML,Modern Languages,B1,005ML_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/005ML_B1FLR.pdf
+yes,ML,Modern Languages,01,005ML_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/005ML_01FLR.pdf
+yes,ML,Modern Languages,02,005ML_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/005ML_02FLR.pdf
+yes,ML,Modern Languages,03,005ML_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/005ML_03FLR.pdf
+yes,ML,Modern Languages,RO,005ML_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/005ML_RO.pdf
+yes,NH,Ira G. Needles Hall,B1,031NH_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_B1FLR.pdf
+yes,NH,Ira G. Needles Hall,00,031NH_00FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_00FLR.pdf
+yes,NH,Ira G. Needles Hall,01,031NH_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_01FLR.pdf
+yes,NH,Ira G. Needles Hall,02,031NH_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_02FLR.pdf
+yes,NH,Ira G. Needles Hall,03,031NH_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_03FLR.pdf
+yes,NH,Ira G. Needles Hall,04,031NH_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/031NH_04FLR.pdf
+yes,NH,Ira G. Needles Hall,RO,031NH_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/031NH_RO.pdf
+yes,OPT,School of Optometry & Vision Science,01,033OPT_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/033OPT_01FLR.pdf
+yes,OPT,School of Optometry & Vision Science,02,033OPT_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/033OPT_02FLR.pdf
+yes,OPT,School of Optometry & Vision Science,03,033OPT_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/033OPT_03FLR.pdf
+yes,OPT,School of Optometry & Vision Science,04,033OPT_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/033OPT_04FLR.pdf
+yes,OPT,School of Optometry & Vision Science,RO,033OPT_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/033OPT_RO.pdf
+yes,PAC,Physical Activities Complex,B1,018PAC_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/018PAC_B1FLR.pdf
+yes,PAC,Physical Activities Complex,01,018PAC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/018PAC_01FLR.pdf
+yes,PAC,Physical Activities Complex,02,018PAC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/018PAC_02FLR.pdf
+yes,PAC,Physical Activities Complex,03,018PAC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/018PAC_03FLR.pdf
+yes,PAC,Physical Activities Complex,RO,018PAC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/018PAC_RO.pdf
+yes,PAS,"Psychology, Anthropology & Sociology",01,030PAS_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/030PAS_01FLR.pdf
+yes,PAS,"Psychology, Anthropology & Sociology",02,030PAS_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/030PAS_02FLR.pdf
+yes,PAS,"Psychology, Anthropology & Sociology",03,030PAS_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/030PAS_03FLR.pdf
+yes,PAS,"Psychology, Anthropology & Sociology",04,030PAS_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/030PAS_04FLR.pdf
+yes,PAS,"Psychology, Anthropology & Sociology",05,030PAS_05FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/030PAS_05FLR.pdf
+yes,PAS,"Psychology, Anthropology & Sociology",RO,030PAS_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/030PAS_RO.pdf
+yes,PHR,School of Pharmacy,B1,049PHR_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_B1FLR.pdf
+yes,PHR,School of Pharmacy,01,049PHR_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_01FLR.pdf
+yes,PHR,School of Pharmacy,02,049PHR_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_02FLR.pdf
+yes,PHR,School of Pharmacy,03,049PHR_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_03FLR.pdf
+yes,PHR,School of Pharmacy,04,049PHR_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_04FLR.pdf
+yes,PHR,School of Pharmacy,05,049PHR_05FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_05FLR.pdf
+yes,PHR,School of Pharmacy,06,049PHR_06FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_06FLR.pdf
+yes,PHR,School of Pharmacy,07,049PHR_07FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/049PHR_07FLR.pdf
+yes,PHR,School of Pharmacy,08,049PHR_08FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/049PHR_08FLR.pdf
+yes,PHR,School of Pharmacy,09,049PHR_09FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/049PHR_09FLR.pdf
+yes,PHR,School of Pharmacy,RO,049PHR_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/049PHR_RO.pdf
+yes,PHY,Physics,B1,004PHY_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/004PHY_B1FLR.pdf
+yes,PHY,Physics,01,004PHY_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/004PHY_01FLR.pdf
+yes,PHY,Physics,02,004PHY_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/004PHY_02FLR.pdf
+yes,PHY,Physics,03,004PHY_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/004PHY_03FLR.pdf
+yes,PHY,Physics,04,004PHY_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/004PHY_04FLR.pdf
+yes,PHY,Physics,RO,004PHY_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/004PHY_RO.pdf
+yes,QNC,Mike & Ophelia Lazaridis Quantum Nano Centre,01,050QNC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_01FLR.pdf
+yes,QNC,Mike & Ophelia Lazaridis Quantum Nano Centre,CON,050QNC_0B_CON.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_0B_CON.pdf
+yes,QNC,Mike & Ophelia Lazaridis Quantum Nano Centre,MEZ,050QNC_0M_MEZ.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_0M_MEZ.pdf
+yes,QNC,Mike & Ophelia Lazaridis Quantum Nano Centre,02,050QNC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_02FLR.pdf
+yes,QNC,Mike & Ophelia Lazaridis Quantum Nano Centre,03,050QNC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_03FLR.pdf
+yes,QNC,Mike & Ophelia Lazaridis Quantum Nano Centre,04,050QNC_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_04FLR.pdf
+yes,QNC,Mike & Ophelia Lazaridis Quantum Nano Centre,05,050QNC_05FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_05FLR.pdf
+yes,QNC,Mike & Ophelia Lazaridis Quantum Nano Centre,06,050QNC_06FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/050QNC_06FLR.pdf
+yes,QNC,Mike & Ophelia Lazaridis Quantum Nano Centre,RO,050QNC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/050QNC_RO.pdf
+yes,RA2,Research Advancement Centre 2,01,058RA2_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/058RA2_01FLR.pdf
+yes,RA2,Research Advancement Centre 2,02,058RA2_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/058RA2_02FLR.pdf
+yes,RA2,Research Advancement Centre 2,03,058RA2_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/058RA2_03FLR.pdf
+yes,RA2,Research Advancement Centre 2,04,058RA2_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/058RA2_04FLR.pdf
+yes,RA2,Research Advancement Centre 2,RO,058RA2_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/058RA2_RO.pdf
+yes,RAC,Research Advancement Centre,01,051RAC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/051RAC_01FLR.pdf
+yes,RAC,Research Advancement Centre,02,051RAC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/051RAC_02FLR.pdf
+yes,RAC,Research Advancement Centre,03,051RAC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/051RAC_03FLR.pdf
+yes,RAC,Research Advancement Centre,04,051RAC_04FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/051RAC_04FLR.pdf
+yes,RAC,Research Advancement Centre,RO,051RAC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/051RAC_RO.pdf
+yes,RCH,J. R. Coutts Engineering Lecture Hall,01,011RCH_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/011RCH_01FLR.pdf
+yes,RCH,J. R. Coutts Engineering Lecture Hall,02,011RCH_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/011RCH_02FLR.pdf
+yes,RCH,J. R. Coutts Engineering Lecture Hall,03,011RCH_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/011RCH_03FLR.pdf
+yes,RCH,J. R. Coutts Engineering Lecture Hall,RO,011RCH_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/011RCH_RO.pdf
+yes,REV,Ron Eydt Village,RO,025REV_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/025REV_RO.pdf
+yes,SCH,South Campus Hall,B1,016SCH_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/016SCH_B1FLR.pdf
+yes,SCH,South Campus Hall,01,016SCH_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/016SCH_01FLR.pdf
+yes,SCH,South Campus Hall,02,016SCH_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/016SCH_02FLR.pdf
+yes,SCH,South Campus Hall,PH,016SCH_PHFLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/016SCH_PHFLR.pdf
+yes,SCH,South Campus Hall,RO,016SCH_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/016SCH_RO.pdf
+yes,SLC,Student Life Centre,B1,019SLC_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/019SLC_B1FLR.pdf
+yes,SLC,Student Life Centre,01,019SLC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/019SLC_01FLR.pdf
+yes,SLC,Student Life Centre,02,019SLC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/019SLC_02FLR.pdf
+yes,SLC,Student Life Centre,03,019SLC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/019SLC_03FLR.pdf
+yes,SLC,Student Life Centre,RO,019SLC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/019SLC_RO.pdf
+yes,STC,Science Teaching Complex,B1,054STC_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_B1FLR.pdf
+yes,STC,Science Teaching Complex,01,054STC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_01FLR.pdf
+yes,STC,Science Teaching Complex,02,054STC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_02FLR.pdf
+yes,STC,Science Teaching Complex,03,054STC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_03FLR.pdf
+yes,STC,Science Teaching Complex,04,054STC_04FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_04FLR.pdf
+yes,STC,Science Teaching Complex,05,054STC_05FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_05FLR.pdf
+yes,STC,Science Teaching Complex,MB,054STC_MBFLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/054STC_MBFLR.pdf
+yes,STC,Science Teaching Complex,RO,054STC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/054STC_RO.pdf
+yes,TC,Tatham Centre for Co-operative Education and Career Action,B1,045TC_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/045TC_B1FLR.pdf
+yes,TC,Tatham Centre for Co-operative Education and Career Action,01,045TC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/045TC_01FLR.pdf
+yes,TC,Tatham Centre for Co-operative Education and Career Action,02,045TC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/045TC_02FLR.pdf
+yes,TC,Tatham Centre for Co-operative Education and Career Action,03,045TC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/045TC_03FLR.pdf
+yes,TC,Tatham Centre for Co-operative Education and Career Action,RO,045TC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/045TC_RO.pdf
+yes,TH,Tutor's Houses,B1,021TH_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/021TH_B1FLR.pdf
+yes,TH,Tutor's Houses,01,021TH_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/021TH_01FLR.pdf
+yes,TH,Tutor's Houses,02,021TH_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/021TH_02FLR.pdf
+yes,TH,Tutor's Houses,RO,021TH_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/021TH_RO.pdf
+yes,TJB,Toby Jenkins Applied Health Research Building,01,061TJB_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/061TJB_01FLR.pdf
+yes,TJB,Toby Jenkins Applied Health Research Building,02,061TJB_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/061TJB_02FLR.pdf
+yes,TJB,Toby Jenkins Applied Health Research Building,RO,061TJB_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/061TJB_RO.pdf
+yes,UC,University Club,B1,027UC_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/027UC_B1FLR.pdf
+yes,UC,University Club,01,027UC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/027UC_01FLR.pdf
+yes,UC,University Club,RO,027UC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/027UC_RO.pdf
+yes,UWP_BECK,Beck Hall,01,026UWP_BECK_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_01FLR.pdf
+yes,UWP_BECK,Beck Hall,02,026UWP_BECK_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_02FLR.pdf
+yes,UWP_BECK,Beck Hall,03,026UWP_BECK_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_03FLR.pdf
+yes,UWP_BECK,Beck Hall,04,026UWP_BECK_04FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_04FLR.pdf
+yes,UWP_BECK,Beck Hall,05,026UWP_BECK_05FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_05FLR.pdf
+yes,UWP_BECK,Beck Hall,06,026UWP_BECK_06FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_06FLR.pdf
+yes,UWP_BECK,Beck Hall,07,026UWP_BECK_07FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_07FLR.pdf
+yes,UWP_BECK,Beck Hall,08,026UWP_BECK_08FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_08FLR.pdf
+yes,UWP_BECK,Beck Hall,09,026UWP_BECK_09FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_09FLR.pdf
+yes,UWP_BECK,Beck Hall,10,026UWP_BECK_10FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_10FLR.pdf
+yes,UWP_BECK,Beck Hall,11,026UWP_BECK_11FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_11FLR.pdf
+yes,UWP_BECK,Beck Hall,12,026UWP_BECK_12FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_12FLR.pdf
+yes,UWP_BECK,Beck Hall,13,026UWP_BECK_13FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_13FLR.pdf
+yes,UWP_BECK,Beck Hall,14,026UWP_BECK_14FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_BECK_14FLR.pdf
+yes,UWP_COMMONS,UW Place Grand Commons,01,026UWP_COMMONS_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/026UWP_COMMONS_01FLR.pdf
+yes,UWP_EBY,Eby Hall,B1,026UWP_EBY_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_B1FLR.pdf
+yes,UWP_EBY,Eby Hall,01,026UWP_EBY_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_01FLR.pdf
+yes,UWP_EBY,Eby Hall,02,026UWP_EBY_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_02FLR.pdf
+yes,UWP_EBY,Eby Hall,03,026UWP_EBY_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_03FLR.pdf
+yes,UWP_EBY,Eby Hall,04,026UWP_EBY_04FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_04FLR.pdf
+yes,UWP_EBY,Eby Hall,05,026UWP_EBY_05FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_05FLR.pdf
+yes,UWP_EBY,Eby Hall,06,026UWP_EBY_06FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_06FLR.pdf
+yes,UWP_EBY,Eby Hall,07,026UWP_EBY_07FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_07FLR.pdf
+yes,UWP_EBY,Eby Hall,08,026UWP_EBY_08FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_08FLR.pdf
+yes,UWP_EBY,Eby Hall,09,026UWP_EBY_09FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_09FLR.pdf
+yes,UWP_EBY,Eby Hall,10,026UWP_EBY_10FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_10FLR.pdf
+yes,UWP_EBY,Eby Hall,11,026UWP_EBY_11FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_11FLR.pdf
+yes,UWP_EBY,Eby Hall,12,026UWP_EBY_12FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_12FLR.pdf
+yes,UWP_EBY,Eby Hall,13,026UWP_EBY_13FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_13FLR.pdf
+yes,UWP_EBY,Eby Hall,14,026UWP_EBY_14FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_EBY_14FLR.pdf
+yes,UWP_WATERLOO,Waterloo Court,01,026UWP_WATERLOO_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WATERLOO_01FLR.pdf
+yes,UWP_WATERLOO,Waterloo Court,02,026UWP_WATERLOO_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WATERLOO_02FLR.pdf
+yes,UWP_WATERLOO,Waterloo Court,03,026UWP_WATERLOO_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WATERLOO_03FLR.pdf
+yes,UWP_WELLESLEY,Wellesley Court,B1,026UWP_WELLESLEY_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WELLESLEY_B1FLR.pdf
+yes,UWP_WELLESLEY,Wellesley Court,01,026UWP_WELLESLEY_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WELLESLEY_01FLR.pdf
+yes,UWP_WELLESLEY,Wellesley Court,02,026UWP_WELLESLEY_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WELLESLEY_02FLR.pdf
+yes,UWP_WELLESLEY,Wellesley Court,03,026UWP_WELLESLEY_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WELLESLEY_03FLR.pdf
+yes,UWP_WILMOT,Wilmot Court,B1,026UWP_WILMOT_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WILMOT_B1FLR.pdf
+yes,UWP_WILMOT,Wilmot Court,01,026UWP_WILMOT_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WILMOT_01FLR.pdf
+yes,UWP_WILMOT,Wilmot Court,02,026UWP_WILMOT_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WILMOT_02FLR.pdf
+yes,UWP_WILMOT,Wilmot Court,03,026UWP_WILMOT_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WILMOT_03FLR.pdf
+yes,UWP_WOOLWICH,Woolwich Court,01,026UWP_WOOLWICH_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WOOLWICH_01FLR.pdf
+yes,UWP_WOOLWICH,Woolwich Court,02,026UWP_WOOLWICH_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WOOLWICH_02FLR.pdf
+yes,UWP_WOOLWICH,Woolwich Court,03,026UWP_WOOLWICH_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/026UWP_WOOLWICH_03FLR.pdf
+yes,V1_CC,Student Village 1 Central Complex,B1,020V1_CC_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/020V1_CC_B1FLR.pdf
+yes,V1_CC,Student Village 1 Central Complex,01,020V1_CC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/020V1_CC_01FLR.pdf
+yes,V1_CC,Student Village 1 Central Complex,02,020V1_CC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/020V1_CC_02FLR.pdf
+yes,V1_CC,Student Village 1 Central Complex,03,020V1_CC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/020V1_CC_03FLR.pdf
+no,ARC,,01,047ARC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/047ARC_01FLR.pdf
+no,ARC,,02,047ARC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/047ARC_02FLR.pdf
+no,ARC,,03,047ARC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/047ARC_03FLR.pdf
+no,ARC,,RO,047ARC_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/047ARC_RO.pdf
+no,CLV_BLOCK_A,,01,043CLV_BLOCK_A_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_A_01FLR.pdf
+no,CLV_BLOCK_A,,02,043CLV_BLOCK_A_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_A_02FLR.pdf
+no,CLV_BLOCK_B,,01,043CLV_BLOCK_B_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_B_01FLR.pdf
+no,CLV_BLOCK_B,,02,043CLV_BLOCK_B_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_B_02FLR.pdf
+no,CLV_BLOCK_C,,01,043CLV_BLOCK_C_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_C_01FLR.pdf
+no,CLV_BLOCK_C,,02,043CLV_BLOCK_C_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_C_02FLR.pdf
+no,CLV_BLOCK_D,,01,043CLV_BLOCK_D_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_D_01FLR.pdf
+no,CLV_BLOCK_D,,02,043CLV_BLOCK_D_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_D_02FLR.pdf
+no,CLV_BLOCK_E,,01,043CLV_BLOCK_E_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_E_01FLR.pdf
+no,CLV_BLOCK_E,,02,043CLV_BLOCK_E_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_E_02FLR.pdf
+no,CLV_BLOCK_F,,01,043CLV_BLOCK_F_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_F_01FLR.pdf
+no,CLV_BLOCK_F,,02,043CLV_BLOCK_F_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_F_02FLR.pdf
+no,CLV_BLOCK_G,,01,043CLV_BLOCK_G_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_G_01FLR.pdf
+no,CLV_BLOCK_G,,02,043CLV_BLOCK_G_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_G_02FLR.pdf
+no,CLV_BLOCK_H,,01,043CLV_BLOCK_H_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_H_01FLR.pdf
+no,CLV_BLOCK_H,,02,043CLV_BLOCK_H_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_H_02FLR.pdf
+no,CLV_BLOCK_J,,01,043CLV_BLOCK_J_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_J_01FLR.pdf
+no,CLV_BLOCK_J,,02,043CLV_BLOCK_J_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_J_02FLR.pdf
+no,CLV_BLOCK_K,,01,043CLV_BLOCK_K_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_K_01FLR.pdf
+no,CLV_BLOCK_K,,02,043CLV_BLOCK_K_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_K_02FLR.pdf
+no,CLV_BLOCK_L,,01,043CLV_BLOCK_L_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_L_01FLR.pdf
+no,CLV_BLOCK_L,,02,043CLV_BLOCK_L_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_L_02FLR.pdf
+no,CLV_BLOCK_M,,01,043CLV_BLOCK_M_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_M_01FLR.pdf
+no,CLV_BLOCK_M,,02,043CLV_BLOCK_M_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_M_02FLR.pdf
+no,CLV_BLOCK_N,,01,043CLV_BLOCK_N_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_N_01FLR.pdf
+no,CLV_BLOCK_N,,02,043CLV_BLOCK_N_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_N_02FLR.pdf
+no,CLV_BLOCK_P,,01,043CLV_BLOCK_P_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_P_01FLR.pdf
+no,CLV_BLOCK_P,,02,043CLV_BLOCK_P_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/043CLV_BLOCK_P_02FLR.pdf
+no,DMS,,01,055DMS_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/055DMS_01FLR.pdf
+no,DMS,,02,055DMS_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/055DMS_02FLR.pdf
+no,DMS,,03,055DMS_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/055DMS_03FLR.pdf
+no,DMS,,RO,055DMS_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/055DMS_RO.pdf
+no,E10,,01,072E10_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/072E10_01FLR.pdf
+no,E10,,RO,072E10_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/072E10_RO.pdf
+no,GA,,01,132GA_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/132GA_01FLR.pdf
+no,IHB,,B1,052IHB_B1FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/052IHB_B1FLR.pdf
+no,IHB,,01,052IHB_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/052IHB_01FLR.pdf
+no,IHB,,02,052IHB_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/052IHB_02FLR.pdf
+no,IHB,,03,052IHB_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/052IHB_03FLR.pdf
+no,IHB,,RO,052IHB_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/052IHB_RO.pdf
+no,KING,,07,155180KING_07FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/155180KING_07FLR.pdf
+no,REV_CC,,01,025REV_CC_01FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/025REV_CC_01FLR.pdf
+no,REV_CC,,02,025REV_CC_02FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/025REV_CC_02FLR.pdf
+no,REV_CC,,03,025REV_CC_03FLR.pdf,no,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/025REV_CC_03FLR.pdf
+no,REV_EH,,01,025REV_EH_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_EH_01FLR.pdf
+no,REV_EH,,02,025REV_EH_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_EH_02FLR.pdf
+no,REV_EH,,03,025REV_EH_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_EH_03FLR.pdf
+no,REV_NH,,01,025REV_NH_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_NH_01FLR.pdf
+no,REV_NH,,02,025REV_NH_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_NH_02FLR.pdf
+no,REV_NH,,03,025REV_NH_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_NH_03FLR.pdf
+no,REV_SH,,01,025REV_SH_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_SH_01FLR.pdf
+no,REV_SH,,02,025REV_SH_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_SH_02FLR.pdf
+no,REV_SH,,03,025REV_SH_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_SH_03FLR.pdf
+no,REV_WH,,01,025REV_WH_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_WH_01FLR.pdf
+no,REV_WH,,02,025REV_WH_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_WH_02FLR.pdf
+no,REV_WH,,03,025REV_WH_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/025REV_WH_03FLR.pdf
+no,UWD,,01,153UWD_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/153UWD_01FLR.pdf
+no,UWD,,02,153UWD_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/153UWD_02FLR.pdf
+no,UWP,,RO,026UWP_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/026UWP_RO.pdf
+no,V1_E123,,B1,020V1_E123_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E123_B1FLR.pdf
+no,V1_E123,,01,020V1_E123_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E123_01FLR.pdf
+no,V1_E123,,02,020V1_E123_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E123_02FLR.pdf
+no,V1_E123,,03,020V1_E123_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E123_03FLR.pdf
+no,V1_E456,,B1,020V1_E456_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E456_B1FLR.pdf
+no,V1_E456,,01,020V1_E456_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E456_01FLR.pdf
+no,V1_E456,,02,020V1_E456_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E456_02FLR.pdf
+no,V1_E456,,03,020V1_E456_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_E456_03FLR.pdf
+no,V1_N156,,B1,020V1_N156_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N156_B1FLR.pdf
+no,V1_N156,,01,020V1_N156_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N156_01FLR.pdf
+no,V1_N156,,02,020V1_N156_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N156_02FLR.pdf
+no,V1_N156,,03,020V1_N156_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N156_03FLR.pdf
+no,V1_N234,,B1,020V1_N234_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N234_B1FLR.pdf
+no,V1_N234,,01,020V1_N234_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N234_01FLR.pdf
+no,V1_N234,,02,020V1_N234_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N234_02FLR.pdf
+no,V1_N234,,03,020V1_N234_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_N234_03FLR.pdf
+no,V1_S1234,,B1,020V1_S1234_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S1234_B1FLR.pdf
+no,V1_S1234,,01,020V1_S1234_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S1234_01FLR.pdf
+no,V1_S1234,,02,020V1_S1234_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S1234_02FLR.pdf
+no,V1_S1234,,03,020V1_S1234_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S1234_03FLR.pdf
+no,V1_S5678,,B1,020V1_S5678_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S5678_B1FLR.pdf
+no,V1_S5678,,01,020V1_S5678_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S5678_01FLR.pdf
+no,V1_S5678,,02,020V1_S5678_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S5678_02FLR.pdf
+no,V1_S5678,,03,020V1_S5678_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_S5678_03FLR.pdf
+no,V1_W126,,B1,020V1_W126_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W126_B1FLR.pdf
+no,V1_W126,,01,020V1_W126_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W126_01FLR.pdf
+no,V1_W126,,02,020V1_W126_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W126_02FLR.pdf
+no,V1_W126,,03,020V1_W126_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W126_03FLR.pdf
+no,V1_W345,,B1,020V1_W345_B1FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W345_B1FLR.pdf
+no,V1_W345,,01,020V1_W345_01FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W345_01FLR.pdf
+no,V1_W345,,02,020V1_W345_02FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W345_02FLR.pdf
+no,V1_W345,,03,020V1_W345_03FLR.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/residences/020V1_W345_03FLR.pdf
+no,V1E1,,RO,020V1E1_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E1_RO.pdf
+no,V1E2,,RO,020V1E2_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E2_RO.pdf
+no,V1E3,,RO,020V1E3_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E3_RO.pdf
+no,V1E4,,RO,020V1E4_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E4_RO.pdf
+no,V1E5,,RO,020V1E5_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E5_RO.pdf
+no,V1E6,,RO,020V1E6_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1E6_RO.pdf
+no,V1N1,,RO,020V1N1_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N1_RO.pdf
+no,V1N2,,RO,020V1N2_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N2_RO.pdf
+no,V1N3,,RO,020V1N3_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N3_RO.pdf
+no,V1N4,,RO,020V1N4_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N4_RO.pdf
+no,V1N5,,RO,020V1N5_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N5_RO.pdf
+no,V1N6,,RO,020V1N6_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1N6_RO.pdf
+no,V1S1,,RO,020V1S1_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S1_RO.pdf
+no,V1S2,,RO,020V1S2_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S2_RO.pdf
+no,V1S3,,RO,020V1S3_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S3_RO.pdf
+no,V1S4,,RO,020V1S4_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S4_RO.pdf
+no,V1S5,,RO,020V1S5_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S5_RO.pdf
+no,V1S6,,RO,020V1S6_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S6_RO.pdf
+no,V1S7,,RO,020V1S7_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1S7_RO.pdf
+no,V1W1,,RO,020V1W1_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W1_RO.pdf
+no,V1W2,,RO,020V1W2_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W2_RO.pdf
+no,V1W3,,RO,020V1W3_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W3_RO.pdf
+no,V1W4,,RO,020V1W4_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W4_RO.pdf
+no,V1W5,,RO,020V1W5_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W5_RO.pdf
+no,V1W6,,RO,020V1W6_RO.pdf,yes,Needed,https://plantops.uwaterloo.ca/floor_plans/pdf_drawings/restricted/roof_plans/020V1W6_RO.pdf
