@@ -14,4 +14,4 @@ data-sources/plantops/pdfs/
 futurelabs/
 
 # Runtime store: imported floor plans (may be university-owned) and corrections
-data/
+/data/
