@@ -67,3 +67,21 @@ ${noPlans.map((b) => `| ${b.code || '–'} | ${b.name || b.id} | ${b.osmIndoor.r
 writeFileSync('docs/FLOOR_PLANS.md', md);
 writeFileSync('docs/floor-plans.csv', csv.map((row) => row.map((v) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v)).join(',')).join('\n') + '\n');
 console.log(`${withPlans.length} buildings, ${all.length} plans (${onMap.length} buildings / ${n(onMap)} plans on the map)`);
+
+// Clickable download page: open it in a browser signed in to UW and click through the list.
+const esc = (s) => String(s).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]);
+const seen = new Set();
+const groups = onMap.map((b) => {
+  const fl = [...b.floors].sort((a, z) => order(a.floorCode) - order(z.floorCode)).filter((f) => !seen.has(f.filename) && seen.add(f.filename));
+  if (!fl.length) return '';
+  return `<h2>${esc(label(b))}</h2><ul>${fl.map((f) => `<li><label><input type="checkbox"> <a href="${esc(f.url)}" download>${esc(f.filename)}</a></label> ${f.wing ? `<span class="w">${esc(f.wing)}</span>` : ''}${f.restricted ? '<span class="r">restricted: needs Plant Operations permission</span>' : ''}${status(b, f) !== 'Needed' ? `<span class="d">${esc(status(b, f))}</span>` : ''}</li>`).join('')}</ul>`;
+}).join('\n');
+writeFileSync('docs/floor-plan-downloads.html', `<!doctype html><meta charset="utf-8"><title>UW floor plans to download</title>
+<style>body{font:14px system-ui,sans-serif;max-width:860px;margin:24px auto;padding:0 16px;color:#1e293b}h2{font-size:15px;margin:18px 0 4px}ul{margin:0;padding-left:4px;list-style:none}li{padding:2px 0}a{color:#1d4ed8}.r{color:#9f1239;margin-left:8px;font-size:12px}.w{background:#e2e8f0;border-radius:4px;padding:0 4px;margin-left:6px;font-size:12px}.d{color:#047857;margin-left:8px;font-size:12px}.box{background:#fef3c7;border-radius:8px;padding:10px 12px}</style>
+<h1>UW floor plans to download for InsideOut</h1>
+<div class="box">Sign in to plantops.uwaterloo.ca in this browser first (UW login). Then click each link to download it. Tick the box as you go.<br>
+Skip the <b>restricted</b> ones unless Plant Operations has given permission.<br>
+When done, put the PDFs (keep their names) in <code>data-sources/plantops/pdfs/</code> of the InsideOut folder, or add them in the app: campus map → Floor plans → Bulk import.</div>
+<p>${onMap.length} buildings on the campus map · ${n(onMap)} documents (${n(onMap) - r(onMap)} not restricted, ${r(onMap)} restricted). Generated ${new Date().toISOString().slice(0, 10)}.</p>
+${groups}
+`);
