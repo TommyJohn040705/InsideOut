@@ -84,6 +84,8 @@ export interface FloorPlanData {
   title: string;
   subTitle?: string;
   floorNumber: number;
+  /** Short label for the floor buttons when it is not just the number ("B1", "2M", "LL"). */
+  floorLabel?: string;
   buildingId?: string;
   buildingName?: string;
   buildingType: string;

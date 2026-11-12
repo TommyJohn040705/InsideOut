@@ -72,14 +72,24 @@ export function importStatus(f: FloorImport): FloorStatus {
   return graphProblems(f.rooms, f.hallways).length ? 'human_reviewed' : 'routing_available';
 }
 
+/** Floor button label for a Plant Operations floor code: "01" -> "1", "02FLR_MEZ" -> "2M", "CON" -> "Con". */
+export function floorLabelOf(code: string, filename = ''): string {
+  if (/02FLR_MEZ/i.test(filename)) return '2M';
+  if (/_0M_MEZ/i.test(filename)) return 'Mez';
+  if (/_0B_CON/i.test(filename)) return 'Con';
+  if (code === '00') return 'G';
+  return /^\d+$/.test(code) ? String(Number(code)) : code;
+}
+
 export const importAppBuildingId = (buildingId: string) => `import-${buildingId}`;
 
 /** A published import as a floor the indoor navigator can open and route on. */
 export function importToPlan(f: FloorImport, buildingName: string): FloorPlanData {
   return {
     id: `import-${f.id}`,
-    title: `${buildingName}, floor ${f.floorCode}`,
-    subTitle: `Imported from ${f.sourceName}. ${f.reviewed ? 'Reviewed' : 'Not reviewed'}; not walked.`,
+    title: `${buildingName}, floor ${floorLabelOf(f.floorCode, f.sourceName)}`,
+    subTitle: `${buildingName} · Plant Operations plan ${f.sourceName}`,
+    floorLabel: floorLabelOf(f.floorCode, f.sourceName),
     floorNumber: f.floorNumber,
     buildingId: importAppBuildingId(f.buildingId),
     buildingName,

@@ -933,6 +933,37 @@ app.get('/api/plantops-folder', (_req: Request, res: Response) => {
   try { names = fs.readdirSync(PLANTOPS_DIR).filter((n) => /\.(pdf|png|jpe?g|svg|webp)$/i.test(n)); } catch { /* folder missing */ }
   return res.json(names.map((name) => ({ name, size: fs.statSync(path.join(PLANTOPS_DIR, name)).size })));
 });
+// Saving PDFs into the folder from a plantops.uwaterloo.ca tab where the user is signed in.
+// Only non-restricted manifest files for buildings on the map are accepted; CORS is limited to that origin.
+const manifestRows: { filename: string; restricted: boolean; url: string }[] = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'data-sources', 'wayfinder', 'uw_floor_plans_manifest.json'), 'utf8'));
+const campusBuildings: { footprint: unknown; floors: { filename: string }[] }[] = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'src', 'data', 'campus', 'buildings.json'), 'utf8'));
+const onMapFiles = new Set(campusBuildings.filter((b) => b.footprint).flatMap((b) => b.floors.map((x) => x.filename)));
+const downloadable = new Map(manifestRows.filter((r) => !r.restricted && onMapFiles.has(r.filename)).map((r) => [r.filename, r.url]));
+const plantopsCors = (req: Request, res: Response, next: () => void) => {
+  if (req.headers.origin === 'https://plantops.uwaterloo.ca') {
+    res.set('Access-Control-Allow-Origin', 'https://plantops.uwaterloo.ca');
+    res.set('Access-Control-Allow-Methods', 'GET, PUT');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    res.set('Access-Control-Allow-Private-Network', 'true');
+  }
+  if (req.method === 'OPTIONS') return res.status(204).end();
+  next();
+};
+app.options('/api/plantops-wanted', plantopsCors);
+app.get('/api/plantops-wanted', plantopsCors, (_req: Request, res: Response) => {
+  const have = new Set(fs.existsSync(PLANTOPS_DIR) ? fs.readdirSync(PLANTOPS_DIR) : []);
+  return res.json([...downloadable].filter(([n]) => !have.has(n)).map(([filename, url]) => ({ filename, url })));
+});
+app.options('/api/plantops-folder/:name', plantopsCors);
+app.put('/api/plantops-folder/:name', plantopsCors, express.raw({ type: 'application/pdf', limit: '60mb' }), (req: Request, res: Response) => {
+  const name = path.basename(req.params.name);
+  if (!downloadable.has(name)) return res.status(403).json({ error: 'Only non-restricted Plant Operations plans of buildings on the map are accepted' });
+  const body = req.body as Buffer;
+  if (!Buffer.isBuffer(body) || body.subarray(0, 5).toString() !== '%PDF-') return res.status(400).json({ error: 'Not a PDF (maybe a login page)' });
+  fs.mkdirSync(PLANTOPS_DIR, { recursive: true });
+  fs.writeFileSync(path.join(PLANTOPS_DIR, name), body);
+  return res.json({ ok: true, bytes: body.length });
+});
 app.get('/api/plantops-folder/:name', (req: Request, res: Response) => {
   const name = path.basename(req.params.name);
   const file = path.join(PLANTOPS_DIR, name);
@@ -949,7 +980,7 @@ app.post('/api/floor-imports', (req: Request, res: Response) => {
     if (!b.buildingId || !b.floorCode || !Number.isFinite(Number(b.floorNumber))) return res.status(400).json({ error: 'buildingId, floorCode and floorNumber are required' });
     if (!String(b.authorization || '').trim()) return res.status(400).json({ error: 'Say who authorized use of this document' });
     if (!b.fileDataUrl || !b.imageDataUrl || !Array.isArray(b.imageSize)) return res.status(400).json({ error: 'The file and its rendered image are required' });
-    const id = `${String(b.buildingId).replace(/W/g, '')}-${String(b.floorCode).replace(/W/g, '')}-${Date.now().toString(36)}`;
+    const id = `${String(b.buildingId).replace(/\W/g, '')}-${String(b.floorCode).replace(/\W/g, '')}-${Date.now().toString(36)}`;
     const file = store.saveUpload(id, b.fileDataUrl);
     // Rasters are used as-is; PDFs and SVGs get the PNG the browser rendered (Gemini needs a raster).
     const image = ['image/png', 'image/jpeg', 'image/webp'].includes(file.mime) ? file : store.saveUpload(`${id}-page1`, b.imageDataUrl);
@@ -1001,7 +1032,8 @@ app.patch('/api/floor-imports/:id', (req: Request, res: Response) => {
     if (Array.isArray(b.hallways)) { f.hallways = b.hallways; f.reviewed = false; }
     if (Array.isArray(b.controlPoints)) { f.controlPoints = b.controlPoints; f.alignmentFrom = typeof b.alignmentFrom === 'string' ? b.alignmentFrom : undefined; f.reviewed = false; }
     if (typeof b.reviewed === 'boolean') { f.reviewed = b.reviewed; f.reviewedAt = b.reviewed ? new Date().toISOString() : undefined; }
-    if (typeof b.published === 'boolean') f.published = b.published && f.controlPoints.length >= 2;
+    // Published = shown in the app (indoor navigator); the map overlay additionally needs control points.
+    if (typeof b.published === 'boolean') f.published = b.published;
     return f;
   });
   return out ? res.json(out) : res.status(404).json({ error: 'No such import' });

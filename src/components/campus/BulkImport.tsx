@@ -24,7 +24,9 @@ interface Item {
   msg: string;
 }
 
-const floorNumberOf = (code: string) => (/^B(\d)$/i.test(code) ? -Number(code.slice(1)) : /^\d+$/.test(code) ? Number(code) : null);
+// Irregular Plant Operations codes, placed between the numbered floors they sit between.
+const SPECIAL: Record<string, number> = { '003E3_02FLR_MEZ.pdf': 2.5, '050QNC_0M_MEZ.pdf': 0.5, '050QNC_0B_CON.pdf': 0, '039EIT_LLFLR.pdf': 0, '044MKV_00FLR.pdf': 0, '054STC_MBFLR.pdf': -0.5 };
+const floorNumberOf = (code: string, filename?: string | null) => (filename && filename in SPECIAL ? SPECIAL[filename] : /^B(\d)$/i.test(code) ? -Number(code.slice(1)) : /^\d+$/.test(code) ? Number(code) : null);
 const STATE_STYLE: Record<State, string> = {
   ready: 'bg-sky-50 text-sky-800', review: 'bg-amber-50 text-amber-900', permission: 'bg-rose-50 text-rose-800', skipped: 'bg-slate-100 text-slate-500',
   importing: 'bg-indigo-50 text-indigo-800', done: 'bg-emerald-50 text-emerald-800', failed: 'bg-red-50 text-red-800',
@@ -42,13 +44,14 @@ export function BulkImport({ imports, onChanged }: { imports: FloorImport[]; onC
   const [auth, setAuth] = useState('');
   const [permitRestricted, setPermitRestricted] = useState(false);
   const [useGemini, setUseGemini] = useState(false);
+  const [showNow, setShowNow] = useState(true);
   const [running, setRunning] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   const set = (key: string, p: Partial<Item>) => setItems((l) => l.map((x) => (x.key === key ? { ...x, ...p } : x)));
 
   const classify = (name: string, source: Item['source']): Item => {
     const match = matchFile(name);
-    const targets = match.targets.map((t) => ({ buildingId: t.building.id, floorCode: t.floorCode, floorNumber: floorNumberOf(t.floorCode), manifestFilename: t.floor?.filename || null, restricted: !!t.floor?.restricted }));
+    const targets = match.targets.map((t) => ({ buildingId: t.building.id, floorCode: t.floorCode, floorNumber: floorNumberOf(t.floorCode, t.floor?.filename), manifestFilename: t.floor?.filename || null, restricted: !!t.floor?.restricted }));
     const already = targets.length > 0 && targets.every((t) => imports.some((f) => f.buildingId === t.buildingId && (t.manifestFilename ? f.manifestFilename === t.manifestFilename : f.sourceName === name)));
     let state: State = match.confidence === 'exact' ? 'ready' : 'review';
     let msg = match.reason;
@@ -108,6 +111,7 @@ export function BulkImport({ imports, onChanged }: { imports: FloorImport[]; onC
           // Plant Operations sheets of one building share a frame when their size matches; reuse that alignment, flagged for checking.
           const src = known.find((f) => f.buildingId === rec.buildingId && f.id !== rec.id && f.imageSize[0] === rec.imageSize[0] && f.imageSize[1] === rec.imageSize[1] && georefOfImport(f) && !f.alignmentFrom);
           if (src) Object.assign(patch, { controlPoints: src.controlPoints, alignmentFrom: src.id });
+          if (showNow) patch.published = true;
           if (Object.keys(patch).length) rec = await api(`/api/floor-imports/${rec.id}`, { method: 'PATCH', body: JSON.stringify(patch) });
           if (useGemini) { try { rec = await api(`/api/floor-imports/${rec.id}/extract`, { method: 'POST' }); } catch (e: any) { done.push(`Gemini: ${e.message}`); } }
           known = [...known, rec];
@@ -166,6 +170,7 @@ export function BulkImport({ imports, onChanged }: { imports: FloorImport[]; onC
               <span><Lock className="inline w-3.5 h-3.5" /> Plant Operations gave permission to use the restricted documents in this batch. Without this they are skipped.</span>
             </label>
           )}
+          <label className="flex items-center gap-2 text-xs"><input type="checkbox" checked={showNow} onChange={(e) => setShowNow(e.target.checked)} /> Show imported floors in the app right away (indoor view; the map needs alignment)</label>
           <label className="flex items-center gap-2 text-xs"><input type="checkbox" checked={useGemini} onChange={(e) => setUseGemini(e.target.checked)} /> Also ask Gemini for rooms and hallways (slower; needs GEMINI_API_KEY on the server)</label>
           <button disabled={running} onClick={run} className="w-full h-10 rounded-xl bg-slate-900 text-white font-bold flex items-center justify-center gap-1.5 disabled:bg-slate-300">
             {running ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />} Import {(counts.ready || 0) + (permitRestricted ? counts.permission || 0 : 0)} files

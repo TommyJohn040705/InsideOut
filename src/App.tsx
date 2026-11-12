@@ -523,6 +523,7 @@ export default function App() {
 
   const routeFloors = route ? route.floorSegments.map((s) => s.floor) : [];
   const floors = buildingPlans.map((p) => p.floorNumber);
+  const floorLabels = Object.fromEntries(buildingPlans.filter((p) => p.floorLabel).map((p) => [p.floorNumber, p.floorLabel!]));
 
   const actions = [
     { label: 'Workplace Companion', icon: Briefcase, on: () => setWorkplaceCompanionOpen(true), active: workplaceCompanionOpen },
@@ -855,11 +856,11 @@ export default function App() {
 
           <main className="relative flex-1 min-w-0">
             {map({ top: isNavigating ? 150 : 24, right: 80, bottom: isNavigating ? 110 : 24, left: 24 })}
-            <div className="absolute top-4 right-4"><FloorPicker floors={floors} current={currentPlan.floorNumber} onPick={goFloor} routeFloors={routeFloors} vertical /></div>
+            <div className="absolute top-4 right-4"><FloorPicker floors={floors} labels={floorLabels} current={currentPlan.floorNumber} onPick={goFloor} routeFloors={routeFloors} vertical /></div>
             <div className="absolute bottom-4 right-4">{mapControls}</div>
             <div className="absolute top-4 left-4 pointer-events-none">
               <div className="bg-white/90 backdrop-blur rounded-xl px-3 py-1.5 shadow ring-1 ring-slate-200 text-sm">
-                <span className="font-bold">Floor {currentPlan.floorNumber}</span>
+                <span className="font-bold">Floor {currentPlan.floorLabel ?? currentPlan.floorNumber}</span>
                 {currentPlan.subTitle && <span className="text-slate-500"> · {currentPlan.subTitle}</span>}
               </div>
             </div>
@@ -1013,7 +1014,7 @@ export default function App() {
             {!searchOpen && (
               <div className="pointer-events-auto flex items-center gap-2">
                 {campusButton}
-                <FloorPicker floors={floors} current={currentPlan.floorNumber} onPick={goFloor} routeFloors={routeFloors} />
+                <FloorPicker floors={floors} labels={floorLabels} current={currentPlan.floorNumber} onPick={goFloor} routeFloors={routeFloors} />
                 <button
                   onClick={() => setWorkplaceCompanionOpen(true)}
                   className="h-10 px-3 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 flex items-center gap-1.5 text-xs font-bold text-slate-800 shrink-0"

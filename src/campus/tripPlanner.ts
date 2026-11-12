@@ -27,7 +27,7 @@ export function indoorSites(plans: FloorPlanData[], imports: FloorImport[]): Rec
     out[id] = { buildingId: id, appBuildingId: d.appBuildingId, plans: plans.filter((p) => p.buildingId === d.appBuildingId), georef: (f) => georefFor(id, f), alignment: `Draft fit to the OpenStreetMap footprint (${d.georef.rmsM.toFixed(1)} m fit error)` };
   }
   const byB = new Map<string, FloorImport[]>();
-  for (const f of imports) if (f.published && georefOfImport(f)) byB.set(f.buildingId, [...(byB.get(f.buildingId) || []), f]);
+  for (const f of imports) if (f.published) byB.set(f.buildingId, [...(byB.get(f.buildingId) || []), f]);
   for (const [id, fl] of byB) {
     if (out[id]) continue; // a building's own traced dataset wins over an import
     out[id] = {
@@ -35,7 +35,7 @@ export function indoorSites(plans: FloorPlanData[], imports: FloorImport[]): Rec
       appBuildingId: importAppBuildingId(id),
       plans: plans.filter((p) => p.buildingId === importAppBuildingId(id)),
       georef: (n) => { const f = fl.find((x) => x.floorNumber === n); return f ? georefOfImport(f) : null; },
-      alignment: `Control points set in the floor-plan studio${fl.every((f) => f.reviewed) ? ', reviewed' : ', not reviewed'}`,
+      alignment: fl.some((f) => georefOfImport(f)) ? `Control points set in the floor-plan studio${fl.every((f) => f.reviewed) ? ', reviewed' : ', not reviewed'}` : 'Not aligned to the map yet',
     };
   }
   return out;

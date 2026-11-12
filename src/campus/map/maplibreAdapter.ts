@@ -74,9 +74,11 @@ export function createMapLibreAdapter(el: HTMLElement, center: LngLat, zoom: num
         provider: 'maplibre',
         setFootprints(fc, cb) { onClick = cb; src('footprints')?.setData(fc); },
         setSelected(id) {
-          if (selected) map.setFeatureState({ source: 'footprints', id: selected }, { selected: false });
-          selected = id;
-          if (id) map.setFeatureState({ source: 'footprints', id }, { selected: true });
+          try {
+            if (selected) map.setFeatureState({ source: 'footprints', id: selected }, { selected: false });
+            selected = id;
+            if (id) map.setFeatureState({ source: 'footprints', id }, { selected: true });
+          } catch { /* map already torn down (hot reload or unmount) */ }
         },
         flyTo(c, z, padBottom = 0) { map.flyTo({ center: c, zoom: z, duration: 800, padding: { top: 0, left: 0, right: 0, bottom: padBottom } }); },
         setFloorOverlay(o: FloorOverlay | null) {

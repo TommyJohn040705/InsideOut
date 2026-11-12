@@ -15,7 +15,7 @@ import {
 import type { LngLat } from '../../campus/georef';
 import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_MAP_ID, MAP_PROVIDER } from '../../campus/map/config';
 import type { CampusMapAdapter, FloorOverlay, MapMarker, MapProvider } from '../../campus/map/types';
-import { FloorImport, importStatus } from '../../campus/floorImports';
+import { FloorImport, floorLabelOf, importStatus } from '../../campus/floorImports';
 import { indoorSites, planTrip, Trip, TripEnd } from '../../campus/tripPlanner';
 import { loadOutdoorGraph } from '../../campus/outdoorRoute';
 import { FloorPlanStudio } from './FloorPlanStudio';
@@ -76,7 +76,9 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
   const site = selected ? sites[selected.id] || null : null;
   const entrances = useMemo(() => (selected ? entrancesOf(selected.id) : []), [selected]);
   /** Floors of the selected building that can be drawn on the map. */
-  const siteFloors = useMemo(() => (site ? [...new Set(site.plans.map((p) => p.floorNumber))].filter((f) => site.georef(f)).sort((a, b) => a - b) : []), [site]);
+  // Every floor that can be opened indoors; only aligned ones are also drawn on the map.
+  const siteFloors = useMemo(() => (site ? [...new Set(site.plans.map((p) => p.floorNumber))].sort((a, b) => a - b) : []), [site]);
+  const unaligned = site && floor != null && !site.georef(floor);
   const chips = useMemo(() => {
     if (!selected) return [];
     const importFloor = (f: CampusFloor) => imports.find((x) => x.published && x.buildingId === selected.id && x.manifestFilename === f.filename)?.floorNumber;
@@ -85,7 +87,8 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
       return { key: f.id, code: f.floorCode, wing: f.wing || '', floor: n ?? null, restricted: f.restricted, url: f.url as string | null, filename: f.filename as string | null, title: `${f.filename}: ${f.restricted ? 'restricted document, ' : ''}${FLOOR_STATUS_LABEL[f.status]}` };
     });
     for (const n of siteFloors) if (!out.some((c) => c.floor === n)) out.push({ key: `site-${n}`, code: String(n), wing: '', floor: n, restricted: false, url: null, filename: null, title: 'Mapped floor (not in the Plant Operations list)' });
-    return out.sort((a, b) => a.wing.localeCompare(b.wing) || floorOrder(a.code) - floorOrder(b.code));
+    // Imported floors know their real position (QNC concourse 0, E3 mezzanine 2.5); others go by code.
+    return out.sort((a, b) => a.wing.localeCompare(b.wing) || (a.floor ?? floorOrder(a.code)) - (b.floor ?? floorOrder(b.code)));
   }, [selected, siteFloors, imports]);
 
   // Create the map once. If Google fails to load, say so and use the fallback.
@@ -249,15 +252,16 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
           <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-1.5 flex items-center gap-1"><Layers className="w-3.5 h-3.5" /> Floors ({siteFloors.length} mapped, {selected.floors.length} plans listed)</div>
           <div className="flex flex-wrap gap-1.5" role="group" aria-label="Floor selector">
             {chips.map((c) => c.floor != null ? (
-              <button key={c.key} onClick={() => setFloor(c.floor)} title={c.title} aria-pressed={floor === c.floor}
+              // Aligned floors switch the map overlay; floors not on the map yet open straight in the indoor navigator.
+              <button key={c.key} onClick={() => (site && !site.georef(c.floor!) ? onOpenIndoor(site.appBuildingId, c.floor!) : setFloor(c.floor))} title={c.title} aria-pressed={floor === c.floor}
                 className={`h-8 min-w-8 px-2.5 rounded-lg text-xs font-bold flex items-center justify-center gap-1 ${floor === c.floor ? 'bg-slate-900 text-white' : 'bg-indigo-50 text-indigo-800 hover:bg-indigo-100'}`}>
-                {c.restricted && <Lock className="w-3 h-3" />}{c.wing && <span className="opacity-60">{c.wing}</span>}{floorLabel(c.code)}
+                {c.restricted && <Lock className="w-3 h-3" />}{c.wing && <span className="opacity-60">{c.wing}</span>}{floorLabelOf(c.code, c.filename || '')}
               </button>
             ) : (
               // Not on the map yet: the button opens the Plant Operations PDF (UW login; restricted ones need permission).
               <a key={c.key} href={c.url || undefined} target="_blank" rel="noreferrer" title={`Open ${c.filename} at Plant Operations (UW login${c.restricted ? '; restricted: needs permission' : ''})`}
                 className="h-8 min-w-8 px-2.5 rounded-lg text-xs font-bold flex items-center justify-center gap-1 bg-slate-100 text-slate-600 hover:bg-slate-200 ring-1 ring-dashed ring-slate-300">
-                {c.restricted && <Lock className="w-3 h-3" />}{c.wing && <span className="opacity-60">{c.wing}</span>}{floorLabel(c.code)}<ExternalLink className="w-3 h-3 opacity-60" />
+                {c.restricted && <Lock className="w-3 h-3" />}{c.wing && <span className="opacity-60">{c.wing}</span>}{floorLabelOf(c.code, c.filename || '')}<ExternalLink className="w-3 h-3 opacity-60" />
               </a>
             ))}
           </div>
@@ -287,7 +291,7 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
       {site && (
         <p className="text-[11px] text-amber-800 bg-amber-50 rounded-lg p-2 flex gap-1.5">
           <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-px" />
-          <span>Alignment: {site.alignment}. Not surveyed or walked.</span>
+          <span>Alignment: {site.alignment}. Not surveyed or walked.{unaligned && ' This floor is not drawn on the map yet; open the indoor navigator to see it.'}</span>
         </p>
       )}
       {(site || studioPreview) && (

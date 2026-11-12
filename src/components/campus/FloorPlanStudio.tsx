@@ -253,8 +253,8 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
                 <span>I compared the aligned drawing with the building footprint (use the eye slider on the map) and checked the rooms. {(!g || !rec.rooms.length) && <span className="text-slate-400">Needs rooms and alignment first.</span>}</span>
               </label>
               <div className="flex gap-2">
-                <button disabled={!g || !!busy} onClick={() => patch({ published: !rec.published })} className={`flex-1 h-10 rounded-xl font-bold flex items-center justify-center gap-1.5 ${rec.published ? 'bg-slate-100 text-slate-800' : 'bg-indigo-600 text-white disabled:bg-slate-300'}`}>
-                  {rec.published ? <><Eye className="w-4 h-4" /> Unpublish</> : <><CheckCircle2 className="w-4 h-4" /> Publish on the map</>}
+                <button disabled={!!busy} onClick={() => patch({ published: !rec.published })} className={`flex-1 h-10 rounded-xl font-bold flex items-center justify-center gap-1.5 ${rec.published ? 'bg-slate-100 text-slate-800' : 'bg-indigo-600 text-white disabled:bg-slate-300'}`}>
+                  {rec.published ? <><Eye className="w-4 h-4" /> Unpublish</> : <><CheckCircle2 className="w-4 h-4" /> {g ? 'Publish on the map' : 'Publish (indoor view only until aligned)'}</>}
                 </button>
                 <button disabled={!!busy} onClick={() => { if (confirm(`Delete the import of ${rec.buildingId} floor ${rec.floorCode} and its stored file? This cannot be undone.`)) run('Deleting…', async () => { await api(`/api/floor-imports/${rec.id}`, { method: 'DELETE' }); setOpenId(null); }); }}
                   className="h-10 px-3 rounded-xl ring-1 ring-slate-200 text-red-700" aria-label="Delete import"><Trash2 className="w-4 h-4" /></button>

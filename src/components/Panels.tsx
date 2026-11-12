@@ -117,8 +117,8 @@ export function SearchInput({ value, onChange, placeholder, autoFocus, onClear, 
 }
 
 /* ---------------- floor picker ---------------- */
-export function FloorPicker({ floors, current, onPick, routeFloors, vertical }: {
-  floors: number[]; current: number; onPick: (f: number) => void; routeFloors?: number[]; vertical?: boolean;
+export function FloorPicker({ floors, current, onPick, routeFloors, vertical, labels }: {
+  floors: number[]; current: number; onPick: (f: number) => void; routeFloors?: number[]; vertical?: boolean; labels?: Record<number, string>;
 }) {
   const list = vertical ? [...floors].sort((a, b) => b - a) : floors;
   return (
@@ -127,13 +127,13 @@ export function FloorPicker({ floors, current, onPick, routeFloors, vertical }: 
         <button
           key={f}
           onClick={() => onPick(f)}
-          aria-label={`Floor ${f}`}
+          aria-label={`Floor ${labels?.[f] ?? f}`}
           className={cx(
             'relative w-10 h-10 rounded-xl text-sm font-bold transition-colors',
             f === current ? 'bg-blue-600 text-white' : 'text-slate-700 hover:bg-slate-100'
           )}
         >
-          {f}
+          {labels?.[f] ?? f}
           {routeFloors?.includes(f) && f !== current && <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-blue-500" />}
         </button>
       ))}
