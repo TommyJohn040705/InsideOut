@@ -6943,8 +6943,25 @@
    ],
    "uploadedAt": "2026-11-12T23:31:12.277Z",
    "pdfLabels": [],
-   "extraction": null,
-   "rooms": [],
+   "extraction": {
+    "model": "gemini-3.6-flash",
+    "at": "2026-11-13T16:19:58.872Z",
+    "title": "SECOND FLOOR PLAN"
+   },
+   "rooms": [
+    {
+     "id": "COM-02-mwe6lxjm-r1-201",
+     "roomNumber": "201",
+     "name": "Room 201",
+     "category": "elevator",
+     "coords": {
+      "x": 78.2,
+      "y": 16.3
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    }
+   ],
    "hallways": [],
    "controlPoints": [
     {
