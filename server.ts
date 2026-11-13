@@ -8,7 +8,8 @@ import { GoogleGenAI, Type } from '@google/genai';
 import { openStore } from './server/store';
 import type { FloorImport } from './src/campus/floorImports';
 
-dotenv.config();
+// .env.local (gitignored, holds GEMINI_API_KEY as the README says) first, then .env.
+dotenv.config({ path: ['.env.local', '.env'].map((f) => fileURLToPath(new URL(f, import.meta.url))), quiet: true });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
