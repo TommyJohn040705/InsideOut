@@ -137,3 +137,15 @@ export function verticalLinksFor(plans: FloorPlanData[]): VerticalCirculationLin
     description: 'Matched by room number across floors (Plant Operations numbering); not checked on site.',
   }));
 }
+
+/** The same alignment turned 180° about the control points' centre (fixes an upside-down automatic fit). */
+export function turnedControlPoints(f: FloorImport): FloorImport['controlPoints'] {
+  const g = georefOfImport(f);
+  if (!g) return f.controlPoints;
+  const cx = f.controlPoints.reduce((s, c) => s + c.px[0], 0) / f.controlPoints.length;
+  const cy = f.controlPoints.reduce((s, c) => s + c.px[1], 0) / f.controlPoints.length;
+  return f.controlPoints.map((c) => {
+    const [lng, lat] = g.pxToLngLat([2 * cx - c.px[0], 2 * cy - c.px[1]]);
+    return { ...c, lngLat: [+lng.toFixed(7), +lat.toFixed(7)] };
+  });
+}

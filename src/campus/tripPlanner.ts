@@ -36,7 +36,7 @@ export function indoorSites(plans: FloorPlanData[], imports: FloorImport[]): Rec
       plans: plans.filter((p) => p.buildingId === importAppBuildingId(id)),
       georef: (n) => { const f = fl.find((x) => x.floorNumber === n); return f ? georefOfImport(f) : null; },
       alignment: !fl.some((f) => georefOfImport(f)) ? 'Not aligned to the map yet'
-        : `${fl.some((f) => f.alignmentFrom?.startsWith('auto:')) ? 'Automatic fit of the plan outline to the OpenStreetMap footprint' : 'Control points set in the floor-plan studio'}${fl.every((f) => f.reviewed) ? ', reviewed' : ', not reviewed'}`,
+        : `${fl.some((f) => f.alignmentFrom?.startsWith('auto?:')) ? 'ORIENTATION UNCERTAIN (the plan may be turned 180°; fix it under Floor plans). ' : ''}${fl.some((f) => f.alignmentFrom?.startsWith('auto')) ? 'Automatic fit of the plan outline to the OpenStreetMap footprint' : 'Control points set in the floor-plan studio'}${fl.every((f) => f.reviewed) ? ', reviewed' : ', not reviewed'}`,
     };
   }
   return out;

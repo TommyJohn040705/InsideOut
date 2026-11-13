@@ -88,3 +88,18 @@ describe('drawn imported buildings route between floors', () => {
     expect(r.steps.some((s) => s.isVerticalTransition)).toBe(true);
   });
 });
+
+describe('turning an alignment 180°', () => {
+  it('keeps scale, flips rotation, and turning twice restores it', async () => {
+    const { turnedControlPoints, georefOfImport } = await import('../src/campus/floorImports');
+    const f = { ...base, controlPoints: e5.controlPoints as FloorImport['controlPoints'] };
+    const g0 = georefOfImport(f)!;
+    const once = { ...f, controlPoints: turnedControlPoints(f) };
+    const g1 = georefOfImport(once)!;
+    expect(g1.metresPerPixel).toBeCloseTo(g0.metresPerPixel, 4);
+    expect(Math.abs(((g1.xAxisBearingDeg - g0.xAxisBearingDeg + 360) % 360) - 180)).toBeLessThan(0.1);
+    const twice = turnedControlPoints(once);
+    // Turned points come from the fitted transform, so twice gives the fitted (not the raw) positions.
+    twice.forEach((c) => { const p = g0.pxToLngLat(c.px); expect(c.lngLat[0]).toBeCloseTo(p[0], 5); expect(c.lngLat[1]).toBeCloseTo(p[1], 5); });
+  });
+});

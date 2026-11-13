@@ -7,7 +7,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { X, Upload, Lock, Sparkles, Trash2, Crosshair, CheckCircle2, AlertTriangle, Eye, FileText } from 'lucide-react';
 import { BUILDINGS, FLOOR_STATUS_LABEL, buildingById } from '../../campus/campusData';
-import { FloorImport, georefOfImport, graphProblems, importStatus, roomNumberLabels } from '../../campus/floorImports';
+import { FloorImport, georefOfImport, graphProblems, importStatus, roomNumberLabels, turnedControlPoints } from '../../campus/floorImports';
 import type { CampusMapAdapter, FloorOverlay } from '../../campus/map/types';
 import type { ControlPoint, Px } from '../../campus/georef';
 import type { POICategory, RoomPOI } from '../../types/navigation';
@@ -85,6 +85,13 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
   });
 
   const patch = (body: Partial<FloorImport>) => run('Saving…', () => api(`/api/floor-imports/${rec!.id}`, { method: 'PATCH', body: JSON.stringify(body) }));
+  // Every aligned floor of the building shares the sheet orientation, so turn (or confirm) them together.
+  const turnBuilding = async (turn: boolean) => {
+    for (const f of imports.filter((x) => x.buildingId === rec!.buildingId && georefOfImport(x))) {
+      const body = { controlPoints: turn ? turnedControlPoints(f) : f.controlPoints, alignmentFrom: f.alignmentFrom?.replace('auto?:', 'auto:') };
+      await api(`/api/floor-imports/${f.id}`, { method: 'PATCH', body: JSON.stringify(body) });
+    }
+  };
   const setRoom = (i: number, p: Partial<RoomPOI>) => patch({ rooms: rec!.rooms.map((r, j) => (j === i ? { ...r, ...p } : r)) });
 
   const roomsFromText = () => {
@@ -218,8 +225,15 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
                   ))}</ul>
                 </div>
               ) : <div className="text-xs text-slate-500">Not aligned yet ({rec.controlPoints.length} of 2 control points).</div>}
-              {rec.alignmentFrom?.startsWith('auto:') && <p className="mt-1 text-[11px] text-amber-900 bg-amber-50 rounded-lg p-2">Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap {Math.round(Number(rec.alignmentFrom.split(':')[1]) * 100)}%). On DC this method landed within about 2 m of a fit from 52 matched rooms; still check the overlay before reviewing.</p>}
-              {rec.alignmentFrom && !rec.alignmentFrom.startsWith('auto:') && <p className="mt-1 text-[11px] text-amber-900 bg-amber-50 rounded-lg p-2">Control points copied from floor {imports.find((x) => x.id === rec.alignmentFrom)?.floorCode || rec.alignmentFrom} (same building, same sheet size). Check the overlay before reviewing; replace them if this sheet is framed differently.</p>}
+              {g && (
+                <div className="mt-1 flex gap-1.5 flex-wrap items-center">
+                  {rec.alignmentFrom?.startsWith('auto?:') && <span className="text-[11px] font-semibold text-red-800">Orientation uncertain: the outline fits almost as well turned around.</span>}
+                  <button disabled={!!busy} onClick={() => run(`Turning ${rec.buildingId} 180°…`, () => turnBuilding(true))} className="h-7 px-2 rounded-lg ring-1 ring-slate-200 text-[11px] font-bold">Turn plan 180°</button>
+                  {rec.alignmentFrom?.startsWith('auto?:') && <button disabled={!!busy} onClick={() => run('Saving…', () => turnBuilding(false))} className="h-7 px-2 rounded-lg ring-1 ring-slate-200 text-[11px] font-bold">Orientation looks right</button>}
+                </div>
+              )}
+              {rec.alignmentFrom?.startsWith('auto') && <p className="mt-1 text-[11px] text-amber-900 bg-amber-50 rounded-lg p-2">Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap {Math.round(Number(rec.alignmentFrom.split(':')[1]) * 100)}%). On DC this method landed within about 2 m of a fit from 52 matched rooms; still check the overlay before reviewing.</p>}
+              {rec.alignmentFrom && !rec.alignmentFrom.startsWith('auto') && <p className="mt-1 text-[11px] text-amber-900 bg-amber-50 rounded-lg p-2">Control points copied from floor {imports.find((x) => x.id === rec.alignmentFrom)?.floorCode || rec.alignmentFrom} (same building, same sheet size). Check the overlay before reviewing; replace them if this sheet is framed differently.</p>}
               {g && siblings.length > 0 && (
                 <button disabled={!!busy} onClick={() => run(`Copying alignment to ${siblings.length} floors…`, async () => { for (const s of siblings) await api(`/api/floor-imports/${s.id}`, { method: 'PATCH', body: JSON.stringify({ controlPoints: rec.controlPoints, alignmentFrom: rec.id }) }); })}
                   className="mt-1 text-[11px] font-bold text-indigo-700">Copy this alignment to {siblings.length} other unaligned floor{siblings.length > 1 ? 's' : ''} of {rec.buildingId} with the same sheet size</button>
