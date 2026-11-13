@@ -118,7 +118,8 @@ export default function App() {
   }, []);
   // Published imports become ordinary floors of an "import-<building>" building.
   useEffect(() => {
-    const imported = floorImports.filter((f) => f.published).map((f) => importToPlan(f, buildingById(f.buildingId)?.name || f.buildingId));
+    // Room edits made in the app (names, purposes, moves) are stored as overrides by room id; apply them to imported floors too.
+    const imported = applyOverrides(floorImports.filter((f) => f.published).map((f) => importToPlan(f, buildingById(f.buildingId)?.name || f.buildingId)), loadOverrides());
     setPlans((prev) => [...prev.filter((p) => !p.id.startsWith('import-')), ...imported]);
   }, [floorImports]);
 

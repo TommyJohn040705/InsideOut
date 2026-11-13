@@ -217,7 +217,8 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
                   ))}</ul>
                 </div>
               ) : <div className="text-xs text-slate-500">Not aligned yet ({rec.controlPoints.length} of 2 control points).</div>}
-              {rec.alignmentFrom && <p className="mt-1 text-[11px] text-amber-900 bg-amber-50 rounded-lg p-2">Control points copied from floor {imports.find((x) => x.id === rec.alignmentFrom)?.floorCode || rec.alignmentFrom} (same building, same sheet size). Check the overlay before reviewing; replace them if this sheet is framed differently.</p>}
+              {rec.alignmentFrom?.startsWith('auto:') && <p className="mt-1 text-[11px] text-amber-900 bg-amber-50 rounded-lg p-2">Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap {Math.round(Number(rec.alignmentFrom.split(':')[1]) * 100)}%). On DC this method landed within about 2 m of a fit from 52 matched rooms; still check the overlay before reviewing.</p>}
+              {rec.alignmentFrom && !rec.alignmentFrom.startsWith('auto:') && <p className="mt-1 text-[11px] text-amber-900 bg-amber-50 rounded-lg p-2">Control points copied from floor {imports.find((x) => x.id === rec.alignmentFrom)?.floorCode || rec.alignmentFrom} (same building, same sheet size). Check the overlay before reviewing; replace them if this sheet is framed differently.</p>}
               {g && siblings.length > 0 && (
                 <button disabled={!!busy} onClick={() => run(`Copying alignment to ${siblings.length} floors…`, async () => { for (const s of siblings) await api(`/api/floor-imports/${s.id}`, { method: 'PATCH', body: JSON.stringify({ controlPoints: rec.controlPoints, alignmentFrom: rec.id }) }); })}
                   className="mt-1 text-[11px] font-bold text-indigo-700">Copy this alignment to {siblings.length} other unaligned floor{siblings.length > 1 ? 's' : ''} of {rec.buildingId} with the same sheet size</button>

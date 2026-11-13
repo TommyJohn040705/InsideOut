@@ -3,6 +3,7 @@ import { Sparkles, X, Send, ExternalLink, Navigation2, Globe, CheckCircle2, MapP
 import { FloorPlanData, RoomPOI, IndoorLocationState, NavigationRoute } from '../types/navigation';
 import { answerLocally } from '../utils/localAssistant';
 import { E5_FACTS, factText } from '../data/e5/facts';
+import { buildingCode } from './Panels';
 import { cx } from './Panels';
 import { MicButton } from './MicButton';
 import { resolveCheckpoint } from '../data/e5/checkpoints';
@@ -66,6 +67,7 @@ export function Assistant({
   onReportIssue,
 }: Props) {
   const building = plan.buildingName || plan.title;
+  const code = buildingCode(plan);
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [q, setQ] = useState('');
   const [busy, setBusy] = useState(false);
@@ -92,7 +94,7 @@ export function Assistant({
 
   const findRoom = (idOrNumber?: string): RoomPOI | undefined => {
     if (!idOrNumber) return undefined;
-    const clean = idOrNumber.trim().toUpperCase().replace(/^E5[\s-]*/i, '');
+    const clean = idOrNumber.trim().toUpperCase().replace(new RegExp(`^(E5|${code})[\\s-]*`, 'i'), ''); // "DC 1301" or "E5 2108" -> the number
     return allRooms.find(
       (r) =>
         r.id.toUpperCase() === clean ||
@@ -129,7 +131,7 @@ export function Assistant({
         if (r) {
           onSetStartRoom(r);
           if (r.floor) onSwitchFloor(r.floor);
-          return { feedback: `Updated starting location to E5 ${r.roomNumber || r.name} on Level ${r.floor}.`, targetRoom: r };
+          return { feedback: `Updated starting location to ${code} ${r.roomNumber || r.name} on Level ${r.floor}.`, targetRoom: r };
         }
         return { feedback: `Could not find room ${args.roomNumberOrId}` };
       }
@@ -138,9 +140,9 @@ export function Assistant({
         const r = findRoom(args.query);
         if (r) {
           if (r.floor) onSwitchFloor(r.floor);
-          return { feedback: `Found E5 ${r.roomNumber || r.name} on Level ${r.floor}.`, targetRoom: r };
+          return { feedback: `Found ${code} ${r.roomNumber || r.name} on Level ${r.floor}.`, targetRoom: r };
         }
-        return { feedback: `Room "${args.query}" was not found in the E5 directory.` };
+        return { feedback: `Room "${args.query}" was not found in the ${code} directory.` };
       }
 
       case 'findNearestFacility': {
@@ -169,7 +171,7 @@ export function Assistant({
             if (st) onSetStartRoom(st);
           }
           onGo(dest);
-          return { feedback: `Calculated route to E5 ${dest.roomNumber || dest.name} on Level ${dest.floor}.`, targetRoom: dest };
+          return { feedback: `Calculated route to ${code} ${dest.roomNumber || dest.name} on Level ${dest.floor}.`, targetRoom: dest };
         }
         return { feedback: `Route calculation destination not found.` };
       }
@@ -194,7 +196,7 @@ export function Assistant({
           roomId: args.roomNumberOrId,
           details: args.details || '',
         });
-        return { feedback: `Map report recorded: ${args.details || args.issueType}. Thank you for helping keep E5 updated!` };
+        return { feedback: `Map report recorded: ${args.details || args.issueType}. Thank you for helping keep ${code} updated!` };
       }
 
       default:
@@ -227,7 +229,8 @@ export function Assistant({
             totalDistanceMeters: route?.totalDistanceMeters,
           },
           buildingFacts: isE5 ? E5_FACTS.map(factText) : [],
-          directory: allRooms.map((r) => ({ id: r.id, roomNumber: r.roomNumber, name: r.name, floor: r.floor })),
+          building: { code, name: plan.buildingName || plan.title },
+          directory: allRooms.map((r) => ({ id: r.id, roomNumber: r.roomNumber, name: r.name, floor: r.floor, category: r.category })),
         }),
       });
 
@@ -278,7 +281,7 @@ export function Assistant({
             role: 'bot',
             offline: true,
             text:
-              'Running in offline mode. I can answer: nearest washroom, elevator, stairs or entrance, food, and "where is room 3101". All E5 maps and turn-by-turn routes remain fully functional locally.',
+              'Running in offline mode. I can answer: nearest washroom, elevator, stairs or entrance, food, and "where is room 3101". Saved maps keep working offline.',
           },
         ]);
       }

@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { GoogleGenAI, Type } from '@google/genai';
 import { openStore } from './server/store';
+import { readPlantOpsSheet } from './server/plantOpsSheet';
 import type { FloorImport } from './src/campus/floorImports';
 
 // .env.local (gitignored, holds GEMINI_API_KEY as the README says) first, then .env.
@@ -29,8 +30,25 @@ const ai = new GoogleGenAI({
     headers: {
       'User-Agent': 'aistudio-build',
     },
+    timeout: 240000, // a busy model must fail, not hang the request forever
   },
 });
+
+// The newest flash models are often overloaded (503) or rate limited (429): fall back to older flash models.
+const FLASH_MODELS = (process.env.GEMINI_MODELS || 'gemini-3.8-flash,gemini-3.7-flash,gemini-3.6-flash,gemini-3.5-flash').split(',').map((s) => s.trim()).filter(Boolean);
+async function generateContent(params: Parameters<typeof ai.models.generateContent>[0]) {
+  const at = FLASH_MODELS.indexOf(params.model);
+  const models = at >= 0 ? FLASH_MODELS.slice(at) : [params.model]; // from the asked model down to older ones
+  let last: unknown;
+  for (const model of models) {
+    try { return await ai.models.generateContent({ ...params, model }); } catch (e: any) {
+      last = e;
+      if (!/\b(503|504|UNAVAILABLE|DEADLINE_EXCEEDED|429|RESOURCE_EXHAUSTED)\b/.test(String(e?.message || e))) throw e;
+      console.warn(`Gemini ${model} busy, trying the next model`);
+    }
+  }
+  throw last;
+}
 
 /**
  * Helper to extract mimeType and base64 string from data URL
@@ -94,7 +112,7 @@ Key Requirements:
 Respond in structured JSON strictly matching the requested format.`,
     };
 
-    const response = await ai.models.generateContent({
+    const response = await generateContent({
       model: 'gemini-3.8-flash',
       contents: { parts: [imagePart, textPart] },
       config: {
@@ -273,7 +291,7 @@ User Question: "${question}"
 
 Return JSON with 'answer', 'suggestedDestinationId' (optional string), 'suggestedFloor' (optional number), 'suggestedStartId' (optional string), and 'relevantRoomIds' (array of strings).`;
 
-    const response = await ai.models.generateContent({
+    const response = await generateContent({
       model: 'gemini-3.8-flash',
       contents: systemPrompt,
       config: {
@@ -354,7 +372,7 @@ Reply with ONLY a JSON object, no other text:
 {"roomNumber": string, "name": string, "category": one of ${JSON.stringify(ROOM_CATEGORIES)}, "purpose": string (1-2 plain sentences), "confidence": "high"|"medium"|"low"|"none", "notes": string (what was unclear, or what the photo showed)}`,
     });
 
-    const response = await ai.models.generateContent({
+    const response = await generateContent({
       model: 'gemini-3.8-flash',
       contents: [{ role: 'user', parts }],
       config: { tools: [{ googleSearch: {} }] },
@@ -399,7 +417,7 @@ app.post('/api/read-sign', async (req: Request, res: Response) => {
     if (!image) return res.status(400).json({ error: 'image is required' });
     if (!process.env.GEMINI_API_KEY) return res.status(503).json({ error: 'GEMINI_API_KEY is not set on the server' });
     const { mimeType, data } = parseDataUrl(image);
-    const response = await ai.models.generateContent({
+    const response = await generateContent({
       model: 'gemini-3.8-flash',
       contents: [{ role: 'user', parts: [
         { inlineData: { mimeType, data } },
@@ -452,7 +470,7 @@ Turn this into a list of changes. Rules:
 - If a room number is mentioned that is not in the directory, still return it; the app will say it is not on the map.
 - If you cannot tell what they mean, return an empty list and explain in "message".` });
 
-    const response = await ai.models.generateContent({
+    const response = await generateContent({
       model: 'gemini-3.8-flash',
       contents: [{ role: 'user', parts }],
       config: {
@@ -520,13 +538,13 @@ app.post('/api/transcribe', async (req: Request, res: Response) => {
 
     let response;
     try {
-      response = await ai.models.generateContent({
+      response = await generateContent({
         model: 'gemini-3.5-transcribe',
         contents: { parts: [audioPart, { text: promptText }] },
       });
     } catch (modelErr: any) {
       console.warn('Falling back to gemini-3.8-flash for transcription:', modelErr?.message);
-      response = await ai.models.generateContent({
+      response = await generateContent({
         model: 'gemini-3.8-flash',
         contents: { parts: [audioPart, { text: promptText }] },
       });
@@ -598,7 +616,7 @@ Extract with high fidelity:
 
 Return strictly valid JSON.`;
 
-    const response = await ai.models.generateContent({
+    const response = await generateContent({
       model: 'gemini-3.8-flash',
       contents: [{
         role: 'user',
@@ -712,7 +730,7 @@ Return strictly valid JSON.`;
  */
 app.post('/api/assistant-chat', async (req: Request, res: Response) => {
   try {
-    const { message, currentState, buildingFacts, directory } = req.body || {};
+    const { message, currentState, buildingFacts, directory, building } = req.body || {};
     if (!message) {
       return res.status(400).json({ error: 'message is required' });
     }
@@ -856,27 +874,33 @@ app.post('/api/assistant-chat', async (req: Request, res: Response) => {
       },
     ];
 
-    const systemPrompt = `You are FloorNav AI, the trusted indoor navigation assistant for University of Waterloo Engineering 5 (E5).
+    const isE5 = !building?.code || building.code === 'E5';
+    const buildingRules = isE5
+      ? `- E5 has 6 floors: Level 1 (Sedra SDC & Machine Shop), Level 2 (Main Ring Road Entrance, Gear Lab 2108, Rapid Proto 2002), Level 3 (Classrooms 3101/3102, E3 Bridge 3818), Level 4 (ECE), Level 5 (Dean Suite), Level 6 (SYDE/BME).
+- E5 room numbers are 4 digits where the first digit is the floor number (e.g. 2108 is Floor 2, 3101 is Floor 3).
+- Vertical circulation: Southeast elevator bank connects all 6 floors and is wheelchair-accessible.`
+      : `- Room numbers and types in ${building.code} were read automatically from Plant Operations floor plans and have not been checked; say so when it matters.
+- Indoor turn-by-turn routes are not available in ${building.code} yet. Give the room's floor and point to the elevators or stairs listed in the directory instead of describing a path.
+- Usually the first digit of a room number is the floor (B or 0 for basements).`;
+    const systemPrompt = `You are FloorNav AI, the indoor navigation assistant for University of Waterloo ${isE5 ? 'Engineering 5 (E5)' : `${building.name || building.code} (${building.code})`}.
 You have real-time access to the interactive map via structured tool calls.
 When a user asks you to navigate, locate a room, find facilities, switch floors, or report an issue, CALL THE RELEVANT TOOL.
 Rules:
-- E5 has 6 floors: Level 1 (Sedra SDC & Machine Shop), Level 2 (Main Ring Road Entrance, Gear Lab 2108, Rapid Proto 2002), Level 3 (Classrooms 3101/3102, E3 Bridge 3818), Level 4 (ECE), Level 5 (Dean Suite), Level 6 (SYDE/BME).
-- E5 room numbers are 4 digits where the first digit is the floor number (e.g. 2108 is Floor 2, 3101 is Floor 3).
-- Vertical circulation: Southeast elevator bank connects all 6 floors and is wheelchair-accessible.
+${buildingRules}
 - Do NOT invent rooms, hallways, elevators, or coordinates. Use the directory and call the tools.
 - Keep conversational answers concise, professional, and clear (1-3 plain sentences, no markdown).
 
 Current App State:
 ${JSON.stringify(currentState || {}, null, 2)}
-
+${isE5 ? `
 Verified E5 Building Facts:
 ${Array.isArray(buildingFacts) ? buildingFacts.slice(0, 15).join('\n') : ''}
-
-Directory sample:
-${Array.isArray(directory) ? directory.slice(0, 60).map((r: any) => `${r.roomNumber || r.id}: ${r.name} (L${r.floor})`).join(', ') : ''}
+` : ''}
+Directory:
+${Array.isArray(directory) ? directory.slice(0, 400).map((r: any) => `${r.roomNumber || r.id}: ${r.name}${r.category ? ` [${r.category}]` : ''} (L${r.floor})`).join(', ') : ''}
 `;
 
-    const response = await ai.models.generateContent({
+    const response = await generateContent({
       model: 'gemini-3.8-flash',
       contents: [
         { role: 'user', parts: [{ text: `${systemPrompt}\n\nUser request: "${message}"` }] },
@@ -1006,14 +1030,13 @@ app.post('/api/floor-imports/:id/extract', async (req: Request, res: Response) =
   if (!rec) return res.status(404).json({ error: 'No such import' });
   if (!process.env.GEMINI_API_KEY) return res.status(503).json({ error: 'GEMINI_API_KEY is not set on the server, so AI extraction is unavailable. You can still add rooms by hand.' });
   try {
-    const hint = `University of Waterloo building ${rec.buildingId}, floor ${rec.floorCode}. Room labels printed on the drawing: ${rec.pdfLabels.slice(0, 150).map((l) => l.text).join(', ')}`;
-    const out = await analyzeFloorplan(store.readUploadDataUrl(rec.imageUrl.replace('/uploads/', '')), hint, true);
+    const out = await readPlantOpsSheet(generateContent, parseDataUrl(store.readUploadDataUrl(rec.imageUrl.replace('/uploads/', ''))), rec.buildingId, rec.floorCode);
     const updated = store.update((d) => {
       const f = d.floorImports.find((x) => x.id === rec.id)!;
       f.rooms = (out.rooms || []).map((r: any) => ({ ...r, id: `${rec.id}-${r.id}`, floor: rec.floorNumber, purposeVerification: 'unverified_drawing_only' }));
       const rid = new Map((out.rooms || []).map((r: any) => [r.id, `${rec.id}-${r.id}`]));
       f.hallways = (out.hallways || []).map((h: any) => ({ ...h, id: `${rec.id}-${h.id}`, connectedTo: (h.connectedTo || []).map((t: string) => rid.get(t) || `${rec.id}-${t}`) }));
-      f.extraction = { model: 'gemini-3.8-flash', at: new Date().toISOString(), title: out.title, summary: out.summary };
+      f.extraction = { model: out.model, at: new Date().toISOString(), title: out.title, summary: out.summary };
       f.reviewed = false;
       return f;
     });
