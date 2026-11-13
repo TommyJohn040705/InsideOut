@@ -42,7 +42,8 @@ describe('room-to-room trip', () => {
   });
 
   it('refuses multi-floor routes in buildings with no mapped stairs or elevators', () => {
-    const fake = SAMPLE_FLOOR_PLANS.slice(0, 2).map((p) => ({ ...p, buildingId: 'import-X' }));
+    // E5's floors without their stairs and elevators: nothing joins the two floors.
+    const fake = SAMPLE_FLOOR_PLANS.slice(0, 2).map((p) => ({ ...p, buildingId: 'import-X', rooms: p.rooms.filter((r) => r.category !== 'elevator' && r.category !== 'stairs') }));
     const s = { X: { buildingId: 'X', appBuildingId: 'import-X', plans: fake, georef: () => null, alignment: '' } };
     const a = { ...fake[0].rooms[0], floor: fake[0].floorNumber }, b = { ...fake[1].rooms[0], floor: fake[1].floorNumber };
     const t = planTrip(g, s, { buildingId: 'X', room: a, label: 'a' }, { buildingId: 'X', room: b, label: 'b' }, false);

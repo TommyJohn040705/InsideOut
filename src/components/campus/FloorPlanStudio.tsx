@@ -13,6 +13,7 @@ import type { ControlPoint, Px } from '../../campus/georef';
 import type { POICategory, RoomPOI } from '../../types/navigation';
 import { BulkImport } from './BulkImport';
 import { FloorCatalogue } from './FloorCatalogue';
+import { HallwayEditor } from './HallwayEditor';
 
 interface Props {
   buildingId: string | null;
@@ -231,8 +232,7 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
                 {textRooms > 0 && <button disabled={!!busy} onClick={roomsFromText} className="text-[11px] font-bold text-indigo-700">+ {textRooms} from PDF text</button>}
                 <button disabled={!!busy} onClick={() => run('Asking Gemini to read the drawing…', () => api(`/api/floor-imports/${rec.id}/extract`, { method: 'POST' }))} className="text-[11px] font-bold text-indigo-700 flex items-center gap-1"><Sparkles className="w-3.5 h-3.5" /> Gemini</button>
               </div>
-              {rec.extraction && <p className="text-[11px] text-slate-500 mb-1">Gemini ({rec.extraction.model}) extracted rooms and hallways {new Date(rec.extraction.at).toLocaleString()}. AI output: check every room.</p>}
-              {problems.length > 0 && <p className="text-[11px] text-amber-900 bg-amber-50 rounded-lg p-2 mb-1"><AlertTriangle className="inline w-3.5 h-3.5" /> No indoor routing on this floor yet: {problems.join(' ')}</p>}
+              {rec.extraction && <p className="text-[11px] text-slate-500 mb-1">Gemini ({rec.extraction.model}) read the room labels {new Date(rec.extraction.at).toLocaleString()}. AI output: check every room. Hallways are drawn by hand below.</p>}
               <ul className="max-h-48 overflow-y-auto divide-y divide-slate-100 ring-1 ring-slate-200 rounded-lg">
                 {rec.rooms.map((r, i) => (
                   <li key={r.id} className="flex items-center gap-1 px-1.5 py-1">
@@ -247,6 +247,8 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
                 {!rec.rooms.length && <li className="p-2 text-xs text-slate-500">No rooms yet. Use the PDF text or Gemini above.</li>}
               </ul>
             </section>
+
+            <HallwayEditor key={rec.id} imageUrl={rec.imageUrl} imageSize={rec.imageSize} rooms={rec.rooms} hallways={rec.hallways} idPrefix={rec.id} busy={!!busy} onSave={(hallways) => patch({ hallways })} />
 
             <section className="space-y-2 border-t border-slate-100 pt-2">
               <label className="flex items-start gap-2 text-xs">

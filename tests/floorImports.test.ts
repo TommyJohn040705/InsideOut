@@ -67,3 +67,24 @@ describe('imported floors never route through walls', () => {
     expect(importToPlan({ ...rec, reviewed: true }, 'Davis Centre').hallways).toHaveLength(1);
   });
 });
+
+describe('drawn imported buildings route between floors', () => {
+  it('matches elevators by room number and routes floor 1 -> floor 2', async () => {
+    const { calculateIndoorRoute } = await import('../src/utils/pathfinding');
+    const { verticalLinksFor } = await import('../src/campus/floorImports');
+    const floor = (n: number) => importToPlan({
+      ...base, id: `T-0${n}`, floorNumber: n, floorCode: `0${n}`, reviewed: true, controlPoints: e5.controlPoints as FloorImport['controlPoints'],
+      rooms: [{ id: `r${n}a`, name: 'Office', roomNumber: `${n}101`, category: 'office', coords: { x: 10, y: 50 } }, { id: `r${n}e`, name: 'Elevator', roomNumber: `${n}801`, category: 'elevator', coords: { x: 90, y: 50 } }],
+      hallways: [{ id: `h${n}1`, coords: { x: 10, y: 55 }, connectedTo: [`h${n}2`, `r${n}a`] }, { id: `h${n}2`, coords: { x: 90, y: 55 }, connectedTo: [`h${n}1`, `r${n}e`] }],
+    }, 'Test');
+    const plans = [floor(1), floor(2)];
+    const links = verticalLinksFor(plans);
+    expect(links).toHaveLength(1);
+    expect(links[0]).toMatchObject({ type: 'elevator', floorsServed: [1, 2], accessible: true });
+    const a = plans[0].rooms[0], b = plans[1].rooms[0];
+    const r = calculateIndoorRoute(plans[0], a.coords, a.name, b.coords, b.name, a.id, b.id, { allFloors: plans, startFloor: 1, endFloor: 2, verticalLinks: links });
+    expect(r.fromFloor).toBe(1);
+    expect(r.toFloor).toBe(2);
+    expect(r.steps.some((s) => s.isVerticalTransition)).toBe(true);
+  });
+});

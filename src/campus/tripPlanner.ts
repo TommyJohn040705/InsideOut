@@ -8,7 +8,7 @@ import type { FloorPlanData, NavigationRoute, RoomPOI } from '../types/navigatio
 import { calculateIndoorRoute } from '../utils/pathfinding';
 import { distanceM, type Georef, type LngLat } from './georef';
 import { INDOOR, buildingById, entrancesOf, georefFor, type CampusEntrance } from './campusData';
-import { importAppBuildingId, georefOfImport, type FloorImport } from './floorImports';
+import { importAppBuildingId, georefOfImport, verticalLinksFor, type FloorImport } from './floorImports';
 import { routeOutdoor, type OutdoorGraph, type OutdoorRoute } from './outdoorRoute';
 
 export interface IndoorSite {
@@ -35,7 +35,8 @@ export function indoorSites(plans: FloorPlanData[], imports: FloorImport[]): Rec
       appBuildingId: importAppBuildingId(id),
       plans: plans.filter((p) => p.buildingId === importAppBuildingId(id)),
       georef: (n) => { const f = fl.find((x) => x.floorNumber === n); return f ? georefOfImport(f) : null; },
-      alignment: fl.some((f) => georefOfImport(f)) ? `Control points set in the floor-plan studio${fl.every((f) => f.reviewed) ? ', reviewed' : ', not reviewed'}` : 'Not aligned to the map yet',
+      alignment: !fl.some((f) => georefOfImport(f)) ? 'Not aligned to the map yet'
+        : `${fl.some((f) => f.alignmentFrom?.startsWith('auto:')) ? 'Automatic fit of the plan outline to the OpenStreetMap footprint' : 'Control points set in the floor-plan studio'}${fl.every((f) => f.reviewed) ? ', reviewed' : ', not reviewed'}`,
     };
   }
   return out;
@@ -88,7 +89,7 @@ function indoor(site: IndoorSite, a: RoomPOI, b: RoomPOI, accessible: boolean): 
   const pa = roomFloorPlan(site, a.floor!);
   if (!pa) return null;
   try {
-    return calculateIndoorRoute(pa, a.coords, a.name, b.coords, b.name, a.id, b.id, { isAccessibleOnly: accessible, allFloors: site.plans, startFloor: a.floor!, endFloor: b.floor! });
+    return calculateIndoorRoute(pa, a.coords, a.name, b.coords, b.name, a.id, b.id, { isAccessibleOnly: accessible, allFloors: site.plans, startFloor: a.floor!, endFloor: b.floor!, verticalLinks: site.appBuildingId.startsWith('import-') ? verticalLinksFor(site.plans) : undefined });
   } catch { return null; }
 }
 

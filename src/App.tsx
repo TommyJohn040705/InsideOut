@@ -20,7 +20,7 @@ import { E5ValidationModal } from './components/E5ValidationModal';
 import { resolveCheckpoint } from './data/e5/checkpoints';
 import { hydrateSuggestions } from './utils/auditLog';
 import { pullStore, pushStore } from './utils/serverStore';
-import { FloorImport, importToPlan } from './campus/floorImports';
+import { FloorImport, importToPlan, verticalLinksFor } from './campus/floorImports';
 import { buildingById } from './campus/campusData';
 import { calculateIndoorRoute } from './utils/pathfinding';
 import { speakGuidance } from './utils/speech';
@@ -295,7 +295,10 @@ export default function App() {
       r = calculateIndoorRoute(sPlan, startRoom.coords, startRoom.name, endRoom.coords, endRoom.name, startRoom.id, endRoom.id, {
         isAccessibleOnly, allFloors: buildingPlans, startFloor: sFloor, endFloor: eFloor,
         closures: routeClosures(reports, buildingPlans, E5_VERTICAL_LINKS),
+        // Imported buildings: stairs and elevators matched by room number across their drawn floors.
+        verticalLinks: buildingId === 'uwaterloo-e5' ? undefined : verticalLinksFor(buildingPlans),
       });
+      if (sPlan.source === 'upload') r.flaggedNotes = ['Route follows hallways drawn on the Plant Operations plan; stairs and elevators matched by room number. Not walked.', ...(r.flaggedNotes || [])];
     } catch (e: any) { setRoute(null); setRouteError(e?.message || 'No route found.'); return; }
     setRouteError(null);
     setRoute(r);

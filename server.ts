@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import { GoogleGenAI, Type } from '@google/genai';
 import { openStore } from './server/store';
 import { readPlantOpsSheet } from './server/plantOpsSheet';
+import { createExtractQueue } from './server/extractQueue';
 import type { FloorImport } from './src/campus/floorImports';
 
 // .env.local (gitignored, holds GEMINI_API_KEY as the README says) first, then .env.
@@ -1025,27 +1026,45 @@ app.post('/api/floor-imports', (req: Request, res: Response) => {
   }
 });
 
+/** Reads one floor's rooms with Gemini and stores them. Hand-drawn hallways are kept. Returns the room count. */
+async function extractImport(id: string): Promise<number> {
+  const rec = store.read().floorImports.find((f) => f.id === id);
+  if (!rec) throw new Error('No such import');
+  const out = await readPlantOpsSheet(generateContent, parseDataUrl(store.readUploadDataUrl(rec.imageUrl.replace('/uploads/', ''))), rec.buildingId, rec.floorCode);
+  store.update((d) => {
+    const f = d.floorImports.find((x) => x.id === rec.id)!;
+    f.rooms = out.rooms.map((r: any) => ({ ...r, id: `${rec.id}-${r.id}`, floor: rec.floorNumber, purposeVerification: 'unverified_drawing_only' }));
+    f.extraction = { model: out.model, at: new Date().toISOString(), title: out.title, summary: out.summary };
+    f.reviewed = false;
+  });
+  return out.rooms.length;
+}
+
 app.post('/api/floor-imports/:id/extract', async (req: Request, res: Response) => {
-  const rec = store.read().floorImports.find((f) => f.id === req.params.id);
-  if (!rec) return res.status(404).json({ error: 'No such import' });
+  if (!store.read().floorImports.some((f) => f.id === req.params.id)) return res.status(404).json({ error: 'No such import' });
   if (!process.env.GEMINI_API_KEY) return res.status(503).json({ error: 'GEMINI_API_KEY is not set on the server, so AI extraction is unavailable. You can still add rooms by hand.' });
   try {
-    const out = await readPlantOpsSheet(generateContent, parseDataUrl(store.readUploadDataUrl(rec.imageUrl.replace('/uploads/', ''))), rec.buildingId, rec.floorCode);
-    const updated = store.update((d) => {
-      const f = d.floorImports.find((x) => x.id === rec.id)!;
-      f.rooms = (out.rooms || []).map((r: any) => ({ ...r, id: `${rec.id}-${r.id}`, floor: rec.floorNumber, purposeVerification: 'unverified_drawing_only' }));
-      const rid = new Map((out.rooms || []).map((r: any) => [r.id, `${rec.id}-${r.id}`]));
-      f.hallways = (out.hallways || []).map((h: any) => ({ ...h, id: `${rec.id}-${h.id}`, connectedTo: (h.connectedTo || []).map((t: string) => rid.get(t) || `${rec.id}-${t}`) }));
-      f.extraction = { model: out.model, at: new Date().toISOString(), title: out.title, summary: out.summary };
-      f.reviewed = false;
-      return f;
-    });
-    return res.json(updated);
+    await extractImport(req.params.id);
+    return res.json(store.read().floorImports.find((f) => f.id === req.params.id));
   } catch (e: any) {
     console.error('extract failed', e);
     return res.status(500).json({ error: e?.message || 'Extraction failed' });
   }
 });
+
+// Paced background reading of many floors (Gemini free tier): POST { buildingIds?: string[] } queues
+// every published floor without rooms, those buildings first; GET reports progress; DELETE stops.
+const extractQueue = createExtractQueue(extractImport);
+app.get('/api/floor-imports/extract-queue', (_req: Request, res: Response) => res.json(extractQueue.status()));
+app.post('/api/floor-imports/extract-queue', (req: Request, res: Response) => {
+  if (!process.env.GEMINI_API_KEY) return res.status(503).json({ error: 'GEMINI_API_KEY is not set on the server.' });
+  const first: string[] = Array.isArray(req.body?.buildingIds) ? req.body.buildingIds : [];
+  const todo = store.read().floorImports.filter((f) => f.published && !f.rooms.length)
+    .sort((x, y) => (first.includes(x.buildingId) ? 0 : 1) - (first.includes(y.buildingId) ? 0 : 1) || x.buildingId.localeCompare(y.buildingId) || x.floorNumber - y.floorNumber);
+  const added = extractQueue.enqueue(todo.map((f) => f.id));
+  return res.json({ added, ...extractQueue.status() });
+});
+app.delete('/api/floor-imports/extract-queue', (_req: Request, res: Response) => { extractQueue.stop(); return res.json(extractQueue.status()); });
 
 app.patch('/api/floor-imports/:id', (req: Request, res: Response) => {
   const b = req.body || {};

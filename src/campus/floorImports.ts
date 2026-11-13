@@ -3,7 +3,7 @@
  * them in data/store.json) and the app (which shows published ones on the campus map and
  * in the indoor navigator). Status is always derived from what the record actually holds.
  */
-import type { CorridorNode, FloorPlanData, RoomPOI } from '../types/navigation';
+import type { CorridorNode, FloorPlanData, RoomPOI, VerticalCirculationLink } from '../types/navigation';
 import { fitGeoref, type ControlPoint, type Georef } from './georef';
 import type { FloorStatus } from './campusData';
 
@@ -69,7 +69,8 @@ export function importStatus(f: FloorImport): FloorStatus {
   if (!f.rooms.length) return 'imported';
   if (!georefOfImport(f)) return 'geometry_extracted';
   if (!f.reviewed) return 'georeferenced';
-  return graphProblems(f.rooms, f.hallways).length ? 'human_reviewed' : 'routing_available';
+  // A connected corridor network makes the floor routable; rooms not linked to it are warned about, not blocking.
+  return f.hallways.length && !graphProblems([], f.hallways).length ? 'routing_available' : 'human_reviewed';
 }
 
 /** Floor button label for a Plant Operations floor code: "01" -> "1", "02FLR_MEZ" -> "2M", "CON" -> "Con". */
@@ -105,3 +106,34 @@ export function importToPlan(f: FloorImport, buildingName: string): FloorPlanDat
 
 /** PDF text items that look like room numbers ("1302", "2108A", "DC 1302"). */
 export const roomNumberLabels = (labels: FloorImport['pdfLabels']) => labels.filter((l) => /^([A-Z]{1,4}\s?)?\d{3,4}[A-Z]?$/.test(l.text));
+
+/**
+ * Stairs and elevators of an imported building, matched across floors by room number: Plant
+ * Operations repeats the number after the floor digit on every floor (1817, 2817, 3817). Only
+ * shafts linked to a hand-drawn corridor on at least two floors become links.
+ */
+export function verticalLinksFor(plans: FloorPlanData[]): VerticalCirculationLink[] {
+  const groups = new Map<string, { floor: number; roomId: string; corridorNodeId: string; type: 'elevator' | 'stairs'; number: string }[]>();
+  for (const p of plans) {
+    const corridorOf = new Map<string, string>();
+    for (const h of p.hallways) for (const t of h.connectedTo) if (!corridorOf.has(t)) corridorOf.set(t, h.id);
+    for (const r of p.rooms) {
+      if ((r.category !== 'elevator' && r.category !== 'stairs') || !r.roomNumber || r.roomNumber.length < 4) continue;
+      const corridor = corridorOf.get(r.id);
+      if (!corridor) continue;
+      const key = `${r.category}:${r.roomNumber.slice(1)}`;
+      const list = groups.get(key) || [];
+      if (!list.some((x) => x.floor === p.floorNumber)) list.push({ floor: p.floorNumber, roomId: r.id, corridorNodeId: corridor, type: r.category, number: r.roomNumber });
+      groups.set(key, list);
+    }
+  }
+  return [...groups.entries()].filter(([, l]) => l.length >= 2).map(([key, l]) => ({
+    id: `v-${key}`,
+    type: l[0].type,
+    name: `${l[0].type === 'elevator' ? 'Elevator' : 'Stairs'} ${l.map((x) => x.number).join('/')}`,
+    floorsServed: l.map((x) => x.floor).sort((a, b) => a - b),
+    accessible: l[0].type === 'elevator',
+    nodes: l.map(({ floor, roomId, corridorNodeId }) => ({ floor, roomId, corridorNodeId })),
+    description: 'Matched by room number across floors (Plant Operations numbering); not checked on site.',
+  }));
+}
