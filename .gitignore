@@ -13,5 +13,6 @@ data-sources/plantops/pdfs/
 # Separate clone of the Wayfinder repo, kept for reference only
 futurelabs/
 
-# Runtime store: imported floor plans (may be university-owned) and corrections
-/data/
+# Runtime store (imported floor plans, rooms, corrections) IS committed so the private repo
+# carries the working buildings. University-owned drawings: keep this repository private.
+InsideOut-prototype.zip
