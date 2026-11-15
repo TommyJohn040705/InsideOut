@@ -85,8 +85,12 @@ export function UpdateMap(props: Props) {
     if (!t && !photo) return;
     setBusy(true); setNote(null); setItems([]);
     let changes: MapChange[] | null = null;
-    try {
+    // A plain problem report ("door locked", "elevator not working") needs no AI: answer at once.
+    const local = !photo ? parseLocally(t, initialRoom || null) : [];
+    if (local.length && local.every((c) => c.kind === 'report')) changes = local;
+    else try {
       const r = await fetch('/api/contribute', {
+        signal: AbortSignal.timeout(12000), // AI busy or rate-limited: fall back to the local reading below
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           building: buildingName, text: t || undefined, image: photo || undefined, roomNumber: initialRoom?.roomNumber,

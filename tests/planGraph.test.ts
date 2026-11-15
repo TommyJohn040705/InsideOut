@@ -74,7 +74,7 @@ import { calculateIndoorRoute } from '../src/utils/pathfinding';
 import type { FloorPlanData, RoomPOI } from '../src/types/navigation';
 
 describe('stairs and elevators across imported floors', () => {
-  const room = (id: string, roomNumber: string, category: RoomPOI['category'], x: number): RoomPOI => ({ id, roomNumber, name: `Room ${roomNumber}`, category, coords: { x, y: 50 } } as RoomPOI);
+  const room = (id: string, roomNumber: string, category: string, x: number): RoomPOI => ({ id, roomNumber, name: `Room ${roomNumber}`, category, coords: { x, y: 50 } } as RoomPOI);
   const floor = (n: number, rooms: RoomPOI[]): FloorPlanData => ({
     id: `f${n}`, title: '', floorNumber: n, buildingId: 'import-X', buildingName: 'X', buildingType: 'University', summary: '', imageUrl: '',
     rooms, hallways: [{ id: `h${n}a`, coords: { x: 10, y: 50 }, connectedTo: [`h${n}b`, ...rooms.filter((r) => r.coords.x < 50).map((r) => r.id)] },

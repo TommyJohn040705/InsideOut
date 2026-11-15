@@ -985,7 +985,18 @@ export default function App() {
               </div>
               <button onClick={startNavigation} className="h-12 px-6 rounded-full bg-blue-600 text-white font-bold shadow">Start</button>
             </div>
-            <button onClick={() => setSheetFull(true)} className="text-sm font-semibold text-blue-700">Route options and steps</button>
+            <button onClick={() => openSearch('start')} className="w-full text-left text-sm text-slate-700 truncate">
+              From <span className="font-semibold text-slate-900">{startRoom ? roomTitle(startRoom) : 'choose a start'}</span> <span className="text-blue-700 font-semibold">· Change</span>
+            </button>
+            <label className={cx('flex items-center gap-2.5 rounded-xl px-3 py-2.5 ring-2 cursor-pointer', isAccessibleOnly ? 'bg-blue-50 ring-blue-600' : 'bg-white ring-slate-300')}>
+              <input type="checkbox" checked={isAccessibleOnly} onChange={() => setIsAccessibleOnly((v) => !v)} className="w-5 h-5 accent-blue-700" />
+              <Accessibility className="w-4 h-4 text-slate-800" />
+              <span className="text-[15px] font-bold text-slate-900">Elevators only (step-free)</span>
+            </label>
+            <div className="flex items-center justify-between gap-2">
+              <button onClick={() => setSheetFull(true)} className="text-sm font-semibold text-blue-700">Route options and steps</button>
+              <button onClick={() => openUpdate(endRoom || startRoom || null)} className="text-sm font-semibold text-blue-800 flex items-center gap-1"><MapPinned className="w-4 h-4" /> Update the map</button>
+            </div>
           </div>
         );
       }
@@ -1019,7 +1030,7 @@ export default function App() {
                 value={query}
                 onChange={(v) => { setQuery(v); setSearchOpen(true); setSheetFull(true); }}
                 onFocus={() => { setSearchOpen(true); setSheetFull(true); setInspected(null); }}
-                placeholder={searchTarget === 'start' ? 'Search a starting point' : 'Search E5 rooms'}
+                placeholder={searchTarget === 'start' ? 'Search a starting point' : `Search rooms in ${buildingCode(currentPlan)}`}
                 leading={
                   searchOpen ? (
                     <button aria-label="Back" onClick={() => { setSearchOpen(false); setQuery(''); setSearchTarget('dest'); setSheetFull(false); }} className="p-1 -ml-1"><ChevronLeft className="w-5 h-5 text-slate-600" /></button>
