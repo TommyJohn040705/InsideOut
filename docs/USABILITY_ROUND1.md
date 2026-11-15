@@ -10,7 +10,7 @@ Two tasks from the mentor brief: (1) find a room on another floor using **Elevat
 - [ ] Pause background room reading so the AI is free for testers:
       `curl -X DELETE http://localhost:3000/api/floor-imports/extract-queue`
       (restart after: `curl -X POST -H "Content-Type: application/json" -d "{}" http://localhost:3000/api/floor-imports/extract-queue`).
-- [ ] Reload the page so it starts on the campus map with nothing selected.
+- [ ] Open **http://localhost:3000/?dev=0** (tester view: hides Coverage, Floor plans, the map badge and staff tools) so it starts on the campus map with nothing selected. Use **?dev** to get the tools back.
 - [ ] After the session: open the reported room and tap **Fixed** to clear the test report.
 - [ ] Have this sheet, a timer, and consent to take notes (no names in notes; use P1, P2…).
 
@@ -79,4 +79,4 @@ clear? Do they expect a confirmation or that others will see it?
 - Routes have not been walked; E5's map is hand-traced, other buildings are read automatically
   from the floor-plan drawings.
 - The app doesn't know about card-access or locked doors until someone reports them.
-- "Development fallback map" at the top means the free map is shown instead of Google Maps.
+- The map is the free OpenStreetMap-based one, not Google Maps.

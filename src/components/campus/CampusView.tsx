@@ -17,6 +17,7 @@ import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_MAP_ID, MAP_PROVIDER } from '../../cam
 import type { CampusMapAdapter, FloorOverlay, MapMarker, MapProvider } from '../../campus/map/types';
 import { FloorImport, floorLabelOf, importStatus } from '../../campus/floorImports';
 import { indoorSites, planTrip, Trip, TripEnd } from '../../campus/tripPlanner';
+import { DEV_MODE } from '../../devMode';
 import { loadOutdoorGraph } from '../../campus/outdoorRoute';
 import { FloorPlanStudio } from './FloorPlanStudio';
 import { searchEvidence, normRoom, type EvidenceHit } from '../../campus/evidenceIndex';
@@ -343,7 +344,7 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, r
         </button>
       </div>
       <div className="flex gap-3 text-xs font-semibold">
-        <button onClick={() => setStudioOpen(true)} className="text-indigo-700 flex items-center gap-1"><FileText className="w-3.5 h-3.5" /> Import a floor plan</button>
+        {DEV_MODE && <button onClick={() => setStudioOpen(true)} className="text-indigo-700 flex items-center gap-1"><FileText className="w-3.5 h-3.5" /> Import a floor plan</button>}
         {provider === 'google' && <button onClick={walkTo} className="text-slate-600 flex items-center gap-1"><Footprints className="w-3.5 h-3.5" /> Google walking route</button>}
       </div>
       {walk && <p className="text-xs text-slate-700" role="status">{walk}</p>}
@@ -474,12 +475,14 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, r
 
       {/* provider badge + controls */}
       <div className="absolute right-3 top-[76px] md:top-3 flex flex-col items-end gap-2">
-        <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold shadow ring-1 ${provider === 'google' ? 'bg-white text-slate-700 ring-slate-200' : 'bg-amber-100 text-amber-900 ring-amber-300'}`}>
-          {provider === 'google' ? 'Google Maps' : 'Development fallback map (MapLibre, not Google Maps)'}
-        </span>
-        <button onClick={() => setCoverageOpen(true)} className="h-10 px-3 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 text-xs font-bold flex items-center gap-1.5"><BarChart3 className="w-4 h-4" /> Coverage</button>
+        {DEV_MODE && (
+          <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold shadow ring-1 ${provider === 'google' ? 'bg-white text-slate-700 ring-slate-200' : 'bg-amber-100 text-amber-900 ring-amber-300'}`}>
+            {provider === 'google' ? 'Google Maps' : 'Development fallback map (MapLibre, not Google Maps)'}
+          </span>
+          )}
+        {DEV_MODE && <button onClick={() => setCoverageOpen(true)} className="h-10 px-3 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 text-xs font-bold flex items-center gap-1.5"><BarChart3 className="w-4 h-4" /> Coverage</button>}
         <button onClick={() => setTripOpen(true)} className="h-10 px-3 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 text-xs font-bold flex items-center gap-1.5"><Navigation2 className="w-4 h-4" /> Directions</button>
-        <button onClick={() => setStudioOpen(true)} className="h-10 px-3 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 text-xs font-bold flex items-center gap-1.5"><FileText className="w-4 h-4" /> Floor plans</button>
+        {DEV_MODE && <button onClick={() => setStudioOpen(true)} className="h-10 px-3 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 text-xs font-bold flex items-center gap-1.5"><FileText className="w-4 h-4" /> Floor plans</button>}
         <button onClick={locate} aria-label="Show my location" className="w-10 h-10 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 flex items-center justify-center"><LocateFixed className="w-5 h-5 text-slate-700" /></button>
       </div>
 

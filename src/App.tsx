@@ -22,6 +22,7 @@ import { hydrateSuggestions } from './utils/auditLog';
 import { pullStore, pushStore } from './utils/serverStore';
 import { decodeNetwork, FloorImport, importLocator, importToPlan, verticalLinksFor } from './campus/floorImports';
 import { withEvidence } from './campus/evidenceIndex';
+import { DEV_MODE } from './devMode';
 import { buildingById } from './campus/campusData';
 import { calculateIndoorRoute } from './utils/pathfinding';
 import { speakGuidance } from './utils/speech';
@@ -599,13 +600,13 @@ export default function App() {
       >
         <ShieldAlert className="w-5 h-5" />
       </button>
-      {currentPlan.originalImageUrl && (
+      {DEV_MODE && currentPlan.originalImageUrl && (
         <button aria-label={showOriginal ? 'Show clean map' : 'Show original drawing'} title={showOriginal ? 'Clean map' : 'Original drawing'} onClick={() => setShowOriginal((v) => !v)}
           className={cx('w-11 h-11 rounded-2xl shadow-md ring-1 ring-slate-200 flex items-center justify-center', showOriginal ? 'bg-amber-100 text-amber-800' : 'bg-white text-slate-700')}>
           <FileImage className="w-5 h-5" />
         </button>
       )}
-      {!isMobile && (
+      {DEV_MODE && !isMobile && (
         <button aria-label="Show hallway network" title="Hallway network" onClick={() => setShowGraph((v) => !v)}
           className={cx('w-11 h-11 rounded-2xl shadow-md ring-1 ring-slate-200 flex items-center justify-center', showGraph ? 'bg-sky-100 text-sky-800' : 'bg-white text-slate-700')}>
           <Layers className="w-5 h-5" />
@@ -809,18 +810,19 @@ export default function App() {
       <div className="h-[100dvh] w-screen flex flex-col bg-white text-slate-900 font-sans antialiased overflow-hidden">
         <header className="h-14 shrink-0 border-b border-slate-200 flex items-center gap-3 px-4 bg-white z-10">
           <div className="w-8 h-8 rounded-lg bg-amber-400 flex items-center justify-center font-extrabold text-xs text-slate-900 shadow-sm">
-            UW
+            IO
           </div>
           <div className="flex flex-col">
             <span className="font-extrabold text-base tracking-tight leading-none text-slate-900">
-              Waterloo StaffNav <span className="text-amber-600 font-bold">{buildingCode(currentPlan)}</span>
+              InsideOut <span className="text-amber-600 font-bold">{buildingCode(currentPlan)}</span>
             </span>
-            <span className="text-[10px] text-slate-500 font-medium">Workplace Companion & Navigation</span>
+            <span className="text-[10px] text-slate-500 font-medium">Indoor and campus navigation</span>
           </div>
           <span className="text-slate-300">|</span>
           {campusButton}
 
-          {/* Role Indicator & Switcher Button */}
+          {/* Role switcher and onboarding checklist: staff-companion features, developer mode only */}
+          {DEV_MODE && (<>
           <button
             onClick={() => setRoleModalOpen(true)}
             className="h-8 px-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold flex items-center gap-1.5 transition-colors"
@@ -846,6 +848,7 @@ export default function App() {
             <CheckCircle2 className="w-3.5 h-3.5 text-amber-600" />
             <span>Checklist ({completedTasks.length}/{ONBOARDING_TASKS.filter((t: OnboardingTask) => t.role === staffRole || t.role === 'all').length})</span>
           </button>
+          </>)}
 
           <div className="flex-1" />
           {actions.map((a) => (
@@ -1063,7 +1066,7 @@ export default function App() {
               <div className="pointer-events-auto flex items-center gap-2">
                 {campusButton}
                 <FloorPicker floors={floors} labels={floorLabels} current={currentPlan.floorNumber} onPick={goFloor} routeFloors={routeFloors} />
-                <button
+                {DEV_MODE && <button
                   onClick={() => setWorkplaceCompanionOpen(true)}
                   className="h-10 px-3 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 flex items-center gap-1.5 text-xs font-bold text-slate-800 shrink-0"
                 >
@@ -1078,7 +1081,7 @@ export default function App() {
                   <span className="text-[10px] font-extrabold px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-900">
                     {completedTasks.length}
                   </span>
-                </button>
+                </button>}
               </div>
             )}
             {/* Day 1 Orientation banner on mobile */}
@@ -1149,7 +1152,7 @@ export default function App() {
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-lg bg-amber-400 flex items-center justify-center font-black text-xs text-slate-900">UW</div>
               <div className="flex-1 min-w-0">
-                <p className="font-extrabold text-slate-900">Waterloo StaffNav E5</p>
+                <p className="font-extrabold text-slate-900">InsideOut</p>
                 <p className="text-xs text-slate-500 truncate">{STAFF_ROLES[staffRole]?.label || 'Staff'} · {currentPlan.buildingName || currentPlan.title}</p>
               </div>
               <button aria-label="Close menu" onClick={() => setMenuOpen(false)} className="p-2 rounded-full hover:bg-slate-100"><X className="w-5 h-5" /></button>
