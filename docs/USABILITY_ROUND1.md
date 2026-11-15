@@ -25,27 +25,34 @@ Two tasks from the mentor brief: (1) find a room on another floor using **Elevat
 > You use a wheelchair and you're at the **east entrance of Engineering 5**. Your class is in
 > **E5 3101** on the third floor. Find the way there **without using any stairs**.
 
-Start: campus map. Done when: the route to E5 3101 is on screen with **Elevators only** checked
-and they can say which elevator they'd take.
+Start: campus map ("Which building are you in?"). Done when: the step-by-step directions to E5 3101
+are on screen with **Elevators only** checked and they can say which elevator they'd take.
 
-Expected path: search "E5 3101" → open it → **Directions** → (start shows "From East Ground Entrance
-1816"; tap **Change** if not) → **Elevators only (step-free)** is checked → route shows
-"Elevator to L3", about 92 m.
+Expected path: tap **Engineering 5** in the list (or on the map) → **I am at** already shows
+"East Ground Entrance & Concourse 1816" → **I want to go to** → type **3101** → pick it →
+**Elevators only (step-free)** is checked → summary "2 min · about 92 m · floors 1 → 3" →
+**Show the way** → step 5 of 8 reads "Take Southeast Passenger Elevator Bank up 2 floors to Level 3".
 
-Watch for: do they find the search? Do they notice the start point? Do they look for the
-step-free option, and where? Do they understand the floor buttons (1–6) and the "Elevator to L3" tag?
+Other ways they may find: searching "E5 3101" at the top of the campus map, opening the room and
+tapping **Directions**; or **Tell us in words instead** ("I'm at 1816 and need 3101"). Both count.
 
-Optional harder version (automatic route, not E5): from **MC 3068** to **MC 1085**, elevators only
-(route uses Elevator 1101/3101/4101, about 160 m; the screen notes it's read automatically from the drawing).
+Watch for: do they pick the building first or search? Do they notice "I am at" is already filled?
+Do they look for the step-free box before or after Show the way? Do they use Back / Next or read
+the list of all steps? Do they understand the floor buttons (1–6)?
+
+Optional harder version (automatic route, not E5): in **Mathematics & Computer (MC)**, from **3068**
+to **6124**, elevators only (about 98 m, elevator up 3 floors; 6124 shows as Chris Bauch's office;
+the directions note the route is read automatically from the drawing).
 
 ## Task 2: Update the map (report a problem)
 
 > When you get to E5 3101, the **door is locked**. Let the app know so other people are warned.
 > (Second participant variant: the **elevator isn't working**.)
 
-Start: the route from Task 1 still open. Done when: "Saved" appears.
+Start: the directions from Task 1 still open. Done when: "Saved" appears.
 
-Expected path: **Update the map** (on the route summary or the room card) → tap **Door locked**
+Expected path: **Update the map** (bottom of the directions, or "Locked door or broken elevator?
+Update the map" under the form, or **Report a problem** on a room card) → tap **Door locked**
 (or **Elevator not working**) → **Continue** → **Submit report** → "Saved".
 
 Watch for: do they find Update the map? Do they type or use the quick buttons? Is "Check and save"
