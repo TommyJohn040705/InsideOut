@@ -194,3 +194,26 @@ describe('compact network storage', () => {
     expect(norm(back as typeof h)).toEqual(norm(h));
   });
 });
+
+import { readShaftLinks } from '../src/campus/floorImports';
+
+describe('stairs and elevators linked by hand', () => {
+  const room = (id: string, roomNumber: string, category: string, x: number): RoomPOI => ({ id, roomNumber, name: `Room ${roomNumber}`, category, coords: { x, y: 50 } } as RoomPOI);
+  const floor = (n: number, rooms: RoomPOI[]): FloorPlanData => ({
+    id: `f${n}`, title: '', floorNumber: n, buildingId: 'import-X', buildingName: 'X', buildingType: 'University', summary: '', imageUrl: '',
+    rooms, hallways: [{ id: `h${n}`, coords: { x: 50, y: 50 }, connectedTo: rooms.map((r) => r.id) }],
+  } as FloorPlanData);
+  const plans = [floor(1, [room('a', '1200', 'other', 20), room('o1', '1050', 'office', 70)]), floor(2, [room('b', '2333', 'utility', 80), room('o2', '2050', 'office', 70)])];
+
+  it('joins the chosen rooms as one elevator, whatever they were read as', () => {
+    expect(verticalLinksFor(plans)).toEqual([]);
+    const links = verticalLinksFor(plans, undefined, [{ id: 'm1', type: 'elevator', rooms: [{ floor: 1, roomId: 'a' }, { floor: 2, roomId: 'b' }] }]);
+    expect(links.map((l) => [l.type, l.accessible, l.nodes.map((n) => n.roomId)])).toEqual([['elevator', true, ['a', 'b']]]);
+    expect(links[0].description).toMatch(/by hand/);
+  });
+
+  it('drops malformed saved links', () => {
+    const v = { X: [{ id: 'ok', type: 'stairs', rooms: [{ floor: 1, roomId: 'a' }, { floor: 2, roomId: 'b' }] }, { id: 'bad', type: 'lift', rooms: [] }, { id: 'one', type: 'stairs', rooms: [{ floor: 1, roomId: 'a' }] }], Y: 'nope' };
+    expect(readShaftLinks(v)).toEqual({ X: [v.X[0]] });
+  });
+});

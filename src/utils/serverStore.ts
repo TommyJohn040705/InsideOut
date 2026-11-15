@@ -1,5 +1,5 @@
 /** Server copy of lists the app also keeps in localStorage (see server.ts /api/store/:key). */
-export type StoreKey = 'corrections' | 'roomOverrides' | 'reports';
+export type StoreKey = 'corrections' | 'roomOverrides' | 'reports' | 'shaftLinks';
 
 export async function pullStore<T>(key: StoreKey): Promise<T | null> {
   try {

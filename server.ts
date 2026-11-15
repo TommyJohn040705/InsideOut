@@ -957,7 +957,7 @@ const networkFile = (id: string) => path.join(NETWORKS, `${id.replace(/[^\w-]/g,
 app.use('/uploads', (_req, res, next) => { res.set('Cache-Control', 'private, no-store'); res.set('X-Robots-Tag', 'noindex'); next(); }, express.static(store.uploadsDir));
 app.use('/uploads', (_req: Request, res: Response) => res.status(404).json({ error: 'No such file' }));
 
-const STORE_KEYS = new Set(['corrections', 'roomOverrides', 'reports']);
+const STORE_KEYS = new Set(['corrections', 'roomOverrides', 'reports', 'shaftLinks']);
 app.get('/api/store/:key', (req: Request, res: Response) => {
   if (!STORE_KEYS.has(req.params.key)) return res.status(404).json({ error: 'Unknown store key' });
   return res.json(store.read().kv[req.params.key] ?? null);

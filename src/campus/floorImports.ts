@@ -154,6 +154,21 @@ export function importToPlan(f: FloorImport, buildingName: string, sameBuilding:
 /** PDF text items that look like room numbers ("1302", "2108A", "DC 1302"). */
 export const roomNumberLabels = (labels: FloorImport['pdfLabels']) => labels.filter((l) => /^([A-Z]{1,4}\s?)?\d{3,4}[A-Z]?$/.test(l.text));
 
+/** A stair or elevator linked by hand across floors: one room per floor it serves. */
+export interface ManualShaft { id: string; type: 'elevator' | 'stairs'; rooms: { floor: number; roomId: string }[] }
+
+/** Hand-made links stored under the "shaftLinks" key, by building id; anything malformed is dropped. */
+export function readShaftLinks(v: unknown): Record<string, ManualShaft[]> {
+  const out: Record<string, ManualShaft[]> = {};
+  if (!v || typeof v !== 'object') return out;
+  for (const [b, list] of Object.entries(v as Record<string, unknown>)) {
+    if (!Array.isArray(list)) continue;
+    out[b] = list.filter((m: any) => m && typeof m.id === 'string' && (m.type === 'elevator' || m.type === 'stairs') && Array.isArray(m.rooms)
+      && m.rooms.length >= 2 && m.rooms.every((r: any) => r && Number.isFinite(r.floor) && typeof r.roomId === 'string'));
+  }
+  return out;
+}
+
 /** Two shafts on different floors this close on the map (m) are the same shaft, if each is the other's nearest. */
 export const SHAFT_MATCH_M = 3;
 
@@ -161,9 +176,12 @@ export const SHAFT_MATCH_M = 3;
  * Stairs and elevators of an imported building, matched across floors two ways: by room number
  * (Plant Operations repeats the number after the floor digit: 1817, 2817, 3817) and, when floors
  * are placed on the map (`locate`), by position: the same type of shaft within SHAFT_MATCH_M on
- * another floor, each the other's nearest. Only shafts joined to a hallway network become links.
+ * another floor, each the other's nearest. `manual` links made by hand in the floor-plan studio are
+ * added on top (any room can be named a shaft there). Only shafts joined to a hallway network become links.
  */
-export function verticalLinksFor(plans: FloorPlanData[], locate?: (floor: number, p: { x: number; y: number }) => LngLat | null): VerticalCirculationLink[] {
+export function verticalLinksFor(plans: FloorPlanData[], locate?: (floor: number, p: { x: number; y: number }) => LngLat | null, manual: ManualShaft[] = []): VerticalCirculationLink[] {
+  const manualType = new Map<string, 'elevator' | 'stairs'>();
+  for (const m of manual) for (const r of m.rooms) manualType.set(r.roomId, m.type);
   // "1093 ELV" -> "093": the number after the floor digit, ignoring any trailing label.
   const suffix = (r: RoomPOI) => (r.roomNumber || '').match(/^\d(\d{3}[A-Z]?)\b/)?.[1];
   // A shaft read as elevator/stairs on one floor carries to the same number on other floors where the
@@ -181,7 +199,7 @@ export function verticalLinksFor(plans: FloorPlanData[], locate?: (floor: number
     for (const h of p.hallways) for (const t of h.connectedTo) if (!corridorOf.has(t)) corridorOf.set(t, h.id);
     for (const r of p.rooms) {
       const s = suffix(r);
-      const type = s && shaftType.has(s) && MAY_BE_SHAFT.has(r.category) ? shaftType.get(s)! : r.category === 'elevator' || r.category === 'stairs' ? r.category : undefined;
+      const type = manualType.get(r.id) ?? (s && shaftType.has(s) && MAY_BE_SHAFT.has(r.category) ? shaftType.get(s)! : r.category === 'elevator' || r.category === 'stairs' ? r.category : undefined);
       const corridor = corridorOf.get(r.id);
       if (!type || !corridor) continue;
       shafts.push({ floor: p.floorNumber, roomId: r.id, corridorNodeId: corridor, type, number: r.roomNumber?.match(/^\d+[A-Z]?/)?.[0] || r.name, key: s && shaftType.has(s) ? `${type}:${s}` : undefined, at: locate ? locate(p.floorNumber, r.coords) : null });
@@ -227,8 +245,13 @@ export function verticalLinksFor(plans: FloorPlanData[], locate?: (floor: number
     };
     shafts.forEach((s, i) => { if (s.floor === fa && P[i]) { const j = near(i, fb, 1); if (j >= 0 && near(j, fa, -1) === i) union(i, j); } });
   }
+  // Hand-made links join their rooms whatever the automatic matching said.
+  const indexOf = new Map(shafts.map((s, i) => [s.roomId, i]));
+  for (const m of manual) { const idx = m.rooms.map((r) => indexOf.get(r.roomId)).filter((i): i is number => i !== undefined); for (const i of idx.slice(1)) union(idx[0], i); }
   const groups = new Map<number, Shaft[]>();
-  shafts.forEach((s, i) => { const l = groups.get(find(i)) || []; if (!l.some((x) => x.floor === s.floor)) l.push(s); groups.set(find(i), l); });
+  // Hand-linked rooms first, so they are the ones used on their floor.
+  const order = shafts.map((_, i) => i).sort((a, b) => Number(manualType.has(shafts[b].roomId)) - Number(manualType.has(shafts[a].roomId)));
+  for (const i of order) { const s = shafts[i]; const l = groups.get(find(i)) || []; if (!l.some((x) => x.floor === s.floor)) l.push(s); groups.set(find(i), l); }
   return [...groups.values()].filter((l) => l.length >= 2).map((l) => {
     l.sort((a, b) => a.floor - b.floor);
     const byNumber = l.every((x) => x.key && x.key === l[0].key);
@@ -239,7 +262,8 @@ export function verticalLinksFor(plans: FloorPlanData[], locate?: (floor: number
       floorsServed: l.map((x) => x.floor),
       accessible: l[0].type === 'elevator',
       nodes: l.map(({ floor, roomId, corridorNodeId }) => ({ floor, roomId, corridorNodeId })),
-      description: byNumber ? 'Matched by room number across floors (Plant Operations numbering); not checked on site.'
+      description: l.some((x) => manualType.has(x.roomId)) ? 'Linked by hand in the floor-plan studio; not checked on site.'
+        : byNumber ? 'Matched by room number across floors (Plant Operations numbering); not checked on site.'
         : `Matched across floors by room number and by position on the map (within ${SHAFT_MATCH_M} m); not checked on site.`,
     };
   });

@@ -7,12 +7,13 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { X, Upload, Lock, Sparkles, Trash2, Crosshair, CheckCircle2, AlertTriangle, Eye, FileText } from 'lucide-react';
 import { BUILDINGS, FLOOR_STATUS_LABEL, buildingById } from '../../campus/campusData';
-import { FloorImport, georefOfImport, graphProblems, importStatus, roomNumberLabels, turnedControlPoints } from '../../campus/floorImports';
+import { FloorImport, georefOfImport, graphProblems, importStatus, roomNumberLabels, turnedControlPoints, type ManualShaft } from '../../campus/floorImports';
 import type { CampusMapAdapter, FloorOverlay } from '../../campus/map/types';
 import type { ControlPoint, Px } from '../../campus/georef';
 import type { POICategory, RoomPOI } from '../../types/navigation';
 import { BulkImport } from './BulkImport';
 import { FloorCatalogue } from './FloorCatalogue';
+import { LinkFloors } from './LinkFloors';
 import { HallwayEditor } from './HallwayEditor';
 
 interface Props {
@@ -22,6 +23,8 @@ interface Props {
   adapter: CampusMapAdapter | null;
   onPreview: (o: FloorOverlay | null) => void;
   onClose: () => void;
+  shaftLinks?: Record<string, ManualShaft[]>;
+  onShaftLinksChanged?: (links: Record<string, ManualShaft[]>) => void;
 }
 
 const CATS: POICategory[] = ['classroom', 'lab', 'office', 'conference', 'restroom', 'elevator', 'stairs', 'entrance', 'dining', 'study', 'utility', 'other'] as POICategory[];
@@ -36,7 +39,7 @@ async function api(url: string, init?: RequestInit) {
   return d;
 }
 
-export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPreview, onClose }: Props) {
+export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPreview, onClose, shaftLinks = {}, onShaftLinksChanged }: Props) {
   const [bId, setBId] = useState(buildingId || 'E5');
   const b = buildingById(bId);
   const [floorCode, setFloorCode] = useState('');
@@ -47,7 +50,7 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
   const [err, setErr] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [pendingPx, setPendingPx] = useState<Px | null>(null);
-  const [tab, setTab] = useState<'single' | 'bulk' | 'catalogue'>('single');
+  const [tab, setTab] = useState<'single' | 'bulk' | 'catalogue' | 'links'>('single');
   const imgRef = useRef<HTMLImageElement>(null);
 
   const rec = imports.find((f) => f.id === openId) || null;
@@ -141,12 +144,15 @@ export function FloorPlanStudio({ buildingId, imports, onChanged, adapter, onPre
 
         {!rec && (
           <div role="tablist" className="flex gap-1 bg-slate-100 rounded-xl p-1">
-            {([['single', 'One floor'], ['bulk', 'Bulk import'], ['catalogue', 'Catalogue']] as const).map(([k, l]) => (
+            {([['single', 'One floor'], ['bulk', 'Bulk import'], ['catalogue', 'Catalogue'], ['links', 'Link floors']] as const).map(([k, l]) => (
               <button key={k} role="tab" aria-selected={tab === k} onClick={() => setTab(k)} className={`flex-1 h-8 rounded-lg text-xs font-bold ${tab === k ? 'bg-white shadow text-slate-900' : 'text-slate-600'}`}>{l}</button>
             ))}
           </div>
         )}
         {!rec && tab === 'bulk' && <BulkImport imports={imports} onChanged={onChanged} />}
+        {!rec && tab === 'links' && (mine.length < 2
+          ? <p className="text-xs text-slate-600">{b ? b.name : bId} has fewer than two imported floors; pick a building with several floors on the map first.</p>
+          : <LinkFloors buildingName={b?.name || bId} floors={mine} links={shaftLinks[bId] || []} onSave={(l) => onShaftLinksChanged?.({ ...shaftLinks, [bId]: l })} />)}
         {!rec && tab === 'catalogue' && <FloorCatalogue imports={imports} onOpen={(id) => { setOpenId(id); }} onImport={(b, code) => { setBId(b); setFloorCode(code); setTab('single'); }} />}
         {!rec && tab === 'single' && (
           <>

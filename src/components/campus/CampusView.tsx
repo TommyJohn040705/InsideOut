@@ -17,6 +17,7 @@ import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_MAP_ID, MAP_PROVIDER } from '../../cam
 import type { CampusMapAdapter, FloorOverlay, MapMarker, MapProvider } from '../../campus/map/types';
 import { FloorImport, floorLabelOf, importStatus } from '../../campus/floorImports';
 import { indoorSites, planTrip, Trip, TripEnd } from '../../campus/tripPlanner';
+import type { ManualShaft } from '../../campus/floorImports';
 import { DEV_MODE } from '../../devMode';
 import { loadOutdoorGraph } from '../../campus/outdoorRoute';
 import { FloorPlanStudio } from './FloorPlanStudio';
@@ -28,6 +29,9 @@ interface Props {
   onImportsChanged: () => void;
   /** Fetch the hallway networks of these buildings; resolves true when new ones were loaded. */
   onNeedNetworks?: (buildingIds: string[]) => Promise<boolean>;
+  /** Stairs/elevators linked by hand, by building id, and a setter that saves them. */
+  shaftLinks?: Record<string, ManualShaft[]>;
+  onShaftLinksChanged?: (links: Record<string, ManualShaft[]>) => void;
   route: NavigationRoute | null;
   destination: RoomPOI | null;
   isMobile: boolean;
@@ -49,7 +53,7 @@ const floorLabel = (code: string) => code.replace(/^0(\d)$/, '$1');
 const hitLabel = (h: Hit) => h.kind === 'floor' ? `${h.b.code} floor ${h.f.wing ? h.f.wing + ' ' : ''}${floorLabel(h.f.floorCode)}` : h.kind === 'room' ? `${h.b.code} ${h.room.roomNumber || ''} ${h.room.name}`.trim() : h.kind === 'osmroom' ? `${h.b.code} ${[h.r.ref, h.r.name].filter(Boolean).join(': ')}` : buildingLabel(h.b);
 const toTripEnd = (h: Hit): TripEnd => h.kind === 'room' ? { buildingId: h.b.id, room: h.room, label: hitLabel(h) } : h.kind === 'osmroom' ? { buildingId: h.b.id, at: h.r.center, label: hitLabel(h) } : { buildingId: h.b.id, label: hitLabel(h) };
 
-export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, route, destination, isMobile, onOpenIndoor, onRouteIndoor }: Props) {
+export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, shaftLinks, onShaftLinksChanged, route, destination, isMobile, onOpenIndoor, onRouteIndoor }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const [adapter, setAdapter] = useState<CampusMapAdapter | null>(null);
   const [provider, setProvider] = useState<MapProvider>(MAP_PROVIDER);
@@ -75,7 +79,7 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, r
   const [trip, setTrip] = useState<Trip | null>(null);
   const [tripMsg, setTripMsg] = useState<string | null>(null);
 
-  const sites = useMemo(() => indoorSites(plans, imports), [plans, imports]);
+  const sites = useMemo(() => indoorSites(plans, imports, shaftLinks), [plans, imports, shaftLinks]);
   const selected = selectedId ? buildingById(selectedId) : null;
   const site = selected ? sites[selected.id] || null : null;
   const entrances = useMemo(() => (selected ? entrancesOf(selected.id) : []), [selected]);
@@ -496,7 +500,7 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, r
 
       {studioOpen && (
         <div className={isMobile ? 'fixed inset-x-0 bottom-0 top-1/3 z-40 p-2' : 'absolute right-3 top-3 bottom-3 w-[420px] z-40'}>
-          <FloorPlanStudio buildingId={selectedId} imports={imports} onChanged={onImportsChanged} adapter={adapter} onPreview={setStudioPreview} onClose={() => setStudioOpen(false)} />
+          <FloorPlanStudio buildingId={selectedId} imports={imports} onChanged={onImportsChanged} shaftLinks={shaftLinks || {}} onShaftLinksChanged={onShaftLinksChanged} adapter={adapter} onPreview={setStudioPreview} onClose={() => setStudioOpen(false)} />
         </div>
       )}
 

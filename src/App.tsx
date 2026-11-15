@@ -20,7 +20,7 @@ import { E5ValidationModal } from './components/E5ValidationModal';
 import { resolveCheckpoint } from './data/e5/checkpoints';
 import { hydrateSuggestions } from './utils/auditLog';
 import { pullStore, pushStore } from './utils/serverStore';
-import { decodeNetwork, FloorImport, importLocator, importToPlan, verticalLinksFor } from './campus/floorImports';
+import { decodeNetwork, FloorImport, importLocator, importToPlan, readShaftLinks, verticalLinksFor, type ManualShaft } from './campus/floorImports';
 import { withEvidence } from './campus/evidenceIndex';
 import { DEV_MODE } from './devMode';
 import { buildingById } from './campus/campusData';
@@ -99,6 +99,9 @@ export default function App() {
   const [auditModalOpen, setAuditModalOpen] = useState(false);
   const [validationModalOpen, setValidationModalOpen] = useState(false);
   const [floorImports, setFloorImports] = useState<FloorImport[]>([]);
+  // Stairs/elevators linked by hand in the floor-plan studio, by building id (shared store key "shaftLinks").
+  const [shaftLinks, setShaftLinks] = useState<Record<string, ManualShaft[]>>({});
+  const saveShaftLinks = (l: Record<string, ManualShaft[]>) => { setShaftLinks(l); pushStore('shaftLinks', l); };
   const [isOffline, setIsOffline] = useState(() => typeof navigator !== 'undefined' && !navigator.onLine);
 
   // Shared map data from the server: imported floors, room edits, reports, corrections.
@@ -112,6 +115,7 @@ export default function App() {
       setPlans((prev) => applyOverrides(prev, o));
       setCurrentPlan((p) => applyOverrides([p], o)[0]);
     });
+    pullStore<unknown>('shaftLinks').then((v) => setShaftLinks(readShaftLinks(v)));
     pullStore<RoomReport[]>('reports').then((l) => { if (Array.isArray(l)) { setReports(l); try { localStorage.setItem('floornav.reports.v1', JSON.stringify(l)); } catch { /* */ } } });
     const on = () => setIsOffline(false), off = () => setIsOffline(true);
     window.addEventListener('online', on); window.addEventListener('offline', off);
@@ -316,7 +320,7 @@ export default function App() {
         isAccessibleOnly, allFloors: buildingPlans, startFloor: sFloor, endFloor: eFloor,
         closures: routeClosures(reports, buildingPlans, E5_VERTICAL_LINKS),
         // Imported buildings: stairs and elevators matched by room number across their drawn floors.
-        verticalLinks: buildingId === 'uwaterloo-e5' ? undefined : verticalLinksFor(buildingPlans, importLocator(floorImports.filter((f) => `import-${f.buildingId}` === buildingId))),
+        verticalLinks: buildingId === 'uwaterloo-e5' ? undefined : verticalLinksFor(buildingPlans, importLocator(floorImports.filter((f) => `import-${f.buildingId}` === buildingId)), shaftLinks[buildingId.replace(/^import-/, '')]),
       });
       if (sPlan.source === 'upload') r.flaggedNotes = [buildingPlans.some((p) => p.autoHallways)
         ? 'Automatic route: read from the open space on the Plant Operations drawing (stays out of walls, goes through drawn doorways); stairs and elevators matched by room number. Not walked or reviewed; locked doors are not known.'
@@ -326,7 +330,7 @@ export default function App() {
     setRoute(r);
     setStepIndex(0); stepRef.current = 0; spokenRef.current = -1;
     setWalked(0); walkedRef.current = 0;
-  }, [startRoom, endRoom, isAccessibleOnly, buildingPlans, reports]);
+  }, [startRoom, endRoom, isAccessibleOnly, buildingPlans, reports, shaftLinks]);
 
   const stepForDistance = (r: NavigationRoute, d: number) => {
     let idx = 0;
@@ -794,7 +798,7 @@ export default function App() {
     if (room) { setInspected(room); setTimeout(() => showRoom(room), 120); }
   };
   if (view === 'campus') {
-    return <CampusView plans={plans} imports={floorImports} onImportsChanged={loadImports} onNeedNetworks={ensureNetworks} route={route} destination={endRoom} isMobile={isMobile} onOpenIndoor={openIndoor}
+    return <CampusView plans={plans} imports={floorImports} onImportsChanged={loadImports} onNeedNetworks={ensureNetworks} shaftLinks={shaftLinks} onShaftLinksChanged={saveShaftLinks} route={route} destination={endRoom} isMobile={isMobile} onOpenIndoor={openIndoor}
       onRouteIndoor={(appBuildingId, s, e, stepFree) => {
         setIsAccessibleOnly(stepFree);
         const p = plansRef.current.find((x) => x.buildingId === appBuildingId && x.floorNumber === s.floor);
