@@ -111,7 +111,7 @@ function indoor(site: IndoorSite, a: RoomPOI, b: RoomPOI, accessible: boolean): 
   const pa = roomFloorPlan(site, a.floor!);
   if (!pa) return null;
   try {
-    return calculateIndoorRoute(pa, a.coords, a.name, b.coords, b.name, a.id, b.id, { isAccessibleOnly: accessible, allFloors: site.plans, startFloor: a.floor!, endFloor: b.floor!, verticalLinks: site.appBuildingId.startsWith('import-') ? verticalLinksFor(site.plans) : undefined });
+    return calculateIndoorRoute(pa, a.coords, a.name, b.coords, b.name, a.id, b.id, { isAccessibleOnly: accessible, allFloors: site.plans, startFloor: a.floor!, endFloor: b.floor!, verticalLinks: site.appBuildingId.startsWith('import-') ? verticalLinksFor(site.plans, (f, p) => site.georef(f)?.pctToLngLat(p) ?? null) : undefined });
   } catch { return null; }
 }
 

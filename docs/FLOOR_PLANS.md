@@ -1539,7 +1539,9 @@ Every imported floor with rooms gets a hallway network read straight off its Pla
 rooms are read). Walls are thick lines plus thin lines that run straight for 30 px or more; text, door
 swings and door leaves are short or curved and are ignored, so doorways stay open. The open floor space
 is thinned to centre-lines that become hallway nodes; nodes inside rooms (not corridors) cost 4x so routes
-keep to corridors. Stairs and elevators are matched across floors by room number. Campus trips enter at
+keep to corridors. Stairs and elevators are matched across floors by room number and by position
+on the map (same type, mutual nearest within 3 m after allowing for a whole-floor alignment shift;
+an unaligned floor borrows a same-size sibling sheet's alignment). Campus trips enter at
 the hallway node nearest each OpenStreetMap door (within 8 m) when the floor has no entrance room.
 
 What it does not know: locked or card-access doors, doors drawn without a gap, one-way doors, ramps and
@@ -1547,3 +1549,8 @@ door openers, and whether a matched elevator really serves every floor. Routes a
 not walked. Hand-drawn hallways, once reviewed and connected, replace the automatic network for that floor.
 Distances use the floor's map alignment for scale; floors of buildings with no aligned floor fall back to
 E5's scale and read too short.
+
+Storage: each floor's automatic network is kept in `data/networks/<floor id>.json` (compact form:
+positions, edges by index, room links; see `encodeNetwork` in src/campus/floorImports.ts), not in
+`data/store.json`. The app fetches a building's networks only when that building is opened or a
+campus trip needs it (`GET /api/floor-imports/:id/network`).

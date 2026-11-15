@@ -8,7 +8,7 @@ import { GoogleGenAI, Type } from '@google/genai';
 import { openStore } from './server/store';
 import { readPlantOpsSheet } from './server/plantOpsSheet';
 import { createExtractQueue } from './server/extractQueue';
-import type { FloorImport } from './src/campus/floorImports';
+import { encodeNetwork, type FloorImport } from './src/campus/floorImports';
 import { spawn } from 'child_process';
 
 // .env.local (gitignored, holds GEMINI_API_KEY as the README says) first, then .env.
@@ -38,9 +38,12 @@ const ai = new GoogleGenAI({
 
 // The newest flash models are often overloaded (503) or rate limited (429): fall back to older flash models.
 const FLASH_MODELS = (process.env.GEMINI_MODELS || 'gemini-3.8-flash,gemini-3.7-flash,gemini-3.6-flash,gemini-3.5-flash').split(',').map((s) => s.trim()).filter(Boolean);
-async function generateContent(params: Parameters<typeof ai.models.generateContent>[0]) {
+// Background room reading tries every flash model (each has its own free-tier daily limit), newest last
+// so the interactive features, which start at the newest, keep its allowance longest.
+const READ_MODELS = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.7-flash', 'gemini-3.8-flash'].filter((m) => FLASH_MODELS.includes(m));
+async function generateContent(params: Parameters<typeof ai.models.generateContent>[0], order?: string[]) {
   const at = FLASH_MODELS.indexOf(params.model);
-  const models = at >= 0 ? FLASH_MODELS.slice(at) : [params.model]; // from the asked model down to older ones
+  const models = order || (at >= 0 ? FLASH_MODELS.slice(at) : [params.model]); // from the asked model down to older ones
   let last: unknown;
   for (const model of models) {
     try { return await ai.models.generateContent({ ...params, model }); } catch (e: any) {
@@ -937,6 +940,19 @@ ${Array.isArray(directory) ? directory.slice(0, 400).map((r: any) => `${r.roomNu
 
 /* ---------------- Persistent store: imported floor plans and corrections ---------------- */
 const store = openStore(path.resolve(__dirname, 'data'));
+// Automatic hallway networks live one file per floor (they are most of the data); the app loads them on demand.
+const NETWORKS = path.resolve(__dirname, "data", "networks");
+fs.mkdirSync(NETWORKS, { recursive: true });
+const networkFile = (id: string) => path.join(NETWORKS, `${id.replace(/[^\w-]/g, "_")}.json`);
+{
+  // One-time move of networks that were still kept inside the store.
+  const d = store.read();
+  const inStore = d.floorImports.filter((f) => f.autoHallways?.length);
+  if (inStore.length) {
+    store.update((s) => { for (const f of s.floorImports) if (f.autoHallways?.length) { fs.writeFileSync(networkFile(f.id), JSON.stringify(encodeNetwork(f.autoHallways))); f.autoNodes = f.autoHallways.length; delete f.autoHallways; } });
+    console.log(`Moved ${inStore.length} hallway networks to data/networks`);
+  }
+}
 // Uploaded drawings may be university-owned: never cached publicly, never indexed.
 app.use('/uploads', (_req, res, next) => { res.set('Cache-Control', 'private, no-store'); res.set('X-Robots-Tag', 'noindex'); next(); }, express.static(store.uploadsDir));
 app.use('/uploads', (_req: Request, res: Response) => res.status(404).json({ error: 'No such file' }));
@@ -1031,14 +1047,15 @@ app.post('/api/floor-imports', (req: Request, res: Response) => {
 async function extractImport(id: string): Promise<number> {
   const rec = store.read().floorImports.find((f) => f.id === id);
   if (!rec) throw new Error('No such import');
-  const out = await readPlantOpsSheet(generateContent, parseDataUrl(store.readUploadDataUrl(rec.imageUrl.replace('/uploads/', ''))), rec.buildingId, rec.floorCode);
+  const out = await readPlantOpsSheet((p) => generateContent(p, READ_MODELS), parseDataUrl(store.readUploadDataUrl(rec.imageUrl.replace('/uploads/', ''))), rec.buildingId, rec.floorCode);
   store.update((d) => {
     const f = d.floorImports.find((x) => x.id === rec.id)!;
     f.rooms = out.rooms.map((r: any) => ({ ...r, id: `${rec.id}-${r.id}`, floor: rec.floorNumber, purposeVerification: 'unverified_drawing_only' }));
     f.extraction = { model: out.model, at: new Date().toISOString(), title: out.title, summary: out.summary };
     f.reviewed = false;
-    delete f.autoHallways; delete f.autoHallwaysAt; // linked to the old rooms
+    delete f.autoHallways; delete f.autoHallwaysAt; delete f.autoNodes; // linked to the old rooms
   });
+  fs.rmSync(networkFile(rec.id), { force: true });
   buildAutoHallways([rec.id]);
   return out.rooms.length;
 }
@@ -1058,15 +1075,24 @@ app.put('/api/floor-imports/:id/auto-hallways', (req: Request, res: Response) =>
     && Number.isFinite(n?.coords?.x) && Number.isFinite(n?.coords?.y) && n.coords.x >= 0 && n.coords.x <= 100 && n.coords.y >= 0 && n.coords.y <= 100
     && Array.isArray(n.connectedTo) && n.connectedTo.every((t: any) => typeof t === 'string') && (n.cost === undefined || (Number.isFinite(n.cost) && n.cost >= 1)));
   if (!ok) return res.status(400).json({ error: 'hallways must be [{id, coords:{x,y} in 0-100, connectedTo: string[], cost?: >=1}]' });
-  let found = false;
+  if (!store.read().floorImports.some((x) => x.id === req.params.id)) return res.status(404).json({ error: 'No such import' });
+  fs.writeFileSync(networkFile(req.params.id), JSON.stringify(encodeNetwork(h.map((n: any) => ({ id: n.id, coords: { x: n.coords.x, y: n.coords.y }, connectedTo: n.connectedTo, ...(n.cost ? { cost: n.cost } : {}) })))));
   store.update((d) => {
     const f = d.floorImports.find((x) => x.id === req.params.id);
     if (!f) return;
-    found = true;
-    f.autoHallways = h.map((n: any) => ({ id: n.id, coords: { x: n.coords.x, y: n.coords.y }, connectedTo: n.connectedTo, ...(n.cost ? { cost: n.cost } : {}) }));
+    delete f.autoHallways;
+    f.autoNodes = h.length;
     f.autoHallwaysAt = new Date().toISOString();
   });
-  return found ? res.json({ saved: h.length }) : res.status(404).json({ error: 'No such import' });
+  return res.json({ saved: h.length });
+});
+
+// One floor's automatic hallway network (compact form, see encodeNetwork).
+app.get('/api/floor-imports/:id/network', (req: Request, res: Response) => {
+  const file = networkFile(req.params.id);
+  if (!fs.existsSync(file)) return res.status(404).json({ error: 'No network for this floor' });
+  res.set('Cache-Control', 'private, no-cache');
+  res.type('application/json').send(fs.readFileSync(file));
 });
 
 app.post('/api/floor-imports/:id/extract', async (req: Request, res: Response) => {
@@ -1101,6 +1127,7 @@ app.patch('/api/floor-imports/:id', (req: Request, res: Response) => {
     const f = d.floorImports.find((x) => x.id === req.params.id);
     if (!f) return null;
     if (Array.isArray(b.rooms)) { f.rooms = b.rooms; f.reviewed = false; }
+    if (b.extraction && typeof b.extraction.model === 'string' && typeof b.extraction.at === 'string') f.extraction = { model: b.extraction.model.slice(0, 80), at: b.extraction.at.slice(0, 40) };
     if (Array.isArray(b.hallways)) { f.hallways = b.hallways; f.reviewed = false; }
     if (Array.isArray(b.controlPoints)) { f.controlPoints = b.controlPoints; f.alignmentFrom = typeof b.alignmentFrom === 'string' ? b.alignmentFrom : undefined; f.reviewed = false; }
     if (typeof b.reviewed === 'boolean') { f.reviewed = b.reviewed; f.reviewedAt = b.reviewed ? new Date().toISOString() : undefined; }

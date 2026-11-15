@@ -463,7 +463,73 @@ export function calculateIndoorRoute(...args: Parameters<typeof calculateIndoorR
   const startPlan = o?.allFloors?.find((f) => f.floorNumber === o?.startFloor) || args[0];
   sheetAspect = startPlan.aspect ?? MAP_ASPECT_RATIO;
   sheetMetresPerPct = startPlan.metresPerPct;
-  try { return calculateIndoorRouteOnSheet(...args); } finally { sheetAspect = MAP_ASPECT_RATIO; sheetMetresPerPct = undefined; }
+  try {
+    try { return calculateIndoorRouteOnSheet(...args); } catch (e: any) {
+      const r = o?.verticalLinks && o.startFloor !== o.endFloor ? routeWithTransfers(args) : null;
+      if (r) return r;
+      throw e;
+    }
+  } finally { sheetAspect = MAP_ASPECT_RATIO; sheetMetresPerPct = undefined; }
+}
+
+/**
+ * No single stair or elevator serves both floors: change shafts on the way (fewest changes),
+ * e.g. stairs from 5 to 3, then an elevator from 3 to 1. Each leg is an ordinary route ending at
+ * the next shaft's door on the transfer floor; the legs are joined into one route.
+ */
+function routeWithTransfers(args: Parameters<typeof calculateIndoorRouteOnSheet>): NavigationRoute | null {
+  const [plan, startPoint, startName, endPoint, endName, startRoomId, endRoomId, o] = args;
+  const links = (o!.verticalLinks || []).filter((l) => !(o!.isAccessibleOnly ?? true) || l.accessible);
+  const from = o!.startFloor!, to = o!.endFloor!;
+  // Breadth-first over floors; remember which link reached each floor.
+  const via = new Map<number, { prev: number; link: VerticalCirculationLink }>();
+  const seen = new Set([from]);
+  const queue = [from];
+  while (queue.length && !seen.has(to)) {
+    const f = queue.shift()!;
+    for (const l of links) if (l.floorsServed.includes(f)) for (const g of l.floorsServed) if (!seen.has(g)) { seen.add(g); via.set(g, { prev: f, link: l }); queue.push(g); }
+  }
+  if (!seen.has(to)) return null;
+  const hops: { floor: number; link: VerticalCirculationLink }[] = [];
+  for (let f = to; f !== from; f = via.get(f)!.prev) hops.unshift({ floor: f, link: via.get(f)!.link });
+  const roomAt = (floor: number, id: string) => o!.allFloors?.find((p) => p.floorNumber === floor)?.rooms.find((r) => r.id === id);
+  const legs: NavigationRoute[] = [];
+  let p = { point: startPoint, name: startName, id: startRoomId, floor: from };
+  for (let i = 0; i < hops.length; i++) {
+    const last = i === hops.length - 1;
+    const exit = last ? null : hops[i].link.nodes.find((n) => n.floor === hops[i].floor);
+    const exitRoom = exit ? roomAt(hops[i].floor, exit.roomId) : null;
+    if (!last && !exitRoom) return null;
+    const q = last ? { point: endPoint, name: endName, id: endRoomId } : { point: exitRoom!.coords, name: hops[i].link.name, id: exitRoom!.id };
+    const legPlan = o!.allFloors?.find((f) => f.floorNumber === p.floor) || plan;
+    try {
+      legs.push(calculateIndoorRouteOnSheet(legPlan, p.point, p.name, q.point, q.name, p.id, q.id, { ...o, startFloor: p.floor, endFloor: hops[i].floor, verticalLinks: [hops[i].link] }));
+    } catch { return null; }
+    p = { ...q, floor: hops[i].floor };
+  }
+  // Join: drop each leg's "arrive at the shaft" and the next leg's "start at the shaft".
+  const steps = legs.flatMap((l, i) => l.steps.filter((_, j) => !(i < legs.length - 1 && j === l.steps.length - 1) && !(i > 0 && j === 0)));
+  let cum = 0;
+  steps.forEach((s, i) => { s.stepNumber = i + 1; cum += s.distanceMeters; s.cumulativeDistanceMeters = Math.round(cum * 10) / 10; });
+  const floorSegments: NavigationRoute['floorSegments'] = [];
+  for (const seg of legs.flatMap((l) => l.floorSegments)) {
+    const prev = floorSegments[floorSegments.length - 1];
+    if (prev && prev.floor === seg.floor) { prev.waypoints.push(...seg.waypoints); prev.steps.push(...seg.steps); } else floorSegments.push({ ...seg, waypoints: [...seg.waypoints], steps: [...seg.steps] });
+  }
+  const total = legs.reduce((s, l) => s + l.totalDistanceMeters, 0);
+  const changeAt = hops.slice(0, -1).map((h) => `floor ${h.floor}`).join(', ');
+  return {
+    ...legs[0],
+    toName: endName, toFloor: to, toCoords: endPoint,
+    totalDistanceMeters: Math.round(total * 10) / 10,
+    estimatedWalkTimeMinutes: legs.reduce((s, l) => s + l.estimatedWalkTimeMinutes, 0),
+    isAccessible: legs.every((l) => l.isAccessible),
+    legs: legs.flatMap((l) => l.legs),
+    floorSegments, steps,
+    spokenOverview: legs.map((l) => l.spokenOverview).join(' Then '),
+    pathDescription: legs.map((l) => l.pathDescription).join(' Then '),
+    flaggedNotes: [`No single stair or elevator joins these floors on the drawings: change at ${changeAt}.`, ...new Set(legs.flatMap((l) => l.flaggedNotes || []))],
+  };
 }
 
 function calculateIndoorRouteOnSheet(

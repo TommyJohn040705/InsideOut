@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { CampusView } from './components/campus/CampusView';
 import { SAMPLE_FLOOR_PLANS } from './data/sampleFloorPlans';
-import { FloorPlanData, RoomPOI, Point, NavigationRoute, POICategory, IndoorLocationState, QRCheckpoint } from './types/navigation';
+import { CorridorNode, FloorPlanData, RoomPOI, Point, NavigationRoute, POICategory, IndoorLocationState, QRCheckpoint } from './types/navigation';
 import { CameraSignScannerModal } from './components/CameraSignScannerModal';
 import { GoogleMapsHandoffModal } from './components/GoogleMapsHandoffModal';
 import { CorrectionsAuditModal } from './components/CorrectionsAuditModal';
@@ -20,7 +20,8 @@ import { E5ValidationModal } from './components/E5ValidationModal';
 import { resolveCheckpoint } from './data/e5/checkpoints';
 import { hydrateSuggestions } from './utils/auditLog';
 import { pullStore, pushStore } from './utils/serverStore';
-import { FloorImport, importToPlan, verticalLinksFor } from './campus/floorImports';
+import { decodeNetwork, FloorImport, importLocator, importToPlan, verticalLinksFor } from './campus/floorImports';
+import { withEvidence } from './campus/evidenceIndex';
 import { buildingById } from './campus/campusData';
 import { calculateIndoorRoute } from './utils/pathfinding';
 import { speakGuidance } from './utils/speech';
@@ -116,12 +117,27 @@ export default function App() {
     fetch('/api/health').then((r) => setIsOffline(!r.ok)).catch(() => setIsOffline(true));
     return () => { window.removeEventListener('online', on); window.removeEventListener('offline', off); };
   }, []);
+  // Automatic hallway networks are big, so each building's are fetched only when it is opened or routed.
+  const [networks, setNetworks] = useState<Record<string, CorridorNode[]>>({});
+  const requested = useRef(new Set<string>());
+  const ensureNetworks = async (buildingIds: string[]): Promise<boolean> => {
+    const todo = floorImports.filter((f) => buildingIds.includes(f.buildingId) && f.autoNodes && !requested.current.has(f.id));
+    if (!todo.length) return false;
+    todo.forEach((f) => requested.current.add(f.id));
+    const got = await Promise.all(todo.map((f) => fetch(`/api/floor-imports/${encodeURIComponent(f.id)}/network`).then((r) => (r.ok ? r.json() : null)).then((c) => [f.id, c ? decodeNetwork(c) : null] as const).catch(() => [f.id, null] as const)));
+    const ok = got.filter(([, n]) => n) as [string, CorridorNode[]][];
+    got.filter(([, n]) => !n).forEach(([id]) => requested.current.delete(id)); // retry next time
+    if (ok.length) setNetworks((prev) => ({ ...prev, ...Object.fromEntries(ok) }));
+    return ok.length > 0;
+  };
   // Published imports become ordinary floors of an "import-<building>" building.
   useEffect(() => {
     // Room edits made in the app (names, purposes, moves) are stored as overrides by room id; apply them to imported floors too.
-    const imported = applyOverrides(floorImports.filter((f) => f.published).map((f, _, all) => importToPlan(f, buildingById(f.buildingId)?.name || f.buildingId, all.filter((x) => x.buildingId === f.buildingId))), loadOverrides());
+    const withNets = floorImports.map((f) => (networks[f.id] ? { ...f, autoHallways: networks[f.id] } : f));
+    const imported = applyOverrides(withNets.filter((f) => f.published).map((f, _, all) => importToPlan(f, buildingById(f.buildingId)?.name || f.buildingId, all.filter((x) => x.buildingId === f.buildingId))), loadOverrides())
+      .map((p) => ({ ...p, rooms: p.rooms.map((r) => withEvidence(r, (p.buildingId || "").replace(/^import-/, ""))) }));
     setPlans((prev) => [...prev.filter((p) => !p.id.startsWith('import-')), ...imported]);
-  }, [floorImports]);
+  }, [floorImports, networks]);
 
   const [startRoom, setStartRoom] = useState<RoomPOI | null>(null);
   const [endRoom, setEndRoom] = useState<RoomPOI | null>(null);
@@ -257,6 +273,8 @@ export default function App() {
   plansRef.current = plans;
 
   const buildingId = currentPlan.buildingId || currentPlan.id;
+  // Opening an imported building fetches its floors' hallway networks.
+  useEffect(() => { if (buildingId.startsWith('import-')) ensureNetworks([buildingId.slice(7)]); }, [buildingId, floorImports]);
   const buildingPlans = useMemo(
     () => plans.filter((p) => (p.buildingId || p.id) === buildingId).sort((a, b) => a.floorNumber - b.floorNumber),
     [plans, buildingId]
@@ -296,7 +314,7 @@ export default function App() {
         isAccessibleOnly, allFloors: buildingPlans, startFloor: sFloor, endFloor: eFloor,
         closures: routeClosures(reports, buildingPlans, E5_VERTICAL_LINKS),
         // Imported buildings: stairs and elevators matched by room number across their drawn floors.
-        verticalLinks: buildingId === 'uwaterloo-e5' ? undefined : verticalLinksFor(buildingPlans),
+        verticalLinks: buildingId === 'uwaterloo-e5' ? undefined : verticalLinksFor(buildingPlans, importLocator(floorImports.filter((f) => `import-${f.buildingId}` === buildingId))),
       });
       if (sPlan.source === 'upload') r.flaggedNotes = [buildingPlans.some((p) => p.autoHallways)
         ? 'Automatic route: read from the open space on the Plant Operations drawing (stays out of walls, goes through drawn doorways); stairs and elevators matched by room number. Not walked or reviewed; locked doors are not known.'
@@ -770,7 +788,7 @@ export default function App() {
     if (room) { setInspected(room); setTimeout(() => showRoom(room), 120); }
   };
   if (view === 'campus') {
-    return <CampusView plans={plans} imports={floorImports} onImportsChanged={loadImports} route={route} destination={endRoom} isMobile={isMobile} onOpenIndoor={openIndoor}
+    return <CampusView plans={plans} imports={floorImports} onImportsChanged={loadImports} onNeedNetworks={ensureNetworks} route={route} destination={endRoom} isMobile={isMobile} onOpenIndoor={openIndoor}
       onRouteIndoor={(appBuildingId, s, e, stepFree) => {
         setIsAccessibleOnly(stepFree);
         const p = plansRef.current.find((x) => x.buildingId === appBuildingId && x.floorNumber === s.floor);

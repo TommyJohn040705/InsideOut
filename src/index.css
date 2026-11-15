@@ -1,4 +1,7 @@
 @import "tailwindcss";
+/* Map data (store, uploads, hallway networks) has no class names; scanning it rebuilt the CSS on every save. */
+@source not "../data";
+@source not "../data-sources";
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {

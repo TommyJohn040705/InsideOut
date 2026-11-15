@@ -31,7 +31,13 @@ export function openStore(dir: string) {
   const write = (d: StoreData) => {
     const tmp = `${file}.${process.pid}.tmp`;
     fs.writeFileSync(tmp, JSON.stringify(d, null, 1));
-    fs.renameSync(tmp, file);
+    // Windows: antivirus or the indexer can hold the file for a moment; retry instead of failing the save.
+    for (let i = 0; ; i++) {
+      try { fs.renameSync(tmp, file); return; } catch (e: any) {
+        if (!['EPERM', 'EBUSY', 'EACCES'].includes(e?.code) || i >= 10) throw e;
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 200);
+      }
+    }
   };
   const update = <T>(fn: (d: StoreData) => T): T => { const d = read(); const out = fn(d); write(d); return out; };
 

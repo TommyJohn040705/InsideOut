@@ -4,7 +4,7 @@
  * in the indoor navigator). Status is always derived from what the record actually holds.
  */
 import type { CorridorNode, FloorPlanData, RoomPOI, VerticalCirculationLink } from '../types/navigation';
-import { fitGeoref, type ControlPoint, type Georef } from './georef';
+import { distanceM, fitGeoref, type ControlPoint, type Georef, type LngLat } from './georef';
 import type { FloorStatus } from './campusData';
 
 export interface FloorImport {
@@ -40,6 +40,35 @@ export interface FloorImport {
   /** Hallway network read automatically off the drawing (src/campus/planGraph.ts); used until hand-drawn hallways are reviewed. */
   autoHallways?: CorridorNode[];
   autoHallwaysAt?: string;
+  /** Node count of the automatic network, which is stored in its own file (data/networks) and loaded on demand. */
+  autoNodes?: number;
+}
+
+/** A hallway network in a compact form for storage: positions, costly nodes, edges by index, room links. */
+export interface CompactNetwork { v: 1; xy: number[]; costly: number[]; cost: number; edges: number[]; rooms: Record<string, number[]> }
+
+export function encodeNetwork(h: CorridorNode[]): CompactNetwork {
+  const at = new Map(h.map((n, i) => [n.id, i]));
+  const out: CompactNetwork = { v: 1, xy: [], costly: [], cost: 1, edges: [], rooms: {} };
+  h.forEach((n, i) => {
+    out.xy.push(+n.coords.x.toFixed(2), +n.coords.y.toFixed(2));
+    if (n.cost && n.cost > 1) { out.costly.push(i); out.cost = n.cost; }
+    for (const t of n.connectedTo) {
+      const j = at.get(t);
+      if (j === undefined) (out.rooms[t] ||= []).push(i);
+      else if (j > i) out.edges.push(i, j);
+    }
+  });
+  return out;
+}
+
+export function decodeNetwork(c: CompactNetwork): CorridorNode[] {
+  const nodes: CorridorNode[] = [];
+  for (let i = 0; i < c.xy.length / 2; i++) nodes.push({ id: `n${i}`, coords: { x: c.xy[2 * i], y: c.xy[2 * i + 1] }, connectedTo: [] });
+  for (const i of c.costly) nodes[i].cost = c.cost;
+  for (let k = 0; k < c.edges.length; k += 2) { nodes[c.edges[k]].connectedTo.push(`n${c.edges[k + 1]}`); nodes[c.edges[k + 1]].connectedTo.push(`n${c.edges[k]}`); }
+  for (const [room, idx] of Object.entries(c.rooms)) for (const i of idx) nodes[i].connectedTo.push(room);
+  return nodes;
 }
 
 /** Metres per 1% of image height from this floor's alignment, else from another aligned floor of the building. */
@@ -52,7 +81,7 @@ export function metresPerPctOf(f: FloorImport, sameBuilding: FloorImport[] = [])
 }
 
 /** True when routing on this floor uses the automatic network, not reviewed hand-drawn hallways. */
-export const usesAutoHallways = (f: FloorImport) => importStatus(f) !== 'routing_available' && !!f.autoHallways?.length;
+export const usesAutoHallways = (f: FloorImport) => importStatus(f) !== 'routing_available' && !!(f.autoHallways?.length || f.autoNodes);
 
 /** Problems that keep a floor's hallway graph from being used for routing. */
 export function graphProblems(rooms: RoomPOI[], hallways: CorridorNode[]): string[] {
@@ -125,12 +154,16 @@ export function importToPlan(f: FloorImport, buildingName: string, sameBuilding:
 /** PDF text items that look like room numbers ("1302", "2108A", "DC 1302"). */
 export const roomNumberLabels = (labels: FloorImport['pdfLabels']) => labels.filter((l) => /^([A-Z]{1,4}\s?)?\d{3,4}[A-Z]?$/.test(l.text));
 
+/** Two shafts on different floors this close on the map (m) are the same shaft, if each is the other's nearest. */
+export const SHAFT_MATCH_M = 3;
+
 /**
- * Stairs and elevators of an imported building, matched across floors by room number: Plant
- * Operations repeats the number after the floor digit on every floor (1817, 2817, 3817). Only
- * shafts linked to a hand-drawn corridor on at least two floors become links.
+ * Stairs and elevators of an imported building, matched across floors two ways: by room number
+ * (Plant Operations repeats the number after the floor digit: 1817, 2817, 3817) and, when floors
+ * are placed on the map (`locate`), by position: the same type of shaft within SHAFT_MATCH_M on
+ * another floor, each the other's nearest. Only shafts joined to a hallway network become links.
  */
-export function verticalLinksFor(plans: FloorPlanData[]): VerticalCirculationLink[] {
+export function verticalLinksFor(plans: FloorPlanData[], locate?: (floor: number, p: { x: number; y: number }) => LngLat | null): VerticalCirculationLink[] {
   // "1093 ELV" -> "093": the number after the floor digit, ignoring any trailing label.
   const suffix = (r: RoomPOI) => (r.roomNumber || '').match(/^\d(\d{3}[A-Z]?)\b/)?.[1];
   // A shaft read as elevator/stairs on one floor carries to the same number on other floors where the
@@ -141,31 +174,94 @@ export function verticalLinksFor(plans: FloorPlanData[]): VerticalCirculationLin
     if (s && (r.category === 'elevator' || (r.category === 'stairs' && !shaftType.has(s)))) shaftType.set(s, r.category);
   }
   const MAY_BE_SHAFT = new Set(['elevator', 'stairs', 'corridor', 'utility', 'other']);
-  const groups = new Map<string, { floor: number; roomId: string; corridorNodeId: string; type: 'elevator' | 'stairs'; number: string }[]>();
+  type Shaft = { floor: number; roomId: string; corridorNodeId: string; type: 'elevator' | 'stairs'; number: string; key?: string; at: LngLat | null };
+  const shafts: Shaft[] = [];
   for (const p of plans) {
     const corridorOf = new Map<string, string>();
     for (const h of p.hallways) for (const t of h.connectedTo) if (!corridorOf.has(t)) corridorOf.set(t, h.id);
     for (const r of p.rooms) {
-      const s = suffix(r), type = s ? shaftType.get(s) : undefined;
-      if (!s || !type || !MAY_BE_SHAFT.has(r.category)) continue;
+      const s = suffix(r);
+      const type = s && shaftType.has(s) && MAY_BE_SHAFT.has(r.category) ? shaftType.get(s)! : r.category === 'elevator' || r.category === 'stairs' ? r.category : undefined;
       const corridor = corridorOf.get(r.id);
-      if (!corridor) continue;
-      const key = `${type}:${s}`;
-      const list = groups.get(key) || [];
-      if (!list.some((x) => x.floor === p.floorNumber)) list.push({ floor: p.floorNumber, roomId: r.id, corridorNodeId: corridor, type, number: r.roomNumber!.match(/^\d+[A-Z]?/)![0] });
-      groups.set(key, list);
+      if (!type || !corridor) continue;
+      shafts.push({ floor: p.floorNumber, roomId: r.id, corridorNodeId: corridor, type, number: r.roomNumber?.match(/^\d+[A-Z]?/)?.[0] || r.name, key: s && shaftType.has(s) ? `${type}:${s}` : undefined, at: locate ? locate(p.floorNumber, r.coords) : null });
     }
   }
-  return [...groups.entries()].filter(([, l]) => l.length >= 2).map(([key, l]) => ({
-    id: `v-${key}`,
-    type: l[0].type,
-    name: `${l[0].type === 'elevator' ? 'Elevator' : 'Stairs'} ${l.map((x) => x.number).join('/')}`,
-    floorsServed: l.map((x) => x.floor).sort((a, b) => a - b),
-    accessible: l[0].type === 'elevator',
-    nodes: l.map(({ floor, roomId, corridorNodeId }) => ({ floor, roomId, corridorNodeId })),
-    description: 'Matched by room number across floors (Plant Operations numbering); not checked on site.',
-  }));
+  // Union-find over shafts: same number key, or mutual nearest same-type shaft on the map.
+  const parent = shafts.map((_, i) => i);
+  const find = (i: number): number => (parent[i] === i ? i : (parent[i] = find(parent[i])));
+  const union = (a: number, b: number) => { parent[find(a)] = find(b); };
+  const byKey = new Map<string, number>();
+  shafts.forEach((s, i) => { if (s.key) { if (byKey.has(s.key)) union(i, byKey.get(s.key)!); else byKey.set(s.key, i); } });
+  // Positions in local metres. Floors are aligned one by one, so a whole floor can sit a few metres
+  // off its neighbour; estimate that shift per pair of floors from the shafts themselves first.
+  const ref = shafts.find((s) => s.at)?.at;
+  const xy = (s: Shaft): [number, number] | null => (s.at && ref ? [(s.at[0] - ref[0]) * 111320 * Math.cos((ref[1] * Math.PI) / 180), (s.at[1] - ref[1]) * 111320] : null);
+  const P = shafts.map(xy);
+  const floors = [...new Set(shafts.map((s) => s.floor))];
+  const shiftBetween = (fa: number, fb: number): [number, number] | null => {
+    const A = shafts.map((_, i) => i).filter((i) => shafts[i].floor === fa && P[i]), B = shafts.map((_, i) => i).filter((i) => shafts[i].floor === fb && P[i]);
+    let best: [number, number] | null = null, bestN = 0;
+    for (const i of A) for (const j of B) {
+      if (shafts[i].type !== shafts[j].type) continue;
+      const d: [number, number] = [P[j]![0] - P[i]![0], P[j]![1] - P[i]![1]];
+      if (Math.hypot(d[0], d[1]) > 8) continue;
+      const n = A.filter((a) => B.some((b) => shafts[a].type === shafts[b].type && Math.hypot(P[b]![0] - P[a]![0] - d[0], P[b]![1] - P[a]![1] - d[1]) <= 1.5)).length;
+      if (n > bestN || (n === bestN && best && Math.hypot(...d) < Math.hypot(...best))) { best = d; bestN = n; }
+    }
+    // One shaft pair alone can't confirm a shift: accept it only if small.
+    return best && (bestN >= 2 || Math.hypot(...best) <= 5) ? best : null;
+  };
+  for (const fa of floors) for (const fb of floors) {
+    if (fa >= fb) continue;
+    const d = shiftBetween(fa, fb);
+    if (!d) continue;
+    const near = (i: number, floor: number, sign: number) => {
+      let best = -1, bestM = SHAFT_MATCH_M;
+      shafts.forEach((t, j) => {
+        if (t.floor !== floor || t.type !== shafts[i].type || !P[j]) return;
+        const m = Math.hypot(P[j]![0] - P[i]![0] - sign * d[0], P[j]![1] - P[i]![1] - sign * d[1]);
+        if (m <= bestM) { best = j; bestM = m; }
+      });
+      return best;
+    };
+    shafts.forEach((s, i) => { if (s.floor === fa && P[i]) { const j = near(i, fb, 1); if (j >= 0 && near(j, fa, -1) === i) union(i, j); } });
+  }
+  const groups = new Map<number, Shaft[]>();
+  shafts.forEach((s, i) => { const l = groups.get(find(i)) || []; if (!l.some((x) => x.floor === s.floor)) l.push(s); groups.set(find(i), l); });
+  return [...groups.values()].filter((l) => l.length >= 2).map((l) => {
+    l.sort((a, b) => a.floor - b.floor);
+    const byNumber = l.every((x) => x.key && x.key === l[0].key);
+    return {
+      id: `v-${l[0].type}-${l[0].roomId}`,
+      type: l[0].type,
+      name: `${l[0].type === 'elevator' ? 'Elevator' : 'Stairs'} ${l.map((x) => x.number).join('/')}`,
+      floorsServed: l.map((x) => x.floor),
+      accessible: l[0].type === 'elevator',
+      nodes: l.map(({ floor, roomId, corridorNodeId }) => ({ floor, roomId, corridorNodeId })),
+      description: byNumber ? 'Matched by room number across floors (Plant Operations numbering); not checked on site.'
+        : `Matched across floors by room number and by position on the map (within ${SHAFT_MATCH_M} m); not checked on site.`,
+    };
+  });
 }
+
+/** Map position of a point on a building's imported floor, for matching shafts across floors. */
+export const importLocator = (imports: FloorImport[]) => (floor: number, p: { x: number; y: number }): LngLat | null => {
+  const f = imports.find((x) => x.floorNumber === floor);
+  if (!f) return null;
+  // An unaligned floor borrows the alignment of a sibling sheet of the same size (same drawing set);
+  // the per-floor shift estimate in verticalLinksFor absorbs the difference.
+  const g = georefOfImport(f) || imports.filter((x) => x.imageSize.join() === f.imageSize.join()).map(georefOfImport).find(Boolean);
+  if (g) return g.pctToLngLat(p);
+  // No alignment for this sheet size at all: compare in sheet coordinates, in a made-up frame per
+  // sheet size placed far from campus, so these floors only ever match each other.
+  // shortcut: assumes ~1 m per 1% of sheet height (typical Plant Operations scale); upgrade by aligning the floor.
+  const sizes = [...new Set(imports.map((x) => x.imageSize.join()))].sort();
+  const k = sizes.indexOf(f.imageSize.join());
+  const mPerPct = metresPerPctOf(f, imports) || 1;
+  const yM = p.y * mPerPct, xM = p.x * mPerPct * (f.imageSize[0] / f.imageSize[1]);
+  return [10 * k + xM / 80000, yM / 111320];
+};
 
 /** The same alignment turned 180° about the control points' centre (fixes an upside-down automatic fit). */
 export function turnedControlPoints(f: FloorImport): FloorImport['controlPoints'] {

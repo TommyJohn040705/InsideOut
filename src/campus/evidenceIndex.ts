@@ -158,3 +158,29 @@ export function searchEvidence(q: string, limit = 6): EvidenceHit[] {
 }
 
 export const evidenceById = (id: string) => EVIDENCE.records.find((r) => r.id === id) || null;
+
+/** Published listings for one room of a campus building (buildings.json id, e.g. "MC", "E7"). */
+export function evidenceForRoom(buildingId: string, roomNumber?: string): EvidenceRecord[] {
+  const n = normRoom(roomNumber || null);
+  if (!n) return [];
+  return EVIDENCE.records.filter((r) => (ALIASES[r.building_code]?.id || r.building_code) === buildingId && normRoom(r.room_number) === n);
+}
+
+/**
+ * A drawing-only room with the name and purpose an official page lists for it, and that page as
+ * the source. Rooms a person already described (staff report, approved lookup) are left as they are.
+ */
+export function withEvidence<T extends { roomNumber?: string; name: string; purpose?: string; purposeVerification?: string; sourceUrl?: string }>(room: T, buildingId: string): T {
+  if (room.purposeVerification && room.purposeVerification !== 'unverified_drawing_only') return room;
+  const recs = evidenceForRoom(buildingId, room.roomNumber);
+  if (!recs.length) return room;
+  const r = recs[0];
+  const what = recs.map((x) => (x.person ? `${x.person}${x.person_role ? `, ${x.person_role}` : ''}` : x.display_name)).join('; ');
+  return {
+    ...room,
+    name: r.person ? `${r.person}'s office` : r.display_name,
+    purpose: `${r.operational_status === 'closed' ? 'Closed. ' : ''}${what}. ${ACCESS_LABEL[r.access_tier] || ''}. Listed on ${r.source_title}, checked ${r.source_checked_on}.`.replace(/\.\s*\./g, '.'),
+    purposeVerification: 'verified_official_source',
+    sourceUrl: r.source_url,
+  };
+}

@@ -10,6 +10,8 @@ import type { CorridorNode, Point } from '../types/navigation';
 export interface PlanGraphOptions {
   /** Dark lines thinner than this many image pixels are not walls (text, door arcs). */
   thinPx?: number;
+  /** Stair boxes in image pixels (detectStairs) to add as rooms. */
+  stairs?: { x0: number; y0: number; x1: number; y1: number }[];
   /** Doorways up to 2 x this many cells wide are closed when telling rooms from corridors. */
   doorCloseCells?: number;
   /** Edge-length multiplier inside rooms other than corridors, so routes keep to corridors. */
@@ -30,6 +32,8 @@ export interface PlanGraph {
   hallways: CorridorNode[];
   linkedRoomIds: string[];
   unlinkedRoomIds: string[];
+  /** Stairs found on the drawing and joined to the network (opts.stairs), to add to the floor's rooms. */
+  addedRooms: { id: string; name: string; category: 'stairs'; coords: Point }[];
   /** Interior open-space grid, for tests and debugging. */
   grid: { w: number; h: number; cellPx: number; open: Uint8Array };
 }
@@ -260,7 +264,33 @@ export function buildPlanGraph(
     const st = [start]; keep[start] = 1;
     while (st.length) for (const m of nodes[st.pop()!].links) if (!keep[m]) { keep[m] = 1; st.push(m); }
   }
-  const id = (n: number) => `${idPrefix}-a${n}`;
+
+  // 7. Stairs found on the drawing become rooms, joined at an open point by the flight (treads are
+  // often drawn as walls), unless the floor already has a stairs room there. Only stairs that reach
+  // the kept network count: a false find in the key map or legend is dropped.
+  const addedRooms: { id: string; name: string; category: 'stairs'; coords: Point }[] = [];
+  const C = (px: number, py: number) => [Math.min(w - 1, Math.max(0, Math.floor(px / cell))), Math.min(h - 1, Math.max(0, Math.floor(py / cell)))];
+  (opts.stairs || []).forEach((b, i) => {
+    const pad = 4 * cell;
+    if (rooms.some((r) => r.category === 'stairs' && r.coords.x / 100 * imgW >= b.x0 - pad && r.coords.x / 100 * imgW <= b.x1 + pad && r.coords.y / 100 * imgH >= b.y0 - pad && r.coords.y / 100 * imgH <= b.y1 + pad)) return;
+    const mx = (b.x0 + b.x1) / 2, my = (b.y0 + b.y1) / 2, o = 3 * cell;
+    for (const [px, py] of [[mx, my], [mx, b.y0 - o], [mx, b.y1 + o], [b.x0 - o, my], [b.x1 + o, my]]) {
+      const [cx, cy] = C(px, py);
+      if (!open[cy * w + cx]) continue;
+      let best = -1, bestD = linkR * linkR;
+      for (let n = 0; n < nodes.length; n++) {
+        if (!keep[n]) continue;
+        const c = nodes[n].cell, dx = (c % w) - cx, dy = ((c / w) | 0) - cy, d = dx * dx + dy * dy;
+        if (d < bestD && clearLine(open, w, cx, cy, c % w, (c / w) | 0)) { best = n; bestD = d; }
+      }
+      if (best < 0) continue;
+      const room = { id: `${idPrefix}-st${i + 1}`, name: 'Stairs', category: 'stairs' as const, coords: { x: +(((cx + 0.5) * cell) / imgW * 100).toFixed(2), y: +(((cy + 0.5) * cell) / imgH * 100).toFixed(2) } };
+      roomLinks.set(best, [...(roomLinks.get(best) || []), room.id]);
+      addedRooms.push(room);
+      return;
+    }
+  });
+  const id = (n: number) => `n${n}`; // unique within the floor; room ids carry the floor prefix
   const pct = (c: number, axis: 'x' | 'y') => +((((axis === 'x' ? c % w : (c / w) | 0) + 0.5) * cell) / (axis === 'x' ? imgW : imgH) * 100).toFixed(2);
   const hallways: CorridorNode[] = [];
   for (let n = 0; n < nodes.length; n++) if (keep[n]) hallways.push({
@@ -269,5 +299,71 @@ export function buildPlanGraph(
     ...(roomRegion.has(region[nodes[n].cell]) ? { cost: roomCost } : {}),
     connectedTo: [...[...nodes[n].links].filter((m) => keep[m]).map(id), ...(roomLinks.get(n) || [])],
   });
-  return { hallways, linkedRoomIds: linked, unlinkedRoomIds: unlinked, grid: { w, h, cellPx: cell, open } };
+  return { hallways, linkedRoomIds: linked, unlinkedRoomIds: unlinked, addedRooms, grid: { w, h, cellPx: cell, open } };
+}
+
+/**
+ * Stairs on a drawing: a flight is a stack of at least `minTreads` short parallel lines (treads)
+ * at a steady small spacing. Returns boxes in image pixels. Horizontal and vertical flights only.
+ */
+export function detectStairs(gray: Uint8Array, imgW: number, imgH: number, opts: { minLen?: number; maxLen?: number; minGap?: number; maxGap?: number; minTreads?: number } = {}): { x0: number; y0: number; x1: number; y1: number }[] {
+  const minLen = opts.minLen ?? 12, maxLen = opts.maxLen ?? 90, minGap = opts.minGap ?? 3, maxGap = opts.maxGap ?? 16, minTreads = opts.minTreads ?? 6;
+  const out: { x0: number; y0: number; x1: number; y1: number }[] = [];
+  for (const vertical of [false, true]) {
+    // Runs along rows (horizontal treads) or along columns (vertical treads); a = along, b = across.
+    const A = vertical ? imgH : imgW, Bn = vertical ? imgW : imgH;
+    const dark = (a: number, b: number) => gray[vertical ? a * imgW + b : b * imgW + a] < 200; // thin tread lines are often anti-aliased grey
+    const black = (a: number, b: number) => gray[vertical ? a * imgW + b : b * imgW + a] < 128;
+    const runs: { b: number; a0: number; a1: number }[][] = [];
+    for (let b = 0; b < Bn; b++) {
+      const row: { b: number; a0: number; a1: number }[] = [];
+      let s = -1;
+      for (let a = 0; a <= A; a++) {
+        const d = a < A && dark(a, b);
+        if (d && s < 0) s = a;
+        if (!d && s >= 0) { const L = a - s; if (L >= minLen && L <= maxLen) row.push({ b, a0: s, a1: a }); s = -1; }
+      }
+      runs.push(row);
+    }
+    // A thick line shows as several adjacent runs: keep the first of each touching group.
+    const used = new Set<string>();
+    for (let b = 0; b < Bn; b++) for (const r of runs[b]) {
+      if (used.has(`${b}:${r.a0}`)) continue;
+      const chain = [r];
+      let cur = r;
+      while (true) {
+        let next: typeof r | null = null;
+        for (let g = minGap; g <= maxGap && !next; g++) {
+          const nb = cur.b + g;
+          if (nb >= Bn) break;
+          next = runs[nb].find((q) => Math.min(q.a1, cur.a1) - Math.max(q.a0, cur.a0) >= 0.7 * Math.min(q.a1 - q.a0, cur.a1 - cur.a0) && Math.abs((q.a1 - q.a0) - (cur.a1 - cur.a0)) <= 0.3 * (cur.a1 - cur.a0)) || null;
+        }
+        if (!next) break;
+        // skip the rest of this thick line's rows
+        chain.push(next); cur = next;
+      }
+      const gaps = chain.slice(1).map((c, i) => c.b - chain[i].b);
+      const steady = gaps.length && Math.max(...gaps) - Math.min(...gaps) <= 4;
+      // Treads have white space between them; a solid black block (column, scale bar) does not.
+      const openPairs = chain.slice(1).filter((c, i) => {
+        const mb = Math.round((c.b + chain[i].b) / 2);
+        let d = 0; for (let a = c.a0; a < c.a1; a++) if (black(a, mb)) d++;
+        return d <= 0.3 * (c.a1 - c.a0);
+      }).length;
+      // An arrow or label crossing the flight closes a gap or two; most gaps must be open.
+      if (openPairs < 0.75 * (chain.length - 1)) continue;
+      if (chain.length >= minTreads && steady) {
+        for (const c of chain) used.add(`${c.b}:${c.a0}`);
+        const a0 = Math.min(...chain.map((c) => c.a0)), a1 = Math.max(...chain.map((c) => c.a1)), b0 = chain[0].b, b1 = chain[chain.length - 1].b;
+        out.push(vertical ? { x0: b0, y0: a0, x1: b1, y1: a1 } : { x0: a0, y0: b0, x1: a1, y1: b1 });
+      }
+    }
+  }
+  // Merge overlapping boxes (two flights of one stair, or the same flight found twice).
+  const merged: typeof out = [];
+  for (const b of out) {
+    const m = merged.find((o) => b.x0 <= o.x1 + 10 && b.x1 >= o.x0 - 10 && b.y0 <= o.y1 + 10 && b.y1 >= o.y0 - 10);
+    if (m) { m.x0 = Math.min(m.x0, b.x0); m.y0 = Math.min(m.y0, b.y0); m.x1 = Math.max(m.x1, b.x1); m.y1 = Math.max(m.y1, b.y1); } else merged.push({ ...b });
+  }
+  return merged;
 }

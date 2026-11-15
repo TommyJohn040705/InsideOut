@@ -25,6 +25,8 @@ interface Props {
   plans: FloorPlanData[];
   imports: FloorImport[];
   onImportsChanged: () => void;
+  /** Fetch the hallway networks of these buildings; resolves true when new ones were loaded. */
+  onNeedNetworks?: (buildingIds: string[]) => Promise<boolean>;
   route: NavigationRoute | null;
   destination: RoomPOI | null;
   isMobile: boolean;
@@ -46,7 +48,7 @@ const floorLabel = (code: string) => code.replace(/^0(\d)$/, '$1');
 const hitLabel = (h: Hit) => h.kind === 'floor' ? `${h.b.code} floor ${h.f.wing ? h.f.wing + ' ' : ''}${floorLabel(h.f.floorCode)}` : h.kind === 'room' ? `${h.b.code} ${h.room.roomNumber || ''} ${h.room.name}`.trim() : h.kind === 'osmroom' ? `${h.b.code} ${[h.r.ref, h.r.name].filter(Boolean).join(': ')}` : buildingLabel(h.b);
 const toTripEnd = (h: Hit): TripEnd => h.kind === 'room' ? { buildingId: h.b.id, room: h.room, label: hitLabel(h) } : h.kind === 'osmroom' ? { buildingId: h.b.id, at: h.r.center, label: hitLabel(h) } : { buildingId: h.b.id, label: hitLabel(h) };
 
-export function CampusView({ plans, imports, onImportsChanged, route, destination, isMobile, onOpenIndoor, onRouteIndoor }: Props) {
+export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, route, destination, isMobile, onOpenIndoor, onRouteIndoor }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const [adapter, setAdapter] = useState<CampusMapAdapter | null>(null);
   const [provider, setProvider] = useState<MapProvider>(MAP_PROVIDER);
@@ -227,6 +229,8 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
     setTrip(null); setTripMsg(null);
     if (!from || !to) return;
     setTripMsg('Finding a route…');
+    // Newly loaded indoor networks change `sites`, which re-runs this trip with them.
+    if (onNeedNetworks && await onNeedNetworks([from.buildingId, to.buildingId].filter(Boolean) as string[])) return;
     const g = await loadOutdoorGraph();
     const t = planTrip(g, sites, from, to, sf);
     if ('error' in t) { setTripMsg(t.error); return; }

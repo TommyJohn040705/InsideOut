@@ -16,3 +16,6 @@ futurelabs/
 # Runtime store (imported floor plans, rooms, corrections) IS committed so the private repo
 # carries the working buildings. University-owned drawings: keep this repository private.
 InsideOut-prototype.zip
+
+# OCR language data, downloaded by tesseract.js on first run
+*.traineddata

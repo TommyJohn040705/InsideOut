@@ -6,7 +6,7 @@
  *   --missing                                         skip floors that already have one
  */
 import { createCanvas, loadImage } from '@napi-rs/canvas';
-import { buildPlanGraph } from '../../src/campus/planGraph';
+import { buildPlanGraph, detectStairs } from '../../src/campus/planGraph';
 import type { FloorImport } from '../../src/campus/floorImports';
 
 const BASE = process.env.INSIDEOUT_URL || 'http://localhost:3000';
@@ -23,7 +23,9 @@ async function fetchRetry(url: string, init?: RequestInit): Promise<Response> {
 }
 
 const all: FloorImport[] = await (await fetchRetry(`${BASE}/api/floor-imports`)).json();
-const todo = all.filter((f) => f.rooms.length && (ids.length ? ids.includes(f.id) : true) && !(missingOnly && f.autoHallways?.length));
+// --part=k/n takes every n-th floor starting at k, so several processes can share the work.
+const [partK, partN] = (args.find((a) => a.startsWith('--part='))?.slice(7) || '0/1').split('/').map(Number);
+const todo = all.filter((f) => f.rooms.length && (ids.length ? ids.includes(f.id) : true) && !(missingOnly && (f.autoNodes || f.autoHallways?.length))).filter((_, i) => i % partN === partK);
 console.log(`${todo.length} floors`);
 
 for (const f of todo) {
@@ -39,13 +41,20 @@ for (const f of todo) {
     const d = g.getImageData(0, 0, img.width, img.height).data;
     const gray = new Uint8Array(img.width * img.height);
     for (let i = 0; i < gray.length; i++) gray[i] = (d[i * 4] + d[i * 4 + 1] + d[i * 4 + 2]) / 3;
-    const pg = buildPlanGraph(gray, img.width, img.height, f.rooms, f.id);
+    // Stairs this script added before are found again; drop them so they are not counted twice.
+    const rooms = f.rooms.filter((r) => !/-st\d+$/.test(r.id));
+    const pg = buildPlanGraph(gray, img.width, img.height, rooms, f.id, { stairs: detectStairs(gray, img.width, img.height) });
+    const newRooms = [...rooms, ...pg.addedRooms.map((r) => ({ ...r, floor: f.floorNumber, purposeVerification: 'unverified_drawing_only' }))];
+    if (newRooms.length !== f.rooms.length || pg.addedRooms.length) {
+      const pr = await fetchRetry(`${BASE}/api/floor-imports/${encodeURIComponent(f.id)}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ rooms: newRooms }) });
+      if (!pr.ok) throw new Error(`rooms save ${pr.status}`);
+    }
     const put = await fetchRetry(`${BASE}/api/floor-imports/${encodeURIComponent(f.id)}/auto-hallways`, {
       method: 'PUT', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ hallways: pg.hallways }),
     });
     if (!put.ok) throw new Error(`save ${put.status} ${await put.text()}`);
-    console.log(`${f.id}: ${pg.hallways.length} nodes, ${pg.linkedRoomIds.length}/${f.rooms.length} rooms linked (${((Date.now() - t) / 1000).toFixed(1)} s)`);
+    console.log(`${f.id}: ${pg.hallways.length} nodes, ${pg.linkedRoomIds.length}/${f.rooms.length} rooms linked, ${pg.addedRooms.length} stairs found (${((Date.now() - t) / 1000).toFixed(1)} s)`);
   } catch (e: any) {
     console.error(`${f.id}: failed: ${e?.message || e}`);
   }
