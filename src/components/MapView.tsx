@@ -86,14 +86,28 @@ export const MapView = React.forwardRef<MapViewHandle, MapViewProps>(function Ma
     return () => ro.disconnect();
   }, []);
 
-  const fitView = useCallback(() => {
+  // Uploaded plan sheets carry a key map, legend and title block: frame the building itself (its
+  // hallway network, else its rooms), in image percent with a small margin.
+  const content = useMemo(() => {
+    if (plan.source !== 'upload') return null;
+    const pts = (plan.hallways.length ? plan.hallways : plan.rooms).map((p) => p.coords);
+    if (pts.length < 3) return null;
+    const xs = pts.map((p) => p.x), ys = pts.map((p) => p.y);
+    const x0 = Math.max(0, Math.min(...xs) - 3), x1 = Math.min(100, Math.max(...xs) + 3), y0 = Math.max(0, Math.min(...ys) - 3), y1 = Math.min(100, Math.max(...ys) + 3);
+    return x1 - x0 > 5 && y1 - y0 > 5 ? { x0, y0, x1, y1 } : null;
+  }, [plan]);
+
+  const fitRect = useCallback((r: { x0: number; y0: number; x1: number; y1: number }) => {
     if (!box.w || !box.h) return null;
     const aw = Math.max(50, box.w - pad.left - pad.right), ah = Math.max(50, box.h - pad.top - pad.bottom);
-    const s = Math.min(aw / nat.w, ah / nat.h);
-    return { s, tx: pad.left + (aw - nat.w * s) / 2, ty: pad.top + (ah - nat.h * s) / 2 };
+    const bx = (r.x0 / 100) * nat.w, by = (r.y0 / 100) * nat.h, bw = ((r.x1 - r.x0) / 100) * nat.w, bh = ((r.y1 - r.y0) / 100) * nat.h;
+    const s = Math.min(aw / bw, ah / bh);
+    return { s, tx: pad.left + (aw - bw * s) / 2 - bx * s, ty: pad.top + (ah - bh * s) / 2 - by * s };
   }, [box.w, box.h, nat.w, nat.h, pad.top, pad.right, pad.bottom, pad.left]);
+  const WHOLE = { x0: 0, y0: 0, x1: 100, y1: 100 };
+  const fitView = useCallback(() => fitRect(content || WHOLE), [fitRect, content]);
 
-  const minScale = () => (fitView()?.s || 0.1) * 0.8;
+  const minScale = () => (fitRect(WHOLE)?.s || 0.1) * 0.8;
   const maxScale = () => Math.max(1.6, (fitView()?.s || 0.1) * 14);
 
   const animateTo = useCallback((target: { s: number; tx: number; ty: number }, ms = 260) => {

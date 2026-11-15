@@ -288,12 +288,13 @@ export default function App() {
   const allRooms = useMemo(() => buildingPlans.flatMap((p) => p.rooms.map((r) => ({ ...r, floor: r.floor ?? p.floorNumber }))), [buildingPlans]);
   const results = useRoomSearch(allRooms, query);
 
-  // default start: building entrance
+  // default start: the building's entrance when one is mapped; never an arbitrary room (people would
+  // get directions from somewhere they are not). Without one, Directions asks where they are.
   useEffect(() => {
     const inHere = (r: RoomPOI | null) => !!r && buildingPlans.some((p) => p.rooms.some((x) => x.id === r.id));
     if (inHere(startRoom)) { if (endRoom && !inHere(endRoom)) setEndRoom(null); return; }
     const first = buildingPlans.find((p) => p.defaultStartId) || buildingPlans[0];
-    const def = first?.rooms.find((r) => r.id === first.defaultStartId) || first?.rooms.find((r) => r.category === 'entrance') || first?.rooms[0] || null;
+    const def = first?.rooms.find((r) => r.id === first.defaultStartId) || first?.rooms.find((r) => r.category === 'entrance') || null;
     setStartRoom(def ? { ...def, floor: def.floor ?? first.floorNumber } : null);
     setEndRoom(null);
   }, [buildingId]);
@@ -430,7 +431,11 @@ export default function App() {
     setQuery(''); setSearchOpen(false); setSheetFull(false);
     showRoom(r);
   };
-  const directionsTo = (r: RoomPOI) => { setEndRoom(r); setInspected(null); setSheetFull(false); if (startRoom) goFloor(startRoom.floor ?? currentPlan.floorNumber); };
+  const directionsTo = (r: RoomPOI) => {
+    setEndRoom(r); setInspected(null);
+    if (!startRoom) { openSearch('start'); return; } // ask where they are starting
+    setSheetFull(false); goFloor(startRoom.floor ?? currentPlan.floorNumber);
+  };
   const manualLocation = (r: RoomPOI) => setLocationState({ status: 'manual', accuracyRadiusMeters: 0, source: 'manual_room', coords: r.coords, floor: r.floor ?? currentPlan.floorNumber, roomId: r.id, roomNumber: r.roomNumber, roomName: r.name, updatedAt: Date.now() });
   const startHere = (r: RoomPOI) => { setStartRoom(r); manualLocation(r); setInspected(null); };
   // Nearest by straight line from the start (or the floor on screen); other floors rank after this one.
@@ -990,7 +995,14 @@ export default function App() {
     if (searchOpen) {
       return (
         <div className="-mx-4">
-          {query ? <SearchResults results={results} onPick={pickFromSearch} emptyHint="No matching rooms" /> : <div className="px-4">{quickChips}</div>}
+          {query ? <SearchResults results={results} onPick={pickFromSearch} emptyHint="No matching rooms" />
+            : searchTarget === 'start' ? (
+              <div className="px-4 space-y-2">
+                <p className="text-[15px] font-bold text-slate-900">Where are you now?</p>
+                <p className="text-sm text-slate-600">Type the room number on the nearest door{endRoom ? ` to get directions to ${roomTitle(endRoom)}` : ''}.</p>
+                <button onClick={() => setScannerOpen(true)} className="h-10 px-4 rounded-full ring-1 ring-slate-300 text-sm font-semibold text-slate-800 flex items-center gap-1.5"><ScanLine className="w-4 h-4" /> Scan a room sign instead</button>
+              </div>
+            ) : <div className="px-4">{quickChips}</div>}
         </div>
       );
     }
