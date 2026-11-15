@@ -23,6 +23,8 @@ import { pullStore, pushStore } from './utils/serverStore';
 import { decodeNetwork, FloorImport, importLocator, importToPlan, readShaftLinks, verticalLinksFor, type ManualShaft } from './campus/floorImports';
 import { withEvidence } from './campus/evidenceIndex';
 import { DEV_MODE } from './devMode';
+import { DirectionsView, FindForm } from './components/FindWay';
+import { readTripWords } from './utils/tellInWords';
 import { buildingById } from './campus/campusData';
 import { calculateIndoorRoute } from './utils/pathfinding';
 import { speakGuidance } from './utils/speech';
@@ -68,7 +70,8 @@ const QUICK = [
   { label: 'Bridges & Doors', q: 'bridge', icon: DoorOpen },
 ];
 
-type SearchTarget = 'dest' | 'start';
+// dest: look up a room (opens its card); to: choose the destination; start: choose where you are.
+type SearchTarget = 'dest' | 'start' | 'to';
 
 const OVERRIDES_KEY = 'floornav.roomOverrides.v1';
 type Overrides = Record<string, Partial<RoomPOI>>;
@@ -161,6 +164,8 @@ export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [inspected, setInspected] = useState<RoomPOI | null>(null);
   const [sheetFull, setSheetFull] = useState(false);
+  // Phone: the guided form until "Show the way", then step-by-step directions.
+  const [showWay, setShowWay] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showOriginal, setShowOriginal] = useState(false);
   const [showGraph, setShowGraph] = useState(false);
@@ -300,7 +305,7 @@ export default function App() {
     const first = buildingPlans.find((p) => p.defaultStartId) || buildingPlans[0];
     const def = first?.rooms.find((r) => r.id === first.defaultStartId) || first?.rooms.find((r) => r.category === 'entrance') || null;
     setStartRoom(def ? { ...def, floor: def.floor ?? first.floorNumber } : null);
-    setEndRoom(null);
+    setEndRoom(null); setShowWay(false);
   }, [buildingId]);
 
   const goFloor = (n: number) => {
@@ -431,27 +436,29 @@ export default function App() {
   };
   const pickFromSearch = (r: RoomPOI) => {
     if (searchTarget === 'start') { setStartRoom(r); manualLocation(r); setSearchTarget('dest'); }
+    else if (searchTarget === 'to') { setEndRoom(r); setShowWay(false); setSearchTarget('dest'); }
     else { setInspected(r); }
     setQuery(''); setSearchOpen(false); setSheetFull(false);
     showRoom(r);
   };
   const directionsTo = (r: RoomPOI) => {
-    setEndRoom(r); setInspected(null);
+    setEndRoom(r); setInspected(null); setShowWay(false);
     if (!startRoom) { openSearch('start'); return; } // ask where they are starting
     setSheetFull(false); goFloor(startRoom.floor ?? currentPlan.floorNumber);
   };
   const manualLocation = (r: RoomPOI) => setLocationState({ status: 'manual', accuracyRadiusMeters: 0, source: 'manual_room', coords: r.coords, floor: r.floor ?? currentPlan.floorNumber, roomId: r.id, roomNumber: r.roomNumber, roomName: r.name, updatedAt: Date.now() });
   const startHere = (r: RoomPOI) => { setStartRoom(r); manualLocation(r); setInspected(null); };
   // Nearest by straight line from the start (or the floor on screen); other floors rank after this one.
-  const goNearest = (cat: 'restroom' | 'elevator' | 'exit') => {
+  const goNearest = (cat: 'restroom' | 'elevator' | 'exit', from: RoomPOI | null = startRoom) => {
     const cats: string[] = cat === 'exit' ? ['exit', 'entrance'] : [cat];
-    const floor = startRoom?.floor ?? currentPlan.floorNumber;
-    const at = startRoom?.coords ?? { x: 50, y: 50 };
+    const floor = from?.floor ?? currentPlan.floorNumber;
+    const at = from?.coords ?? { x: 50, y: 50 };
     const best = buildingPlans.flatMap((p) => p.rooms.map((r) => ({ ...r, floor: r.floor ?? p.floorNumber })))
-      .filter((r) => cats.includes(r.category) && r.id !== startRoom?.id)
+      .filter((r) => cats.includes(r.category) && r.id !== from?.id)
       .map((r) => ({ r, d: Math.abs(r.floor - floor) * 1000 + Math.hypot(r.coords.x - at.x, r.coords.y - at.y) }))
       .sort((a, b) => a.d - b.d)[0];
-    if (best) directionsTo(best.r);
+    if (best && from && from !== startRoom) { setEndRoom(best.r); setShowWay(false); } // start was just set (state not updated yet)
+    else if (best) directionsTo(best.r);
     else setRouteError(`No ${cat === 'restroom' ? 'washroom' : cat} is mapped in this building yet.`);
   };
   const swap = () => { const s = startRoom; setStartRoom(endRoom); setEndRoom(s); };
@@ -1011,41 +1018,24 @@ export default function App() {
       );
     }
     if (inspected) return roomCard(inspected, () => setInspected(null));
-    if (endRoom) {
-      if (!sheetFull && route) {
-        return (
-          <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <div className="min-w-0 flex-1">
-                <p className="text-sm text-slate-500 truncate">To {roomTitle(endRoom)}</p>
-                <RouteSummary route={route} />
-              </div>
-              <button onClick={startNavigation} className="h-12 px-6 rounded-full bg-blue-600 text-white font-bold shadow">Start</button>
-            </div>
-            <button onClick={() => openSearch('start')} className="w-full text-left text-sm text-slate-700 truncate">
-              From <span className="font-semibold text-slate-900">{startRoom ? roomTitle(startRoom) : 'choose a start'}</span> <span className="text-blue-700 font-semibold">· Change</span>
-            </button>
-            <label className={cx('flex items-center gap-2.5 rounded-xl px-3 py-2.5 ring-2 cursor-pointer', isAccessibleOnly ? 'bg-blue-50 ring-blue-600' : 'bg-white ring-slate-300')}>
-              <input type="checkbox" checked={isAccessibleOnly} onChange={() => setIsAccessibleOnly((v) => !v)} className="w-5 h-5 accent-blue-700" />
-              <Accessibility className="w-4 h-4 text-slate-800" />
-              <span className="text-[15px] font-bold text-slate-900">Elevators only (step-free)</span>
-            </label>
-            <div className="flex items-center justify-between gap-2">
-              <button onClick={() => setSheetFull(true)} className="text-sm font-semibold text-blue-700">Route options and steps</button>
-              <button onClick={() => openUpdate(endRoom || startRoom || null)} className="text-sm font-semibold text-blue-800 flex items-center gap-1"><MapPinned className="w-4 h-4" /> Update the map</button>
-            </div>
-          </div>
-        );
-      }
-      return planner(false);
+    if (showWay && route && startRoom && endRoom) {
+      return <DirectionsView route={route} end={endRoom} current={stepIndex} onPick={(i) => jumpToStep(i)}
+        onEnd={() => { setShowWay(false); setEndRoom(null); }}
+        onChangeDestination={() => { setShowWay(false); openSearch('to'); }}
+        onReport={() => openUpdate(endRoom)} />;
     }
-    return (
-      <div className="space-y-2">
-        <p className="text-[15px] font-bold text-slate-900">Where to?</p>
-        {quickChips}
-        <p className="text-xs text-slate-500">Or tap any room on the map.</p>
-      </div>
-    );
+    return <FindForm buildingName={currentPlan.buildingName || buildingCode(currentPlan)} start={startRoom} end={endRoom} route={route} routeError={routeError}
+      accessible={isAccessibleOnly} onToggleAccessible={() => setIsAccessibleOnly((v) => !v)}
+      onPickStart={() => openSearch('start')} onPickEnd={() => openSearch('to')} onScan={() => setScannerOpen(true)}
+      onNearest={(n) => goNearest(n)} onShowWay={() => { setShowWay(true); jumpToStep(0); setSheetFull(true); }}
+      onWords={(text) => {
+        const w = readTripWords(text, allRooms);
+        if (w.start) { setStartRoom(w.start); manualLocation(w.start); }
+        if (w.nearest) goNearest(w.nearest, w.start || startRoom);
+        else if (w.end) { setEndRoom(w.end); setShowWay(false); }
+        return w.message || null;
+      }}
+      onReport={() => openUpdate(endRoom || startRoom || null)} onChangeBuilding={() => setView('campus')} />;
   })();
 
   return (
@@ -1067,7 +1057,8 @@ export default function App() {
                 value={query}
                 onChange={(v) => { setQuery(v); setSearchOpen(true); setSheetFull(true); }}
                 onFocus={() => { setSearchOpen(true); setSheetFull(true); setInspected(null); }}
-                placeholder={searchTarget === 'start' ? 'Search a starting point' : `Search rooms in ${buildingCode(currentPlan)}`}
+                focus={searchOpen}
+                placeholder={searchTarget === 'start' ? 'Where are you? (room number)' : searchTarget === 'to' ? 'Where to? (room number)' : `Search rooms in ${buildingCode(currentPlan)}`}
                 leading={
                   searchOpen ? (
                     <button aria-label="Back" onClick={() => { setSearchOpen(false); setQuery(''); setSearchTarget('dest'); setSheetFull(false); }} className="p-1 -ml-1"><ChevronLeft className="w-5 h-5 text-slate-600" /></button>

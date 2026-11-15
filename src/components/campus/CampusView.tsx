@@ -264,6 +264,33 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
 
   const sum = useMemo(coverageSummary, []);
   const importsOf = (id: string) => imports.filter((f) => f.buildingId === id);
+  // First thing people see: which building are you in? (tap the map, or pick from the list)
+  const pickList = useMemo(() => Object.values(sites)
+    .map((s) => ({ s, b: buildingById(s.buildingId) }))
+    .filter((x) => x.b && x.s.plans.length)
+    .sort((x, y) => (x.s.buildingId === 'E5' ? -1 : y.s.buildingId === 'E5' ? 1 : (x.b!.name || x.s.buildingId).localeCompare(y.b!.name || y.s.buildingId))), [sites]);
+  const enter = (s: (typeof pickList)[number]['s']) => {
+    const floors = s.plans.map((p) => p.floorNumber).sort((a, b) => a - b);
+    onOpenIndoor(s.appBuildingId, floors.find((f) => f >= 1) ?? floors[0]);
+  };
+  const picker = (
+    <div className="bg-white rounded-2xl shadow-lg ring-1 ring-slate-200 p-4 space-y-2">
+      <p className="text-lg font-extrabold text-slate-900">Which building are you in?</p>
+      <p className="text-sm text-slate-600">Tap it on the map, or pick it here. Search above to find a room.</p>
+      <ul className={isMobile ? 'max-h-[34dvh] overflow-y-auto -mx-1 space-y-1.5' : 'max-h-[60dvh] overflow-y-auto -mx-1 space-y-1.5'}>
+        {pickList.map(({ s, b }) => (
+          <li key={s.buildingId} className="flex items-center gap-2 rounded-xl ring-1 ring-slate-200 hover:bg-slate-50 mx-1">
+            <button onClick={() => enter(s)} className="flex-1 min-w-0 flex items-center gap-3 p-2.5 text-left">
+              <span className="w-11 h-8 shrink-0 rounded-lg bg-blue-50 text-blue-800 text-[11px] font-extrabold flex items-center justify-center">{s.buildingId.split('_')[0]}</span>
+              <span className="text-[15px] font-semibold text-slate-900 truncate">{b!.name || s.buildingId}</span>
+            </button>
+            <button onClick={() => openTripTo({ buildingId: s.buildingId, label: buildingLabel(b!) })} className="px-3 text-sm font-semibold text-blue-700 shrink-0">Directions</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+
   const card = selected && (
     <div className="bg-white rounded-2xl shadow-xl ring-1 ring-slate-200 p-4 space-y-3 max-h-[60dvh] overflow-y-auto">
       <div className="flex items-start gap-3">
@@ -491,6 +518,12 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
       </div>
 
       {mapError && <div role="alert" className="absolute left-3 right-3 top-[76px] md:left-auto md:right-3 md:top-64 md:w-[360px] bg-red-50 text-red-900 ring-1 ring-red-200 rounded-xl p-3 text-xs font-medium">{mapError}</div>}
+
+      {!tripPanel && !card && !studioOpen && !query.trim() && (
+        <div className={isMobile ? 'absolute left-0 right-0 bottom-0 p-3 pb-[max(12px,env(safe-area-inset-bottom))]' : 'absolute left-3 top-[76px] w-[400px]'}>
+          {picker}
+        </div>
+      )}
 
       {(tripPanel || card) && (
         <div className={isMobile ? 'absolute left-0 right-0 bottom-0 p-3 pb-[max(12px,env(safe-area-inset-bottom))]' : 'absolute left-3 top-[76px] w-[400px] space-y-2'}>

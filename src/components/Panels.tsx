@@ -90,13 +90,18 @@ export function SearchResults({ results, onPick, emptyHint }: { results: RoomPOI
   );
 }
 
-export function SearchInput({ value, onChange, placeholder, autoFocus, onClear, onFocus, leading, trailing }: {
+export function SearchInput({ value, onChange, placeholder, autoFocus, focus, onClear, onFocus, leading, trailing }: {
   value: string; onChange: (v: string) => void; placeholder: string; autoFocus?: boolean; onClear?: () => void; onFocus?: () => void; leading?: React.ReactNode; trailing?: React.ReactNode;
+  /** Put the cursor in the box whenever this becomes true (search opened from a button). */
+  focus?: boolean;
 }) {
+  const ref = React.useRef<HTMLInputElement>(null);
+  React.useEffect(() => { if (focus) ref.current?.focus(); }, [focus]);
   return (
     <div className="flex items-center gap-2 h-12 px-3 rounded-full bg-white shadow-md ring-1 ring-slate-200 focus-within:ring-2 focus-within:ring-blue-500">
       {leading || <Search className="w-5 h-5 text-slate-400 shrink-0" />}
       <input
+        ref={ref}
         value={value}
         autoFocus={autoFocus}
         onFocus={onFocus}
