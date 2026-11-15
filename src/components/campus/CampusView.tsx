@@ -19,6 +19,7 @@ import { FloorImport, floorLabelOf, importStatus } from '../../campus/floorImpor
 import { indoorSites, planTrip, Trip, TripEnd } from '../../campus/tripPlanner';
 import { loadOutdoorGraph } from '../../campus/outdoorRoute';
 import { FloorPlanStudio } from './FloorPlanStudio';
+import { searchEvidence, normRoom, type EvidenceHit } from '../../campus/evidenceIndex';
 
 interface Props {
   plans: FloorPlanData[];
@@ -184,7 +185,25 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
     }
     return out.slice(0, 8);
   };
-  const hits = useMemo(() => search(query), [query, sites]);
+  // Source-listed destinations; each is tied to a mapped room only if an indoor site has that room number.
+  const evHits = useMemo(() => searchEvidence(query, 5).map((e) => {
+    const s = e.building ? sites[e.building.id] : undefined;
+    const num = normRoom(e.rec.room_number)?.split(/[/ ]/)[0];
+    let room: RoomPOI | undefined;
+    if (s && num) for (const p of s.plans) for (const r of p.rooms) if (!room && r.roomNumber?.toUpperCase() === num) room = { ...r, floor: r.floor ?? p.floorNumber };
+    return { e, room };
+  }), [query, sites]);
+  const hits = useMemo(() => {
+    const listed = new Set(evHits.map((x) => x.room?.id).filter(Boolean));
+    return search(query).filter((h) => !(h.kind === 'room' && listed.has(h.room.id)));
+  }, [query, sites, evHits]);
+  const pickEvidence = ({ e, room }: { e: EvidenceHit; room?: RoomPOI }) => {
+    if (!e.building) return;
+    setQuery('');
+    if (room) { onOpenIndoor(sites[e.building.id].appBuildingId, room.floor!, room); return; }
+    setSelectedId(e.building.id); setFloor(null); setOsmRoom(null);
+    setWalk(`${e.rec.display_name}${e.rec.room_number ? ` (${e.rec.building_code} ${e.rec.room_number})` : ''} is listed by ${e.rec.source_title}, but its position is not on a mapped floor, so there is no route inside the building.`);
+  };
   const tripHits = useMemo(() => (tripQ ? search(tripQ.q) : []), [tripQ, sites]);
 
   const pick = (h: Hit) => {
@@ -395,6 +414,40 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
               aria-label="Search campus buildings and rooms" className="flex-1 min-w-0 bg-transparent outline-none text-sm font-medium placeholder:text-slate-400" />
             {query && <button aria-label="Clear search" onClick={() => setQuery('')}><X className="w-4 h-4 text-slate-500" /></button>}
           </div>
+          {evHits.length > 0 && (
+            <ul aria-label="Listed destinations" className="mt-2 bg-white rounded-2xl shadow-xl ring-1 ring-slate-200 overflow-hidden divide-y divide-slate-100 max-h-[50vh] overflow-y-auto">
+              {evHits.map(({ e, room }) => (
+                <li key={e.rec.id} className="flex items-start">
+                  <button onClick={() => pickEvidence({ e, room })} disabled={!e.building} className="flex-1 min-w-0 text-left px-3 py-2.5 hover:bg-slate-50 disabled:hover:bg-white flex items-start gap-2.5">
+                    <span className="min-w-9 h-7 px-1.5 rounded-md bg-slate-100 text-[11px] font-extrabold flex items-center justify-center">{e.rec.building_code}</span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block text-sm font-bold">{e.rec.room_number ? `${e.rec.building_code} ${e.rec.room_number}: ` : ''}{e.rec.display_name}</span>
+                      <span className="block text-[11px] text-slate-600">{e.accessLabel}</span>
+                      <span className="mt-1 flex flex-wrap gap-1 text-[10px] font-bold">
+                        {e.rec.operational_status === 'closed' && <span className="px-1.5 py-0.5 rounded bg-red-100 text-red-800">Closed</span>}
+                        {e.rec.operational_status === 'planned' && <span className="px-1.5 py-0.5 rounded bg-amber-100 text-amber-900">Planned, not open</span>}
+                        {e.rec.review_required && <span className="px-1.5 py-0.5 rounded bg-amber-100 text-amber-900">Sources disagree</span>}
+                        <span className={`px-1.5 py-0.5 rounded ${room ? 'bg-blue-50 text-blue-800' : 'bg-slate-100 text-slate-700'}`}>{room ? `On the floor ${room.floor} map` : 'Location listed, no indoor route'}</span>
+                        <span className="px-1.5 py-0.5 rounded bg-green-50 text-green-800">Listed as of {e.rec.source_checked_on}</span>
+                        {e.linkNote && <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-semibold">{e.linkNote}</span>}
+                      </span>
+                      {e.historicalNote && <span className="block mt-1 text-[11px] font-semibold text-amber-800">{e.historicalNote}</span>}
+                      {e.e5Room?.nameConflict && <span className="block mt-1 text-[11px] text-amber-800">E5 map calls this room “{e.e5Room.name}”: needs review.</span>}
+                      {e.rec.notes && <span className="block mt-1 text-[11px] text-slate-500">{e.rec.notes}</span>}
+                    </span>
+                  </button>
+                  <span className="flex flex-col items-center">
+                    <a href={e.rec.source_url} target="_blank" rel="noreferrer" aria-label={`Source: ${e.rec.source_title}`} title={e.rec.source_title} className="px-3 h-10 flex items-center text-slate-600"><ExternalLink className="w-4 h-4" /></a>
+                    {e.building && e.rec.operational_status === 'listed' && (
+                      <button aria-label={`Directions to ${room ? e.rec.display_name : e.building.name}`} title={room ? 'Directions' : 'Directions to the building'}
+                        onClick={() => { setQuery(''); openTripTo(room ? { buildingId: e.building!.id, room, label: e.rec.display_name } : { buildingId: e.building!.id, label: buildingLabel(e.building!) }); }}
+                        className="px-3 h-10 text-blue-700"><Navigation2 className="w-4 h-4" /></button>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
           {hits.length > 0 && (
             <ul className="mt-2 bg-white rounded-2xl shadow-xl ring-1 ring-slate-200 overflow-hidden divide-y divide-slate-100">
               {hits.map((h) => (
@@ -411,7 +464,7 @@ export function CampusView({ plans, imports, onImportsChanged, route, destinatio
               ))}
             </ul>
           )}
-          {query.trim() && hits.length === 0 && <div className="mt-2 bg-white rounded-2xl shadow ring-1 ring-slate-200 px-3 py-2.5 text-sm text-slate-600">No building or mapped room matches.</div>}
+          {query.trim() && hits.length === 0 && evHits.length === 0 &&<div className="mt-2 bg-white rounded-2xl shadow ring-1 ring-slate-200 px-3 py-2.5 text-sm text-slate-600">No building or mapped room matches.</div>}
         </div>
       </div>
 
