@@ -58,9 +58,31 @@ export function doorLinks(site: IndoorSite, buildingId: string): DoorLink[] {
       const m = distanceM(door.position, g.pctToLngLat(r.coords));
       if (m <= DOOR_LINK_M && (!best || m < best.m)) best = { door, room: r, m };
     }
+    if (!best && site.appBuildingId.startsWith('import-')) best = doorAtNetwork(site, door);
     if (best) out.push(best);
   }
   return out;
+}
+
+/** Furthest a door may be from a floor's hallway network to enter there (m). */
+export const DOOR_NETWORK_M = 8;
+
+/**
+ * No entrance room near this door: enter at the nearest hallway node, preferring the ground floor.
+ * The door itself is not in the indoor map, so the link is an estimate and says so.
+ */
+function doorAtNetwork(site: IndoorSite, door: CampusEntrance): DoorLink | null {
+  let best: DoorLink | null = null;
+  for (const p of [...site.plans].sort((a, b) => Math.abs(a.floorNumber - 1) - Math.abs(b.floorNumber - 1))) {
+    const g = site.georef(p.floorNumber);
+    if (!g || !p.hallways.length) continue;
+    for (const h of p.hallways) {
+      const m = distanceM(door.position, g.pctToLngLat(h.coords));
+      if (m <= DOOR_NETWORK_M && (!best || m < best.m)) best = { door, m, room: { id: `door-${door.id}`, name: door.name || 'Entrance', category: 'entrance', coords: h.coords, floor: p.floorNumber } as RoomPOI };
+    }
+    if (best) return best; // nearest floor to the ground that has a match
+  }
+  return best;
 }
 
 export interface TripEnd {

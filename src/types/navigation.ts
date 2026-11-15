@@ -77,6 +77,8 @@ export interface CorridorNode {
   label?: string;
   floor?: number;
   connectedTo: string[]; // IDs of connected hallway nodes or room POIs
+  /** Multiplies the length of edges at this node (default 1); higher means avoid if possible. */
+  cost?: number;
 }
 
 export interface FloorPlanData {
@@ -89,6 +91,12 @@ export interface FloorPlanData {
   buildingId?: string;
   buildingName?: string;
   buildingType: string;
+  /** Image width / height; percent coordinates are scaled by this for distances. Default: E5's sheet. */
+  aspect?: number;
+  /** Hallways were read automatically off the drawing, not drawn and reviewed by a person. */
+  autoHallways?: boolean;
+  /** Metres per 1% of image height, when known from the map alignment. Default: E5's scale. */
+  metresPerPct?: number;
   summary: string;
   scaleNote?: string;
   drawingNumber?: string;

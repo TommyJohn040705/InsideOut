@@ -37,7 +37,22 @@ export interface FloorImport {
   reviewed: boolean;
   reviewedAt?: string;
   published: boolean;
+  /** Hallway network read automatically off the drawing (src/campus/planGraph.ts); used until hand-drawn hallways are reviewed. */
+  autoHallways?: CorridorNode[];
+  autoHallwaysAt?: string;
 }
+
+/** Metres per 1% of image height from this floor's alignment, else from another aligned floor of the building. */
+export function metresPerPctOf(f: FloorImport, sameBuilding: FloorImport[] = []): number | undefined {
+  for (const x of [f, ...sameBuilding]) {
+    const g = georefOfImport(x);
+    if (g && x.imageSize[1] === f.imageSize[1]) return (g.metresPerPixel * x.imageSize[1]) / 100;
+  }
+  return undefined;
+}
+
+/** True when routing on this floor uses the automatic network, not reviewed hand-drawn hallways. */
+export const usesAutoHallways = (f: FloorImport) => importStatus(f) !== 'routing_available' && !!f.autoHallways?.length;
 
 /** Problems that keep a floor's hallway graph from being used for routing. */
 export function graphProblems(rooms: RoomPOI[], hallways: CorridorNode[]): string[] {
@@ -85,7 +100,7 @@ export function floorLabelOf(code: string, filename = ''): string {
 export const importAppBuildingId = (buildingId: string) => `import-${buildingId}`;
 
 /** A published import as a floor the indoor navigator can open and route on. */
-export function importToPlan(f: FloorImport, buildingName: string): FloorPlanData {
+export function importToPlan(f: FloorImport, buildingName: string, sameBuilding: FloorImport[] = []): FloorPlanData {
   return {
     id: `import-${f.id}`,
     title: `${buildingName}, floor ${floorLabelOf(f.floorCode, f.sourceName)}`,
@@ -98,8 +113,11 @@ export function importToPlan(f: FloorImport, buildingName: string): FloorPlanDat
     summary: f.extraction?.summary || '',
     imageUrl: f.imageUrl,
     rooms: f.rooms.map((r) => ({ ...r, floor: f.floorNumber, buildingId: importAppBuildingId(f.buildingId) })),
-    // Hallways only count once the floor is reviewed and its graph is connected; otherwise no routing.
-    hallways: importStatus(f) === 'routing_available' ? f.hallways : [],
+    // Reviewed, connected hand-drawn hallways win; otherwise the network read off the drawing.
+    hallways: importStatus(f) === 'routing_available' ? f.hallways : f.autoHallways || [],
+    autoHallways: usesAutoHallways(f),
+    aspect: f.imageSize[0] / f.imageSize[1],
+    metresPerPct: metresPerPctOf(f, sameBuilding),
     source: 'upload',
   };
 }
@@ -113,17 +131,28 @@ export const roomNumberLabels = (labels: FloorImport['pdfLabels']) => labels.fil
  * shafts linked to a hand-drawn corridor on at least two floors become links.
  */
 export function verticalLinksFor(plans: FloorPlanData[]): VerticalCirculationLink[] {
+  // "1093 ELV" -> "093": the number after the floor digit, ignoring any trailing label.
+  const suffix = (r: RoomPOI) => (r.roomNumber || '').match(/^\d(\d{3}[A-Z]?)\b/)?.[1];
+  // A shaft read as elevator/stairs on one floor carries to the same number on other floors where the
+  // reader called it a corridor or service room (lobbies, unlabelled shafts), never an office or classroom.
+  const shaftType = new Map<string, 'elevator' | 'stairs'>();
+  for (const p of plans) for (const r of p.rooms) {
+    const s = suffix(r);
+    if (s && (r.category === 'elevator' || (r.category === 'stairs' && !shaftType.has(s)))) shaftType.set(s, r.category);
+  }
+  const MAY_BE_SHAFT = new Set(['elevator', 'stairs', 'corridor', 'utility', 'other']);
   const groups = new Map<string, { floor: number; roomId: string; corridorNodeId: string; type: 'elevator' | 'stairs'; number: string }[]>();
   for (const p of plans) {
     const corridorOf = new Map<string, string>();
     for (const h of p.hallways) for (const t of h.connectedTo) if (!corridorOf.has(t)) corridorOf.set(t, h.id);
     for (const r of p.rooms) {
-      if ((r.category !== 'elevator' && r.category !== 'stairs') || !r.roomNumber || r.roomNumber.length < 4) continue;
+      const s = suffix(r), type = s ? shaftType.get(s) : undefined;
+      if (!s || !type || !MAY_BE_SHAFT.has(r.category)) continue;
       const corridor = corridorOf.get(r.id);
       if (!corridor) continue;
-      const key = `${r.category}:${r.roomNumber.slice(1)}`;
+      const key = `${type}:${s}`;
       const list = groups.get(key) || [];
-      if (!list.some((x) => x.floor === p.floorNumber)) list.push({ floor: p.floorNumber, roomId: r.id, corridorNodeId: corridor, type: r.category, number: r.roomNumber });
+      if (!list.some((x) => x.floor === p.floorNumber)) list.push({ floor: p.floorNumber, roomId: r.id, corridorNodeId: corridor, type, number: r.roomNumber!.match(/^\d+[A-Z]?/)![0] });
       groups.set(key, list);
     }
   }

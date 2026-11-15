@@ -119,7 +119,7 @@ export default function App() {
   // Published imports become ordinary floors of an "import-<building>" building.
   useEffect(() => {
     // Room edits made in the app (names, purposes, moves) are stored as overrides by room id; apply them to imported floors too.
-    const imported = applyOverrides(floorImports.filter((f) => f.published).map((f) => importToPlan(f, buildingById(f.buildingId)?.name || f.buildingId)), loadOverrides());
+    const imported = applyOverrides(floorImports.filter((f) => f.published).map((f, _, all) => importToPlan(f, buildingById(f.buildingId)?.name || f.buildingId, all.filter((x) => x.buildingId === f.buildingId))), loadOverrides());
     setPlans((prev) => [...prev.filter((p) => !p.id.startsWith('import-')), ...imported]);
   }, [floorImports]);
 
@@ -298,7 +298,9 @@ export default function App() {
         // Imported buildings: stairs and elevators matched by room number across their drawn floors.
         verticalLinks: buildingId === 'uwaterloo-e5' ? undefined : verticalLinksFor(buildingPlans),
       });
-      if (sPlan.source === 'upload') r.flaggedNotes = ['Route follows hallways drawn on the Plant Operations plan; stairs and elevators matched by room number. Not walked.', ...(r.flaggedNotes || [])];
+      if (sPlan.source === 'upload') r.flaggedNotes = [buildingPlans.some((p) => p.autoHallways)
+        ? 'Automatic route: read from the open space on the Plant Operations drawing (stays out of walls, goes through drawn doorways); stairs and elevators matched by room number. Not walked or reviewed; locked doors are not known.'
+        : 'Route follows hallways drawn on the Plant Operations plan; stairs and elevators matched by room number. Not walked.', ...(r.flaggedNotes || [])];
     } catch (e: any) { setRoute(null); setRouteError(e?.message || 'No route found.'); return; }
     setRouteError(null);
     setRoute(r);

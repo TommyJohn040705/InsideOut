@@ -13,11 +13,16 @@ import { E5_VERTICAL_LINKS } from '../data/e5/e5DataLoader';
 // Cropped E5 floor plan frame: 3067 x 992 px
 export const MAP_ASPECT_RATIO = 3067 / 992; // ~1.5454545
 
+// Sheet shape and scale of the building being routed; E5's unless the floor plan says otherwise.
+// shortcut: set per calculateIndoorRoute call from its start floor, assumes one building's sheets share a shape and scale.
+let sheetAspect = MAP_ASPECT_RATIO;
+let sheetMetresPerPct: number | undefined;
+
 /**
  * Aspect-corrected Euclidean distance between two percentage coordinates
  */
 export function aspectDistance(p1: Point, p2: Point): number {
-  const dx = (p2.x - p1.x) * MAP_ASPECT_RATIO;
+  const dx = (p2.x - p1.x) * sheetAspect;
   const dy = p2.y - p1.y;
   return Math.sqrt(dx * dx + dy * dy);
 }
@@ -28,6 +33,7 @@ export function aspectDistance(p1: Point, p2: Point): number {
  * so 1% of map height ~= 0.34 m (map width ~105 m).
  */
 export function pctToMeters(pctDist: number, buildingType: string = ''): number {
+  if (sheetMetresPerPct) return Math.max(1, Math.round(pctDist * sheetMetresPerPct * 10) / 10);
   let scaleMetersPerPct = 0.34;
   if (buildingType.toLowerCase().includes('engineering')) {
     scaleMetersPerPct = 0.34;
@@ -43,9 +49,9 @@ export function pctToMeters(pctDist: number, buildingType: string = ''): number 
  * Determine turn angle between 3 points in real pixel space: A -> B -> C
  */
 function calculateTurnAction(a: Point, b: Point, c: Point): ManeuverAction {
-  const v1x = (b.x - a.x) * MAP_ASPECT_RATIO;
+  const v1x = (b.x - a.x) * sheetAspect;
   const v1y = b.y - a.y;
-  const v2x = (c.x - b.x) * MAP_ASPECT_RATIO;
+  const v2x = (c.x - b.x) * sheetAspect;
   const v2y = c.y - b.y;
 
   const angle1 = Math.atan2(v1y, v1x);
@@ -142,7 +148,9 @@ function findPathCore(
     });
   }
 
-  // Connect hallway nodes based on connectedTo
+  // Connect hallway nodes based on connectedTo. A node's cost (default 1) scales the edges at it,
+  // so generated networks can prefer corridors over cutting through other rooms.
+  const costOf = new Map(floorPlan.hallways.map((h) => [h.id, h.cost ?? 1]));
   for (const h of floorPlan.hallways) {
     const node = nodes.get(h.id);
     if (!node) continue;
@@ -150,7 +158,7 @@ function findPathCore(
     for (const targetId of h.connectedTo) {
       const targetNode = nodes.get(targetId);
       if (targetNode) {
-        const dist = aspectDistance(node.coords, targetNode.coords);
+        const dist = aspectDistance(node.coords, targetNode.coords) * Math.max(h.cost ?? 1, costOf.get(targetId) ?? 1);
         if (!node.neighbors.some((n) => n.id === targetId)) {
           node.neighbors.push({ id: targetId, weight: dist });
         }
@@ -229,21 +237,31 @@ function findPathCore(
 
   distances.set(startId, 0);
 
-  while (unvisited.size > 0) {
-    let currentId: string | null = null;
-    let shortest = Infinity;
-
-    for (const id of unvisited) {
-      const dist = distances.get(id)!;
-      if (dist < shortest) {
-        shortest = dist;
-        currentId = id;
+  // Binary min-heap with lazy deletion: generated plan networks have thousands of nodes.
+  const heap: [number, string][] = [[0, startId]];
+  const push = (e: [number, string]) => {
+    heap.push(e);
+    for (let i = heap.length - 1; i > 0;) { const p = (i - 1) >> 1; if (heap[p][0] <= heap[i][0]) break; [heap[p], heap[i]] = [heap[i], heap[p]]; i = p; }
+  };
+  const pop = (): [number, string] => {
+    const top = heap[0], last = heap.pop()!;
+    if (heap.length) {
+      heap[0] = last;
+      for (let i = 0; ;) {
+        const l = 2 * i + 1, r = l + 1; let m = i;
+        if (l < heap.length && heap[l][0] < heap[m][0]) m = l;
+        if (r < heap.length && heap[r][0] < heap[m][0]) m = r;
+        if (m === i) break;
+        [heap[m], heap[i]] = [heap[i], heap[m]]; i = m;
       }
     }
+    return top;
+  };
 
-    if (!currentId || shortest === Infinity || currentId === endId) {
-      break;
-    }
+  while (heap.length) {
+    const [shortest, currentId] = pop();
+    if (!unvisited.has(currentId) || shortest > distances.get(currentId)!) continue;
+    if (currentId === endId) break;
 
     unvisited.delete(currentId);
     const currentNode = nodes.get(currentId)!;
@@ -256,6 +274,7 @@ function findPathCore(
       if (alt < distances.get(neighbor.id)!) {
         distances.set(neighbor.id, alt);
         previous.set(neighbor.id, currentId);
+        push([alt, neighbor.id]);
       }
     }
   }
@@ -296,7 +315,7 @@ function simplifyCorridorPointsPreservingConnectors(points: Point[]): Point[] {
   const corridorSegment = points.slice(1, points.length - 1);
   const EPS = 1.6;
   const perp = (p: Point, a: Point, b: Point) => {
-    const ax = a.x * MAP_ASPECT_RATIO, ay = a.y, bx = b.x * MAP_ASPECT_RATIO, by = b.y, px = p.x * MAP_ASPECT_RATIO, py = p.y;
+    const ax = a.x * sheetAspect, ay = a.y, bx = b.x * sheetAspect, by = b.y, px = p.x * sheetAspect, py = p.y;
     const dx = bx - ax, dy = by - ay;
     const L = Math.hypot(dx, dy);
     if (L === 0) return Math.hypot(px - ax, py - ay);
@@ -438,7 +457,16 @@ function generateStepsForWaypoints(
  * - Builds ONE ordered list of legs for arc-length continuous speed
  * - Accurately sets cumulativeDistanceMeters on all NavigationSteps
  */
-export function calculateIndoorRoute(
+/** Indoor route; distances and turns use the start floor's sheet shape and scale when it gives them. */
+export function calculateIndoorRoute(...args: Parameters<typeof calculateIndoorRouteOnSheet>): NavigationRoute {
+  const o = args[7];
+  const startPlan = o?.allFloors?.find((f) => f.floorNumber === o?.startFloor) || args[0];
+  sheetAspect = startPlan.aspect ?? MAP_ASPECT_RATIO;
+  sheetMetresPerPct = startPlan.metresPerPct;
+  try { return calculateIndoorRouteOnSheet(...args); } finally { sheetAspect = MAP_ASPECT_RATIO; sheetMetresPerPct = undefined; }
+}
+
+function calculateIndoorRouteOnSheet(
   floorPlan: FloorPlanData,
   startPoint: Point,
   startName: string,
@@ -577,6 +605,10 @@ export function calculateIndoorRoute(
     }
   }
 
+  if (!chosenLink && options?.verticalLinks) {
+    // Buildings other than E5: never route over a stair or elevator not known to serve both floors.
+    throw new Error(`No ${isAccessibleOnly ? 'elevator' : 'stair or elevator'} matched on the drawings serves both floor ${startFloor} and floor ${endFloor}${isAccessibleOnly ? ', so there is no step-free route yet. Turn off "Elevators only" to try stairs' : ''}.`);
+  }
   if (!chosenLink) {
     chosenLink = links[0]; // first link (E5: Southeast elevators)
   }

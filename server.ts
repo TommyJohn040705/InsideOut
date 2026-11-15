@@ -9,6 +9,7 @@ import { openStore } from './server/store';
 import { readPlantOpsSheet } from './server/plantOpsSheet';
 import { createExtractQueue } from './server/extractQueue';
 import type { FloorImport } from './src/campus/floorImports';
+import { spawn } from 'child_process';
 
 // .env.local (gitignored, holds GEMINI_API_KEY as the README says) first, then .env.
 dotenv.config({ path: ['.env.local', '.env'].map((f) => fileURLToPath(new URL(f, import.meta.url))), quiet: true });
@@ -1036,9 +1037,37 @@ async function extractImport(id: string): Promise<number> {
     f.rooms = out.rooms.map((r: any) => ({ ...r, id: `${rec.id}-${r.id}`, floor: rec.floorNumber, purposeVerification: 'unverified_drawing_only' }));
     f.extraction = { model: out.model, at: new Date().toISOString(), title: out.title, summary: out.summary };
     f.reviewed = false;
+    delete f.autoHallways; delete f.autoHallwaysAt; // linked to the old rooms
   });
+  buildAutoHallways([rec.id]);
   return out.rooms.length;
 }
+
+/** Reads the floor's hallway network off its drawing in a child process (CPU-heavy; keeps the server responsive). */
+function buildAutoHallways(ids: string[]) {
+  const child = spawn(process.execPath, ['--import', 'tsx', 'scripts/campus/autoHallways.ts', ...ids], {
+    cwd: path.dirname(fileURLToPath(import.meta.url)), stdio: 'inherit', env: { ...process.env, INSIDEOUT_URL: `http://localhost:${PORT}` },
+  });
+  child.on('error', (e) => console.error('auto hallways failed to start', e));
+}
+
+// Saves a hallway network read off the drawing (scripts/campus/autoHallways.ts). Shape-checked only.
+app.put('/api/floor-imports/:id/auto-hallways', (req: Request, res: Response) => {
+  const h = req.body?.hallways;
+  const ok = Array.isArray(h) && h.length <= 50000 && h.every((n: any) => typeof n?.id === 'string' && n.id.length < 120
+    && Number.isFinite(n?.coords?.x) && Number.isFinite(n?.coords?.y) && n.coords.x >= 0 && n.coords.x <= 100 && n.coords.y >= 0 && n.coords.y <= 100
+    && Array.isArray(n.connectedTo) && n.connectedTo.every((t: any) => typeof t === 'string') && (n.cost === undefined || (Number.isFinite(n.cost) && n.cost >= 1)));
+  if (!ok) return res.status(400).json({ error: 'hallways must be [{id, coords:{x,y} in 0-100, connectedTo: string[], cost?: >=1}]' });
+  let found = false;
+  store.update((d) => {
+    const f = d.floorImports.find((x) => x.id === req.params.id);
+    if (!f) return;
+    found = true;
+    f.autoHallways = h.map((n: any) => ({ id: n.id, coords: { x: n.coords.x, y: n.coords.y }, connectedTo: n.connectedTo, ...(n.cost ? { cost: n.cost } : {}) }));
+    f.autoHallwaysAt = new Date().toISOString();
+  });
+  return found ? res.json({ saved: h.length }) : res.status(404).json({ error: 'No such import' });
+});
 
 app.post('/api/floor-imports/:id/extract', async (req: Request, res: Response) => {
   if (!store.read().floorImports.some((f) => f.id === req.params.id)) return res.status(404).json({ error: 'No such import' });

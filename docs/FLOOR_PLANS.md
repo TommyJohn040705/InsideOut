@@ -1531,3 +1531,19 @@ These buildings are drawn on the campus map but have no Plant Operations floor p
 | – | Univ of Waterloo Interlocking |  |
 | UTD | United College |  |
 | – | Waterloo Regional Campus |  |
+
+## Automatic indoor routes (read off the drawings)
+
+Every imported floor with rooms gets a hallway network read straight off its Plant Operations drawing
+(`src/campus/planGraph.ts`, run by `scripts/campus/autoHallways.ts`; the server runs it after each floor's
+rooms are read). Walls are thick lines plus thin lines that run straight for 30 px or more; text, door
+swings and door leaves are short or curved and are ignored, so doorways stay open. The open floor space
+is thinned to centre-lines that become hallway nodes; nodes inside rooms (not corridors) cost 4x so routes
+keep to corridors. Stairs and elevators are matched across floors by room number. Campus trips enter at
+the hallway node nearest each OpenStreetMap door (within 8 m) when the floor has no entrance room.
+
+What it does not know: locked or card-access doors, doors drawn without a gap, one-way doors, ramps and
+door openers, and whether a matched elevator really serves every floor. Routes are labelled automatic and
+not walked. Hand-drawn hallways, once reviewed and connected, replace the automatic network for that floor.
+Distances use the floor's map alignment for scale; floors of buildings with no aligned floor fall back to
+E5's scale and read too short.
