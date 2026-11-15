@@ -217,3 +217,36 @@ describe('stairs and elevators linked by hand', () => {
     expect(readShaftLinks(v)).toEqual({ X: [v.X[0]] });
   });
 });
+
+import { stairBoxesFromLayer } from '../src/campus/planGraph';
+
+describe('walls drawn from the PDF wall layer', () => {
+  // 300 x 200 box split by a wall drawn as two 1 px lines 5 px apart, with a 30 px doorway.
+  const W = 300, H = 200, g = new Uint8Array(W * H).fill(255);
+  const rect = (x0: number, y0: number, x1: number, y1: number) => { for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) g[y * W + x] = 0; };
+  rect(20, 20, 280, 20); rect(20, 180, 280, 180); rect(20, 20, 20, 180); rect(280, 20, 280, 180);
+  for (const x of [148, 154]) { rect(x, 20, x, 90); rect(x, 120, x, 180); }
+  const rooms = [{ id: 'A', coords: { x: 25, y: 50 }, category: 'office' }, { id: 'B', coords: { x: 75, y: 50 }, category: 'office' }];
+  const pg = buildPlanGraph(g, W, H, rooms, 't', { cleanWalls: true, outsideCloseCells: 4 });
+
+  it('fills the channel inside a wall but keeps the doorway open', () => {
+    const { w, cellPx, open } = pg.grid;
+    expect(open[Math.floor(50 / cellPx) * w + Math.floor(151 / cellPx)]).toBe(0); // inside the wall
+    expect(open[Math.floor(105 / cellPx) * w + Math.floor(151 / cellPx)]).toBe(1); // the doorway
+  });
+
+  it('joins both rooms through the doorway', () => {
+    const byId = new Map(pg.hallways.map((n) => [n.id, n]));
+    const a = pg.hallways.find((n) => n.connectedTo.includes('A'))!, b = pg.hallways.find((n) => n.connectedTo.includes('B'))!;
+    const seen = new Set([a.id]), st = [a.id];
+    while (st.length) for (const t of byId.get(st.pop()!)!.connectedTo) if (byId.has(t) && !seen.has(t)) { seen.add(t); st.push(t); }
+    expect(seen.has(b.id)).toBe(true);
+  });
+
+  it('takes stair-layer drawings as stair boxes, but not long thin ones', () => {
+    const s = new Uint8Array(W * H).fill(255);
+    for (let i = 0; i < 8; i++) for (let y = 40; y <= 70; y++) s[y * W + 60 + i * 5] = 0; // a flight
+    for (let x = 100; x <= 290; x++) { s[150 * W + x] = 0; s[160 * W + x] = 0; } // a long thin bridge outline
+    expect(stairBoxesFromLayer(s, W, H).length).toBe(1);
+  });
+});

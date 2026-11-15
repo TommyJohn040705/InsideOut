@@ -3057,8 +3057,8 @@
    ],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:38:50.280Z",
-   "autoNodes": 6802
+   "autoHallwaysAt": "2026-11-15T07:53:42.187Z",
+   "autoNodes": 6803
   },
   {
    "id": "DWE-01-mwe6jhbf",
@@ -4036,8 +4036,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 52.45,
-      "y": 79.06
+      "x": 90.75,
+      "y": 22.02
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -4047,8 +4047,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 89.65,
-      "y": 20.94
+      "x": 52.45,
+      "y": 79.37
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -4104,8 +4104,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.82",
-   "autoHallwaysAt": "2026-11-15T03:38:45.302Z",
-   "autoNodes": 3805
+   "autoHallwaysAt": "2026-11-15T07:53:29.091Z",
+   "autoNodes": 2751
   },
   {
    "id": "DWE-02-mwe6jjl4",
@@ -4819,8 +4819,41 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 6.15,
-      "y": 35.32
+      "x": 5.65,
+      "y": 35.78
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DWE-02-mwe6jjl4-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 47.25,
+      "y": 37.64
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DWE-02-mwe6jjl4-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.15,
+      "y": 42.74
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DWE-02-mwe6jjl4-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 52.15,
+      "y": 87.4
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -4876,8 +4909,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.84",
-   "autoHallwaysAt": "2026-11-15T03:38:40.416Z",
-   "autoNodes": 3712
+   "autoHallwaysAt": "2026-11-15T07:53:28.883Z",
+   "autoNodes": 2814
   },
   {
    "id": "DWE-03-mwe6jl47",
@@ -5590,8 +5623,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 63.45,
-      "y": 33.46
+      "x": 6.35,
+      "y": 26.51
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -5601,8 +5634,41 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 52.95,
-      "y": 77.82
+      "x": 47.95,
+      "y": 28.36
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DWE-03-mwe6jl47-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.85,
+      "y": 33.46
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DWE-03-mwe6jl47-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 89.35,
+      "y": 45.67
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DWE-03-mwe6jl47-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 53.95,
+      "y": 75.66
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -5658,8 +5724,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.81",
-   "autoHallwaysAt": "2026-11-15T03:39:02.632Z",
-   "autoNodes": 2437
+   "autoHallwaysAt": "2026-11-15T07:53:44.812Z",
+   "autoNodes": 1692
   },
   {
    "id": "E2-01-mwe6jlwv",
@@ -6784,7 +6850,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.88",
-   "autoHallwaysAt": "2026-11-15T03:38:59.359Z",
+   "autoHallwaysAt": "2026-11-15T07:53:36.563Z",
    "autoNodes": 3172
   },
   {
@@ -8111,8 +8177,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 45.98,
-      "y": 25.45
+      "x": 48.3,
+      "y": 25.65
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -8122,8 +8188,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 50,
-      "y": 49.65
+      "x": 5.49,
+      "y": 46.95
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E2-02-mwe6job9-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 51.85,
+      "y": 48.05
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E2-02-mwe6job9-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 51.24,
+      "y": 83.85
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -8133,8 +8221,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:38:57.670Z",
-   "autoNodes": 2851
+   "autoHallwaysAt": "2026-11-15T07:53:32.471Z",
+   "autoNodes": 2291
   },
   {
    "id": "E2-03-mwe6jpsh",
@@ -8945,7 +9033,7 @@
      "category": "stairs",
      "coords": {
       "x": 8.27,
-      "y": 35.15
+      "y": 35.05
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -8956,7 +9044,7 @@
      "category": "stairs",
      "coords": {
       "x": 54.64,
-      "y": 36.25
+      "y": 36.05
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -8966,8 +9054,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 54.64,
-      "y": 56.95
+      "x": 55.1,
+      "y": 57.05
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E2-03-mwe6jpsh-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 53.09,
+      "y": 71.05
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -8977,8 +9076,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:39:16.586Z",
-   "autoNodes": 2446
+   "autoHallwaysAt": "2026-11-15T07:53:47.254Z",
+   "autoNodes": 1865
   },
   {
    "id": "E2-04-mwe6jqgv",
@@ -9115,8 +9214,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:39:08.518Z",
-   "autoNodes": 761
+   "autoHallwaysAt": "2026-11-15T07:53:38.239Z",
+   "autoNodes": 154
   },
   {
    "id": "E3-01-mwe6js2b",
@@ -9478,23 +9577,12 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "E3-01-mwe6js2b-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 71.95,
-      "y": 43.82
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "E3-01-mwe6js2b-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 41.25,
-      "y": 69.63
+      "x": 82.05,
+      "y": 46.6
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -9504,8 +9592,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 76.35,
-      "y": 70.4
+      "x": 36.95,
+      "y": 67.47
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -9515,8 +9603,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 40.65,
-      "y": 74.57
+      "x": 38.95,
+      "y": 67.47
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -9526,8 +9614,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 82.05,
-      "y": 47.53
+      "x": 41.25,
+      "y": 69.94
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-01-mwe6js2b-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 77.05,
+      "y": 69.32
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-01-mwe6js2b-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 40.65,
+      "y": 74.73
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -9583,8 +9693,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.81",
-   "autoHallwaysAt": "2026-11-15T03:39:14.865Z",
-   "autoNodes": 2649
+   "autoHallwaysAt": "2026-11-15T07:53:34.361Z",
+   "autoNodes": 442
   },
   {
    "id": "E3-02-mwe6jwj1",
@@ -11134,12 +11244,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "E3-02-mwe6jwj1-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 38.15,
+      "y": 12.6
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "E3-02-mwe6jwj1-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 62.45,
-      "y": 70.87
+      "x": 58.65,
+      "y": 26.82
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -11149,8 +11270,107 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
+      "x": 50.65,
+      "y": 28.83
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-02-mwe6jwj1-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 72.45,
+      "y": 43.97
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-02-mwe6jwj1-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 47.75,
+      "y": 42.89
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-02-mwe6jwj1-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 82.05,
+      "y": 46.29
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-02-mwe6jwj1-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 56.75,
+      "y": 48.61
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-02-mwe6jwj1-st8",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 33.35,
+      "y": 64.99
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-02-mwe6jwj1-st9",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.85,
+      "y": 66.69
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-02-mwe6jwj1-st10",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 77.05,
+      "y": 68.86
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-02-mwe6jwj1-st11",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
       "x": 48.25,
-      "y": 80.29
+      "y": 79.37
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-02-mwe6jwj1-st12",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 45.55,
+      "y": 80.6
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -11206,8 +11426,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.73",
-   "autoHallwaysAt": "2026-11-15T03:39:36.316Z",
-   "autoNodes": 4440
+   "autoHallwaysAt": "2026-11-15T07:53:55.024Z",
+   "autoNodes": 4199
   },
   {
    "id": "E3-MEZ-mwe6jyfc",
@@ -11449,12 +11669,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "E3-MEZ-mwe6jyfc-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 49.85,
+      "y": 27.9
+     },
+     "floor": 2.5,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "E3-MEZ-mwe6jyfc-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 56.25,
-      "y": 49.54
+      "x": 47.35,
+      "y": 42.43
      },
      "floor": 2.5,
      "purposeVerification": "unverified_drawing_only"
@@ -11464,8 +11695,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 50.25,
-      "y": 27.9
+      "x": 56.25,
+      "y": 48.15
      },
      "floor": 2.5,
      "purposeVerification": "unverified_drawing_only"
@@ -11521,8 +11752,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.90",
-   "autoHallwaysAt": "2026-11-15T03:39:21.588Z",
-   "autoNodes": 3322
+   "autoHallwaysAt": "2026-11-15T07:53:42.659Z",
+   "autoNodes": 3668
   },
   {
    "id": "E3-03-mwe6k0ov",
@@ -12644,8 +12875,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 72.35,
-      "y": 43.97
+      "x": 38.05,
+      "y": 11.98
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -12655,8 +12886,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 41.25,
-      "y": 68.7
+      "x": 49.65,
+      "y": 28.67
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -12666,8 +12897,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 41.65,
-      "y": 60.36
+      "x": 72.35,
+      "y": 45.21
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -12677,8 +12908,63 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 44.45,
-      "y": 64.84
+      "x": 48.75,
+      "y": 41.81
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-03-mwe6k0ov-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 82.35,
+      "y": 46.75
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-03-mwe6k0ov-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 33.15,
+      "y": 65.3
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-03-mwe6k0ov-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.75,
+      "y": 67.31
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-03-mwe6k0ov-st8",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 41.55,
+      "y": 68.7
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E3-03-mwe6k0ov-st9",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 44.05,
+      "y": 79.68
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -12734,8 +13020,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.78",
-   "autoHallwaysAt": "2026-11-15T03:39:33.313Z",
-   "autoNodes": 4725
+   "autoHallwaysAt": "2026-11-15T07:53:37.441Z",
+   "autoNodes": 1614
   },
   {
    "id": "E3-04-mwe6k274",
@@ -13075,8 +13361,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.81",
-   "autoHallwaysAt": "2026-11-15T03:39:45.519Z",
-   "autoNodes": 310
+   "autoHallwaysAt": "2026-11-15T07:54:00.501Z",
+   "autoNodes": 311
   },
   {
    "id": "PHY-01-mwe6k3pl",
@@ -14031,7 +14317,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.87",
-   "autoHallwaysAt": "2026-11-15T03:39:38.105Z",
+   "autoHallwaysAt": "2026-11-15T07:53:51.759Z",
    "autoNodes": 3558
   },
   {
@@ -15184,7 +15470,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:39:52.807Z",
+   "autoHallwaysAt": "2026-11-15T07:53:47.335Z",
    "autoNodes": 3069
   },
   {
@@ -16595,6 +16881,28 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
+      "x": 32.65,
+      "y": 8.27
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PHY-03-mwe6k7md-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 35.05,
+      "y": 46.91
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PHY-03-mwe6k7md-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
       "x": 21.85,
       "y": 65.3
      },
@@ -16602,7 +16910,18 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "PHY-03-mwe6k7md-st2",
+     "id": "PHY-03-mwe6k7md-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 61.55,
+      "y": 65.3
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PHY-03-mwe6k7md-st5",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
@@ -16613,45 +16932,12 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "PHY-03-mwe6k7md-st3",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 60.25,
-      "y": 67.47
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PHY-03-mwe6k7md-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 38.85,
-      "y": 80.45
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PHY-03-mwe6k7md-st5",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 22.65,
-      "y": 94.51
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "PHY-03-mwe6k7md-st6",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 32.55,
-      "y": 8.27
+      "x": 39.35,
+      "y": 80.14
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -16661,8 +16947,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 34.85,
-      "y": 46.6
+      "x": 23.85,
+      "y": 92.5
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -16672,8 +16958,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:40:05.370Z",
-   "autoNodes": 3079
+   "autoHallwaysAt": "2026-11-15T07:54:03.689Z",
+   "autoNodes": 2699
   },
   {
    "id": "PHY-04-mwe6k8bj",
@@ -16879,7 +17165,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.83",
-   "autoHallwaysAt": "2026-11-15T03:39:51.115Z",
+   "autoHallwaysAt": "2026-11-15T07:53:58.002Z",
    "autoNodes": 2428
   },
   {
@@ -17533,8 +17819,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 71.89,
-      "y": 15.55
+      "x": 72.27,
+      "y": 17.15
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -17544,8 +17830,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 73.18,
-      "y": 38.65
+      "x": 24.01,
+      "y": 21.75
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -17555,8 +17841,41 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 71.89,
-      "y": 60.75
+      "x": 33.19,
+      "y": 35.65
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "ML-01-mwe6k9zf-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 72.27,
+      "y": 38.55
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "ML-01-mwe6k9zf-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 24.01,
+      "y": 54.55
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "ML-01-mwe6k9zf-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 74.6,
+      "y": 60.85
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -17612,8 +17931,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.86",
-   "autoHallwaysAt": "2026-11-15T03:40:18.743Z",
-   "autoNodes": 6720
+   "autoHallwaysAt": "2026-11-15T07:53:51.617Z",
+   "autoNodes": 2619
   },
   {
    "id": "ML-02-mwe6kcf8",
@@ -18350,8 +18669,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 75.12,
-      "y": 15.35
+      "x": 72.53,
+      "y": 12.85
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -18361,8 +18680,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 75.12,
-      "y": 40.85
+      "x": 27.37,
+      "y": 23.05
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -18372,8 +18691,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 75.12,
-      "y": 60.85
+      "x": 72.53,
+      "y": 39.25
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "ML-02-mwe6kcf8-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 27.37,
+      "y": 53.25
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "ML-02-mwe6kcf8-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 72.53,
+      "y": 59.25
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -18429,8 +18770,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.86",
-   "autoHallwaysAt": "2026-11-15T03:40:37.016Z",
-   "autoNodes": 10951
+   "autoHallwaysAt": "2026-11-15T07:54:10.475Z",
+   "autoNodes": 4577
   },
   {
    "id": "ML-03-mwe6kdtl",
@@ -19061,7 +19402,7 @@
      "category": "stairs",
      "coords": {
       "x": 72.66,
-      "y": 17.15
+      "y": 13.05
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -19083,7 +19424,7 @@
      "category": "stairs",
      "coords": {
       "x": 72.66,
-      "y": 59.45
+      "y": 59.35
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -19139,8 +19480,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.87",
-   "autoHallwaysAt": "2026-11-15T03:40:14.711Z",
-   "autoNodes": 4026
+   "autoHallwaysAt": "2026-11-15T07:54:00.926Z",
+   "autoNodes": 1835
   },
   {
    "id": "ESC-01-mwe6kfcp",
@@ -19878,7 +20219,7 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 83.55,
+      "x": 83.45,
       "y": 39.03
      },
      "floor": 1,
@@ -19890,7 +20231,7 @@
      "category": "stairs",
      "coords": {
       "x": 36.05,
-      "y": 45.21
+      "y": 45.52
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -19901,7 +20242,7 @@
      "category": "stairs",
      "coords": {
       "x": 51.35,
-      "y": 52.94
+      "y": 52.63
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -19957,8 +20298,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.71",
-   "autoHallwaysAt": "2026-11-15T03:40:30.964Z",
-   "autoNodes": 2324
+   "autoHallwaysAt": "2026-11-15T07:53:54.587Z",
+   "autoNodes": 1807
   },
   {
    "id": "ESC-02-mwe6kgwk",
@@ -20876,8 +21217,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 82.35,
-      "y": 39.34
+      "x": 82.95,
+      "y": 39.03
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -20887,8 +21228,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 38.05,
-      "y": 43.04
+      "x": 36.65,
+      "y": 45.05
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -20898,8 +21239,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 50.25,
-      "y": 52.63
+      "x": 50.75,
+      "y": 52.32
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -20955,8 +21296,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.69",
-   "autoHallwaysAt": "2026-11-15T03:40:48.028Z",
-   "autoNodes": 2012
+   "autoHallwaysAt": "2026-11-15T07:54:13.499Z",
+   "autoNodes": 1649
   },
   {
    "id": "ESC-03-mwe6kj8e",
@@ -21463,7 +21804,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:40:32.830Z",
+   "autoHallwaysAt": "2026-11-15T07:54:06.937Z",
    "autoNodes": 2098
   },
   {
@@ -21530,7 +21871,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:40:43.690Z",
+   "autoHallwaysAt": "2026-11-15T07:53:58.773Z",
    "autoNodes": 1395
   },
   {
@@ -22390,8 +22731,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 23.25,
-      "y": 56.23
+      "x": 62.85,
+      "y": 40.83
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -22401,8 +22742,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 76.75,
-      "y": 67.75
+      "x": 80.85,
+      "y": 52.47
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "B1-01-mwe6kmo8-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 23.25,
+      "y": 56.87
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -22412,8 +22764,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 63.55,
-      "y": 41.48
+      "x": 17.95,
+      "y": 58.69
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -22423,8 +22775,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 77.05,
+      "x": 62.65,
+      "y": 60.5
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "B1-01-mwe6kmo8-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 76.65,
       "y": 65.67
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "B1-01-mwe6kmo8-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 65.85,
+      "y": 67.75
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -22480,8 +22854,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.67",
-   "autoHallwaysAt": "2026-11-15T03:41:09.116Z",
-   "autoNodes": 3682
+   "autoHallwaysAt": "2026-11-15T07:54:18.471Z",
+   "autoNodes": 2413
   },
   {
    "id": "B1-02-mwe6ko1s",
@@ -23228,45 +23602,12 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "B1-02-mwe6ko1s-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 19.45,
-      "y": 55.45
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "B1-02-mwe6ko1s-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 65.15,
-      "y": 67.23
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "B1-02-mwe6ko1s-st3",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 78.35,
-      "y": 51.05
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "B1-02-mwe6ko1s-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 81.15,
-      "y": 51.05
+      "x": 65.25,
+      "y": 66.97
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -23322,8 +23663,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.75",
-   "autoHallwaysAt": "2026-11-15T03:40:55.344Z",
-   "autoNodes": 3233
+   "autoHallwaysAt": "2026-11-15T07:54:10.612Z",
+   "autoNodes": 2072
   },
   {
    "id": "B1-03-mwe6kq6t",
@@ -23894,8 +24235,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
+      "x": 21.85,
+      "y": 58.19
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "B1-03-mwe6kq6t-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
       "x": 63.35,
-      "y": 67.93
+      "y": 67.77
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -23951,8 +24303,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.71",
-   "autoHallwaysAt": "2026-11-15T03:41:01.306Z",
-   "autoNodes": 1674
+   "autoHallwaysAt": "2026-11-15T07:54:01.172Z",
+   "autoNodes": 1226
   },
   {
    "id": "LIB-01-mwe6kqye",
@@ -24684,7 +25036,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.94",
-   "autoHallwaysAt": "2026-11-15T03:41:27.856Z",
+   "autoHallwaysAt": "2026-11-15T07:54:24.386Z",
    "autoNodes": 2260
   },
   {
@@ -25418,7 +25770,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.77",
-   "autoHallwaysAt": "2026-11-15T03:41:13.092Z",
+   "autoHallwaysAt": "2026-11-15T07:54:21.041Z",
    "autoNodes": 2460
   },
   {
@@ -26145,8 +26497,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 59.15,
-      "y": 50.15
+      "x": 58.15,
+      "y": 49.38
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -26156,8 +26508,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 77.65,
-      "y": 50.15
+      "x": 78.65,
+      "y": 49.38
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -26167,19 +26519,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 74.25,
-      "y": 71.48
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "LIB-03-mwe6kvmu-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 68.45,
-      "y": 40.57
+      "x": 74.45,
+      "y": 70.87
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -26235,8 +26576,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.96",
-   "autoHallwaysAt": "2026-11-15T03:41:22.426Z",
-   "autoNodes": 6940
+   "autoHallwaysAt": "2026-11-15T07:54:05.446Z",
+   "autoNodes": 2404
   },
   {
    "id": "LIB-04-mwe6kx55",
@@ -26566,8 +26907,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 59.15,
-      "y": 50
+      "x": 58.05,
+      "y": 49.85
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -26577,8 +26918,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 77.45,
-      "y": 50
+      "x": 78.55,
+      "y": 49.85
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -26588,8 +26929,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:41:45.620Z",
-   "autoNodes": 1498
+   "autoHallwaysAt": "2026-11-15T07:54:25.941Z",
+   "autoNodes": 785
   },
   {
    "id": "LIB-05-mwe6kzhx",
@@ -26954,7 +27295,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:41:29.549Z",
+   "autoHallwaysAt": "2026-11-15T07:54:26.530Z",
    "autoNodes": 1148
   },
   {
@@ -27391,7 +27732,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:41:47.242Z",
+   "autoHallwaysAt": "2026-11-15T07:54:11.611Z",
    "autoNodes": 1177
   },
   {
@@ -27768,7 +28109,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:42:03.311Z",
+   "autoHallwaysAt": "2026-11-15T07:54:32.348Z",
    "autoNodes": 1451
   },
   {
@@ -28193,7 +28534,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:41:44.056Z",
+   "autoHallwaysAt": "2026-11-15T07:54:32.806Z",
    "autoNodes": 1511
   },
   {
@@ -28618,7 +28959,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:42:01.729Z",
+   "autoHallwaysAt": "2026-11-15T07:54:17.572Z",
    "autoNodes": 1263
   },
   {
@@ -28788,7 +29129,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:42:17.080Z",
+   "autoHallwaysAt": "2026-11-15T07:54:38.209Z",
    "autoNodes": 436
   },
   {
@@ -29224,8 +29565,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.97",
-   "autoHallwaysAt": "2026-11-15T03:42:00.102Z",
-   "autoNodes": 3077
+   "autoHallwaysAt": "2026-11-15T07:54:38.867Z",
+   "autoNodes": 3079
   },
   {
    "id": "AL-02-mwe6l79o",
@@ -29527,7 +29868,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.98",
-   "autoHallwaysAt": "2026-11-15T03:42:14.990Z",
+   "autoHallwaysAt": "2026-11-15T07:54:22.369Z",
    "autoNodes": 847
   },
   {
@@ -29883,8 +30224,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 21.35,
-      "y": 20.17
+      "x": 39.15,
+      "y": 27.59
      },
      "floor": -1,
      "purposeVerification": "unverified_drawing_only"
@@ -29894,8 +30235,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 31.55,
-      "y": 20.32
+      "x": 61.75,
+      "y": 41.19
      },
      "floor": -1,
      "purposeVerification": "unverified_drawing_only"
@@ -29905,41 +30246,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 39.05,
-      "y": 27.59
-     },
-     "floor": -1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "AL-B1-mwe6l80y-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
       "x": 31.55,
-      "y": 66.85
-     },
-     "floor": -1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "AL-B1-mwe6l80y-st5",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 54.65,
-      "y": 23.11
-     },
-     "floor": -1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "AL-B1-mwe6l80y-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 54.95,
-      "y": 40.88
+      "y": 37.33
      },
      "floor": -1,
      "purposeVerification": "unverified_drawing_only"
@@ -29995,8 +30303,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.95",
-   "autoHallwaysAt": "2026-11-15T03:42:29.414Z",
-   "autoNodes": 1683
+   "autoHallwaysAt": "2026-11-15T07:54:41.006Z",
+   "autoNodes": 1458
   },
   {
    "id": "EV1-01-mwe6l9m6",
@@ -30588,8 +30896,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.93",
-   "autoHallwaysAt": "2026-11-15T03:42:27.500Z",
-   "autoNodes": 7155
+   "autoHallwaysAt": "2026-11-15T07:54:42.869Z",
+   "autoNodes": 2571
   },
   {
    "id": "EV1-02-mwe6lb71",
@@ -31109,8 +31417,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.84",
-   "autoHallwaysAt": "2026-11-15T03:42:47.270Z",
-   "autoNodes": 8850
+   "autoHallwaysAt": "2026-11-15T07:54:26.689Z",
+   "autoNodes": 3297
   },
   {
    "id": "EV1-03-mwe6le7e",
@@ -31737,8 +32045,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.89",
-   "autoHallwaysAt": "2026-11-15T03:42:51.110Z",
-   "autoNodes": 5830
+   "autoHallwaysAt": "2026-11-15T07:54:45.420Z",
+   "autoNodes": 3301
   },
   {
    "id": "RCH-01-mwe6lfsm",
@@ -32245,8 +32553,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.89",
-   "autoHallwaysAt": "2026-11-15T03:42:53.083Z",
-   "autoNodes": 3681
+   "autoHallwaysAt": "2026-11-15T07:54:47.573Z",
+   "autoNodes": 2880
   },
   {
    "id": "RCH-02-mwe6lhdk",
@@ -32644,11 +32952,22 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "RCH-02-mwe6lhdk-st4",
+     "id": "RCH-02-mwe6lhdk-st1",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 41.05,
+      "x": 40.75,
+      "y": 36.82
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "RCH-02-mwe6lhdk-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 40.75,
       "y": 55.84
      },
      "floor": 2,
@@ -32705,8 +33024,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.89",
-   "autoHallwaysAt": "2026-11-15T03:43:07.949Z",
-   "autoNodes": 3388
+   "autoHallwaysAt": "2026-11-15T07:54:30.645Z",
+   "autoNodes": 2857
   },
   {
    "id": "RCH-03-mwe6ljpt",
@@ -32936,12 +33255,34 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "RCH-03-mwe6ljpt-st6",
+     "id": "RCH-03-mwe6ljpt-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 40.85,
+      "y": 33.32
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "RCH-03-mwe6ljpt-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
       "x": 71.75,
       "y": 44.58
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "RCH-03-mwe6ljpt-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 40.85,
+      "y": 55.84
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -32997,8 +33338,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.89",
-   "autoHallwaysAt": "2026-11-15T03:43:17.766Z",
-   "autoNodes": 3012
+   "autoHallwaysAt": "2026-11-15T07:54:49.765Z",
+   "autoNodes": 3239
   },
   {
    "id": "B2-01-mwe6ll7n",
@@ -33515,6 +33856,17 @@
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "B2-01-mwe6ll7n-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 68.95,
+      "y": 38.63
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
@@ -33567,8 +33919,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.88",
-   "autoHallwaysAt": "2026-11-15T03:43:10.402Z",
-   "autoNodes": 3822
+   "autoHallwaysAt": "2026-11-15T07:54:50.496Z",
+   "autoNodes": 1492
   },
   {
    "id": "B2-02-mwe6lnji",
@@ -34363,23 +34715,12 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "B2-02-mwe6lnji-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 9.65,
-      "y": 32.03
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "B2-02-mwe6lnji-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 66.75,
-      "y": 36.04
+      "x": 68.95,
+      "y": 38.63
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -34435,8 +34776,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.84",
-   "autoHallwaysAt": "2026-11-15T03:43:36.491Z",
-   "autoNodes": 4909
+   "autoHallwaysAt": "2026-11-15T07:54:33.785Z",
+   "autoNodes": 1675
   },
   {
    "id": "B2-03-mwe6lqky",
@@ -35100,7 +35441,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.88",
-   "autoHallwaysAt": "2026-11-15T03:43:38.117Z",
+   "autoHallwaysAt": "2026-11-15T07:55:02.696Z",
    "autoNodes": 3813
   },
   {
@@ -36163,8 +36504,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:43:22.562Z",
-   "autoNodes": 4732
+   "autoHallwaysAt": "2026-11-15T07:54:53.671Z",
+   "autoNodes": 3149
   },
   {
    "id": "GSC-02-mwe6lugk",
@@ -36656,25 +36997,14 @@
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "GSC-02-mwe6lugk-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 56.25,
-      "y": 57.42
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:43:47.067Z",
-   "autoNodes": 1455
+   "autoHallwaysAt": "2026-11-15T07:54:35.686Z",
+   "autoNodes": 1179
   },
   {
    "id": "COM-01-mwe6lwuj",
@@ -37731,17 +38061,6 @@
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "COM-01-mwe6lwuj-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 73.75,
-      "y": 31.64
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
@@ -37794,8 +38113,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.92",
-   "autoHallwaysAt": "2026-11-15T03:43:55.547Z",
-   "autoNodes": 5670
+   "autoHallwaysAt": "2026-11-15T07:55:05.933Z",
+   "autoNodes": 2477
   },
   {
    "id": "COM-02-mwe6lxjm",
@@ -37884,7 +38203,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.55",
-   "autoHallwaysAt": "2026-11-15T03:43:34.950Z",
+   "autoHallwaysAt": "2026-11-15T07:55:00.511Z",
    "autoNodes": 81
   },
   {
@@ -38431,8 +38750,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 61.15,
-      "y": 57.11
+      "x": 35.25,
+      "y": 27.9
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -38442,8 +38761,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 39.05,
-      "y": 79.52
+      "x": 26.95,
+      "y": 34.23
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -38453,8 +38772,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 26.35,
-      "y": 34.39
+      "x": 30.05,
+      "y": 48.45
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -38464,8 +38783,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 30.85,
-      "y": 44.74
+      "x": 62.35,
+      "y": 54.64
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -38521,8 +38840,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.79",
-   "autoHallwaysAt": "2026-11-15T03:44:12.686Z",
-   "autoNodes": 4951
+   "autoHallwaysAt": "2026-11-15T07:54:40.927Z",
+   "autoNodes": 2437
   },
   {
    "id": "SCH-02-mwe6lzx3",
@@ -39296,8 +39615,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 20.35,
-      "y": 84
+      "x": 29.95,
+      "y": 47.99
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -39307,8 +39626,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 33.95,
-      "y": 84
+      "x": 31.85,
+      "y": 47.99
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -39318,8 +39637,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 32.05,
-      "y": 47.99
+      "x": 20.35,
+      "y": 83.85
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SCH-02-mwe6lzx3-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 33.95,
+      "y": 83.85
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -39375,8 +39705,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.89",
-   "autoHallwaysAt": "2026-11-15T03:44:14.323Z",
-   "autoNodes": 4404
+   "autoHallwaysAt": "2026-11-15T07:55:10.482Z",
+   "autoNodes": 3082
   },
   {
    "id": "SCH-B1-mwe6m0n8",
@@ -40954,8 +41284,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 32.85,
-      "y": 15.38
+      "x": 77.15,
+      "y": 19.86
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -40965,8 +41295,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 38.95,
-      "y": 20.63
+      "x": 38.25,
+      "y": 21.1
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -40977,7 +41307,7 @@
      "category": "stairs",
      "coords": {
       "x": 73.85,
-      "y": 20.94
+      "y": 21.1
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -40987,8 +41317,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 76.35,
-      "y": 25.89
+      "x": 76.25,
+      "y": 25.27
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -40998,7 +41328,40 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 74.45,
+      "x": 29.75,
+      "y": 36.09
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "MC-01-mwe6m28u-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 53.25,
+      "y": 41.96
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "MC-01-mwe6m28u-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 37.45,
+      "y": 64.53
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "MC-01-mwe6m28u-st8",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 74.25,
       "y": 66.07
      },
      "floor": 1,
@@ -41055,8 +41418,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.83",
-   "autoHallwaysAt": "2026-11-15T03:43:50.956Z",
-   "autoNodes": 3737
+   "autoHallwaysAt": "2026-11-15T07:55:03.949Z",
+   "autoNodes": 3096
   },
   {
    "id": "MC-02-mwe6m4kz",
@@ -42287,19 +42650,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 38.85,
-      "y": 18.01
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "MC-02-mwe6m4kz-st2",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 75.25,
-      "y": 20.79
+      "x": 34.95,
+      "y": 15.53
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -42309,19 +42661,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 38.85,
-      "y": 65.61
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "MC-02-mwe6m4kz-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 35.85,
-      "y": 66.85
+      "x": 38.05,
+      "y": 17.23
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -42331,8 +42672,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 74.25,
-      "y": 66.85
+      "x": 53.45,
+      "y": 41.96
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -42342,8 +42683,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 76.95,
-      "y": 40.11
+      "x": 79.75,
+      "y": 38.1
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "MC-02-mwe6m4kz-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 37.25,
+      "y": 64.99
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -42399,8 +42751,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.84",
-   "autoHallwaysAt": "2026-11-15T03:44:31.133Z",
-   "autoNodes": 3875
+   "autoHallwaysAt": "2026-11-15T07:54:44.433Z",
+   "autoNodes": 3193
   },
   {
    "id": "MC-03-mwe6m64d",
@@ -43651,34 +44003,12 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "MC-03-mwe6m64d-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 36.85,
-      "y": 19.86
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "MC-03-mwe6m64d-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 73.25,
-      "y": 19.86
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "MC-03-mwe6m64d-st3",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 37.15,
-      "y": 64.53
+      "x": 72.45,
+      "y": 20.63
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -43688,19 +44018,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 72.25,
-      "y": 65.77
+      "x": 36.05,
+      "y": 64.06
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "MC-03-mwe6m64d-st6",
+     "id": "MC-03-mwe6m64d-st5",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 76.15,
-      "y": 41.5
+      "x": 71.45,
+      "y": 65.3
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -43756,8 +44086,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.86",
-   "autoHallwaysAt": "2026-11-15T03:44:29.068Z",
-   "autoNodes": 3933
+   "autoHallwaysAt": "2026-11-15T07:55:13.734Z",
+   "autoNodes": 3383
   },
   {
    "id": "MC-04-mwe6m7p9",
@@ -45252,8 +45582,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 35.45,
-      "y": 19.09
+      "x": 33.65,
+      "y": 21.25
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -45263,8 +45593,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 68.15,
-      "y": 19.09
+      "x": 70.05,
+      "y": 21.25
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -45274,7 +45604,7 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 71.65,
+      "x": 71.75,
       "y": 39.49
      },
      "floor": 4,
@@ -45285,8 +45615,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 35.75,
-      "y": 66.85
+      "x": 33.65,
+      "y": 64.84
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -45296,8 +45626,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 67.25,
-      "y": 68.24
+      "x": 69.05,
+      "y": 66.23
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -45353,8 +45683,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.93",
-   "autoHallwaysAt": "2026-11-15T03:44:07.502Z",
-   "autoNodes": 4769
+   "autoHallwaysAt": "2026-11-15T07:55:07.147Z",
+   "autoNodes": 3470
   },
   {
    "id": "MC-05-mwe6ma1b",
@@ -48127,7 +48457,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.94",
-   "autoHallwaysAt": "2026-11-15T03:44:52.587Z",
+   "autoHallwaysAt": "2026-11-15T07:54:54.142Z",
    "autoNodes": 5837
   },
   {
@@ -50823,8 +51153,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 36.65,
-      "y": 20.17
+      "x": 35.85,
+      "y": 20.63
      },
      "floor": 6,
      "purposeVerification": "unverified_drawing_only"
@@ -50834,8 +51164,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 71.55,
-      "y": 19.86
+      "x": 72.25,
+      "y": 16.15
      },
      "floor": 6,
      "purposeVerification": "unverified_drawing_only"
@@ -50845,8 +51175,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 36.95,
-      "y": 63.76
+      "x": 35.85,
+      "y": 63.45
      },
      "floor": 6,
      "purposeVerification": "unverified_drawing_only"
@@ -50856,8 +51186,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 70.55,
-      "y": 64.84
+      "x": 71.25,
+      "y": 64.68
      },
      "floor": 6,
      "purposeVerification": "unverified_drawing_only"
@@ -50913,8 +51243,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.94",
-   "autoHallwaysAt": "2026-11-15T03:44:50.518Z",
-   "autoNodes": 4850
+   "autoHallwaysAt": "2026-11-15T07:55:17.729Z",
+   "autoNodes": 3740
   },
   {
    "id": "PAC-01-mwe6mfgl",
@@ -52079,12 +52409,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "PAC-01-mwe6mfgl-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.05,
+      "y": 11.67
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "PAC-01-mwe6mfgl-st4",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 46.35,
-      "y": 30.53
+      "x": 40.85,
+      "y": 45.21
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -52094,8 +52435,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 82.35,
-      "y": 44.9
+      "x": 21.75,
+      "y": 63.14
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -52105,8 +52446,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 46.35,
-      "y": 52.94
+      "x": 62.85,
+      "y": 81.68
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -52116,74 +52457,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 48.15,
-      "y": 56.49
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-01-mwe6mfgl-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 44.25,
-      "y": 53.09
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-01-mwe6mfgl-st9",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 48.35,
-      "y": 70.87
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-01-mwe6mfgl-st10",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 81.85,
-      "y": 74.88
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-01-mwe6mfgl-st11",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 45.05,
-      "y": 89.88
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-01-mwe6mfgl-st12",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 46.85,
-      "y": 89.88
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-01-mwe6mfgl-st13",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 44.15,
-      "y": 56.34
+      "x": 73.95,
+      "y": 83.23
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -52239,8 +52514,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.88",
-   "autoHallwaysAt": "2026-11-15T03:44:34.407Z",
-   "autoNodes": 6754
+   "autoHallwaysAt": "2026-11-15T07:55:14.312Z",
+   "autoNodes": 4551
   },
   {
    "id": "PAC-02-mwe6miix",
@@ -52914,23 +53189,12 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "PAC-02-mwe6miix-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 51.65,
-      "y": 27.13
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "PAC-02-mwe6miix-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 84.05,
-      "y": 27.13
+      "x": 64.65,
+      "y": 26.2
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -52940,8 +53204,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
+      "x": 51.55,
+      "y": 31.92
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PAC-02-mwe6miix-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
       "x": 84.15,
-      "y": 83.85
+      "y": 31.92
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PAC-02-mwe6miix-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 91.15,
+      "y": 32.53
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -52951,8 +53237,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 49.45,
-      "y": 30.53
+      "x": 80.05,
+      "y": 28.36
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -52962,19 +53248,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 49.45,
-      "y": 83.85
+      "x": 37.85,
+      "y": 40.88
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "PAC-02-mwe6miix-st8",
+     "id": "PAC-02-mwe6miix-st9",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 64.75,
-      "y": 78.9
+      "x": 51.55,
+      "y": 82.46
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PAC-02-mwe6miix-st10",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 84.25,
+      "y": 82.46
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -52984,19 +53281,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 72.95,
-      "y": 78.9
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-02-mwe6miix-st12",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 86.35,
-      "y": 83.69
+      "x": 65.55,
+      "y": 79.06
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -53052,8 +53338,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.88",
-   "autoHallwaysAt": "2026-11-15T03:45:10.609Z",
-   "autoNodes": 3929
+   "autoHallwaysAt": "2026-11-15T07:54:59.314Z",
+   "autoNodes": 2163
   },
   {
    "id": "PAC-03-mwe6mn8o",
@@ -53246,12 +53532,34 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "PAC-03-mwe6mn8o-st2",
+     "id": "PAC-03-mwe6mn8o-st1",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 53.65,
-      "y": 33.15
+      "x": 51.85,
+      "y": 37.17
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PAC-03-mwe6mn8o-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 80.05,
+      "y": 34.23
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PAC-03-mwe6mn8o-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 51.85,
+      "y": 77.36
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -53261,63 +53569,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 81.35,
-      "y": 41.19
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-03-mwe6mn8o-st7",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 53.65,
-      "y": 81.22
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-03-mwe6mn8o-st11",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 58.75,
-      "y": 35.63
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-03-mwe6mn8o-st12",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 58.75,
-      "y": 78.44
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-03-mwe6mn8o-st13",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 77.25,
-      "y": 35.63
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAC-03-mwe6mn8o-st14",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 77.25,
-      "y": 78.44
+      "x": 83.95,
+      "y": 77.36
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -53373,8 +53626,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.87",
-   "autoHallwaysAt": "2026-11-15T03:45:04.895Z",
-   "autoNodes": 983
+   "autoHallwaysAt": "2026-11-15T07:55:21.290Z",
+   "autoNodes": 656
   },
   {
    "id": "SLC-01-mwe6mxb4",
@@ -55104,23 +55357,12 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "SLC-01-mwe6mxb4-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 60.55,
-      "y": 47.06
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "SLC-01-mwe6mxb4-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 35.95,
-      "y": 69.17
+      "x": 65.35,
+      "y": 10.74
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -55130,8 +55372,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 17.05,
-      "y": 88.49
+      "x": 63.95,
+      "y": 19.4
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -55141,8 +55383,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 66.15,
-      "y": 52.94
+      "x": 84.75,
+      "y": 20.94
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -55152,8 +55394,129 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
+      "x": 73.55,
+      "y": 22.18
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-01-mwe6mxb4-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 74.95,
+      "y": 22.18
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-01-mwe6mxb4-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 89.15,
+      "y": 39.49
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-01-mwe6mxb4-st8",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
       "x": 89.25,
-      "y": 40.73
+      "y": 40.88
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-01-mwe6mxb4-st9",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 88.95,
+      "y": 45.67
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-01-mwe6mxb4-st10",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 70.65,
+      "y": 51.24
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-01-mwe6mxb4-st11",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 73.55,
+      "y": 51.24
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-01-mwe6mxb4-st12",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 74.95,
+      "y": 51.24
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-01-mwe6mxb4-st13",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.95,
+      "y": 53.86
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-01-mwe6mxb4-st14",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 74.95,
+      "y": 58.35
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-01-mwe6mxb4-st15",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 65.65,
+      "y": 63.91
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-01-mwe6mxb4-st16",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 33.65,
+      "y": 66.54
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -55163,8 +55526,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:44:56.653Z",
-   "autoNodes": 10038
+   "autoHallwaysAt": "2026-11-15T07:55:21.228Z",
+   "autoNodes": 5088
   },
   {
    "id": "SLC-02-mwe6n0er",
@@ -56631,12 +56994,34 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "SLC-02-mwe6n0er-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 85.75,
+      "y": 10.12
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "SLC-02-mwe6n0er-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 60.45,
-      "y": 47.06
+      "x": 73.55,
+      "y": 20.94
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-02-mwe6n0er-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 86.15,
+      "y": 21.41
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -56646,8 +57031,63 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 18.25,
-      "y": 90.03
+      "x": 90.15,
+      "y": 38.1
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-02-mwe6n0er-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 56.95,
+      "y": 49.69
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-02-mwe6n0er-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 73.55,
+      "y": 55.87
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-02-mwe6n0er-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.55,
+      "y": 53.71
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-02-mwe6n0er-st8",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 65.65,
+      "y": 62.06
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-02-mwe6n0er-st9",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 33.65,
+      "y": 66.85
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -56657,8 +57097,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:45:33.340Z",
-   "autoNodes": 6063
+   "autoHallwaysAt": "2026-11-15T07:55:04.057Z",
+   "autoNodes": 3260
   },
   {
    "id": "SLC-03-mwe6n2nw",
@@ -57633,12 +58073,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "SLC-03-mwe6n2nw-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 68.55,
+      "y": 31.92
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "SLC-03-mwe6n2nw-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 17.25,
-      "y": 88.49
+      "x": 57.75,
+      "y": 49.54
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -57648,8 +58099,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 69.35,
-      "y": 31.92
+      "x": 61.25,
+      "y": 55.87
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-03-mwe6n2nw-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 18.75,
+      "y": 91.27
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -57659,8 +58121,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:45:24.020Z",
-   "autoNodes": 3447
+   "autoHallwaysAt": "2026-11-15T07:55:23.445Z",
+   "autoNodes": 2442
   },
   {
    "id": "SLC-B1-mwe6n5tg",
@@ -59215,8 +59677,63 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 89.85,
-      "y": 60.2
+      "x": 85.45,
+      "y": 7.5
+     },
+     "floor": -1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-B1-mwe6n5tg-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 63.75,
+      "y": 15.69
+     },
+     "floor": -1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-B1-mwe6n5tg-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 86.15,
+      "y": 26.2
+     },
+     "floor": -1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-B1-mwe6n5tg-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 73.65,
+      "y": 50
+     },
+     "floor": -1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-B1-mwe6n5tg-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 63.45,
+      "y": 58.81
+     },
+     "floor": -1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "SLC-B1-mwe6n5tg-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 89.35,
+      "y": 60.66
      },
      "floor": -1,
      "purposeVerification": "unverified_drawing_only"
@@ -59226,8 +59743,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:45:14.496Z",
-   "autoNodes": 5414
+   "autoHallwaysAt": "2026-11-15T07:55:27.282Z",
+   "autoNodes": 3945
   },
   {
    "id": "V1_CC-01-mwe6n86u",
@@ -60418,7 +60935,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:45:48.439Z",
+   "autoHallwaysAt": "2026-11-15T07:55:12.368Z",
    "autoNodes": 5443
   },
   {
@@ -60820,7 +61337,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:45:36.574Z",
+   "autoHallwaysAt": "2026-11-15T07:55:31.414Z",
    "autoNodes": 2226
   },
   {
@@ -60874,8 +61391,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:45:20.016Z",
-   "autoNodes": 19
+   "autoHallwaysAt": "2026-11-15T07:55:29.791Z",
+   "autoNodes": 21
   },
   {
    "id": "V1_CC-B1-mwe6nah7",
@@ -61742,12 +62259,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "HS-01-mwe6nct8-st3",
+     "id": "HS-01-mwe6nct8-st1",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
       "x": 46.91,
-      "y": 58.65
+      "y": 58.75
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "HS-01-mwe6nct8-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 21.25,
+      "y": 80.45
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -61803,8 +62331,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.89",
-   "autoHallwaysAt": "2026-11-15T03:46:06.760Z",
-   "autoNodes": 6886
+   "autoHallwaysAt": "2026-11-15T07:55:16.763Z",
+   "autoNodes": 5116
   },
   {
    "id": "HS-02-mwe6neab",
@@ -62367,6 +62895,17 @@
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "HS-02-mwe6neab-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 45.36,
+      "y": 64.25
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
@@ -62419,8 +62958,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.89",
-   "autoHallwaysAt": "2026-11-15T03:45:49.961Z",
-   "autoNodes": 5216
+   "autoHallwaysAt": "2026-11-15T07:55:32.968Z",
+   "autoNodes": 1302
   },
   {
    "id": "HH-01-mwe6nlc2",
@@ -63698,19 +64237,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 7.55,
-      "y": 23.42
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "HH-01-mwe6nlc2-st2",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 41.45,
-      "y": 33.77
+      "x": 19.45,
+      "y": 9.2
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -63720,8 +64248,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 24.45,
-      "y": 28.36
+      "x": 7.85,
+      "y": 23.26
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -63731,8 +64259,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 25.65,
-      "y": 70.09
+      "x": 24.55,
+      "y": 28.36
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -63742,8 +64270,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 30.35,
-      "y": 54.17
+      "x": 49.25,
+      "y": 32.23
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -63753,8 +64281,74 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 32.25,
-      "y": 54.17
+      "x": 41.95,
+      "y": 33.77
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "HH-01-mwe6nlc2-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 30.15,
+      "y": 38.1
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "HH-01-mwe6nlc2-st8",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 59.35,
+      "y": 61.13
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "HH-01-mwe6nlc2-st9",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 30.65,
+      "y": 67.47
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "HH-01-mwe6nlc2-st10",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 25.75,
+      "y": 66.54
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "HH-01-mwe6nlc2-st11",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 40.35,
+      "y": 75.81
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "HH-01-mwe6nlc2-st12",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 58.25,
+      "y": 85.55
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -63810,8 +64404,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.90",
-   "autoHallwaysAt": "2026-11-15T03:45:46.615Z",
-   "autoNodes": 8282
+   "autoHallwaysAt": "2026-11-15T07:55:35.236Z",
+   "autoNodes": 5270
   },
   {
    "id": "HH-02-mwe6nqqy",
@@ -65472,8 +66066,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 42.55,
-      "y": 33.31
+      "x": 25.65,
+      "y": 26.66
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -65483,8 +66077,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 30.65,
-      "y": 37.17
+      "x": 42.05,
+      "y": 33.15
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "HH-02-mwe6nqqy-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 30.15,
+      "y": 37.64
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -65494,8 +66099,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 30.25,
-      "y": 53.55
+      "x": 60.55,
+      "y": 56.96
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -65505,8 +66110,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 30.35,
-      "y": 66.69
+      "x": 30.55,
+      "y": 66.85
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -65516,8 +66121,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 32.15,
-      "y": 53.4
+      "x": 39.95,
+      "y": 75.81
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -65527,30 +66132,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 35.65,
-      "y": 49.54
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "HH-02-mwe6nqqy-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 37.45,
-      "y": 49.54
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "HH-02-mwe6nqqy-st9",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 59.25,
-      "y": 63.91
+      "x": 58.25,
+      "y": 84.78
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -65606,8 +66189,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.93",
-   "autoHallwaysAt": "2026-11-15T03:46:35.781Z",
-   "autoNodes": 5199
+   "autoHallwaysAt": "2026-11-15T07:55:22.390Z",
+   "autoNodes": 4172
   },
   {
    "id": "HH-03-mwe6nwya",
@@ -67654,7 +68237,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.95",
-   "autoHallwaysAt": "2026-11-15T03:46:08.789Z",
+   "autoHallwaysAt": "2026-11-15T07:55:44.919Z",
    "autoNodes": 4932
   },
   {
@@ -67768,7 +68351,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:45:59.953Z",
+   "autoHallwaysAt": "2026-11-15T07:55:40.804Z",
    "autoNodes": 368
   },
   {
@@ -68115,7 +68698,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.50",
-   "autoHallwaysAt": "2026-11-15T03:46:49.348Z",
+   "autoHallwaysAt": "2026-11-15T07:55:30.109Z",
    "autoNodes": 1695
   },
   {
@@ -68826,7 +69409,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:46:34.071Z",
+   "autoHallwaysAt": "2026-11-15T07:55:59.148Z",
    "autoNodes": 9205
   },
   {
@@ -69069,7 +69652,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:46:12.655Z",
+   "autoHallwaysAt": "2026-11-15T07:55:48.555Z",
    "autoNodes": 1747
   },
   {
@@ -69112,8 +69695,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallways": [],
-   "autoHallwaysAt": "2026-11-15T03:47:04.962Z"
+   "autoHallwaysAt": "2026-11-15T07:55:39.140Z",
+   "autoNodes": 0
   },
   {
    "id": "UWP_COMMONS-01-mwe6o7rf",
@@ -69552,7 +70135,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.74",
-   "autoHallwaysAt": "2026-11-15T03:46:52.439Z",
+   "autoHallwaysAt": "2026-11-15T07:56:07.929Z",
    "autoNodes": 3536
   },
   {
@@ -70407,7 +70990,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.90",
-   "autoHallwaysAt": "2026-11-15T03:46:28.925Z",
+   "autoHallwaysAt": "2026-11-15T07:55:59.415Z",
    "autoNodes": 5182
   },
   {
@@ -71216,8 +71799,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.85",
-   "autoHallwaysAt": "2026-11-15T03:53:28.746Z",
-   "autoNodes": 4544
+   "autoHallwaysAt": "2026-11-15T07:55:52.652Z",
+   "autoNodes": 4545
   },
   {
    "id": "C2-03-mwe6odyp",
@@ -71929,7 +72512,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:47:09.849Z",
+   "autoHallwaysAt": "2026-11-15T07:56:19.297Z",
    "autoNodes": 3973
   },
   {
@@ -72777,7 +73360,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:46:50.928Z",
+   "autoHallwaysAt": "2026-11-15T07:56:09.448Z",
    "autoNodes": 3524
   },
   {
@@ -73705,12 +74288,34 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "CPH-01-mwe6oh0w-st3",
+     "id": "CPH-01-mwe6oh0w-st1",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 24.85,
+      "x": 42.15,
       "y": 18.47
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-01-mwe6oh0w-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 12.55,
+      "y": 26.2
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-01-mwe6oh0w-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 34.95,
+      "y": 31.14
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -73720,8 +74325,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 33.25,
-      "y": 20.17
+      "x": 33.35,
+      "y": 40.42
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -73731,8 +74336,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 25.65,
-      "y": 25.89
+      "x": 23.75,
+      "y": 39.95
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -73742,63 +74347,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 28.45,
-      "y": 26.04
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "CPH-01-mwe6oh0w-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 24.55,
-      "y": 81.84
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "CPH-01-mwe6oh0w-st9",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 14.15,
-      "y": 24.96
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "CPH-01-mwe6oh0w-st10",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 23.65,
-      "y": 18.47
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "CPH-01-mwe6oh0w-st11",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 26.05,
-      "y": 18.01
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "CPH-01-mwe6oh0w-st12",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 34.65,
-      "y": 20.63
+      "x": 23.75,
+      "y": 69.17
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -73854,8 +74404,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.76",
-   "autoHallwaysAt": "2026-11-15T03:53:44.810Z",
-   "autoNodes": 5139
+   "autoHallwaysAt": "2026-11-15T07:55:56.595Z",
+   "autoNodes": 3319
   },
   {
    "id": "CPH-02-mwe6ojd8",
@@ -75026,8 +75576,74 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 3.45,
-      "y": 63.14
+      "x": 42.25,
+      "y": 18.47
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-02-mwe6ojd8-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 23.75,
+      "y": 39.8
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-02-mwe6ojd8-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 94.55,
+      "y": 48.15
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-02-mwe6ojd8-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 58.65,
+      "y": 61.28
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-02-mwe6ojd8-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 4.05,
+      "y": 62.98
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-02-mwe6ojd8-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 24.65,
+      "y": 67.16
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-02-mwe6ojd8-st8",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 35.45,
+      "y": 79.37
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -75083,8 +75699,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.72",
-   "autoHallwaysAt": "2026-11-15T03:53:25.190Z",
-   "autoNodes": 3264
+   "autoHallwaysAt": "2026-11-15T07:56:22.725Z",
+   "autoNodes": 2339
   },
   {
    "id": "CPH-03-mwe6omh7",
@@ -76207,8 +76823,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 3.45,
-      "y": 62.98
+      "x": 74.65,
+      "y": 31.76
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -76218,8 +76834,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 26.85,
+      "x": 26.45,
       "y": 38.25
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-03-mwe6omh7-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 94.55,
+      "y": 47.99
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-03-mwe6omh7-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 58.55,
+      "y": 61.28
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -76229,8 +76867,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:47:06.581Z",
-   "autoNodes": 4012
+   "autoHallwaysAt": "2026-11-15T07:56:13.071Z",
+   "autoNodes": 3048
   },
   {
    "id": "CPH-04-mwe6oore",
@@ -77323,14 +77961,58 @@
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-04-mwe6oore-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 33.35,
+      "y": 41.19
+     },
+     "floor": 4,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-04-mwe6oore-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 28.55,
+      "y": 35.94
+     },
+     "floor": 4,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-04-mwe6oore-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 58.55,
+      "y": 61.28
+     },
+     "floor": 4,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "CPH-04-mwe6oore-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 3.95,
+      "y": 62.83
+     },
+     "floor": 4,
+     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T04:07:14.678Z",
-   "autoNodes": 3442
+   "autoHallwaysAt": "2026-11-15T07:55:59.064Z",
+   "autoNodes": 2287
   },
   {
    "id": "PAS-01-mwe6oryh",
@@ -79541,7 +80223,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.82",
-   "autoHallwaysAt": "2026-11-15T03:53:38.287Z",
+   "autoHallwaysAt": "2026-11-15T07:56:37.430Z",
    "autoNodes": 8953
   },
   {
@@ -81564,19 +82246,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 76.65,
-      "y": 60.36
+      "x": 91.35,
+      "y": 19.24
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "PAS-02-mwe6ov3t-st2",
+     "id": "PAS-02-mwe6ov3t-st3",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 20.55,
-      "y": 63.14
+      "x": 83.25,
+      "y": 38.56
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PAS-02-mwe6ov3t-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 19.25,
+      "y": 60.05
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -81586,19 +82279,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 60.25,
-      "y": 74.42
+      "x": 77.65,
+      "y": 60.36
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "PAS-02-mwe6ov3t-st6",
+     "id": "PAS-02-mwe6ov3t-st7",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 91.45,
-      "y": 19.09
+      "x": 58.95,
+      "y": 71.95
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PAS-02-mwe6ov3t-st8",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 55.75,
+      "y": 73.65
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -81608,8 +82312,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:53:31.764Z",
-   "autoNodes": 6449
+   "autoHallwaysAt": "2026-11-15T07:56:17.786Z",
+   "autoNodes": 4575
   },
   {
    "id": "PAS-03-mwe6owla",
@@ -82739,23 +83443,34 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "PAS-03-mwe6owla-st3",
+     "id": "PAS-03-mwe6owla-st1",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 49.45,
-      "y": 69.17
+      "x": 78.05,
+      "y": 31.14
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "PAS-03-mwe6owla-st4",
+     "id": "PAS-03-mwe6owla-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 54.15,
-      "y": 64.37
+      "x": 73.35,
+      "y": 39.34
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PAS-03-mwe6owla-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 61.65,
+      "y": 60.82
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -82765,30 +83480,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 59.05,
-      "y": 65.61
+      "x": 53.75,
+      "y": 64.53
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "PAS-03-mwe6owla-st7",
+     "id": "PAS-03-mwe6owla-st6",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 68.35,
-      "y": 66.85
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PAS-03-mwe6owla-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 73.35,
-      "y": 39.18
+      "x": 50.05,
+      "y": 69.32
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -82844,8 +83548,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.52",
-   "autoHallwaysAt": "2026-11-15T03:54:13.742Z",
-   "autoNodes": 3949
+   "autoHallwaysAt": "2026-11-15T07:56:02.496Z",
+   "autoNodes": 2929
   },
   {
    "id": "PAS-04-mwe6oy3y",
@@ -84069,6 +84773,17 @@
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "PAS-04-mwe6oy3y-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 53.65,
+      "y": 64.37
+     },
+     "floor": 4,
+     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
@@ -84121,8 +84836,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.56",
-   "autoHallwaysAt": "2026-11-15T03:53:56.285Z",
-   "autoNodes": 3459
+   "autoHallwaysAt": "2026-11-15T07:56:40.371Z",
+   "autoNodes": 2586
   },
   {
    "id": "NH-01-mwe6p17z",
@@ -85311,7 +86026,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.83",
-   "autoHallwaysAt": "2026-11-15T03:53:43.018Z",
+   "autoHallwaysAt": "2026-11-15T07:56:25.130Z",
    "autoNodes": 8227
   },
   {
@@ -86380,7 +87095,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.66",
-   "autoHallwaysAt": "2026-11-15T03:54:33.987Z",
+   "autoHallwaysAt": "2026-11-15T07:56:15.379Z",
    "autoNodes": 6444
   },
   {
@@ -87035,8 +87750,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 31.14,
-      "y": 45.25
+      "x": 30.53,
+      "y": 45.45
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -87046,8 +87761,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 20.94,
-      "y": 69.95
+      "x": 22.95,
+      "y": 68.25
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -87057,8 +87772,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 67.31,
-      "y": 73.45
+      "x": 67.16,
+      "y": 73.55
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -87114,8 +87829,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.91",
-   "autoHallwaysAt": "2026-11-15T03:54:17.212Z",
-   "autoNodes": 11271
+   "autoHallwaysAt": "2026-11-15T07:56:44.742Z",
+   "autoNodes": 3948
   },
   {
    "id": "NH-B1-mwe6p7cz",
@@ -87612,7 +88327,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:53:52.415Z",
+   "autoHallwaysAt": "2026-11-15T07:56:27.937Z",
    "autoNodes": 1247
   },
   {
@@ -90476,8 +91191,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 75.35,
-      "y": 19.4
+      "x": 65.25,
+      "y": 9.2
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -90487,8 +91202,41 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 45.55,
-      "y": 21.56
+      "x": 45.95,
+      "y": 20.32
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "BMH-01-mwe6pc30-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 33.65,
+      "y": 41.04
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "BMH-01-mwe6pc30-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 11.25,
+      "y": 64.68
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "BMH-01-mwe6pc30-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 36.35,
+      "y": 93.59
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -90498,8 +91246,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:55:09.919Z",
-   "autoNodes": 10638
+   "autoHallwaysAt": "2026-11-15T07:56:22.620Z",
+   "autoNodes": 6678
   },
   {
    "id": "BMH-02-mwe6pj6m",
@@ -92872,30 +93620,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 43.65,
-      "y": 22.18
+      "x": 49.05,
+      "y": 56.65
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "BMH-02-mwe6pj6m-st4",
+     "id": "BMH-02-mwe6pj6m-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 26.05,
-      "y": 30.68
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "BMH-02-mwe6pj6m-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 67.75,
-      "y": 22.8
+      "x": 12.45,
+      "y": 64.99
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -92905,8 +93642,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:54:38.657Z",
-   "autoNodes": 6245
+   "autoHallwaysAt": "2026-11-15T07:56:50.116Z",
+   "autoNodes": 4872
   },
   {
    "id": "BMH-03-mwe6pm4d",
@@ -94581,8 +95318,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 68.85,
-      "y": 8.11
+      "x": 66.15,
+      "y": 9.97
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -94592,8 +95329,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 49.55,
-      "y": 8.42
+      "x": 68.75,
+      "y": 8.11
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -94603,19 +95340,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 58.15,
-      "y": 7.96
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "BMH-03-mwe6pm4d-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 61.35,
-      "y": 20.02
+      "x": 21.75,
+      "y": 11.51
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -94625,8 +95351,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:54:11.886Z",
-   "autoNodes": 3955
+   "autoHallwaysAt": "2026-11-15T07:56:31.685Z",
+   "autoNodes": 2593
   },
   {
    "id": "BMH-04-mwe6pnnq",
@@ -95014,8 +95740,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:55:28.143Z",
-   "autoNodes": 6360
+   "autoHallwaysAt": "2026-11-15T07:56:35.150Z",
+   "autoNodes": 6368
   },
   {
    "id": "BMH-B1-mwe6poes",
@@ -95382,7 +96108,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:54:50.304Z",
+   "autoHallwaysAt": "2026-11-15T07:56:58.286Z",
    "autoNodes": 872
   },
   {
@@ -96832,8 +97558,41 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 62.55,
-      "y": 40.42
+      "x": 36.95,
+      "y": 23.72
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "OPT-01-mwe6priu-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.75,
+      "y": 35.94
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "OPT-01-mwe6priu-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 77.05,
+      "y": 46.29
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "OPT-01-mwe6priu-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 31.95,
+      "y": 54.95
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -96889,8 +97648,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.91",
-   "autoHallwaysAt": "2026-11-15T03:54:28.084Z",
-   "autoNodes": 5547
+   "autoHallwaysAt": "2026-11-15T07:56:35.446Z",
+   "autoNodes": 4172
   },
   {
    "id": "OPT-02-mwe6pw6a",
@@ -98224,7 +98983,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.91",
-   "autoHallwaysAt": "2026-11-15T03:55:47.828Z",
+   "autoHallwaysAt": "2026-11-15T07:56:43.667Z",
    "autoNodes": 3766
   },
   {
@@ -99755,8 +100514,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 32.25,
-      "y": 19.4
+      "x": 31.55,
+      "y": 20.02
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -99766,8 +100525,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 28.85,
-      "y": 56.49
+      "x": 60.15,
+      "y": 34.08
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -99777,8 +100536,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 39.65,
-      "y": 50
+      "x": 25.95,
+      "y": 55.56
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -99788,19 +100547,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 43.85,
-      "y": 49.23
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "OPT-03-mwe6pxpo-st5",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 59.95,
-      "y": 33.77
+      "x": 21.85,
+      "y": 58.35
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -99810,8 +100558,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:55:08.137Z",
-   "autoNodes": 5108
+   "autoHallwaysAt": "2026-11-15T07:57:01.665Z",
+   "autoNodes": 3893
   },
   {
    "id": "OPT-04-mwe6pz8x",
@@ -100273,8 +101021,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 32.05,
-      "y": 19.4
+      "x": 31.65,
+      "y": 20.02
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -100284,8 +101032,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 60.15,
-      "y": 33.77
+      "x": 60.35,
+      "y": 34.08
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -100295,8 +101043,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:54:40.025Z",
-   "autoNodes": 2639
+   "autoHallwaysAt": "2026-11-15T07:56:37.503Z",
+   "autoNodes": 1975
   },
   {
    "id": "EV2-01-mwe6q739",
@@ -100922,34 +101670,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "EV2-01-mwe6q739-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.95,
+      "y": 61.79
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "EV2-01-mwe6q739-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 11.35,
-      "y": 70.2
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EV2-01-mwe6q739-st3",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 30.75,
-      "y": 28.92
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EV2-01-mwe6q739-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 61.15,
-      "y": 58.69
+      "x": 10.65,
+      "y": 70.07
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -101005,8 +101742,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.79",
-   "autoHallwaysAt": "2026-11-15T03:56:22.926Z",
-   "autoNodes": 7384
+   "autoHallwaysAt": "2026-11-15T07:56:48.987Z",
+   "autoNodes": 2182
   },
   {
    "id": "EV2-02-mwe6qe3i",
@@ -101862,7 +102599,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.66",
-   "autoHallwaysAt": "2026-11-15T03:55:32.030Z",
+   "autoHallwaysAt": "2026-11-15T07:57:19.336Z",
    "autoNodes": 5817
   },
   {
@@ -102476,7 +103213,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.95",
-   "autoHallwaysAt": "2026-11-15T03:55:11.735Z",
+   "autoHallwaysAt": "2026-11-15T07:57:00.776Z",
    "autoNodes": 7845
   },
   {
@@ -102649,7 +103386,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.96",
-   "autoHallwaysAt": "2026-11-15T03:56:41.203Z",
+   "autoHallwaysAt": "2026-11-15T07:57:03.498Z",
    "autoNodes": 4695
   },
   {
@@ -103324,7 +104061,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.95",
-   "autoHallwaysAt": "2026-11-15T03:55:49.810Z",
+   "autoHallwaysAt": "2026-11-15T07:57:29.532Z",
    "autoNodes": 4991
   },
   {
@@ -104047,7 +104784,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.96",
-   "autoHallwaysAt": "2026-11-15T03:55:22.499Z",
+   "autoHallwaysAt": "2026-11-15T07:57:07.040Z",
    "autoNodes": 2997
   },
   {
@@ -107727,8 +108464,140 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 87.65,
-      "y": 14.14
+      "x": 89.15,
+      "y": 19.86
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 90.45,
+      "y": 24.65
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 40.55,
+      "y": 51.85
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 55.15,
+      "y": 51.85
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 90.45,
+      "y": 49.85
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st6",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 67.95,
+      "y": 58.96
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 67.95,
+      "y": 73.03
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st8",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 90.45,
+      "y": 82.15
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st9",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 40.55,
+      "y": 80.14
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st10",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 55.15,
+      "y": 80.14
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st11",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 17.45,
+      "y": 80.29
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st12",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 29.55,
+      "y": 80.29
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-02-mwe6qoyk-st14",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 90.45,
+      "y": 89.57
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -107738,8 +108607,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:57:05.441Z",
-   "autoNodes": 5770
+   "autoHallwaysAt": "2026-11-15T07:57:08.705Z",
+   "autoNodes": 4186
   },
   {
    "id": "DC-03-mwe6qr86",
@@ -111224,8 +112093,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:56:12.766Z",
-   "autoNodes": 5137
+   "autoHallwaysAt": "2026-11-15T07:57:50.023Z",
+   "autoNodes": 5157
   },
   {
    "id": "DC-B1-mwe6qrxl",
@@ -112132,8 +113001,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 40.15,
-      "y": 77.51
+      "x": 67.65,
+      "y": 54.33
      },
      "floor": -1,
      "purposeVerification": "unverified_drawing_only"
@@ -112143,8 +113012,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 67.55,
-      "y": 71.17
+      "x": 67.65,
+      "y": 70.25
+     },
+     "floor": -1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "DC-B1-mwe6qrxl-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 40.45,
+      "y": 77.51
      },
      "floor": -1,
      "purposeVerification": "unverified_drawing_only"
@@ -112154,8 +113034,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:55:33.664Z",
-   "autoNodes": 1712
+   "autoHallwaysAt": "2026-11-15T07:57:08.571Z",
+   "autoNodes": 1035
   },
   {
    "id": "EIT-01-mwe6qtka",
@@ -112868,8 +113748,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 66.45,
-      "y": 16.77
+      "x": 67.55,
+      "y": 19.24
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -112879,8 +113759,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 45.35,
-      "y": 34.85
+      "x": 52.85,
+      "y": 31.14
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -112890,8 +113770,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 54.25,
-      "y": 30.83
+      "x": 46.55,
+      "y": 37.48
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "EIT-01-mwe6qtka-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 57.35,
+      "y": 74.73
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -112947,8 +113838,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.79",
-   "autoHallwaysAt": "2026-11-15T03:57:23.725Z",
-   "autoNodes": 4471
+   "autoHallwaysAt": "2026-11-15T07:57:11.753Z",
+   "autoNodes": 3071
   },
   {
    "id": "EIT-02-mwe6qv2u",
@@ -113730,12 +114621,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "EIT-02-mwe6qv2u-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 66.65,
+      "y": 13.83
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "EIT-02-mwe6qv2u-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 66.55,
-      "y": 25.58
+      "x": 59.65,
+      "y": 30.99
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -113745,30 +114647,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 60.25,
-      "y": 30.22
+      "x": 54.15,
+      "y": 31.3
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "EIT-02-mwe6qv2u-st4",
+     "id": "EIT-02-mwe6qv2u-st5",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 46.95,
-      "y": 36.55
+      "x": 62.95,
+      "y": 55.1
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "EIT-02-mwe6qv2u-st6",
+     "id": "EIT-02-mwe6qv2u-st7",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 86.65,
-      "y": 77.05
+      "x": 73.75,
+      "y": 75.04
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -113778,8 +114680,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 75.55,
-      "y": 74.11
+      "x": 58.95,
+      "y": 72.72
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "EIT-02-mwe6qv2u-st9",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 83.65,
+      "y": 77.98
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -113835,8 +114748,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.75",
-   "autoHallwaysAt": "2026-11-15T03:56:30.123Z",
-   "autoNodes": 4076
+   "autoHallwaysAt": "2026-11-15T07:57:53.784Z",
+   "autoNodes": 3564
   },
   {
    "id": "EIT-03-mwe6qyly",
@@ -114654,23 +115567,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "EIT-03-mwe6qyly-st3",
+     "id": "EIT-03-mwe6qyly-st1",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 55.45,
-      "y": 75.97
+      "x": 60.55,
+      "y": 30.99
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "EIT-03-mwe6qyly-st4",
+     "id": "EIT-03-mwe6qyly-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 69.25,
-      "y": 81.22
+      "x": 48.15,
+      "y": 70.71
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -114726,8 +115639,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.75",
-   "autoHallwaysAt": "2026-11-15T03:55:53.216Z",
-   "autoNodes": 3784
+   "autoHallwaysAt": "2026-11-15T07:57:13.943Z",
+   "autoNodes": 1793
   },
   {
    "id": "EIT-04-mwe6r0qw",
@@ -115499,8 +116412,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.72",
-   "autoHallwaysAt": "2026-11-15T03:57:40.470Z",
-   "autoNodes": 3756
+   "autoHallwaysAt": "2026-11-15T07:57:15.289Z",
+   "autoNodes": 3220
   },
   {
    "id": "EIT-05-mwe6r25d",
@@ -116079,7 +116992,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.65",
-   "autoHallwaysAt": "2026-11-15T03:56:45.616Z",
+   "autoHallwaysAt": "2026-11-15T07:58:09.200Z",
    "autoNodes": 2352
   },
   {
@@ -116369,7 +117282,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.71",
-   "autoHallwaysAt": "2026-11-15T03:56:07.398Z",
+   "autoHallwaysAt": "2026-11-15T07:57:25.499Z",
    "autoNodes": 1617
   },
   {
@@ -116514,14 +117427,36 @@
      },
      "floor": 0,
      "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "EIT-LL-mwe6r4bo-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 66.35,
+      "y": 67.47
+     },
+     "floor": 0,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "EIT-LL-mwe6r4bo-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 76.75,
+      "y": 74.11
+     },
+     "floor": 0,
+     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:57:54.168Z",
-   "autoNodes": 638
+   "autoHallwaysAt": "2026-11-15T07:57:16.855Z",
+   "autoNodes": 370
   },
   {
    "id": "CIF-01-mwe6rh50",
@@ -118361,7 +119296,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.65",
-   "autoHallwaysAt": "2026-11-15T03:57:02.086Z",
+   "autoHallwaysAt": "2026-11-15T07:58:20.905Z",
    "autoNodes": 3401
   },
   {
@@ -118727,7 +119662,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.88",
-   "autoHallwaysAt": "2026-11-15T03:56:17.860Z",
+   "autoHallwaysAt": "2026-11-15T07:57:36.727Z",
    "autoNodes": 6242
   },
   {
@@ -118889,7 +119824,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.84",
-   "autoHallwaysAt": "2026-11-15T03:58:03.044Z",
+   "autoHallwaysAt": "2026-11-15T07:57:20.393Z",
    "autoNodes": 436
   },
   {
@@ -119159,7 +120094,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.87",
-   "autoHallwaysAt": "2026-11-15T03:57:15.491Z",
+   "autoHallwaysAt": "2026-11-15T07:58:27.926Z",
    "autoNodes": 1659
   },
   {
@@ -119369,7 +120304,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:56:28.168Z",
+   "autoHallwaysAt": "2026-11-15T07:57:46.286Z",
    "autoNodes": 6170
   },
   {
@@ -119922,7 +120857,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.91",
-   "autoHallwaysAt": "2026-11-15T03:58:13.382Z",
+   "autoHallwaysAt": "2026-11-15T07:57:27.027Z",
    "autoNodes": 2047
   },
   {
@@ -120753,45 +121688,34 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "TC-02-mwe6rynw-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 60.05,
+      "y": 12.45
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "TC-02-mwe6rynw-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 60.05,
+      "y": 68.85
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "TC-02-mwe6rynw-st3",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 72.1,
-      "y": 48.75
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "TC-02-mwe6rynw-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 59.43,
-      "y": 85.15
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "TC-02-mwe6rynw-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 59.89,
-      "y": 68.95
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "TC-02-mwe6rynw-st9",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 60.2,
-      "y": 12.55
+      "x": 58.35,
+      "y": 85.95
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -120847,8 +121771,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.90",
-   "autoHallwaysAt": "2026-11-15T03:57:29.667Z",
-   "autoNodes": 2604
+   "autoHallwaysAt": "2026-11-15T07:58:30.542Z",
+   "autoNodes": 1651
   },
   {
    "id": "TC-03-mwe6s3ap",
@@ -121810,12 +122734,45 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "TC-03-mwe6s3ap-st4",
+     "id": "TC-03-mwe6s3ap-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 60.36,
+      "y": 12.65
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "TC-03-mwe6s3ap-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 72.72,
+      "y": 27.25
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "TC-03-mwe6s3ap-st3",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
       "x": 60.66,
-      "y": 12.75
+      "y": 69.05
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "TC-03-mwe6s3ap-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 58.81,
+      "y": 82.05
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -121871,8 +122828,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.90",
-   "autoHallwaysAt": "2026-11-15T03:56:39.071Z",
-   "autoNodes": 2324
+   "autoHallwaysAt": "2026-11-15T07:57:48.929Z",
+   "autoNodes": 1851
   },
   {
    "id": "TC-B1-mwe6s5pt",
@@ -122619,7 +123576,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.65",
-   "autoHallwaysAt": "2026-11-15T04:07:22.894Z",
+   "autoHallwaysAt": "2026-11-15T07:57:32.758Z",
    "autoNodes": 2200
   },
   {
@@ -123009,7 +123966,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:57:44.449Z",
+   "autoHallwaysAt": "2026-11-15T07:58:37.647Z",
    "autoNodes": 2062
   },
   {
@@ -123448,8 +124405,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 91.75,
-      "y": 33.06
+      "x": 90.35,
+      "y": 34.62
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -123459,30 +124416,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 89.75,
-      "y": 32.93
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "ERC-02-mwe6scsi-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 39.35,
-      "y": 79.91
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "ERC-02-mwe6scsi-st5",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 39.25,
-      "y": 83.4
+      "x": 40.15,
+      "y": 81.72
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -123492,8 +124427,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:57:06.958Z",
-   "autoNodes": 5635
+   "autoHallwaysAt": "2026-11-15T07:57:53.444Z",
+   "autoNodes": 2248
   },
   {
    "id": "ERC-03-mwe6sft5",
@@ -123963,7 +124898,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:58:42.204Z",
+   "autoHallwaysAt": "2026-11-15T07:57:54.755Z",
    "autoNodes": 4022
   },
   {
@@ -124507,7 +125442,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.64",
-   "autoHallwaysAt": "2026-11-15T03:57:59.099Z",
+   "autoHallwaysAt": "2026-11-15T07:58:47.871Z",
    "autoNodes": 3595
   },
   {
@@ -125063,7 +125998,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:57:19.453Z",
+   "autoHallwaysAt": "2026-11-15T07:58:01.922Z",
    "autoNodes": 2698
   },
   {
@@ -125274,7 +126209,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:58:51.916Z",
+   "autoHallwaysAt": "2026-11-15T07:58:03.135Z",
    "autoNodes": 2883
   },
   {
@@ -125479,25 +126414,14 @@
      },
      "floor": 5,
      "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PHR-05-mwe6zprs-st2",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 43.45,
-      "y": 47.84
-     },
-     "floor": 5,
-     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:58:08.152Z",
-   "autoNodes": 1449
+   "autoHallwaysAt": "2026-11-15T07:58:50.417Z",
+   "autoNodes": 0
   },
   {
    "id": "PHR-06-mwe705by",
@@ -125737,36 +126661,14 @@
      },
      "floor": 6,
      "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PHR-06-mwe705by-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 74.45,
-      "y": 36.4
-     },
-     "floor": 6,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PHR-06-mwe705by-st2",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 81.25,
-      "y": 53.71
-     },
-     "floor": 6,
-     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:57:33.666Z",
-   "autoNodes": 795
+   "autoHallwaysAt": "2026-11-15T07:58:04.331Z",
+   "autoNodes": 27
   },
   {
    "id": "PHR-07-mwe70gt9",
@@ -125994,25 +126896,14 @@
      },
      "floor": 7,
      "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "PHR-07-mwe70gt9-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 73.65,
-      "y": 37.79
-     },
-     "floor": 7,
-     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:59:06.238Z",
-   "autoNodes": 877
+   "autoHallwaysAt": "2026-11-15T07:58:05.256Z",
+   "autoNodes": 27
   },
   {
    "id": "PHR-B1-mwe70knx",
@@ -126509,7 +127400,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:58:20.393Z",
+   "autoHallwaysAt": "2026-11-15T07:58:54.689Z",
    "autoNodes": 2244
   },
   {
@@ -128003,45 +128894,12 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "QNC-01-mwe70vn5-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 50.05,
-      "y": 23.42
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "QNC-01-mwe70vn5-st2",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 51.55,
-      "y": 23.72
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "QNC-01-mwe70vn5-st3",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 43.65,
-      "y": 83.54
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "QNC-01-mwe70vn5-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 59.35,
-      "y": 55.56
+      "x": 72.75,
+      "y": 28.05
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -128051,30 +128909,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 62.65,
-      "y": 33.77
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "QNC-01-mwe70vn5-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 61.75,
-      "y": 55.56
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "QNC-01-mwe70vn5-st7",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 68.15,
-      "y": 33.77
+      "x": 44.55,
+      "y": 84.93
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -128130,8 +128966,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.93",
-   "autoHallwaysAt": "2026-11-15T03:57:55.892Z",
-   "autoNodes": 5233
+   "autoHallwaysAt": "2026-11-15T07:58:09.783Z",
+   "autoNodes": 2940
   },
   {
    "id": "QNC-02-mwe7149t",
@@ -129076,34 +129912,12 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "QNC-02-mwe7149t-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 33.95,
-      "y": 20.48
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "QNC-02-mwe7149t-st2",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 54.25,
-      "y": 23.72
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "QNC-02-mwe7149t-st3",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 51.45,
-      "y": 23.72
+      "x": 54.25,
+      "y": 26.97
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -129113,8 +129927,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
+      "x": 72.65,
+      "y": 26.82
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "QNC-02-mwe7149t-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
       "x": 54.35,
-      "y": 45.36
+      "y": 43.51
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -129124,19 +129949,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 49.75,
-      "y": 79.37
+      "x": 53.35,
+      "y": 64.06
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "QNC-02-mwe7149t-st7",
+     "id": "QNC-02-mwe7149t-st8",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 52.55,
-      "y": 65.77
+      "x": 49.75,
+      "y": 77.51
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -129146,8 +129971,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 67.65,
-      "y": 33.77
+      "x": 82.15,
+      "y": 79.37
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -129203,8 +130028,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.91",
-   "autoHallwaysAt": "2026-11-15T03:59:26.733Z",
-   "autoNodes": 4460
+   "autoHallwaysAt": "2026-11-15T07:58:11.006Z",
+   "autoNodes": 3619
   },
   {
    "id": "QNC-03-mwe719oz",
@@ -130743,8 +131568,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.73",
-   "autoHallwaysAt": "2026-11-15T03:58:40.301Z",
-   "autoNodes": 4458
+   "autoHallwaysAt": "2026-11-15T07:59:13.229Z",
+   "autoNodes": 4461
   },
   {
    "id": "QNC-04-mwe71i5m",
@@ -132258,23 +133083,12 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "QNC-04-mwe71i5m-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 50.05,
-      "y": 13.68
-     },
-     "floor": 4,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "QNC-04-mwe71i5m-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 51.45,
-      "y": 18.62
+      "x": 34.55,
+      "y": 15.07
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -132284,19 +133098,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 35.15,
-      "y": 15.69
-     },
-     "floor": 4,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "QNC-04-mwe71i5m-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 80.55,
-      "y": 73.03
+      "x": 82.25,
+      "y": 70.09
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -132352,8 +133155,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.67",
-   "autoHallwaysAt": "2026-11-15T03:58:12.090Z",
-   "autoNodes": 4762
+   "autoHallwaysAt": "2026-11-15T07:58:13.860Z",
+   "autoNodes": 2884
   },
   {
    "id": "QNC-05-mwe71ngq",
@@ -133193,18 +133996,18 @@
      "category": "stairs",
      "coords": {
       "x": 34.55,
-      "y": 15.22
+      "y": 15.07
      },
      "floor": 5,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "QNC-05-mwe71ngq-st2",
+     "id": "QNC-05-mwe71ngq-st3",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 80.55,
-      "y": 73.03
+      "x": 82.25,
+      "y": 70.09
      },
      "floor": 5,
      "purposeVerification": "unverified_drawing_only"
@@ -133260,8 +134063,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.67",
-   "autoHallwaysAt": "2026-11-15T03:59:44.227Z",
-   "autoNodes": 3272
+   "autoHallwaysAt": "2026-11-15T07:58:14.604Z",
+   "autoNodes": 2588
   },
   {
    "id": "QNC-CON-mwe71tqm",
@@ -134752,34 +135555,12 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "QNC-CON-mwe71tqm-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 34.05,
-      "y": 16.77
-     },
-     "floor": 0,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "QNC-CON-mwe71tqm-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 50.75,
-      "y": 23.57
-     },
-     "floor": 0,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "QNC-CON-mwe71tqm-st3",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 73.15,
-      "y": 28.67
+      "x": 27.75,
+      "y": 18.78
      },
      "floor": 0,
      "purposeVerification": "unverified_drawing_only"
@@ -134789,8 +135570,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 29.45,
-      "y": 33.62
+      "x": 72.65,
+      "y": 26.97
      },
      "floor": 0,
      "purposeVerification": "unverified_drawing_only"
@@ -134800,8 +135581,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 27.85,
-      "y": 18.62
+      "x": 29.15,
+      "y": 32.23
+     },
+     "floor": 0,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "QNC-CON-mwe71tqm-st7",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 40.55,
+      "y": 83.69
      },
      "floor": 0,
      "purposeVerification": "unverified_drawing_only"
@@ -134857,8 +135649,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.90",
-   "autoHallwaysAt": "2026-11-15T03:59:02.105Z",
-   "autoNodes": 5997
+   "autoHallwaysAt": "2026-11-15T07:59:20.800Z",
+   "autoNodes": 4748
   },
   {
    "id": "QNC-MEZ-mwe722ay",
@@ -135665,8 +136457,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.88",
-   "autoHallwaysAt": "2026-11-15T03:58:34.082Z",
-   "autoNodes": 3343
+   "autoHallwaysAt": "2026-11-15T07:58:40.525Z",
+   "autoNodes": 3383
   },
   {
    "id": "RAC-01-mwe727jf",
@@ -136248,8 +137040,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 18.01,
-      "y": 21.45
+      "x": 17.08,
+      "y": 21.55
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -136259,8 +137051,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 81.38,
-      "y": 21.45
+      "x": 82.3,
+      "y": 21.55
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -136270,8 +137062,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 16.46,
-      "y": 21.95
+      "x": 17.08,
+      "y": 67.65
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -136281,52 +137073,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 82.92,
-      "y": 21.95
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-01-mwe727jf-st5",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 16.46,
-      "y": 67.15
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-01-mwe727jf-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 18.01,
+      "x": 82.3,
       "y": 67.65
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-01-mwe727jf-st7",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 81.38,
-      "y": 67.65
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-01-mwe727jf-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 82.92,
-      "y": 67.15
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -136382,8 +137130,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.98",
-   "autoHallwaysAt": "2026-11-15T04:00:05.822Z",
-   "autoNodes": 4296
+   "autoHallwaysAt": "2026-11-15T07:58:18.064Z",
+   "autoNodes": 1748
   },
   {
    "id": "RAC-02-mwe72bhm",
@@ -136941,7 +137689,7 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 15.84,
+      "x": 14.91,
       "y": 18.75
      },
      "floor": 2,
@@ -136952,7 +137700,7 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 79.06,
+      "x": 79.98,
       "y": 18.75
      },
      "floor": 2,
@@ -136963,8 +137711,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 14.3,
-      "y": 19.15
+      "x": 14.91,
+      "y": 64.85
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -136974,52 +137722,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 80.76,
-      "y": 19.15
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-02-mwe72bhm-st5",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 14.3,
-      "y": 64.45
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-02-mwe72bhm-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 15.84,
+      "x": 79.98,
       "y": 64.85
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-02-mwe72bhm-st7",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 79.06,
-      "y": 64.85
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-02-mwe72bhm-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 80.76,
-      "y": 64.45
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -137075,8 +137779,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.97",
-   "autoHallwaysAt": "2026-11-15T03:59:23.053Z",
-   "autoNodes": 2920
+   "autoHallwaysAt": "2026-11-15T07:59:25.993Z",
+   "autoNodes": 2009
   },
   {
    "id": "RAC-03-mwe72fdi",
@@ -137562,8 +138266,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 13.06,
-      "y": 22.25
+      "x": 15.53,
+      "y": 20.65
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -137573,8 +138277,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 16.31,
-      "y": 20.55
+      "x": 80.29,
+      "y": 20.65
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -137584,8 +138288,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 79.52,
-      "y": 20.55
+      "x": 31.61,
+      "y": 59.95
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -137595,8 +138299,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 82.77,
-      "y": 22.25
+      "x": 15.53,
+      "y": 66.75
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -137606,63 +138310,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 13.06,
-      "y": 65.05
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-03-mwe72fdi-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 16.31,
+      "x": 80.29,
       "y": 66.75
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-03-mwe72fdi-st7",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 79.52,
-      "y": 66.75
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-03-mwe72fdi-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 82.77,
-      "y": 65.05
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-03-mwe72fdi-st10",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 30.68,
-      "y": 60.05
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RAC-03-mwe72fdi-st12",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 68.08,
-      "y": 26.35
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -137718,8 +138367,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.97",
-   "autoHallwaysAt": "2026-11-15T03:58:47.001Z",
-   "autoNodes": 3363
+   "autoHallwaysAt": "2026-11-15T07:58:44.845Z",
+   "autoNodes": 2524
   },
   {
    "id": "E5-01-mwe72ljq",
@@ -138276,8 +138925,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 44.45,
-      "y": 10.28
+      "x": 26.65,
+      "y": 17.85
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -138287,8 +138936,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 51.25,
-      "y": 10.43
+      "x": 48.95,
+      "y": 17.85
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-01-mwe72ljq-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 72.45,
+      "y": 17.85
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-01-mwe72ljq-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.25,
+      "y": 35.47
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -138298,8 +138969,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T04:00:20.512Z",
-   "autoNodes": 4066
+   "autoHallwaysAt": "2026-11-15T07:58:20.206Z",
+   "autoNodes": 1273
   },
   {
    "id": "E5-02-mwe72qc8",
@@ -138742,8 +139413,52 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
+      "x": 26.65,
+      "y": 17.85
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-02-mwe72qc8-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 48.95,
+      "y": 17.85
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-02-mwe72qc8-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 72.45,
+      "y": 17.85
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-02-mwe72qc8-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
       "x": 56.25,
-      "y": 31.3
+      "y": 29.29
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-02-mwe72qc8-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.25,
+      "y": 35.47
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -138753,8 +139468,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:59:42.271Z",
-   "autoNodes": 2058
+   "autoHallwaysAt": "2026-11-15T07:59:29.204Z",
+   "autoNodes": 1618
   },
   {
    "id": "E5-03-mwe72vow",
@@ -139227,14 +139942,58 @@
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-03-mwe72vow-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 27.05,
+      "y": 18.01
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-03-mwe72vow-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 49.35,
+      "y": 18.01
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-03-mwe72vow-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 72.85,
+      "y": 18.01
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-03-mwe72vow-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.65,
+      "y": 35.47
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:59:00.271Z",
-   "autoNodes": 3462
+   "autoHallwaysAt": "2026-11-15T07:58:48.431Z",
+   "autoNodes": 2293
   },
   {
    "id": "E5-04-mwe7312x",
@@ -139794,12 +140553,45 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "E5-04-mwe7312x-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 26.95,
+      "y": 17.85
+     },
+     "floor": 4,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "E5-04-mwe7312x-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 59.85,
-      "y": 7.65
+      "x": 49.25,
+      "y": 17.85
+     },
+     "floor": 4,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-04-mwe7312x-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 72.75,
+      "y": 17.85
+     },
+     "floor": 4,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E5-04-mwe7312x-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 62.55,
+      "y": 35.47
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -139809,8 +140601,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T04:00:36.651Z",
-   "autoNodes": 3594
+   "autoHallwaysAt": "2026-11-15T07:58:23.118Z",
+   "autoNodes": 2252
   },
   {
    "id": "E5-05-mwe737bv",
@@ -140319,7 +141111,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T04:00:03.614Z",
+   "autoHallwaysAt": "2026-11-15T07:59:38.315Z",
    "autoNodes": 2625
   },
   {
@@ -140873,7 +141665,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:59:20.990Z",
+   "autoHallwaysAt": "2026-11-15T07:58:57.204Z",
    "autoNodes": 2757
   },
   {
@@ -141557,7 +142349,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.74",
-   "autoHallwaysAt": "2026-11-15T04:01:08.611Z",
+   "autoHallwaysAt": "2026-11-15T07:58:53.032Z",
    "autoNodes": 4550
   },
   {
@@ -142205,7 +142997,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.58",
-   "autoHallwaysAt": "2026-11-15T04:00:29.914Z",
+   "autoHallwaysAt": "2026-11-15T07:59:59.933Z",
    "autoNodes": 2510
   },
   {
@@ -142621,7 +143413,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T03:59:48.161Z",
+   "autoHallwaysAt": "2026-11-15T07:59:10.922Z",
    "autoNodes": 2705
   },
   {
@@ -142973,7 +143765,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T04:01:29.832Z",
+   "autoHallwaysAt": "2026-11-15T07:59:10.446Z",
    "autoNodes": 2322
   },
   {
@@ -143136,8 +143928,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T04:00:41.323Z",
-   "autoNodes": 2191
+   "autoHallwaysAt": "2026-11-15T08:00:02.411Z",
+   "autoNodes": 1288
   },
   {
    "id": "STC-B1-mwe76ow8",
@@ -143579,7 +144371,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.58",
-   "autoHallwaysAt": "2026-11-15T04:00:15.316Z",
+   "autoHallwaysAt": "2026-11-15T07:59:35.033Z",
    "autoNodes": 11289
   },
   {
@@ -143763,7 +144555,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.58",
-   "autoHallwaysAt": "2026-11-15T04:01:44.799Z",
+   "autoHallwaysAt": "2026-11-15T07:59:18.656Z",
    "autoNodes": 424
   },
   {
@@ -144096,12 +144888,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "M3-01-mwe77265-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 27.65,
+      "y": 11.19
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "M3-01-mwe77265-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 17.95,
-      "y": 14.43
+      "x": 57.85,
+      "y": 12.1
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -144111,8 +144914,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 17.95,
-      "y": 76.54
+      "x": 18.45,
+      "y": 15.46
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -144122,8 +144925,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 46.55,
-      "y": 56.36
+      "x": 18.45,
+      "y": 75.51
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -144179,8 +144982,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.91",
-   "autoHallwaysAt": "2026-11-15T04:01:03.895Z",
-   "autoNodes": 6560
+   "autoHallwaysAt": "2026-11-15T08:00:08.366Z",
+   "autoNodes": 3700
   },
   {
    "id": "M3-02-mwe776xc",
@@ -144904,7 +145707,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.92",
-   "autoHallwaysAt": "2026-11-15T04:00:34.429Z",
+   "autoHallwaysAt": "2026-11-15T07:59:52.860Z",
    "autoNodes": 6478
   },
   {
@@ -145322,7 +146125,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.89",
-   "autoHallwaysAt": "2026-11-15T04:02:08.647Z",
+   "autoHallwaysAt": "2026-11-15T07:59:38.224Z",
    "autoNodes": 5729
   },
   {
@@ -146199,7 +147002,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.90",
-   "autoHallwaysAt": "2026-11-15T04:01:35.053Z",
+   "autoHallwaysAt": "2026-11-15T08:00:36.366Z",
    "autoNodes": 8168
   },
   {
@@ -147231,7 +148034,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.70",
-   "autoHallwaysAt": "2026-11-15T04:00:56.187Z",
+   "autoHallwaysAt": "2026-11-15T08:00:08.938Z",
    "autoNodes": 7217
   },
   {
@@ -148250,7 +149053,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.74",
-   "autoHallwaysAt": "2026-11-15T04:02:30.877Z",
+   "autoHallwaysAt": "2026-11-15T07:59:50.520Z",
    "autoNodes": 5366
   },
   {
@@ -149057,56 +149860,45 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "EV3-03-mwe792ku-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 24.25,
+      "y": 28.83
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "EV3-03-mwe792ku-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 23.45,
-      "y": 27.74
+      "x": 76.55,
+      "y": 28.21
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "EV3-03-mwe792ku-st9",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 18.05,
-      "y": 44.59
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EV3-03-mwe792ku-st11",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 25.25,
-      "y": 50.31
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EV3-03-mwe792ku-st12",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 39.25,
-      "y": 49.69
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EV3-03-mwe792ku-st13",
+     "id": "EV3-03-mwe792ku-st3",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
       "x": 67.75,
-      "y": 27.13
+      "y": 26.97
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "EV3-03-mwe792ku-st4",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 22.65,
+      "y": 67.16
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -149116,8 +149908,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T04:01:52.466Z",
-   "autoNodes": 3285
+   "autoHallwaysAt": "2026-11-15T08:00:45.157Z",
+   "autoNodes": 2286
   },
   {
    "id": "EV3-04-mwe794dr",
@@ -149999,8 +150791,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 21.85,
-      "y": 26.82
+      "x": 23.65,
+      "y": 30.06
+     },
+     "floor": 4,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "EV3-04-mwe794dr-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 74.75,
+      "y": 29.91
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -150010,74 +150813,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 29.35,
-      "y": 40.88
+      "x": 27.95,
+      "y": 33.46
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "EV3-04-mwe794dr-st6",
+     "id": "EV3-04-mwe794dr-st7",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 11.65,
-      "y": 55.72
-     },
-     "floor": 4,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EV3-04-mwe794dr-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 11.65,
-      "y": 62.98
-     },
-     "floor": 4,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EV3-04-mwe794dr-st9",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 17.65,
-      "y": 45.98
-     },
-     "floor": 4,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EV3-04-mwe794dr-st10",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 24.45,
-      "y": 71.48
-     },
-     "floor": 4,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EV3-04-mwe794dr-st11",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 62.15,
-      "y": 46.6
-     },
-     "floor": 4,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EV3-04-mwe794dr-st12",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 75.25,
-      "y": 29.75
+      "x": 22.15,
+      "y": 67.93
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -150087,8 +150835,8 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T04:01:13.734Z",
-   "autoNodes": 3510
+   "autoHallwaysAt": "2026-11-15T08:00:17.328Z",
+   "autoNodes": 2348
   },
   {
    "id": "RA2-01-mwe794vr",
@@ -150809,45 +151557,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "RA2-01-mwe794vr-st4",
+     "id": "RA2-01-mwe794vr-st1",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 17.54,
-      "y": 54.35
+      "x": 19.4,
+      "y": 49.85
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "RA2-01-mwe794vr-st5",
+     "id": "RA2-01-mwe794vr-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 76.89,
-      "y": 54.35
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RA2-01-mwe794vr-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 17.39,
-      "y": 90.75
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RA2-01-mwe794vr-st9",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 76.89,
-      "y": 90.75
+      "x": 74.88,
+      "y": 49.85
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -150903,8 +151629,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.74",
-   "autoHallwaysAt": "2026-11-15T04:02:48.876Z",
-   "autoNodes": 3495
+   "autoHallwaysAt": "2026-11-15T07:59:55.412Z",
+   "autoNodes": 2459
   },
   {
    "id": "RA2-02-mwe795cm",
@@ -151301,34 +152027,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "RA2-02-mwe795cm-st4",
+     "id": "RA2-02-mwe795cm-st1",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 17.54,
-      "y": 54.35
+      "x": 19.4,
+      "y": 49.85
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "RA2-02-mwe795cm-st6",
+     "id": "RA2-02-mwe795cm-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 48.45,
-      "y": 84.05
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RA2-02-mwe795cm-st7",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 17.54,
-      "y": 90.75
+      "x": 74.88,
+      "y": 49.85
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -151384,8 +152099,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.74",
-   "autoHallwaysAt": "2026-11-15T04:02:12.021Z",
-   "autoNodes": 2558
+   "autoHallwaysAt": "2026-11-15T08:00:49.276Z",
+   "autoNodes": 2005
   },
   {
    "id": "RA2-03-mwe795t9",
@@ -151924,28 +152639,6 @@
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RA2-03-mwe795t9-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 48.45,
-      "y": 84.05
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "RA2-03-mwe795t9-st10",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 64.37,
-      "y": 57.85
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
@@ -151998,8 +152691,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.74",
-   "autoHallwaysAt": "2026-11-15T04:01:25.537Z",
-   "autoNodes": 2708
+   "autoHallwaysAt": "2026-11-15T08:00:20.514Z",
+   "autoNodes": 2009
   },
   {
    "id": "E6-01-mwe796ee",
@@ -152699,8 +153392,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 30.65,
-      "y": 14.3
+      "x": 32.05,
+      "y": 13.06
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -152710,8 +153403,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 66.75,
-      "y": 14.3
+      "x": 68.05,
+      "y": 16.46
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -152721,8 +153414,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 32.55,
-      "y": 13.21
+      "x": 36.25,
+      "y": 36.4
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -152732,8 +153425,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 32.55,
-      "y": 59.58
+      "x": 62.55,
+      "y": 33.46
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -152743,8 +153436,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 30.45,
-      "y": 58.5
+      "x": 32.05,
+      "y": 59.89
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -152754,30 +153447,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 66.45,
-      "y": 58.5
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E6-01-mwe796ee-st7",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 37.75,
-      "y": 34.85
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E6-01-mwe796ee-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 62.55,
-      "y": 34.85
+      "x": 68.05,
+      "y": 59.89
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -152833,8 +153504,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.95",
-   "autoHallwaysAt": "2026-11-15T04:03:04.459Z",
-   "autoNodes": 4194
+   "autoHallwaysAt": "2026-11-15T07:59:59.069Z",
+   "autoNodes": 2920
   },
   {
    "id": "E6-02-mwe796y2",
@@ -153486,8 +154157,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 66.05,
-      "y": 19.24
+      "x": 32.15,
+      "y": 18.01
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -153497,8 +154168,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 32.75,
-      "y": 18.16
+      "x": 67.35,
+      "y": 18.01
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -153508,8 +154179,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 32.75,
-      "y": 63.6
+      "x": 32.15,
+      "y": 63.76
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -153519,8 +154190,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 65.75,
-      "y": 62.52
+      "x": 67.35,
+      "y": 63.76
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -153576,8 +154247,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.94",
-   "autoHallwaysAt": "2026-11-15T04:02:22.723Z",
-   "autoNodes": 2918
+   "autoHallwaysAt": "2026-11-15T08:00:52.703Z",
+   "autoNodes": 2807
   },
   {
    "id": "E6-03-mwe797gf",
@@ -154313,8 +154984,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 69.05,
-      "y": 18.62
+      "x": 35.15,
+      "y": 20.94
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -154324,8 +154995,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 37.65,
-      "y": 17.54
+      "x": 70.35,
+      "y": 20.79
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -154335,8 +155006,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 36.45,
-      "y": 31.45
+      "x": 35.15,
+      "y": 59.89
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -154346,30 +155017,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 36.45,
-      "y": 49.85
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E6-03-mwe797gf-st5",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 37.65,
-      "y": 62.98
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E6-03-mwe797gf-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 68.75,
-      "y": 61.9
+      "x": 70.35,
+      "y": 59.89
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -154425,8 +155074,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.92",
-   "autoHallwaysAt": "2026-11-15T04:01:42.729Z",
-   "autoNodes": 3121
+   "autoHallwaysAt": "2026-11-15T08:00:23.608Z",
+   "autoNodes": 2642
   },
   {
    "id": "E6-04-mwe797yh",
@@ -155125,8 +155774,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 69.15,
-      "y": 18.62
+      "x": 35.25,
+      "y": 17.54
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -155136,7 +155785,7 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 35.85,
+      "x": 70.45,
       "y": 17.54
      },
      "floor": 4,
@@ -155147,8 +155796,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 37.75,
-      "y": 62.98
+      "x": 35.25,
+      "y": 59.89
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -155158,8 +155807,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 68.85,
-      "y": 61.9
+      "x": 70.45,
+      "y": 63.14
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -155215,8 +155864,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.94",
-   "autoHallwaysAt": "2026-11-15T04:03:14.866Z",
-   "autoNodes": 2808
+   "autoHallwaysAt": "2026-11-15T08:00:02.242Z",
+   "autoNodes": 2634
   },
   {
    "id": "E6-05-mwe798im",
@@ -155827,8 +156476,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 69.65,
-      "y": 21.1
+      "x": 35.25,
+      "y": 20.94
      },
      "floor": 5,
      "purposeVerification": "unverified_drawing_only"
@@ -155838,8 +156487,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 34.65,
-      "y": 21.1
+      "x": 70.45,
+      "y": 20.79
      },
      "floor": 5,
      "purposeVerification": "unverified_drawing_only"
@@ -155849,8 +156498,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 37.75,
-      "y": 17.54
+      "x": 35.25,
+      "y": 63.14
      },
      "floor": 5,
      "purposeVerification": "unverified_drawing_only"
@@ -155860,41 +156509,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 36.05,
-      "y": 59.58
-     },
-     "floor": 5,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E6-05-mwe798im-st5",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 33.85,
-      "y": 61.9
-     },
-     "floor": 5,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E6-05-mwe798im-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 68.85,
-      "y": 61.9
-     },
-     "floor": 5,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E6-05-mwe798im-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
       "x": 70.45,
-      "y": 59.58
+      "y": 59.89
      },
      "floor": 5,
      "purposeVerification": "unverified_drawing_only"
@@ -155950,8 +156566,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.94",
-   "autoHallwaysAt": "2026-11-15T04:02:34.158Z",
-   "autoNodes": 2998
+   "autoHallwaysAt": "2026-11-15T08:00:55.923Z",
+   "autoNodes": 2273
   },
   {
    "id": "TJB-01-mwe7990t",
@@ -156765,7 +157381,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.95",
-   "autoHallwaysAt": "2026-11-15T04:02:10.337Z",
+   "autoHallwaysAt": "2026-11-15T08:00:40.647Z",
    "autoNodes": 5593
   },
   {
@@ -157678,7 +158294,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.94",
-   "autoHallwaysAt": "2026-11-15T04:03:45.260Z",
+   "autoHallwaysAt": "2026-11-15T08:00:20.242Z",
    "autoNodes": 5348
   },
   {
@@ -158692,8 +159308,30 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 47.85,
+      "x": 43.75,
+      "y": 31.92
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "EC1-01-mwe799zw-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 48.45,
       "y": 38.1
+     },
+     "floor": 1,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "EC1-01-mwe799zw-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 43.95,
+      "y": 48.15
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -158749,8 +159387,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.85",
-   "autoHallwaysAt": "2026-11-15T04:02:52.246Z",
-   "autoNodes": 5613
+   "autoHallwaysAt": "2026-11-15T08:01:00.147Z",
+   "autoNodes": 4032
   },
   {
    "id": "EC1-02-mwe79ai9",
@@ -159665,7 +160303,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.88",
-   "autoHallwaysAt": "2026-11-15T04:02:29.094Z",
+   "autoHallwaysAt": "2026-11-15T08:00:51.479Z",
    "autoNodes": 8765
   },
   {
@@ -160400,7 +161038,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.71",
-   "autoHallwaysAt": "2026-11-15T04:04:07.899Z",
+   "autoHallwaysAt": "2026-11-15T08:00:37.330Z",
    "autoNodes": 6131
   },
   {
@@ -161122,7 +161760,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.76",
-   "autoHallwaysAt": "2026-11-15T04:03:20.088Z",
+   "autoHallwaysAt": "2026-11-15T08:01:20.175Z",
    "autoNodes": 5955
   },
   {
@@ -161724,7 +162362,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.76",
-   "autoHallwaysAt": "2026-11-15T04:02:53.948Z",
+   "autoHallwaysAt": "2026-11-15T08:01:02.981Z",
    "autoNodes": 3549
   },
   {
@@ -162397,7 +163035,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.76",
-   "autoHallwaysAt": "2026-11-15T04:04:36.066Z",
+   "autoHallwaysAt": "2026-11-15T08:01:00.568Z",
    "autoNodes": 7241
   },
   {
@@ -163097,7 +163735,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.92",
-   "autoHallwaysAt": "2026-11-15T04:03:40.234Z",
+   "autoHallwaysAt": "2026-11-15T08:01:32.988Z",
    "autoNodes": 4567
   },
   {
@@ -163732,8 +164370,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 81.35,
-      "y": 76.43
+      "x": 60.45,
+      "y": 16.31
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "EC3-02-mwe7a88z-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 80.65,
+      "y": 83.38
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -163743,19 +164392,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 34.35,
-      "y": 82.61
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EC3-02-mwe7a88z-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 61.85,
-      "y": 14.45
+      "x": 32.95,
+      "y": 80.91
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -163811,8 +164449,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.92",
-   "autoHallwaysAt": "2026-11-15T04:03:21.748Z",
-   "autoNodes": 6719
+   "autoHallwaysAt": "2026-11-15T08:01:06.830Z",
+   "autoNodes": 2841
   },
   {
    "id": "EC4-01-mwe7acvt",
@@ -164730,7 +165368,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.92",
-   "autoHallwaysAt": "2026-11-15T04:04:54.662Z",
+   "autoHallwaysAt": "2026-11-15T08:01:14.920Z",
    "autoNodes": 7500
   },
   {
@@ -165553,8 +166191,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 5.65,
-      "y": 32.84
+      "x": 50.85,
+      "y": 35.32
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -165564,8 +166202,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 47.05,
-      "y": 47.37
+      "x": 46.45,
+      "y": 31.92
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "EC4-02-mwe7ahjb-st3",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 39.35,
+      "y": 31.76
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -165575,8 +166224,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 68.15,
-      "y": 52.16
+      "x": 5.55,
+      "y": 36.4
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -165586,30 +166235,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 83.45,
-      "y": 52.63
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EC4-02-mwe7ahjb-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 92.25,
-      "y": 32.84
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "EC4-02-mwe7ahjb-st7",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 92.25,
-      "y": 39.8
+      "x": 92.45,
+      "y": 36.4
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -165665,8 +166292,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.89",
-   "autoHallwaysAt": "2026-11-15T04:04:04.571Z",
-   "autoNodes": 6764
+   "autoHallwaysAt": "2026-11-15T08:01:38.161Z",
+   "autoNodes": 4173
   },
   {
    "id": "EC5-01-mwe7atev",
@@ -166361,7 +166988,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.97",
-   "autoHallwaysAt": "2026-11-15T04:03:41.990Z",
+   "autoHallwaysAt": "2026-11-15T08:01:21.164Z",
    "autoNodes": 4106
   },
   {
@@ -167106,12 +167733,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "EC5-02-mwe7aynm-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 54.45,
+      "y": 9.97
+     },
+     "floor": 2,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "EC5-02-mwe7aynm-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 87.15,
-      "y": 56.03
+      "x": 86.45,
+      "y": 56.96
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -167167,8 +167805,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.95",
-   "autoHallwaysAt": "2026-11-15T04:05:20.160Z",
-   "autoNodes": 5163
+   "autoHallwaysAt": "2026-11-15T08:01:18.033Z",
+   "autoNodes": 2160
   },
   {
    "id": "EC5-03-mwe7b3bo",
@@ -167866,7 +168504,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.96",
-   "autoHallwaysAt": "2026-11-15T04:04:34.358Z",
+   "autoHallwaysAt": "2026-11-15T08:01:57.069Z",
    "autoNodes": 6836
   },
   {
@@ -168677,8 +169315,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 84.55,
-      "y": 53.25
+      "x": 54.45,
+      "y": 9.97
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -168688,8 +169326,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 54.65,
-      "y": 9.04
+      "x": 86.45,
+      "y": 57.73
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -168699,8 +169337,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 66.15,
-      "y": 53.86
+      "x": 65.55,
+      "y": 56.65
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -168756,8 +169394,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto:0.96",
-   "autoHallwaysAt": "2026-11-15T04:04:02.711Z",
-   "autoNodes": 4200
+   "autoHallwaysAt": "2026-11-15T08:01:24.572Z",
+   "autoNodes": 2749
   },
   {
    "id": "E7-01-mwe7bitl",
@@ -169501,8 +170139,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 19.65,
-      "y": 43.82
+      "x": 17.95,
+      "y": 66.85
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -169512,8 +170150,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 35.75,
-      "y": 56.34
+      "x": 40.35,
+      "y": 66.85
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -169523,19 +170161,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 42.55,
-      "y": 56.18
-     },
-     "floor": 1,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-01-mwe7bitl-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 72.45,
-      "y": 41.5
+      "x": 66.35,
+      "y": 64.37
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -169591,8 +170218,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.70",
-   "autoHallwaysAt": "2026-11-15T04:05:42.367Z",
-   "autoNodes": 5375
+   "autoHallwaysAt": "2026-11-15T08:01:22.442Z",
+   "autoNodes": 3336
   },
   {
    "id": "E7-02-mwe7bs30",
@@ -170740,56 +171367,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "E7-02-mwe7bs30-st1",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 71.05,
-      "y": 34.54
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
      "id": "E7-02-mwe7bs30-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 18.25,
-      "y": 17.39
+      "x": 42.85,
+      "y": 64.37
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "E7-02-mwe7bs30-st5",
+     "id": "E7-02-mwe7bs30-st3",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 35.55,
-      "y": 33.77
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-02-mwe7bs30-st7",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 40.15,
-      "y": 33.77
-     },
-     "floor": 2,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-02-mwe7bs30-st11",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 70.95,
-      "y": 43.97
+      "x": 63.85,
+      "y": 66.85
      },
      "floor": 2,
      "purposeVerification": "unverified_drawing_only"
@@ -170845,8 +171439,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.73",
-   "autoHallwaysAt": "2026-11-15T04:05:01.192Z",
-   "autoNodes": 4338
+   "autoHallwaysAt": "2026-11-15T08:02:01.139Z",
+   "autoNodes": 3201
   },
   {
    "id": "E7-03-mwe7ceq4",
@@ -172046,8 +172640,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 19.75,
-      "y": 16
+      "x": 17.95,
+      "y": 66.85
+     },
+     "floor": 3,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E7-03-mwe7ceq4-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 40.35,
+      "y": 66.85
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -172057,30 +172662,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 42.25,
-      "y": 56.65
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-03-mwe7ceq4-st4",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 50.95,
-      "y": 56.65
-     },
-     "floor": 3,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-03-mwe7ceq4-st5",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 70.75,
-      "y": 43.97
+      "x": 63.85,
+      "y": 66.85
      },
      "floor": 3,
      "purposeVerification": "unverified_drawing_only"
@@ -172136,8 +172719,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.73",
-   "autoHallwaysAt": "2026-11-15T04:04:29.030Z",
-   "autoNodes": 4924
+   "autoHallwaysAt": "2026-11-15T08:01:30.551Z",
+   "autoNodes": 3829
   },
   {
    "id": "E7-04-mwe7dcz7",
@@ -173177,45 +173760,34 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "E7-04-mwe7dcz7-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 17.95,
+      "y": 66.85
+     },
+     "floor": 4,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "E7-04-mwe7dcz7-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 18.15,
-      "y": 17.54
+      "x": 40.35,
+      "y": 66.85
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
     },
     {
-     "id": "E7-04-mwe7dcz7-st6",
+     "id": "E7-04-mwe7dcz7-st3",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 47.35,
-      "y": 56.8
-     },
-     "floor": 4,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-04-mwe7dcz7-st7",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 52.65,
-      "y": 54.17
-     },
-     "floor": 4,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-04-mwe7dcz7-st9",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 72.15,
-      "y": 42.58
+      "x": 63.85,
+      "y": 66.85
      },
      "floor": 4,
      "purposeVerification": "unverified_drawing_only"
@@ -173271,8 +173843,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.73",
-   "autoHallwaysAt": "2026-11-15T04:06:04.737Z",
-   "autoNodes": 4565
+   "autoHallwaysAt": "2026-11-15T08:01:29.589Z",
+   "autoNodes": 4832
   },
   {
    "id": "E7-05-mwe7e1qh",
@@ -174396,12 +174968,23 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "E7-05-mwe7e1qh-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 17.95,
+      "y": 66.85
+     },
+     "floor": 5,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "E7-05-mwe7e1qh-st2",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 18.15,
-      "y": 17.39
+      "x": 42.85,
+      "y": 64.22
      },
      "floor": 5,
      "purposeVerification": "unverified_drawing_only"
@@ -174411,8 +174994,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 18.15,
-      "y": 42.58
+      "x": 63.85,
+      "y": 66.85
      },
      "floor": 5,
      "purposeVerification": "unverified_drawing_only"
@@ -174422,63 +175005,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 18.45,
-      "y": 66.69
-     },
-     "floor": 5,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-05-mwe7e1qh-st5",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 42.25,
-      "y": 64.22
-     },
-     "floor": 5,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-05-mwe7e1qh-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 45.45,
-      "y": 54.02
-     },
-     "floor": 5,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-05-mwe7e1qh-st7",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 52.75,
-      "y": 54.02
-     },
-     "floor": 5,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-05-mwe7e1qh-st8",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 64.25,
-      "y": 66.69
-     },
-     "floor": 5,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-05-mwe7e1qh-st9",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 72.15,
-      "y": 42.43
+      "x": 47.65,
+      "y": 71.48
      },
      "floor": 5,
      "purposeVerification": "unverified_drawing_only"
@@ -174534,8 +175062,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.72",
-   "autoHallwaysAt": "2026-11-15T04:05:23.340Z",
-   "autoNodes": 6120
+   "autoHallwaysAt": "2026-11-15T08:02:07.210Z",
+   "autoNodes": 4570
   },
   {
    "id": "E7-06-mwe7e96v",
@@ -175935,12 +176463,34 @@
      "purposeVerification": "unverified_drawing_only"
     },
     {
+     "id": "E7-06-mwe7e96v-st1",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 17.55,
+      "y": 17.54
+     },
+     "floor": 6,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E7-06-mwe7e96v-st2",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 54.25,
+      "y": 20.79
+     },
+     "floor": 6,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
      "id": "E7-06-mwe7e96v-st3",
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 19.75,
-      "y": 44.13
+      "x": 20.05,
+      "y": 45.05
      },
      "floor": 6,
      "purposeVerification": "unverified_drawing_only"
@@ -175950,8 +176500,19 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 18.45,
-      "y": 66.69
+      "x": 70.75,
+      "y": 45.05
+     },
+     "floor": 6,
+     "purposeVerification": "unverified_drawing_only"
+    },
+    {
+     "id": "E7-06-mwe7e96v-st5",
+     "name": "Stairs",
+     "category": "stairs",
+     "coords": {
+      "x": 52.35,
+      "y": 50.46
      },
      "floor": 6,
      "purposeVerification": "unverified_drawing_only"
@@ -175961,8 +176522,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 50.85,
-      "y": 56.65
+      "x": 52.75,
+      "y": 54.17
      },
      "floor": 6,
      "purposeVerification": "unverified_drawing_only"
@@ -175972,8 +176533,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 50.95,
-      "y": 50.31
+      "x": 17.95,
+      "y": 66.85
      },
      "floor": 6,
      "purposeVerification": "unverified_drawing_only"
@@ -175983,8 +176544,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 65.75,
-      "y": 64.22
+      "x": 42.65,
+      "y": 64.37
      },
      "floor": 6,
      "purposeVerification": "unverified_drawing_only"
@@ -175994,8 +176555,8 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 70.95,
-      "y": 44.13
+      "x": 66.25,
+      "y": 64.37
      },
      "floor": 6,
      "purposeVerification": "unverified_drawing_only"
@@ -176051,8 +176612,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.72",
-   "autoHallwaysAt": "2026-11-15T04:04:59.491Z",
-   "autoNodes": 5179
+   "autoHallwaysAt": "2026-11-15T08:01:34.865Z",
+   "autoNodes": 3518
   },
   {
    "id": "E7-07-mwe7ehol",
@@ -177426,28 +177987,6 @@
      },
      "floor": 7,
      "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-07-mwe7ehol-st3",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 19.75,
-      "y": 44.9
-     },
-     "floor": 7,
-     "purposeVerification": "unverified_drawing_only"
-    },
-    {
-     "id": "E7-07-mwe7ehol-st6",
-     "name": "Stairs",
-     "category": "stairs",
-     "coords": {
-      "x": 53.35,
-      "y": 20.79
-     },
-     "floor": 7,
-     "purposeVerification": "unverified_drawing_only"
     }
    ],
    "hallways": [],
@@ -177500,8 +178039,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.69",
-   "autoHallwaysAt": "2026-11-15T04:06:20.204Z",
-   "autoNodes": 4035
+   "autoHallwaysAt": "2026-11-15T08:01:34.272Z",
+   "autoNodes": 3793
   },
   {
    "id": "CMH-01-mwe7f0jx",
@@ -178668,7 +179207,7 @@
      "category": "stairs",
      "coords": {
       "x": 39.75,
-      "y": 28.67
+      "y": 30.37
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -178678,7 +179217,7 @@
      "name": "Stairs",
      "category": "stairs",
      "coords": {
-      "x": 41.95,
+      "x": 42.55,
       "y": 45.05
      },
      "floor": 1,
@@ -178690,7 +179229,7 @@
      "category": "stairs",
      "coords": {
       "x": 83.45,
-      "y": 56.8
+      "y": 58.35
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -178701,7 +179240,7 @@
      "category": "stairs",
      "coords": {
       "x": 35.95,
-      "y": 61.44
+      "y": 60.05
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -178712,7 +179251,7 @@
      "category": "stairs",
      "coords": {
       "x": 57.45,
-      "y": 59.12
+      "y": 60.36
      },
      "floor": 1,
      "purposeVerification": "unverified_drawing_only"
@@ -178768,8 +179307,8 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.88",
-   "autoHallwaysAt": "2026-11-15T04:05:54.170Z",
-   "autoNodes": 10707
+   "autoHallwaysAt": "2026-11-15T08:02:12.402Z",
+   "autoNodes": 3836
   },
   {
    "id": "GH-01-mwe7f1w8",
@@ -178965,7 +179504,7 @@
    "reviewed": false,
    "published": true,
    "alignmentFrom": "auto?:0.78",
-   "autoHallwaysAt": "2026-11-15T04:05:10.889Z",
+   "autoHallwaysAt": "2026-11-15T08:01:42.563Z",
    "autoNodes": 645
   },
   {
@@ -179044,7 +179583,7 @@
    "controlPoints": [],
    "reviewed": false,
    "published": true,
-   "autoHallwaysAt": "2026-11-15T04:06:27.524Z",
+   "autoHallwaysAt": "2026-11-15T08:01:41.313Z",
    "autoNodes": 976
   }
  ],

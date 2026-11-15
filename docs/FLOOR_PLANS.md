@@ -1554,3 +1554,11 @@ Storage: each floor's automatic network is kept in `data/networks/<floor id>.jso
 positions, edges by index, room links; see `encodeNetwork` in src/campus/floorImports.ts), not in
 `data/store.json`. The app fetches a building's networks only when that building is opened or a
 campus trip needs it (`GET /api/floor-imports/:id/network`).
+
+Walls from drawing layers: 117 of the 211 floor PDFs keep their CAD layers (B-BP-WALL, A-WALL,
+B-BP-STAIR, ...). For those, `scripts/campus/pdfLayers.ts` draws only the wall, window, glass, column,
+railing and stair layers (doors, text, site plan and demolished walls left out), so walls are exact
+and doorways are real gaps; the gap between a wall's two outline lines is filled. Stairs come from the
+stair layer (only shapes that contain treads). Elevator and stair shafts drawn closed join the nearest
+hallway point within ~25 cells. Other floors keep the image-based reading. Idea from the Future Labs
+WayIn prototype (its ADR 0003).

@@ -10,6 +10,8 @@ import type { CorridorNode, Point } from '../types/navigation';
 export interface PlanGraphOptions {
   /** Dark lines thinner than this many image pixels are not walls (text, door arcs). */
   thinPx?: number;
+  /** The image is a render of the PDF's wall layers only (no text, arcs or site plan): use it as is. */
+  cleanWalls?: boolean;
   /** Stair boxes in image pixels (detectStairs) to add as rooms. */
   stairs?: { x0: number; y0: number; x1: number; y1: number }[];
   /** Doorways up to 2 x this many cells wide are closed when telling rooms from corridors. */
@@ -128,7 +130,13 @@ export function buildPlanGraph(
   // leaves and text are thin and short or curved, so doorways stay open.
   const dark = new Uint8Array(imgW * imgH);
   for (let i = 0; i < dark.length; i++) dark[i] = gray[i] < 128 ? 1 : 0;
-  const walls = morph(morph(dark, imgW, imgH, thinPx, true), imgW, imgH, thinPx, false);
+  let walls: Uint8Array;
+  if (opts.cleanWalls) {
+    // Drawn from the PDF's wall layers: every dark pixel is wall. Close gaps under 9 px to fill the
+    // channel between a wall's two outline lines; doorways (20 px and more) stay open.
+    walls = morph(morph(dark, imgW, imgH, 9, false), imgW, imgH, 9, true);
+  } else {
+  walls = morph(morph(dark, imgW, imgH, thinPx, true), imgW, imgH, thinPx, false);
   const band = morph(dark, imgW, imgH, 3, false); // 1 px slack so jagged diagonal lines still count as straight
   // Horizontal and vertical runs first (most walls), in linear time. band is a trailing-window
   // dilation, shifted one pixel, so pixel (x, y) reads band at (x+1, y+1).
@@ -165,6 +173,7 @@ export function buildPlanGraph(
       if (n >= straightPx) { walls[i] = 1; break; }
     }
   }
+  }
 
   // 2. Grid: a cell is blocked if any wall pixel falls in it.
   const w = Math.ceil(imgW / cell), h = Math.ceil(imgH / cell);
@@ -200,12 +209,14 @@ export function buildPlanGraph(
     }
     regions++;
   }
-  const roomRegion = new Set<number>();
+  // A space with a corridor label is a corridor even if a room's doorway leaks into it.
+  const roomRegion = new Set<number>(), corridorRegion = new Set<number>();
   for (const r of rooms) {
-    if (r.category === 'corridor' || r.category === 'entrance' || r.category === 'exit') continue;
     const c = Math.floor((r.coords.y / 100) * imgH / cell) * w + Math.floor((r.coords.x / 100) * imgW / cell);
-    if (region[c] >= 0) roomRegion.add(region[c]);
+    if (region[c] < 0) continue;
+    if (r.category === 'corridor' || r.category === 'entrance' || r.category === 'exit') corridorRegion.add(region[c]); else roomRegion.add(region[c]);
   }
+  for (const c of corridorRegion) roomRegion.delete(c);
 
   // 4. Centre-lines, traced into nodes every `step` cells and at every junction or end.
   const sk = thin(open, w, h);
@@ -251,6 +262,12 @@ export function buildPlanGraph(
     if (open[ry * w + rx]) for (let n = 0; n < nodes.length; n++) {
       const c = nodes[n].cell, dx = (c % w) - rx, dy = ((c / w) | 0) - ry, d = dx * dx + dy * dy;
       if (d < bestD && clearLine(open, w, rx, ry, c % w, (c / w) | 0)) { best = n; bestD = d; }
+    }
+    // Elevator and stair shafts are often drawn closed (their doors are on the door layer): join them to
+    // the nearest hallway point close by, so floors still link through them.
+    if (best < 0 && (r.category === 'elevator' || r.category === 'stairs')) {
+      let bd = 25 * 25;
+      for (let n = 0; n < nodes.length; n++) { const c = nodes[n].cell, dx = (c % w) - rx, dy = ((c / w) | 0) - ry, d = dx * dx + dy * dy; if (d < bd) { best = n; bd = d; } }
     }
     if (best < 0) { unlinked.push(r.id); continue; }
     roomLinks.set(best, [...(roomLinks.get(best) || []), r.id]);
@@ -366,4 +383,29 @@ export function detectStairs(gray: Uint8Array, imgW: number, imgH: number, opts:
     if (m) { m.x0 = Math.min(m.x0, b.x0); m.y0 = Math.min(m.y0, b.y0); m.x1 = Math.max(m.x1, b.x1); m.y1 = Math.max(m.y1, b.y1); } else merged.push({ ...b });
   }
   return merged;
+}
+
+
+/** Stair boxes from a render of the PDF's stair layer: each separate drawing (a flight and its landing) is one box. */
+export function stairBoxesFromLayer(gray: Uint8Array, imgW: number, imgH: number, cell = 4): { x0: number; y0: number; x1: number; y1: number }[] {
+  const w = Math.ceil(imgW / cell), h = Math.ceil(imgH / cell), ink = new Uint8Array(w * h);
+  for (let y = 0; y < imgH; y++) for (let x = 0; x < imgW; x++) if (gray[y * imgW + x] < 200) ink[((y / cell) | 0) * w + ((x / cell) | 0)] = 1;
+  const seen = new Uint8Array(w * h), boxes: { x0: number; y0: number; x1: number; y1: number }[] = [];
+  for (let s0 = 0; s0 < ink.length; s0++) {
+    if (!ink[s0] || seen[s0]) continue;
+    let x0 = Infinity, y0 = Infinity, x1 = -1, y1 = -1, n = 0;
+    const st = [s0]; seen[s0] = 1;
+    while (st.length) {
+      const i = st.pop()!, x = i % w, y = (i / w) | 0; n++;
+      x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+      for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) { // bridge small gaps between treads
+        const nx = x + dx, ny = y + dy, j = ny * w + nx;
+        if (nx >= 0 && ny >= 0 && nx < w && ny < h && ink[j] && !seen[j]) { seen[j] = 1; st.push(j); }
+      }
+    }
+    const bw = (x1 - x0 + 1) * cell, bh = (y1 - y0 + 1) * cell;
+    // Long thin shapes (a bridge or ramp drawn on the stair layer) are not a flight of stairs.
+    if (n >= 6 && Math.min(bw, bh) >= 12 && Math.max(bw, bh) <= 400 && Math.max(bw, bh) <= 4 * Math.min(bw, bh)) boxes.push({ x0: x0 * cell, y0: y0 * cell, x1: (x1 + 1) * cell, y1: (y1 + 1) * cell });
+  }
+  return boxes;
 }
