@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { ManeuverAction, NavigationRoute, NavigationStep, RoomPOI } from '../types/navigation';
 import { CLASSROOM_SPECS } from '../data/waterlooStaffData';
-import { Tv, Mic, Laptop, ScanLine } from 'lucide-react';
+import { Tv, Mic, Laptop, ScanLine, Bath, DoorOpen, MapPinned } from 'lucide-react';
 
 export const cx = (...a: (string | false | null | undefined)[]) => a.filter(Boolean).join(' ');
 
@@ -203,6 +203,7 @@ export function RoutePlanner(props: {
   start: RoomPOI | null; end: RoomPOI | null; route: NavigationRoute | null; accessible: boolean; voice: boolean;
   onEditStart: () => void; onEditEnd: () => void; onSwap: () => void; onToggleAccessible: () => void; onToggleVoice: () => void;
   onStart: () => void; onOpenScanner?: () => void; compactSteps?: boolean; current: number; onPickStep?: (i: number) => void;
+  onNearest?: (category: 'restroom' | 'elevator' | 'exit') => void; onUpdateMap?: () => void;
 }) {
   const { start, end, route } = props;
   const [showSteps, setShowSteps] = useState(!props.compactSteps);
@@ -232,12 +233,28 @@ export function RoutePlanner(props: {
         </button>
       </div>
 
+      {props.onNearest && (
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-sm text-slate-600">Or nearest</span>
+          {([['restroom', 'Washroom', Bath], ['elevator', 'Elevator', ArrowUpDown], ['exit', 'Exit', DoorOpen]] as const).map(([c, label, Icon]) => (
+            <button key={c} onClick={() => props.onNearest!(c)}
+              className="h-9 px-3 rounded-full bg-white ring-1 ring-slate-300 text-sm font-semibold text-slate-800 flex items-center gap-1.5 hover:bg-slate-50">
+              <Icon className="w-4 h-4" /> {label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <label className={cx('flex items-start gap-3 rounded-xl p-3 ring-2 cursor-pointer',
+        props.accessible ? 'bg-blue-50 ring-blue-600' : 'bg-white ring-slate-300')}>
+        <input type="checkbox" checked={props.accessible} onChange={props.onToggleAccessible} className="mt-0.5 w-5 h-5 accent-blue-700" />
+        <span className="min-w-0">
+          <span className="flex items-center gap-1.5 text-[15px] font-bold text-slate-900"><Accessibility className="w-4 h-4" /> Elevators only (step-free)</span>
+          <span className="block text-xs text-slate-600 mt-0.5">Routes use elevators, never stairs. Ramps and door openers are not on the plans.</span>
+        </span>
+      </label>
+
       <div className="flex gap-2">
-        <button onClick={props.onToggleAccessible}
-          className={cx('flex-1 h-10 rounded-full text-sm font-semibold flex items-center justify-center gap-1.5 ring-1',
-            props.accessible ? 'bg-blue-50 text-blue-700 ring-blue-200' : 'bg-white text-slate-600 ring-slate-200')}>
-          <Accessibility className="w-4 h-4" /> {props.accessible ? 'Elevators only' : 'Stairs OK'}
-        </button>
         <button onClick={props.onToggleVoice}
           className={cx('h-10 px-4 rounded-full text-sm font-semibold flex items-center gap-1.5 ring-1',
             props.voice ? 'bg-blue-50 text-blue-700 ring-blue-200' : 'bg-white text-slate-600 ring-slate-200')}>
@@ -256,11 +273,33 @@ export function RoutePlanner(props: {
           {route.flaggedNotes && route.flaggedNotes.length > 0 && (
             <p className="text-xs text-amber-800 bg-amber-50 rounded-lg p-2 flex gap-1.5"><AlertTriangle className="w-4 h-4 shrink-0" />{route.flaggedNotes[0]}</p>
           )}
+          {props.onPickStep && route.steps.length > 0 && (() => {
+            const i = Math.min(Math.max(props.current, 0), route.steps.length - 1);
+            return (
+              <div className="space-y-2">
+                <div className="rounded-xl bg-slate-900 text-white p-3 flex items-center gap-3" aria-live="polite">
+                  <span className="w-9 h-9 shrink-0 rounded-full bg-amber-400 text-slate-900 flex items-center justify-center"><ManeuverIcon step={route.steps[i]} className="w-5 h-5" /></span>
+                  <span className="text-[15px] font-bold leading-snug">{cleanInstruction(route.steps[i].instruction)}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button disabled={i === 0} onClick={() => props.onPickStep!(i - 1)} className="flex-1 h-10 rounded-full ring-1 ring-slate-300 font-semibold text-slate-800 disabled:text-slate-400 disabled:ring-slate-200">Back</button>
+                  <span className="text-sm text-slate-600 tabular-nums">{i + 1} of {route.steps.length}</span>
+                  <button disabled={i === route.steps.length - 1} onClick={() => props.onPickStep!(i + 1)} className="flex-1 h-10 rounded-full bg-slate-900 text-white font-semibold disabled:bg-slate-300">Next</button>
+                </div>
+              </div>
+            );
+          })()}
           <button onClick={() => setShowSteps((v) => !v)} className="text-sm font-semibold text-blue-700">
             {showSteps ? 'Hide' : 'Show'} {route.steps.length} steps
           </button>
           {showSteps && <StepsList route={route} current={props.current} onPick={props.onPickStep} />}
         </div>
+      )}
+
+      {props.onUpdateMap && (
+        <button onClick={props.onUpdateMap} className="w-full text-sm font-semibold text-blue-800 flex items-center justify-center gap-1.5 py-1">
+          <MapPinned className="w-4 h-4" /> Locked door or broken elevator? Update the map
+        </button>
       )}
     </div>
   );

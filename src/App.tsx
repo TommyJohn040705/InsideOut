@@ -412,6 +412,18 @@ export default function App() {
   const directionsTo = (r: RoomPOI) => { setEndRoom(r); setInspected(null); setSheetFull(false); if (startRoom) goFloor(startRoom.floor ?? currentPlan.floorNumber); };
   const manualLocation = (r: RoomPOI) => setLocationState({ status: 'manual', accuracyRadiusMeters: 0, source: 'manual_room', coords: r.coords, floor: r.floor ?? currentPlan.floorNumber, roomId: r.id, roomNumber: r.roomNumber, roomName: r.name, updatedAt: Date.now() });
   const startHere = (r: RoomPOI) => { setStartRoom(r); manualLocation(r); setInspected(null); };
+  // Nearest by straight line from the start (or the floor on screen); other floors rank after this one.
+  const goNearest = (cat: 'restroom' | 'elevator' | 'exit') => {
+    const cats: string[] = cat === 'exit' ? ['exit', 'entrance'] : [cat];
+    const floor = startRoom?.floor ?? currentPlan.floorNumber;
+    const at = startRoom?.coords ?? { x: 50, y: 50 };
+    const best = buildingPlans.flatMap((p) => p.rooms.map((r) => ({ ...r, floor: r.floor ?? p.floorNumber })))
+      .filter((r) => cats.includes(r.category) && r.id !== startRoom?.id)
+      .map((r) => ({ r, d: Math.abs(r.floor - floor) * 1000 + Math.hypot(r.coords.x - at.x, r.coords.y - at.y) }))
+      .sort((a, b) => a.d - b.d)[0];
+    if (best) directionsTo(best.r);
+    else setRouteError(`No ${cat === 'restroom' ? 'washroom' : cat} is mapped in this building yet.`);
+  };
   const swap = () => { const s = startRoom; setStartRoom(endRoom); setEndRoom(s); };
   const openSearch = (t: SearchTarget) => { setSearchTarget(t); setSearchOpen(true); setQuery(''); setInspected(null); setSheetFull(true); };
 
@@ -626,6 +638,7 @@ export default function App() {
       onToggleAccessible={() => setIsAccessibleOnly((v) => !v)} onToggleVoice={() => setVoice((v) => !v)}
       onStart={startNavigation} onOpenScanner={() => setScannerOpen(true)} compactSteps={compact} current={stepIndex}
       onPickStep={(i) => { jumpToStep(i); }}
+      onNearest={goNearest} onUpdateMap={() => openUpdate(endRoom || startRoom || null)}
     />
   </>
   );
