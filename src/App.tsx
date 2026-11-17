@@ -187,9 +187,10 @@ export default function App() {
       return 'instructor';
     }
   });
+  // Staff onboarding (E5 roles) is a developer-mode feature; never pop it up over the visitor app.
   const [roleModalOpen, setRoleModalOpen] = useState(() => {
     try {
-      return !localStorage.getItem(ROLE_STORAGE_KEY);
+      return DEV_MODE && !localStorage.getItem(ROLE_STORAGE_KEY);
     } catch {
       return false;
     }
@@ -749,7 +750,7 @@ export default function App() {
       <Tour open={tourOpen} onClose={() => setTourOpen(false)} />
       <OnboardingRoleModal
         open={roleModalOpen}
-        onClose={() => setRoleModalOpen(false)}
+        onClose={() => { setRoleModalOpen(false); try { localStorage.setItem(ROLE_STORAGE_KEY, staffRole); } catch { /* storage blocked */ } }}
         currentRole={staffRole}
         onSelectRole={handleSelectRole}
       />
