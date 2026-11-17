@@ -28,7 +28,12 @@ export interface PlanGraphOptions {
   stepCells?: number;
   /** Furthest a room label may be from its hallway node, in cells. */
   roomLinkCells?: number;
+  /** Widest gap between two pieces of network that is joined when no wall or outside lies between, in cells. */
+  gapJoinCells?: number;
 }
+
+/** Nodes that join two pieces of network across open floor the reader did not trace (wall check passed). */
+export const WALL_CHECKED_GAP_PREFIX = 'gapc-';
 
 export interface PlanGraph {
   hallways: CorridorNode[];
@@ -37,7 +42,10 @@ export interface PlanGraph {
   /** Stairs found on the drawing and joined to the network (opts.stairs), to add to the floor's rooms. */
   addedRooms: { id: string; name: string; category: 'stairs'; coords: Point }[];
   /** Interior open-space grid, for tests and debugging. */
-  grid: { w: number; h: number; cellPx: number; open: Uint8Array };
+  /** open: where hallways are traced; free: not wall and not outside (where gap joins may cross). */
+  grid: { w: number; h: number; cellPx: number; open: Uint8Array; free: Uint8Array };
+  /** For drawing a clean plan (styledPlan.ts): wall pixels (image size), outside cells, spaces split at doorways (-1 none). */
+  paint: { walls: Uint8Array; outside: Uint8Array; region: Int32Array };
 }
 
 /** Separable square erosion (all dark in a k-window) or dilation (any dark), in place on a copy. */
@@ -274,6 +282,63 @@ export function buildPlanGraph(
     linked.push(r.id);
   }
 
+  // 5b. The traced centre-lines break where the outside margin, a text block or a stair symbol cuts the
+  // open floor, though the floor itself goes on. Join each piece to the nearest other piece reachable
+  // through floor that is neither wall nor outside, within gapR cells of walking, along that path (so the
+  // route line stays on the floor). Not read as hallway, so the new nodes are marked and routes say so.
+  const gapR = opts.gapJoinCells ?? 100;
+  const comp = nodes.map((_, i) => i);
+  const findC = (i: number): number => (comp[i] === i ? i : (comp[i] = findC(comp[i])));
+  nodes.forEach((nd, i) => { for (const m of nd.links) comp[findC(i)] = findC(m); });
+  const free = new Uint8Array(w * h);
+  for (let i = 0; i < free.length; i++) free[i] = !blocked[i] && !outside[i] ? 1 : 0;
+  const nodeOfCell = new Int32Array(w * h).fill(-1);
+  nodes.forEach((nd, i) => { nodeOfCell[nd.cell] = i; });
+  const isGap = new Set<number>();
+  const seen = new Int32Array(w * h), prevC = new Int32Array(w * h);
+  let stamp = 0;
+  for (let pass = 0; pass < 4; pass++) {
+    let joined = 0;
+    const groups = new Map<number, number[]>();
+    nodes.forEach((_, i) => { if (!isGap.has(i)) { const r = findC(i); (groups.get(r) || groups.set(r, []).get(r)!).push(i); } });
+    for (const members of groups.values()) {
+      const own = findC(members[0]);
+      stamp++;
+      let q: number[] = [];
+      for (const m of members) { const c = nodes[m].cell; seen[c] = stamp; prevC[c] = -1; q.push(c); }
+      let hit = -1, hitCell = -1;
+      for (let depth = 0; depth < gapR && q.length && hit < 0; depth++) {
+        const nq: number[] = [];
+        for (const c of q) {
+          const x = c % w;
+          for (const nb of [x > 0 ? c - 1 : -1, x < w - 1 ? c + 1 : -1, c - w, c + w]) {
+            if (nb < 0 || nb >= free.length || !free[nb] || seen[nb] === stamp) continue;
+            seen[nb] = stamp; prevC[nb] = c;
+            const n = nodeOfCell[nb];
+            if (n >= 0 && findC(n) !== own) { hit = n; hitCell = nb; break; }
+            nq.push(nb);
+          }
+          if (hit >= 0) break;
+        }
+        q = nq;
+      }
+      if (hit < 0) continue;
+      const cells: number[] = [];
+      for (let c = hitCell; c !== -1; c = prevC[c]) cells.push(c);
+      let prev = hit;
+      for (let k = step; k < cells.length - 1; k += step) {
+        const ex = nodeAt.get(cells[k]);
+        const n = ex ?? node(cells[k]);
+        if (ex === undefined) { isGap.add(n); comp[n] = own; }
+        link(prev, n); prev = n;
+      }
+      link(prev, nodeOfCell[cells[cells.length - 1]]);
+      comp[findC(hit)] = own;
+      joined++;
+    }
+    if (!joined) break;
+  }
+
   // 6. Keep only the parts of the network that reach a room (drops the key map, title block, etc.).
   const keep = new Uint8Array(nodes.length);
   for (const start of roomLinks.keys()) {
@@ -307,16 +372,16 @@ export function buildPlanGraph(
       return;
     }
   });
-  const id = (n: number) => `n${n}`; // unique within the floor; room ids carry the floor prefix
+  const id = (n: number) => (isGap.has(n) ? `${WALL_CHECKED_GAP_PREFIX}n${n}` : `n${n}`); // unique within the floor; room ids carry the floor prefix
   const pct = (c: number, axis: 'x' | 'y') => +((((axis === 'x' ? c % w : (c / w) | 0) + 0.5) * cell) / (axis === 'x' ? imgW : imgH) * 100).toFixed(2);
   const hallways: CorridorNode[] = [];
   for (let n = 0; n < nodes.length; n++) if (keep[n]) hallways.push({
     id: id(n),
     coords: { x: pct(nodes[n].cell, 'x'), y: pct(nodes[n].cell, 'y') },
-    ...(roomRegion.has(region[nodes[n].cell]) ? { cost: roomCost } : {}),
+    ...(isGap.has(n) ? { cost: 2 } : roomRegion.has(region[nodes[n].cell]) ? { cost: roomCost } : {}),
     connectedTo: [...[...nodes[n].links].filter((m) => keep[m]).map(id), ...(roomLinks.get(n) || [])],
   });
-  return { hallways, linkedRoomIds: linked, unlinkedRoomIds: unlinked, addedRooms, grid: { w, h, cellPx: cell, open } };
+  return { hallways, linkedRoomIds: linked, unlinkedRoomIds: unlinked, addedRooms, grid: { w, h, cellPx: cell, open, free }, paint: { walls, outside: outsideNear, region } };
 }
 
 /**

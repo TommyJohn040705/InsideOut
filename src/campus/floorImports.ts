@@ -3,9 +3,16 @@
  * them in data/store.json) and the app (which shows published ones on the campus map and
  * in the indoor navigator). Status is always derived from what the record actually holds.
  */
-import type { CorridorNode, FloorPlanData, RoomPOI, VerticalCirculationLink } from '../types/navigation';
+import type { CorridorNode, FloorPlanData, Point, RoomPOI, VerticalCirculationLink } from '../types/navigation';
 import { distanceM, fitGeoref, type ControlPoint, type Georef, type LngLat } from './georef';
 import type { FloorStatus } from './campusData';
+import { WALL_CHECKED_GAP_PREFIX } from './planGraph';
+import registrationJson from '../data/campus/floorRegistration.json';
+import doorLinksJson from '../data/campus/doorLinks.json';
+import { applyAffine, type Affine } from './floorRegister';
+
+/** Each floor lined up against a reference floor of its building by its walls (scripts/campus/registerFloors.ts). */
+const REGISTRATION = registrationJson as unknown as Record<string, { ref: string; m: Affine; score: number; runnerUp: number }>;
 
 export interface FloorImport {
   id: string;
@@ -42,17 +49,21 @@ export interface FloorImport {
   autoHallwaysAt?: string;
   /** Node count of the automatic network, which is stored in its own file (data/networks) and loaded on demand. */
   autoNodes?: number;
+  /** Clean coloured picture of the floor (src/campus/styledPlan.ts), same size as imageUrl; shown in the navigator instead of the raw drawing. */
+  styledImageUrl?: string;
 }
 
 /** A hallway network in a compact form for storage: positions, costly nodes, edges by index, room links. */
-export interface CompactNetwork { v: 1; xy: number[]; costly: number[]; cost: number; edges: number[]; rooms: Record<string, number[]> }
+/** gaps: nodes joining pieces across open floor the reader did not trace (planGraph WALL_CHECKED_GAP_PREFIX), cost 2. */
+export interface CompactNetwork { v: 1; xy: number[]; costly: number[]; cost: number; edges: number[]; rooms: Record<string, number[]>; gaps?: number[] }
 
 export function encodeNetwork(h: CorridorNode[]): CompactNetwork {
   const at = new Map(h.map((n, i) => [n.id, i]));
   const out: CompactNetwork = { v: 1, xy: [], costly: [], cost: 1, edges: [], rooms: {} };
   h.forEach((n, i) => {
     out.xy.push(+n.coords.x.toFixed(2), +n.coords.y.toFixed(2));
-    if (n.cost && n.cost > 1) { out.costly.push(i); out.cost = n.cost; }
+    if (n.id.startsWith(WALL_CHECKED_GAP_PREFIX)) (out.gaps ||= []).push(i);
+    else if (n.cost && n.cost > 1) { out.costly.push(i); out.cost = n.cost; }
     for (const t of n.connectedTo) {
       const j = at.get(t);
       if (j === undefined) (out.rooms[t] ||= []).push(i);
@@ -66,7 +77,8 @@ export function decodeNetwork(c: CompactNetwork): CorridorNode[] {
   const nodes: CorridorNode[] = [];
   for (let i = 0; i < c.xy.length / 2; i++) nodes.push({ id: `n${i}`, coords: { x: c.xy[2 * i], y: c.xy[2 * i + 1] }, connectedTo: [] });
   for (const i of c.costly) nodes[i].cost = c.cost;
-  for (let k = 0; k < c.edges.length; k += 2) { nodes[c.edges[k]].connectedTo.push(`n${c.edges[k + 1]}`); nodes[c.edges[k + 1]].connectedTo.push(`n${c.edges[k]}`); }
+  for (const i of c.gaps || []) { nodes[i].id = `${WALL_CHECKED_GAP_PREFIX}n${i}`; nodes[i].cost = 2; }
+  for (let k = 0; k < c.edges.length; k += 2) { nodes[c.edges[k]].connectedTo.push(nodes[c.edges[k + 1]].id); nodes[c.edges[k + 1]].connectedTo.push(nodes[c.edges[k]].id); }
   for (const [room, idx] of Object.entries(c.rooms)) for (const i of idx) nodes[i].connectedTo.push(room);
   return nodes;
 }
@@ -128,8 +140,112 @@ export function floorLabelOf(code: string, filename = ''): string {
 
 export const importAppBuildingId = (buildingId: string) => `import-${buildingId}`;
 
+/** Doors checked by eye on a drawing that the reader missed: floor id -> [{a, b} in image percent, note]. */
+const DOOR_LINKS = doorLinksJson as unknown as Record<string, { a: [number, number]; b: [number, number]; note: string }[]>;
+export const DOOR_NODE_PREFIX = 'door-';
+
+/** Joins the hallway points nearest to each end of a door checked on the drawing, through a door node. */
+export function applyDoorLinks(hallways: CorridorNode[], links: { a: [number, number]; b: [number, number]; note: string }[], aspect: number): CorridorNode[] {
+  if (!links.length || !hallways.length) return hallways;
+  const nearest = ([x, y]: [number, number]) => hallways.reduce((best, h) => (Math.hypot((h.coords.x - x) * aspect, h.coords.y - y) < Math.hypot((best.coords.x - x) * aspect, best.coords.y - y) ? h : best));
+  return [...hallways, ...links.map((l, i) => {
+    const A = nearest(l.a), B = nearest(l.b);
+    return { id: `${DOOR_NODE_PREFIX}${i}`, label: l.note, coords: { x: (A.coords.x + B.coords.x) / 2, y: (A.coords.y + B.coords.y) / 2 }, connectedTo: [A.id, B.id] };
+  })];
+}
+
+/** Furthest a room with no hallway link is joined to the nearest hallway point, in metres. */
+export const STRANDED_LINK_M = 6;
+// shortcut: floors with no map alignment assume 1% of sheet height ≈ 1.3 m (aligned floors: median 0.86, 85th percentile ~1.3, so joins stay on the short side); align the floor for the real scale.
+const FALLBACK_METRES_PER_PCT = 1.3;
+
+/** Widest gap between two pieces of an automatic hallway network that is joined, in metres. */
+export const GAP_LINK_M = 2;
+/** Hallway nodes added to join a gap start with this; routes through one say so. */
+export const GAP_NODE_PREFIX = 'gap-';
+
+/**
+ * The drawing reader breaks a floor's hallways into pieces wherever it closed a doorway or a
+ * dark mark cut a corridor. Pieces closer than maxM are joined, nearest gaps first (a minimum
+ * spanning join, so no piece gets more joins than it needs), through a new node at the gap's
+ * middle. The join is a guess, so it costs extra and routes over it are flagged.
+ */
+export function bridgeHallwayGaps(hallways: CorridorNode[], aspect: number, metresPerPct?: number, maxM = GAP_LINK_M): { hallways: CorridorNode[]; bridged: number } {
+  if (hallways.length < 2) return { hallways, bridged: 0 };
+  const maxPct = maxM / (metresPerPct || FALLBACK_METRES_PER_PCT);
+  const idx = new Map(hallways.map((h, i) => [h.id, i]));
+  const parent = hallways.map((_, i) => i);
+  const find = (i: number): number => (parent[i] === i ? i : (parent[i] = find(parent[i])));
+  hallways.forEach((h, i) => { for (const t of h.connectedTo) { const j = idx.get(t); if (j !== undefined) parent[find(i)] = find(j); } });
+  // Spatial hash in aspect-corrected units, one cell per maxPct, so only nearby nodes are compared.
+  const X = (h: CorridorNode) => h.coords.x * aspect, Y = (h: CorridorNode) => h.coords.y;
+  const cell = (v: number) => Math.floor(v / maxPct);
+  const grid = new Map<string, number[]>();
+  hallways.forEach((h, i) => { const k = `${cell(X(h))},${cell(Y(h))}`; (grid.get(k) || grid.set(k, []).get(k)!).push(i); });
+  const best = new Map<string, [number, number, number]>();
+  hallways.forEach((h, i) => {
+    const cx = cell(X(h)), cy = cell(Y(h));
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) for (const j of grid.get(`${cx + dx},${cy + dy}`) || []) {
+      const a = find(i), b = find(j);
+      if (j <= i || a === b) continue;
+      const d = Math.hypot(X(hallways[j]) - X(h), Y(hallways[j]) - Y(h));
+      const k = a < b ? `${a}|${b}` : `${b}|${a}`;
+      if (d <= maxPct && (!best.has(k) || d < best.get(k)![0])) best.set(k, [d, i, j]);
+    }
+  });
+  const added: CorridorNode[] = [];
+  for (const [, i, j] of [...best.values()].sort((p, q) => p[0] - q[0])) {
+    if (find(i) === find(j)) continue;
+    parent[find(i)] = find(j);
+    const a = hallways[i], b = hallways[j];
+    added.push({ id: `${GAP_NODE_PREFIX}${a.id}-${b.id}`, coords: { x: (a.coords.x + b.coords.x) / 2, y: (a.coords.y + b.coords.y) / 2 }, connectedTo: [a.id, b.id], cost: 2, label: 'Gap joined: no opening on the drawing' });
+  }
+  return { hallways: added.length ? [...hallways, ...added] : hallways, bridged: added.length };
+}
+
+/**
+ * Rooms the drawing reader did not join to the hallway network (doorway not read, label far
+ * from the door) are joined to the nearest hallway point within STRANDED_LINK_M, the way a
+ * label is snapped to the nearest walkable spot. That last stretch is a guess, so the room is
+ * marked provisional and routes to it say so. Hallways that are not changed are reused as is.
+ */
+export function linkStrandedRooms<R extends { id: string; coords: Point; navigabilityVerification?: string }>(
+  rooms: R[], hallways: CorridorNode[], aspect: number, metresPerPct?: number,
+): { rooms: R[]; hallways: CorridorNode[]; linked: string[] } {
+  if (!hallways.length) return { rooms, hallways, linked: [] };
+  const reached = new Set(hallways.flatMap((h) => h.connectedTo));
+  const maxPct = STRANDED_LINK_M / (metresPerPct || FALLBACK_METRES_PER_PCT);
+  // Only the floor's largest connected piece of hallway: a stray fragment would leave the room stranded anyway.
+  const idx = new Map(hallways.map((h, i) => [h.id, i]));
+  const parent = hallways.map((_, i) => i);
+  const find = (i: number): number => (parent[i] === i ? i : (parent[i] = find(parent[i])));
+  hallways.forEach((h, i) => { for (const t of h.connectedTo) { const j = idx.get(t); if (j !== undefined) parent[find(i)] = find(j); } });
+  const size = new Map<number, number>();
+  hallways.forEach((_, i) => size.set(find(i), (size.get(find(i)) || 0) + 1));
+  const main = [...size].sort((a, b) => b[1] - a[1])[0][0];
+  const extra = new Map<number, string[]>();
+  for (const r of rooms) {
+    if (reached.has(r.id)) continue;
+    let best = -1, bestD = maxPct;
+    hallways.forEach((h, i) => { if (find(i) !== main) return; const d = Math.hypot((h.coords.x - r.coords.x) * aspect, h.coords.y - r.coords.y); if (d <= bestD) { best = i; bestD = d; } });
+    if (best >= 0) extra.set(best, [...(extra.get(best) || []), r.id]);
+  }
+  const linked = new Set([...extra.values()].flat());
+  return {
+    rooms: linked.size ? rooms.map((r) => (linked.has(r.id) ? { ...r, navigabilityVerification: 'provisional_corridor_access' } : r)) : rooms,
+    hallways: linked.size ? hallways.map((h, i) => (extra.has(i) ? { ...h, connectedTo: [...h.connectedTo, ...extra.get(i)!] } : h)) : hallways,
+    linked: [...linked],
+  };
+}
+
 /** A published import as a floor the indoor navigator can open and route on. */
 export function importToPlan(f: FloorImport, buildingName: string, sameBuilding: FloorImport[] = []): FloorPlanData {
+  const aspect = f.imageSize[0] / f.imageSize[1];
+  const metresPerPct = metresPerPctOf(f, sameBuilding);
+  const auto = importStatus(f) !== 'routing_available';
+  const rooms = f.rooms.map((r) => ({ ...r, floor: f.floorNumber, buildingId: importAppBuildingId(f.buildingId) }));
+  // Reviewed, connected hand-drawn hallways win as they are; the network read off the drawing gets stranded rooms joined.
+  const net = auto ? linkStrandedRooms(rooms, applyDoorLinks(bridgeHallwayGaps(f.autoHallways || [], aspect, metresPerPct).hallways, DOOR_LINKS[f.id] || [], aspect), aspect, metresPerPct) : { rooms, hallways: f.hallways };
   return {
     id: `import-${f.id}`,
     title: `${buildingName}, floor ${floorLabelOf(f.floorCode, f.sourceName)}`,
@@ -140,13 +256,12 @@ export function importToPlan(f: FloorImport, buildingName: string, sameBuilding:
     buildingName,
     buildingType: 'University',
     summary: f.extraction?.summary || '',
-    imageUrl: f.imageUrl,
-    rooms: f.rooms.map((r) => ({ ...r, floor: f.floorNumber, buildingId: importAppBuildingId(f.buildingId) })),
-    // Reviewed, connected hand-drawn hallways win; otherwise the network read off the drawing.
-    hallways: importStatus(f) === 'routing_available' ? f.hallways : f.autoHallways || [],
+    imageUrl: f.styledImageUrl || f.imageUrl,
+    rooms: net.rooms,
+    hallways: net.hallways,
     autoHallways: usesAutoHallways(f),
-    aspect: f.imageSize[0] / f.imageSize[1],
-    metresPerPct: metresPerPctOf(f, sameBuilding),
+    aspect,
+    metresPerPct,
     source: 'upload',
   };
 }
@@ -273,6 +388,13 @@ export function verticalLinksFor(plans: FloorPlanData[], locate?: (floor: number
 export const importLocator = (imports: FloorImport[]) => (floor: number, p: { x: number; y: number }): LngLat | null => {
   const f = imports.find((x) => x.floorNumber === floor);
   if (!f) return null;
+  // A floor lined up against a reference floor by its walls goes through that floor: much closer
+  // than two separate fits to the map, so the same stair lands on itself from floor to floor.
+  const reg = REGISTRATION[f.id], ref = reg && imports.find((x) => x.id === reg.ref);
+  if (reg && ref) {
+    const [x, y] = applyAffine(reg.m, (p.x / 100) * f.imageSize[0], (p.y / 100) * f.imageSize[1]);
+    return importLocator(imports)(ref.floorNumber, { x: (x / ref.imageSize[0]) * 100, y: (y / ref.imageSize[1]) * 100 });
+  }
   // An unaligned floor borrows the alignment of a sibling sheet of the same size (same drawing set);
   // the per-floor shift estimate in verticalLinksFor absorbs the difference.
   const g = georefOfImport(f) || imports.filter((x) => x.imageSize.join() === f.imageSize.join()).map(georefOfImport).find(Boolean);

@@ -108,7 +108,7 @@ export function DirectionsView({ route, end, current, onPick, onEnd, onChangeDes
         <button disabled={i === plain.length - 1} onClick={() => onPick(plain[i + 1].index)} className="flex-1 h-11 rounded-full bg-slate-900 text-white font-semibold disabled:bg-slate-300">Next</button>
       </div>
       <p className="text-sm text-slate-700">{roomTitle(end)}: about {Math.round(route.totalDistanceMeters)} m, {Math.max(1, Math.round(route.estimatedWalkTimeMinutes))} min.</p>
-      {route.flaggedNotes?.[0] && <p className="text-xs text-slate-600 bg-slate-50 rounded-lg p-2">{route.flaggedNotes[0]}</p>}
+      {route.flaggedNotes?.map((n) => <p key={n} className="text-xs text-slate-600 bg-slate-50 rounded-lg p-2">{n}</p>)}
       <p className="text-[11px] font-bold tracking-wide text-slate-500 uppercase">All steps</p>
       <ol className="space-y-1">
         {plain.map((p, k) => (

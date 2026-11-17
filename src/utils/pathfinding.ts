@@ -9,6 +9,8 @@ import {
   RouteLeg,
 } from '../types/navigation';
 import { E5_VERTICAL_LINKS } from '../data/e5/e5DataLoader';
+import { GAP_NODE_PREFIX } from '../campus/floorImports';
+import { WALL_CHECKED_GAP_PREFIX } from '../campus/planGraph';
 
 // Cropped E5 floor plan frame: 3067 x 992 px
 export const MAP_ASPECT_RATIO = 3067 / 992; // ~1.5454545
@@ -79,16 +81,6 @@ interface GraphNode {
 /**
  * A* Pathfinding for a single floor using aspect-corrected weights
  */
-function findPathOnSingleFloor(
-  floorPlan: FloorPlanData,
-  startPoint: Point,
-  endPoint: Point,
-  startRoomId?: string,
-  endRoomId?: string
-): Point[] {
-  return findPathCore(floorPlan, startPoint, endPoint, startRoomId, endRoomId) ?? [startPoint, endPoint];
-}
-
 /** Nodes and vertical links closed by confirmed reports (see utils/reports.ts routeClosures). */
 export interface RouteClosures {
   nodeIds: Set<string>;
@@ -108,7 +100,7 @@ function findPathAvoiding(
   notes: string[]
 ): Point[] {
   if (closures?.nodeIds.size) {
-    const open = findPathCore(floorPlan, startPoint, endPoint, startRoomId, endRoomId, closures.nodeIds);
+    const open = findPathCore(floorPlan, startPoint, endPoint, startRoomId, endRoomId, closures.nodeIds, notes);
     if (open) {
       const direct = findPathCore(floorPlan, startPoint, endPoint, startRoomId, endRoomId);
       if (direct && direct.length !== open.length) notes.unshift(`Rerouted on Level ${floorPlan.floorNumber} around a hallway reported closed.`);
@@ -116,7 +108,11 @@ function findPathAvoiding(
     }
     notes.unshift(`A hallway on Level ${floorPlan.floorNumber} is reported closed and no other way around it is mapped. This route passes through it.`);
   }
-  return findPathOnSingleFloor(floorPlan, startPoint, endPoint, startRoomId, endRoomId);
+  // Arriving at the stair you are already standing at: nothing to walk.
+  if ((startRoomId && startRoomId === endRoomId) || (startPoint.x === endPoint.x && startPoint.y === endPoint.y)) return [startPoint];
+  const path = findPathCore(floorPlan, startPoint, endPoint, startRoomId, endRoomId, undefined, notes);
+  if (!path) notes.unshift(`No mapped hallway joins these two places on Level ${floorPlan.floorNumber}: the line shown is straight and may cross walls.`);
+  return path ?? [startPoint, endPoint];
 }
 
 /** Returns null when the two points are not connected. */
@@ -126,7 +122,8 @@ function findPathCore(
   endPoint: Point,
   startRoomId?: string,
   endRoomId?: string,
-  blocked?: Set<string>
+  blocked?: Set<string>,
+  notes?: string[]
 ): Point[] | null {
   const nodes = new Map<string, GraphNode>();
 
@@ -290,6 +287,8 @@ function findPathCore(
   if (pathIds.length <= 1 || pathIds[0] !== startId) {
     return null;
   }
+  if (notes && pathIds.some((id) => id.startsWith(WALL_CHECKED_GAP_PREFIX))) notes.push(`On Level ${floorPlan.floorNumber} the route crosses open floor the drawing shows no wall across, but no hallway was read there either: check on site.`);
+  if (notes && pathIds.some((id) => id.startsWith(GAP_NODE_PREFIX))) notes.push(`On Level ${floorPlan.floorNumber} the route crosses a gap the drawing shows no opening for (joined automatically). It may be a door the reader missed or a wall: check on site.`);
 
   const rawPoints = pathIds.map((id) => nodes.get(id)!.coords);
 
@@ -464,9 +463,16 @@ export function calculateIndoorRoute(...args: Parameters<typeof calculateIndoorR
   sheetAspect = startPlan.aspect ?? MAP_ASPECT_RATIO;
   sheetMetresPerPct = startPlan.metresPerPct;
   try {
-    try { return calculateIndoorRouteOnSheet(...args); } catch (e: any) {
-      const r = o?.verticalLinks && o.startFloor !== o.endFloor ? routeWithTransfers(args) : null;
-      if (r) return r;
+    const multi = !!o?.verticalLinks && o.startFloor !== o.endFloor;
+    try {
+      const r = calculateIndoorRouteOnSheet(...args);
+      // Also on one floor: two parts joined only through another floor (down the back stair and up again).
+      return o?.verticalLinks?.length && isStraight(r) ? routeWithOneChange(args) || r : r;
+    } catch (e: any) {
+      const r = multi ? routeWithTransfers(args) : null;
+      if (r && !isStraight(r)) return r;
+      const one = multi ? routeWithOneChange(args) : null;
+      if (one || r) return (one || r)!;
       throw e;
     }
   } finally { sheetAspect = MAP_ASPECT_RATIO; sheetMetresPerPct = undefined; }
@@ -492,6 +498,36 @@ function routeWithTransfers(args: Parameters<typeof calculateIndoorRouteOnSheet>
   if (!seen.has(to)) return null;
   const hops: { floor: number; link: VerticalCirculationLink }[] = [];
   for (let f = to; f !== from; f = via.get(f)!.prev) hops.unshift({ floor: f, link: via.get(f)!.link });
+  return routeOverHops(args, hops);
+}
+
+const isStraight = (r: NavigationRoute) => (r.flaggedNotes || []).some((n) => /line shown is straight/.test(n));
+
+/**
+ * The direct stair or elevator lands on a part of a floor its hallways don't reach (the route would be
+ * a straight line through walls): try changing stairs once on another floor, e.g. up the elevator to
+ * floor 1 and the back stair to floor 2 (or down and back up when both ends are on one floor), and
+ * keep the shortest route that stays on hallways.
+ */
+function routeWithOneChange(args: Parameters<typeof calculateIndoorRouteOnSheet>): NavigationRoute | null {
+  const o = args[7]!;
+  const links = (o.verticalLinks || []).filter((l) => !(o.isAccessibleOnly ?? true) || l.accessible);
+  const from = o.startFloor!, to = o.endFloor!;
+  let best: NavigationRoute | null = null, tries = 0;
+  for (const l1 of links) for (const m of l1.floorsServed) {
+    if (m === from || m === to || !l1.floorsServed.includes(from)) continue;
+    for (const l2 of links) {
+      if (l2 === l1 || !l2.floorsServed.includes(m) || !l2.floorsServed.includes(to) || ++tries > 80) continue;
+      const r = routeOverHops(args, [{ floor: m, link: l1 }, { floor: to, link: l2 }]);
+      if (r && !isStraight(r) && (!best || r.totalDistanceMeters < best.totalDistanceMeters)) best = { ...r, flaggedNotes: [`Goes by way of floor ${m}: no hallway on the drawings joins these places more directly.`, ...(r.flaggedNotes || []).slice(1)] };
+    }
+  }
+  return best;
+}
+
+function routeOverHops(args: Parameters<typeof calculateIndoorRouteOnSheet>, hops: { floor: number; link: VerticalCirculationLink }[]): NavigationRoute | null {
+  const [plan, startPoint, startName, endPoint, endName, startRoomId, endRoomId, o] = args;
+  const from = o!.startFloor!, to = o!.endFloor!;
   const roomAt = (floor: number, id: string) => o!.allFloors?.find((p) => p.floorNumber === floor)?.rooms.find((r) => r.id === id);
   const legs: NavigationRoute[] = [];
   let p = { point: startPoint, name: startName, id: startRoomId, floor: from };
@@ -563,6 +599,10 @@ function calculateIndoorRouteOnSheet(
   for (const p of [startFloorPlan, endFloorPlan]) if (!p.hallways?.length) throw new Error(`No hallway network is mapped on floor ${p.floorNumber} of ${p.buildingName || 'this building'}, so there is no indoor route yet.`);
 
   const flaggedNotes: string[] = [];
+  for (const [plan, id] of [[startFloorPlan, startRoomId], [endFloorPlan, endRoomId]] as const) {
+    const r = id ? plan.rooms.find((x) => x.id === id) : undefined;
+    if (r?.navigabilityVerification === 'provisional_corridor_access') flaggedNotes.push(`The doorway of ${r.name} was not read on the drawing: the route joins it at the nearest hallway. Check the last few metres on site.`);
+  }
   if (
     startName.toLowerCase().includes('3818') ||
     endName.toLowerCase().includes('3818') ||
@@ -653,7 +693,21 @@ function calculateIndoorRouteOnSheet(
   if (!links.length) throw new Error(`No stairs or elevators are mapped between floors ${startFloor} and ${endFloor} of ${startFloorPlan.buildingName || 'this building'}.`);
   let chosenLink: VerticalCirculationLink | undefined;
   const openLinks = links.filter((l) => !closures?.linkIds.has(l.id));
-  if (isAccessibleOnly) {
+  if (options?.verticalLinks) {
+    // Imported buildings: the shortest stair/elevator whose hallways actually reach both ends.
+    const len = (p: Point[]) => p.slice(1).reduce((s, q, i) => s + aspectDistance(p[i], q), 0);
+    let best = Infinity;
+    for (const l of openLinks) {
+      if (!l.floorsServed.includes(startFloor) || !l.floorsServed.includes(endFloor) || (isAccessibleOnly && !l.accessible)) continue;
+      const a = l.nodes.find((n) => n.floor === startFloor), b = l.nodes.find((n) => n.floor === endFloor);
+      const ra = a && startFloorPlan.rooms.find((r) => r.id === a.roomId), rb = b && endFloorPlan.rooms.find((r) => r.id === b.roomId);
+      if (!ra || !rb) continue;
+      const p1 = ra.id === startRoomId ? [ra.coords] : findPathCore(startFloorPlan, startPoint, ra.coords, startRoomId, ra.id, closures?.nodeIds);
+      const p2 = p1 && (rb.id === endRoomId ? [rb.coords] : findPathCore(endFloorPlan, rb.coords, endPoint, rb.id, endRoomId, closures?.nodeIds));
+      if (p1 && p2 && len(p1) + len(p2) < best) { best = len(p1) + len(p2); chosenLink = l; }
+    }
+  }
+  if (chosenLink) { /* picked above */ } else if (isAccessibleOnly) {
     chosenLink = openLinks.find(
       (l) =>
         l.accessible &&

@@ -8,10 +8,13 @@
 import { createCanvas, loadImage } from '@napi-rs/canvas';
 import { buildPlanGraph, detectStairs, stairBoxesFromLayer } from '../../src/campus/planGraph';
 import { renderLayers } from './pdfLayers';
+import { renderStyledPlan } from '../../src/campus/styledPlan';
 
 // Shapes on the stair layer that really are flights: they contain a row of treads (a bridge's X-bracing does not).
 const treadBoxes = (g: Uint8Array, w: number, h: number) => { const t = detectStairs(g, w, h); return stairBoxesFromLayer(g, w, h).filter((b) => t.some((x) => x.x0 < b.x1 && x.x1 > b.x0 && x.y0 < b.y1 && x.y1 > b.y0)); };
-import type { FloorImport } from '../../src/campus/floorImports';
+import { encodeNetwork, type FloorImport } from '../../src/campus/floorImports';
+import { writeFileSync } from 'node:fs';
+import path from 'node:path';
 
 const BASE = process.env.INSIDEOUT_URL || 'http://localhost:3000';
 const args = process.argv.slice(2);
@@ -72,6 +75,16 @@ for (const f of todo) {
       body: JSON.stringify({ hallways: pg.hallways }),
     });
     if (!put.ok) throw new Error(`save ${put.status} ${await put.text()}`);
+    // shortcut: also write the file with this script's encoder, so a server started before an encoder change keeps join marks; drop once the server is restarted.
+    writeFileSync(path.resolve('data', 'networks', `${f.id.replace(/[^\w-]/g, '_')}.json`), JSON.stringify(encodeNetwork(pg.hallways)));
+    // The clean coloured picture shown in the navigator (src/campus/styledPlan.ts), written next to the sheet image.
+    const sc = createCanvas(img.width, img.height), sg = sc.getContext('2d');
+    const sd = sg.createImageData(img.width, img.height);
+    sd.data.set(renderStyledPlan(pg, img.width, img.height, newRooms));
+    sg.putImageData(sd, 0, 0);
+    writeFileSync(path.resolve('data', 'uploads', `${f.id}-styled.png`), sc.toBuffer('image/png'));
+    const sp = await fetchRetry(`${BASE}/api/floor-imports/${encodeURIComponent(f.id)}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ styledImageUrl: `/uploads/${f.id}-styled.png` }) });
+    if (!sp.ok) throw new Error(`styled save ${sp.status}`);
     console.log(`${f.id}: ${pg.hallways.length} nodes, ${pg.linkedRoomIds.length}/${f.rooms.length} rooms linked, ${pg.addedRooms.length} stairs found, from ${source} (${((Date.now() - t) / 1000).toFixed(1)} s)`);
   } catch (e: any) {
     console.error(`${f.id}: failed: ${e?.message || e}`);

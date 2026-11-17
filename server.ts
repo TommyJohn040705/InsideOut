@@ -1129,6 +1129,7 @@ app.patch('/api/floor-imports/:id', (req: Request, res: Response) => {
     if (Array.isArray(b.rooms)) { f.rooms = b.rooms; f.reviewed = false; }
     if (b.extraction && typeof b.extraction.model === 'string' && typeof b.extraction.at === 'string') f.extraction = { model: b.extraction.model.slice(0, 80), at: b.extraction.at.slice(0, 40) };
     if (Array.isArray(b.hallways)) { f.hallways = b.hallways; f.reviewed = false; }
+    if (typeof b.styledImageUrl === 'string' && /^\/uploads\/[\w-]+-styled\.png$/.test(b.styledImageUrl)) f.styledImageUrl = b.styledImageUrl;
     if (Array.isArray(b.controlPoints)) { f.controlPoints = b.controlPoints; f.alignmentFrom = typeof b.alignmentFrom === 'string' ? b.alignmentFrom : undefined; f.reviewed = false; }
     if (typeof b.reviewed === 'boolean') { f.reviewed = b.reviewed; f.reviewedAt = b.reviewed ? new Date().toISOString() : undefined; }
     // Published = shown in the app (indoor navigator); the map overlay additionally needs control points.

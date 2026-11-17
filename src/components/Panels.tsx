@@ -276,7 +276,7 @@ export function RoutePlanner(props: {
             </button>
           </div>
           {route.flaggedNotes && route.flaggedNotes.length > 0 && (
-            <p className="text-xs text-amber-800 bg-amber-50 rounded-lg p-2 flex gap-1.5"><AlertTriangle className="w-4 h-4 shrink-0" />{route.flaggedNotes[0]}</p>
+            route.flaggedNotes.map((n) => <p key={n} className="text-xs text-amber-800 bg-amber-50 rounded-lg p-2 flex gap-1.5"><AlertTriangle className="w-4 h-4 shrink-0" />{n}</p>)
           )}
           {props.onPickStep && route.steps.length > 0 && (() => {
             const i = Math.min(Math.max(props.current, 0), route.steps.length - 1);

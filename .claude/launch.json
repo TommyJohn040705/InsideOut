@@ -1,6 +1,7 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "insideout", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 3000 }
+    { "name": "insideout", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 3000 },
+    { "name": "insideout-3001", "runtimeExecutable": "cmd", "runtimeArgs": ["/c", "set PORT=3001&& set DISABLE_HMR=true&& npm run dev"], "port": 3001 }
   ]
 }
