@@ -16,7 +16,7 @@ import type { LngLat } from '../../campus/georef';
 import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_MAP_ID, MAP_PROVIDER } from '../../campus/map/config';
 import type { CampusMapAdapter, FloorOverlay, MapMarker, MapProvider } from '../../campus/map/types';
 import { FloorImport, floorLabelOf, importStatus } from '../../campus/floorImports';
-import { indoorSites, planTrip, Trip, TripEnd } from '../../campus/tripPlanner';
+import { indoorSites, planTrip, Trip, TripEnd, linkedBuildings } from '../../campus/tripPlanner';
 import type { ManualShaft } from '../../campus/floorImports';
 import { DEV_MODE } from '../../devMode';
 import { loadOutdoorGraph } from '../../campus/outdoorRoute';
@@ -235,7 +235,8 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
     if (!from || !to) return;
     setTripMsg('Finding a route…');
     // Newly loaded indoor networks change `sites`, which re-runs this trip with them.
-    if (onNeedNetworks && await onNeedNetworks([from.buildingId, to.buildingId].filter(Boolean) as string[])) return;
+    // Also every building connected to the start: an indoor trip through connections may pass through one.
+    if (onNeedNetworks && await onNeedNetworks([from.buildingId, to.buildingId, ...(from.buildingId ? linkedBuildings(from.buildingId) : [])].filter(Boolean) as string[])) return;
     const g = await loadOutdoorGraph();
     const t = planTrip(g, sites, from, to, sf);
     if ('error' in t) { setTripMsg(t.error); return; }

@@ -10,6 +10,15 @@ import { distanceM, type Georef, type LngLat } from './georef';
 import { INDOOR, buildingById, entrancesOf, georefFor, type CampusEntrance } from './campusData';
 import { importAppBuildingId, georefOfImport, verticalLinksFor, type FloorImport, type ManualShaft } from './floorImports';
 import { routeOutdoor, type OutdoorGraph, type OutdoorRoute } from './outdoorRoute';
+import buildingLinksJson from '../data/campus/buildingLinks.json';
+
+/** Indoor connections between neighbouring buildings (bridges, tunnels, link corridors), read off the placed drawings by scripts/campus/findConnections.ts. */
+export interface BuildingLink { a: { building: string; floor: number; at: LngLat }; b: { building: string; floor: number; at: LngLat }; gapM: number }
+export const BUILDING_LINKS = buildingLinksJson as unknown as BuildingLink[];
+/** Buildings connected indoors to this one (a trip through connections may pass through any of them). */
+export const linkedBuildings = (id: string) => [...new Set(BUILDING_LINKS.flatMap((l) => (l.a.building === id ? [l.b.building] : l.b.building === id ? [l.a.building] : [])))];
+/** An indoor trip through connections is preferred unless it is this much longer than going outside. */
+const INDOOR_PREFERENCE = 1.3;
 
 export interface IndoorSite {
   buildingId: string;
@@ -144,6 +153,13 @@ export function planTrip(g: OutdoorGraph, sites: Record<string, IndoorSite>, fro
     return { legs: [{ kind: 'indoor', buildingId: from.buildingId, route: r }], notes, totalM: r.totalDistanceMeters, line: [] };
   }
 
+  // Connected buildings: stay indoors through the connection when that is not much longer.
+  const through = fs && ts && from.room && to.room ? indoorThroughLinks(sites, from, to, accessible) : null;
+  const viaOutside = outsideTrip();
+  if (through && (!('legs' in viaOutside) || through.totalM <= viaOutside.totalM * INDOOR_PREFERENCE)) return through;
+  return viaOutside;
+
+  function outsideTrip(): Trip | { error: string } {
   const centre = (e: TripEnd) => e.at || (e.buildingId ? buildingById(e.buildingId)?.center || null : null);
   const fromDoors: (CampusEntrance | null)[] = from.buildingId ? candidateDoors(from.buildingId, accessible, from.at || centre(to), notes) : [null];
   const toDoors = to.buildingId ? candidateDoors(to.buildingId, accessible, centre(from), notes) : [];
@@ -202,5 +218,58 @@ export function planTrip(g: OutdoorGraph, sites: Record<string, IndoorSite>, fro
   for (const l of best.legs) if (l.kind === 'indoor' && l.door) notes.push(`${l.buildingId}: the ${l.door.door.kind === 'main' ? 'main ' : ''}door is ${Math.round(l.door.m)} m from ${l.door.room.name} (estimated link; the door is not in the indoor map).`);
   notes.push('Paths and entrances are unreviewed OpenStreetMap data; this route has not been walked.');
   best.notes = [...new Set([...notes])];
+  return best;
+  }
+}
+
+/**
+ * Indoor trip between two buildings through their connections, passing through at most one
+ * building in between: each building is walked from where you enter it (the start room, or the
+ * connection you came through) to where you leave it. Null when no chain of connections works.
+ */
+export function indoorThroughLinks(sites: Record<string, IndoorSite>, from: TripEnd, to: TripEnd, accessible: boolean, links: BuildingLink[] = BUILDING_LINKS): Trip | null {
+  const A = from.buildingId!, B = to.buildingId!;
+  const ends = (l: BuildingLink, x: string) => (l.a.building === x ? [l.a, l.b] : [l.b, l.a]);
+  const linksOf = (x: string) => links.filter((l) => (l.a.building === x || l.b.building === x) && sites[l.a.building] && sites[l.b.building]);
+  // Chains of links: A-B directly, or A-X-B.
+  const chains: BuildingLink[][] = [];
+  for (const l of linksOf(A)) {
+    const [, far] = ends(l, A);
+    if (far.building === B) chains.push([l]);
+    else for (const m of linksOf(far.building)) { const [, far2] = ends(m, far.building); if (far2.building === B) chains.push([l, m]); }
+  }
+  // The connection's map position, on that building's indoor map.
+  const spot = (e: BuildingLink['a'], other: string): RoomPOI | null => { const g = sites[e.building].georef(e.floor); return g ? ({ id: `link-${e.building}-${e.floor}-${other}`, name: `Connection to ${other}`, category: 'other', coords: g.lngLatToPct(e.at), floor: e.floor } as RoomPOI) : null; };
+  let best: Trip | null = null;
+  for (const chain of chains) {
+    // Floors with different numbers may not meet level: skip them on a step-free trip.
+    if (accessible && chain.some((l) => l.a.floor !== l.b.floor)) continue;
+    const legs: TripLeg[] = [];
+    let total = 0, here: RoomPOI = from.room!, building = A, ok = true;
+    for (const l of chain) {
+      const [near, far] = ends(l, building);
+      const exit = spot(near, far.building), entry = spot(far, near.building);
+      const r = exit && entry ? indoor(sites[building], here, exit, accessible) : null;
+      if (!r || !entry) { ok = false; break; }
+      legs.push({ kind: 'indoor', buildingId: building, route: r });
+      total += r.totalDistanceMeters + l.gapM;
+      building = far.building; here = entry;
+    }
+    if (!ok) continue;
+    const last = indoor(sites[building], here, to.room!, accessible);
+    if (!last) continue;
+    legs.push({ kind: 'indoor', buildingId: building, route: last });
+    total += last.totalDistanceMeters;
+    if (best && total >= best.totalM) continue;
+    best = {
+      // Drawn on the campus map: every leg's walk, floor by floor, on that building's map.
+      legs, totalM: Math.round(total),
+      line: legs.flatMap((l) => l.kind === 'indoor' ? l.route.floorSegments.flatMap((s) => { const g = sites[l.buildingId].georef(s.floor); return g ? s.waypoints.map((w) => g.pctToLngLat(w)) : []; }) : []),
+      notes: [
+        `Stays indoors: through the connection${chain.length > 1 ? 's' : ''} ${chain.map((l) => `${l.a.building}–${l.b.building} (floor ${l.a.floor === l.b.floor ? l.a.floor : l.a.floor + '/' + l.b.floor})`).join(' and ')}.`,
+        'Connections between buildings are read off the floor-plan drawings; not walked.',
+      ],
+    };
+  }
   return best;
 }
