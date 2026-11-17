@@ -7,7 +7,7 @@
 import type { FloorPlanData, NavigationRoute, RoomPOI } from '../types/navigation';
 import { calculateIndoorRoute } from '../utils/pathfinding';
 import { distanceM, type Georef, type LngLat } from './georef';
-import { INDOOR, buildingById, entrancesOf, georefFor, type CampusEntrance } from './campusData';
+import { FOOTPRINTS, INDOOR, buildingById, entrancesOf, georefFor, type CampusEntrance } from './campusData';
 import { importAppBuildingId, georefOfImport, verticalLinksFor, type FloorImport, type ManualShaft } from './floorImports';
 import { routeOutdoor, type OutdoorGraph, type OutdoorRoute } from './outdoorRoute';
 import buildingLinksJson from '../data/campus/buildingLinks.json';
@@ -127,10 +127,33 @@ function indoor(site: IndoorSite, a: RoomPOI, b: RoomPOI, accessible: boolean): 
   } catch { return null; }
 }
 
-const doorName = (d: CampusEntrance, b: string) => `${b} ${d.name || (d.kind === 'main' ? 'main entrance' : 'entrance')}`;
+const doorName = (d: CampusEntrance, b: string) => `${nameOf(b)} ${d.name || (d.kind === 'main' ? 'main entrance' : 'entrance')}`;
+
+/** A building's short name for messages: its code, else its name, never an internal id. */
+const nameOf = (id: string) => { const b = buildingById(id); return b?.code || b?.name || id; };
+
+/**
+ * A building with no entrance in OpenStreetMap: aim for the corners of its footprint nearest to where
+ * the trip comes from, and its centre (whichever joins the path network), so the trip still reaches it.
+ * Not a real door, and said so.
+ */
+function edgesOf(buildingId: string, toward: LngLat | null): CampusEntrance[] {
+  const b = buildingById(buildingId);
+  const f = FOOTPRINTS.features.find((x) => (x.properties as { id?: string } | null)?.id === buildingId);
+  const ring = f && (f.geometry.type === 'Polygon' ? f.geometry.coordinates[0] : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates.flatMap((p) => p[0]) : null);
+  const pts = (ring as LngLat[] | null) || (b?.center ? [b.center as LngLat] : []);
+  if (!pts.length) return [];
+  const near = toward ? [...pts].sort((x, y) => distanceM(x, toward) - distanceM(y, toward)).slice(0, 3) : [];
+  return [...near, ...(b?.center ? [b.center as LngLat] : [])].map((at, i) => ({ id: `edge-${buildingId}-${i}`, buildingId, position: at, kind: 'estimate', name: 'nearest side (no entrance mapped)', level: null, wheelchair: 'unknown', source: 'estimate', validation: 'unreviewed' }));
+}
 
 function candidateDoors(buildingId: string, accessible: boolean, toward: LngLat | null, notes: string[]): CampusEntrance[] {
   let doors = entrancesOf(buildingId);
+  if (!doors.length) {
+    const e = edgesOf(buildingId, toward);
+    if (e.length) notes.push(`${nameOf(buildingId)} has no entrance mapped in OpenStreetMap: the route goes to the nearest side of the building; find the door there.`);
+    return e;
+  }
   if (accessible) {
     const ok = doors.filter((d) => d.wheelchair !== 'no');
     const yes = ok.filter((d) => d.wheelchair === 'yes');
@@ -149,7 +172,7 @@ export function planTrip(g: OutdoorGraph, sites: Record<string, IndoorSite>, fro
   // Same building with an indoor map: indoor only.
   if (from.buildingId && from.buildingId === to.buildingId && fs && from.room && to.room) {
     const r = indoor(fs, from.room, to.room, accessible);
-    if (!r) return { error: `No indoor route between those rooms in ${from.buildingId}.` };
+    if (!r) return { error: `No indoor route between those rooms in ${nameOf(from.buildingId)}.` };
     return { legs: [{ kind: 'indoor', buildingId: from.buildingId, route: r }], notes, totalM: r.totalDistanceMeters, line: [] };
   }
 
@@ -163,13 +186,13 @@ export function planTrip(g: OutdoorGraph, sites: Record<string, IndoorSite>, fro
   const centre = (e: TripEnd) => e.at || (e.buildingId ? buildingById(e.buildingId)?.center || null : null);
   const fromDoors: (CampusEntrance | null)[] = from.buildingId ? candidateDoors(from.buildingId, accessible, from.at || centre(to), notes) : [null];
   const toDoors = to.buildingId ? candidateDoors(to.buildingId, accessible, centre(from), notes) : [];
-  if (from.buildingId && !fromDoors.length) return { error: `No entrance of ${from.buildingId} is mapped, so no outdoor route can start there.` };
-  if (!to.buildingId || !toDoors.length) return { error: `No entrance of ${to.buildingId || 'the destination'} is mapped.` };
+  if (from.buildingId && !fromDoors.length) return { error: `${nameOf(from.buildingId)} is not on the map, so no outdoor route can start there.` };
+  if (!to.buildingId || !toDoors.length) return { error: `${to.buildingId ? nameOf(to.buildingId) : 'The destination'} is not on the map, so no route can reach it.` };
 
   const fLinks = fs && from.room ? doorLinks(fs, from.buildingId!) : [];
   const tLinks = ts && to.room ? doorLinks(ts, to.buildingId!) : [];
-  if (from.room && !fs) notes.push(`${from.buildingId} has no indoor routing map: walk from ${from.label} to the ${from.buildingId} exit yourself.`);
-  if (to.room && !ts) notes.push(`${to.buildingId} has no indoor routing map: from the door, find ${to.label} yourself.`);
+  if (from.room && !fs) notes.push(`${nameOf(from.buildingId!)} has no indoor routing map: walk from ${from.label} to the ${nameOf(from.buildingId!)} exit yourself.`);
+  if (to.room && !ts) notes.push(`${nameOf(to.buildingId!)} has no indoor routing map: from the door, find ${to.label} yourself.`);
 
   let best: Trip | null = null;
   for (const fd of fromDoors) {
@@ -215,7 +238,7 @@ export function planTrip(g: OutdoorGraph, sites: Record<string, IndoorSite>, fro
   const outLeg = best.legs.find((l) => l.kind === 'outdoor') as Extract<TripLeg, { kind: 'outdoor' }>;
   if (outLeg.route.usesSteps) notes.push('The outdoor part uses steps.');
   if (outLeg.route.connectorsM.length) notes.push(`Joins to the path network are straight lines of ${outLeg.route.connectorsM.map((m) => `${Math.round(m)} m`).join(' and ')} (the entrance is not on a mapped path).`);
-  for (const l of best.legs) if (l.kind === 'indoor' && l.door) notes.push(`${l.buildingId}: the ${l.door.door.kind === 'main' ? 'main ' : ''}door is ${Math.round(l.door.m)} m from ${l.door.room.name} (estimated link; the door is not in the indoor map).`);
+  for (const l of best.legs) if (l.kind === 'indoor' && l.door) notes.push(`${nameOf(l.buildingId)}: the ${l.door.door.kind === 'main' ? 'main ' : ''}door is ${Math.round(l.door.m)} m from ${l.door.room.name} (estimated link; the door is not in the indoor map).`);
   notes.push('Paths and entrances are unreviewed OpenStreetMap data; this route has not been walked.');
   best.notes = [...new Set([...notes])];
   return best;
