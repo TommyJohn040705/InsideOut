@@ -710,17 +710,17 @@
   },
   "b": {
    "building": "ESC",
-   "floor": 4,
+   "floor": 1,
    "at": [
-    -80.542975,
-    43.471747
+    -80.5429664,
+    43.471743
    ]
   },
   "gapM": 11.5,
   "source": "UW campus GIS",
   "kind": "link",
   "name": "LINK - C2 TO ESC",
-  "floorsFrom": "drawings"
+  "floorsFrom": "estimate"
  },
  {
   "a": {
