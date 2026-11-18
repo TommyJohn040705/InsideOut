@@ -248,25 +248,6 @@
  },
  {
   "a": {
-   "building": "PAC",
-   "floor": 2,
-   "at": [
-    -80.5456115,
-    43.4724093
-   ]
-  },
-  "b": {
-   "building": "SLC",
-   "floor": 2,
-   "at": [
-    -80.5456109,
-    43.472409
-   ]
-  },
-  "gapM": 0.1
- },
- {
-  "a": {
    "building": "E5",
    "floor": 6,
    "at": [
@@ -318,25 +299,6 @@
    "at": [
     -80.5397171,
     43.4710994
-   ]
-  },
-  "gapM": 0.2
- },
- {
-  "a": {
-   "building": "NH",
-   "floor": 1,
-   "at": [
-    -80.5438096,
-    43.4702479
-   ]
-  },
-  "b": {
-   "building": "STC",
-   "floor": 1,
-   "at": [
-    -80.5438114,
-    43.470247
    ]
   },
   "gapM": 0.2
@@ -647,59 +609,393 @@
  },
  {
   "a": {
+   "building": "E3",
+   "floor": 2,
+   "at": [
+    -80.540551,
+    43.4719257
+   ]
+  },
+  "b": {
+   "building": "E5",
+   "floor": 3,
+   "at": [
+    -80.5398637,
+    43.4724622
+   ]
+  },
+  "gapM": 80.8,
+  "source": "UW campus GIS",
+  "kind": "link",
+  "name": "LINK - E3 TO E5",
+  "floorsFrom": "drawings"
+ },
+ {
+  "a": {
+   "building": "EIT",
+   "floor": 1,
+   "at": [
+    -80.541749,
+    43.4716528
+   ]
+  },
+  "b": {
    "building": "DC",
    "floor": 2,
    "at": [
-    -80.5427264,
-    43.4723161
+    -80.5415575,
+    43.4717896
+   ]
+  },
+  "gapM": 17.7,
+  "source": "UW campus GIS",
+  "kind": "link",
+  "name": "LINK - EIT TO DC",
+  "floorsFrom": "estimate"
+ },
+ {
+  "a": {
+   "building": "DC",
+   "floor": 2,
+   "at": [
+    -80.542437,
+    43.4724216
    ]
   },
   "b": {
+   "building": "C2",
+   "floor": 1,
+   "at": [
+    -80.5427675,
+    43.4723003
+   ]
+  },
+  "gapM": 27.8,
+  "source": "UW campus GIS",
+  "kind": "link",
+  "name": "LINK - DC TO C2",
+  "floorsFrom": "estimate"
+ },
+ {
+  "a": {
+   "building": "DC",
+   "floor": 1,
+   "at": [
+    -80.5433707,
+    43.4726953
+   ]
+  },
+  "b": {
+   "building": "MC",
+   "floor": 3,
+   "at": [
+    -80.5437793,
+    43.472519
+   ]
+  },
+  "gapM": 40,
+  "source": "UW campus GIS",
+  "kind": "link",
+  "name": "LINK - DC TO MC",
+  "floorsFrom": "drawings"
+ },
+ {
+  "a": {
    "building": "C2",
    "floor": 2,
    "at": [
-    -80.5427038,
-    43.4722853
+    -80.5430777,
+    43.4718268
    ]
   },
-  "gapM": 3.9
- },
- {
-  "a": {
+  "b": {
    "building": "ESC",
    "floor": 4,
    "at": [
-    -80.5430481,
-    43.4717921
+    -80.542975,
+    43.471747
    ]
   },
-  "b": {
-   "building": "C2",
-   "floor": 3,
-   "at": [
-    -80.5430509,
-    43.4717934
-   ]
-  },
-  "gapM": 0.3
+  "gapM": 11.5,
+  "source": "UW campus GIS",
+  "kind": "link",
+  "name": "LINK - C2 TO ESC",
+  "floorsFrom": "drawings"
  },
  {
   "a": {
-   "building": "MC",
-   "floor": 1,
+   "building": "SLC",
+   "floor": -1,
    "at": [
-    -80.5439376,
-    43.4716
+    -80.5450104,
+    43.4721013
    ]
   },
   "b": {
-   "building": "QNC",
-   "floor": 0,
+   "building": "MC",
+   "floor": 3,
    "at": [
-    -80.5439731,
-    43.471581
+    -80.5444158,
+    43.4723241
    ]
   },
-  "gapM": 3.6
+  "gapM": 54.2,
+  "source": "UW campus GIS",
+  "kind": "link",
+  "name": "LINK - SLC TO MC",
+  "floorsFrom": "drawings"
+ },
+ {
+  "a": {
+   "building": "M3",
+   "floor": 3,
+   "at": [
+    -80.5439857,
+    43.4729807
+   ]
+  },
+  "b": {
+   "building": "MC",
+   "floor": 1,
+   "at": [
+    -80.5437752,
+    43.4725655
+   ]
+  },
+  "gapM": 50.8,
+  "source": "UW campus GIS",
+  "kind": "link",
+  "name": "LINK - M3 TO DC/MC",
+  "floorsFrom": "estimate"
+ },
+ {
+  "a": {
+   "building": "QNC",
+   "floor": 1,
+   "at": [
+    -80.5435536,
+    43.4710921
+   ]
+  },
+  "b": {
+   "building": "B2",
+   "floor": 2,
+   "at": [
+    -80.5434917,
+    43.4710059
+   ]
+  },
+  "gapM": 10.4,
+  "source": "UW campus GIS",
+  "kind": "link",
+  "name": "LINK - QNC TO B2",
+  "floorsFrom": "estimate"
+ },
+ {
+  "a": {
+   "building": "QNC",
+   "floor": 3,
+   "at": [
+    -80.5438285,
+    43.4714987
+   ]
+  },
+  "b": {
+   "building": "MC",
+   "floor": 1,
+   "at": [
+    -80.5440591,
+    43.4717749
+   ]
+  },
+  "gapM": 33.9,
+  "source": "UW campus GIS",
+  "kind": "link",
+  "name": "LINK - QNC TO MC",
+  "floorsFrom": "drawings"
+ },
+ {
+  "a": {
+   "building": "SLC",
+   "floor": 3,
+   "at": [
+    -80.5454721,
+    43.4718729
+   ]
+  },
+  "b": {
+   "building": "PAC",
+   "floor": 1,
+   "at": [
+    -80.54582,
+    43.4719969
+   ]
+  },
+  "gapM": 28.6,
+  "source": "UW campus GIS",
+  "kind": "link",
+  "name": "LINK - SLC TO PAC",
+  "floorsFrom": "estimate"
+ },
+ {
+  "a": {
+   "building": "NH",
+   "floor": 3,
+   "at": [
+    -80.543717,
+    43.4702742
+   ]
+  },
+  "b": {
+   "building": "STC",
+   "floor": -1,
+   "at": [
+    -80.5437,
+    43.4704137
+   ]
+  },
+  "gapM": 16.2,
+  "source": "UW campus GIS",
+  "kind": "link",
+  "name": "LINK - NH TO STC",
+  "floorsFrom": "drawings"
+ },
+ {
+  "a": {
+   "building": "E2",
+   "floor": 1,
+   "at": [
+    -80.5408861,
+    43.4706173
+   ]
+  },
+  "b": {
+   "building": "RCH",
+   "floor": 1,
+   "at": [
+    -80.5407796,
+    43.4704372
+   ]
+  },
+  "gapM": 16.2,
+  "source": "UW campus GIS",
+  "kind": "tunnel",
+  "name": "PEDESTRIAN TUNNEL E2 TO RCH",
+  "floorsFrom": "estimate"
+ },
+ {
+  "a": {
+   "building": "DWE",
+   "floor": 1,
+   "at": [
+    -80.5405112,
+    43.4698395
+   ]
+  },
+  "b": {
+   "building": "RCH",
+   "floor": 1,
+   "at": [
+    -80.5406883,
+    43.4701127
+   ]
+  },
+  "gapM": 26.9,
+  "source": "UW campus GIS",
+  "kind": "tunnel",
+  "name": "PEDESTRIAN TUNNEL DWE TO RCH",
+  "floorsFrom": "estimate"
+ },
+ {
+  "a": {
+   "building": "SCH",
+   "floor": 1,
+   "at": [
+    -80.5405249,
+    43.469029
+   ]
+  },
+  "b": {
+   "building": "TC",
+   "floor": -1,
+   "at": [
+    -80.5410327,
+    43.4688055
+   ]
+  },
+  "gapM": 47.3,
+  "source": "UW campus GIS",
+  "kind": "tunnel",
+  "name": "PEDESTRIAN TUNNEL SCH TO TC",
+  "floorsFrom": "drawings"
+ },
+ {
+  "a": {
+   "building": "TC",
+   "floor": -1,
+   "at": [
+    -80.541198,
+    43.4687754
+   ]
+  },
+  "b": {
+   "building": "AL",
+   "floor": -1,
+   "at": [
+    -80.5417914,
+    43.4686756
+   ]
+  },
+  "gapM": 48.9,
+  "source": "UW campus GIS",
+  "kind": "tunnel",
+  "name": "PEDESTRIAN TUNNEL TC TO AL",
+  "floorsFrom": "drawings"
+ },
+ {
+  "a": {
+   "building": "AL",
+   "floor": -1,
+   "at": [
+    -80.5420243,
+    43.4688085
+   ]
+  },
+  "b": {
+   "building": "ML",
+   "floor": 1,
+   "at": [
+    -80.5424714,
+    43.4687875
+   ]
+  },
+  "gapM": 36.6,
+  "source": "UW campus GIS",
+  "kind": "tunnel",
+  "name": "PEDESTRIAN TUNNEL AL TO ML/EV1",
+  "floorsFrom": "estimate"
+ },
+ {
+  "a": {
+   "building": "AL",
+   "floor": -1,
+   "at": [
+    -80.5420243,
+    43.4688085
+   ]
+  },
+  "b": {
+   "building": "EV1",
+   "floor": 1,
+   "at": [
+    -80.5422679,
+    43.4685433
+   ]
+  },
+  "gapM": 33.9,
+  "source": "UW campus GIS",
+  "kind": "tunnel",
+  "name": "PEDESTRIAN TUNNEL AL TO ML/EV1",
+  "floorsFrom": "drawings"
  }
 ]

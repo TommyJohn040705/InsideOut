@@ -13,7 +13,11 @@ import { routeOutdoor, type OutdoorGraph, type OutdoorRoute } from './outdoorRou
 import buildingLinksJson from '../data/campus/buildingLinks.json';
 
 /** Indoor connections between neighbouring buildings (bridges, tunnels, link corridors), read off the placed drawings by scripts/campus/findConnections.ts. */
-export interface BuildingLink { a: { building: string; floor: number; at: LngLat }; b: { building: string; floor: number; at: LngLat }; gapM: number }
+export interface BuildingLink {
+  a: { building: string; floor: number; at: LngLat }; b: { building: string; floor: number; at: LngLat }; gapM: number;
+  /** 'UW campus GIS' for the university's own link and tunnel layers (scripts/campus/gisLinks.ts); absent for links found on the drawings. */
+  source?: string; kind?: 'link' | 'tunnel'; name?: string; floorsFrom?: 'drawings' | 'estimate';
+}
 export const BUILDING_LINKS = buildingLinksJson as unknown as BuildingLink[];
 /** Buildings connected indoors to this one (a trip through connections may pass through any of them). */
 export const linkedBuildings = (id: string) => [...new Set(BUILDING_LINKS.flatMap((l) => (l.a.building === id ? [l.b.building] : l.b.building === id ? [l.a.building] : [])))];
@@ -289,8 +293,8 @@ export function indoorThroughLinks(sites: Record<string, IndoorSite>, from: Trip
       legs, totalM: Math.round(total),
       line: legs.flatMap((l) => l.kind === 'indoor' ? l.route.floorSegments.flatMap((s) => { const g = sites[l.buildingId].georef(s.floor); return g ? s.waypoints.map((w) => g.pctToLngLat(w)) : []; }) : []),
       notes: [
-        `Stays indoors: through the connection${chain.length > 1 ? 's' : ''} ${chain.map((l) => `${l.a.building}–${l.b.building} (floor ${l.a.floor === l.b.floor ? l.a.floor : l.a.floor + '/' + l.b.floor})`).join(' and ')}.`,
-        'Connections between buildings are read off the floor-plan drawings; not walked.',
+        `Stays indoors: through the ${chain.map((l) => `${l.kind === 'tunnel' ? 'tunnel' : 'connection'} ${l.a.building}–${l.b.building} (floor ${l.a.floor === l.b.floor ? l.a.floor : l.a.floor + '/' + l.b.floor})`).join(' and ')}.`,
+        chain.some((l) => l.source) ? `From the UW campus GIS: ${chain.filter((l) => l.source).map((l) => `${l.kind === 'tunnel' ? 'tunnel' : 'link'} ${l.a.building}–${l.b.building}`).join(', ')}; ${chain.some((l) => l.floorsFrom === 'estimate') ? 'which floors it joins is estimated' : 'the floors it joins are read off the drawings'}. Not walked.` : 'Connections between buildings are read off the floor-plan drawings; not walked.',
       ],
     };
   }
