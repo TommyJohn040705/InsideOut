@@ -1,0 +1,179 @@
+[
+  {
+    "floorNumber": 1,
+    "id": "e5-flr-1",
+    "title": "Engineering 5 \u2014 First Floor",
+    "subTitle": "Sedra Student Design Centre & Machine Shop",
+    "drawingNumber": "053E5_01FLR",
+    "drawingRevisionDate": "Nov 2022",
+    "scale": "1:300",
+    "buildingNumber": "53",
+    "imageUrl": "/e5_flr1_map.svg",
+    "pdfAsset": "/assets/aistudio/053E5_01FLR_47d0ba55.pdf",
+    "primaryDepartments": [
+      "Sedra Student Design Centre (SDC)",
+      "Mechanical and Mechatronics Engineering (MME)",
+      "Plant Operations"
+    ],
+    "keyHighlights": [
+      "Engineering Student Machine Shop (1101)",
+      "Sedra Student Design Centre Central Workbays (1001-1016)",
+      "Vehicle Prototyping & Dyno Testing Bay (1103-1104)",
+      "Ground Level Loading Concourse & East Entrance (1816)",
+      "Outdoor Testing Yard (1018)"
+    ],
+    "washroomsSummary": "Men's (1901) & Women's (1902) in Southeast core; single washrooms (1904, 1906, 1908, 1909, 1911, 1912) in West wing.",
+    "accessibility": "Barrier-free accessible stalls in Southeast washrooms (1901/1902); accessible single washroom 1904 & 1912; full elevator access via Southeast elevator bank (1801/1802).",
+    "defaultEntranceId": "e5-1816",
+    "elevationMeters": 0.0,
+    "originalImageUrl": "/e5_flr1.png"
+  },
+  {
+    "floorNumber": 2,
+    "id": "e5-flr-2",
+    "title": "Engineering 5 \u2014 Second Floor",
+    "subTitle": "Main Campus Entrance, Rapid Prototyping & Gear Lab",
+    "drawingNumber": "053E5_02FLR",
+    "drawingRevisionDate": "October 2025",
+    "scale": "1:300",
+    "buildingNumber": "53",
+    "imageUrl": "/e5_flr2_map.svg",
+    "pdfAsset": "/assets/aistudio/053E5_02FLR_ec413b14.pdf",
+    "primaryDepartments": [
+      "Mechanical and Mechatronics Engineering (MME)",
+      "Sedra Student Design Centre Mezzanine",
+      "Faculty of Engineering Computing"
+    ],
+    "keyHighlights": [
+      "Main Campus Entrance from Davis Centre / Ring Road (2811 - Ramped & Accessible)",
+      "Rapid Prototyping Centre - 3D Printing & Laser Cutting (2002)",
+      "Gear Computer Lab - 50+ Engineering Workstations (2108)",
+      "Sedra Student Design Centre Mezzanine Overlook (2004)",
+      "Monumental Central Staircase (2808 / Stair E)",
+      "All-Gender Multi-Stall Washrooms (2901 & 2902)"
+    ],
+    "washroomsSummary": "All-Gender Multi-Stall Accessible Washrooms (2901 & 2902); single washrooms (2904, 2906).",
+    "accessibility": "Primary wheelchair-accessible building entrance via ramped bridge from Ring Road; dual All-Gender accessible multi-stall washrooms; elevators to all floors.",
+    "defaultEntranceId": "e5-2811",
+    "elevationMeters": 4.5,
+    "originalImageUrl": "/e5_flr2.png"
+  },
+  {
+    "floorNumber": 3,
+    "id": "e5-flr-3",
+    "title": "Engineering 5 \u2014 Third Floor",
+    "subTitle": "Department Classrooms & Engineering 3 Bridge Link",
+    "drawingNumber": "053E5_03FLR",
+    "drawingRevisionDate": "July 2022",
+    "scale": "1:300",
+    "buildingNumber": "53",
+    "imageUrl": "/e5_flr3_map.svg",
+    "pdfAsset": "/assets/aistudio/053E5_03FLR_881a0d50.pdf",
+    "primaryDepartments": [
+      "Mechanical and Mechatronics Engineering (MME)",
+      "Faculty of Engineering Teaching Facilities"
+    ],
+    "keyHighlights": [
+      "Department Lecture Hall 3101 (114 seats, Crestron AV)",
+      "Department Lecture Hall 3102 (118 seats, Dual projection)",
+      "Seminar & Defense Room 3052 (20 seats, Video conferencing)",
+      "Bridge Link (3818) to Engineering 3 (E3) across Ring Road",
+      "Level 3 Study Area & Collaborative Seating (3812A)",
+      "Engineering 7 (E7) North Overpass Connection"
+    ],
+    "washroomsSummary": "Men's (3901) & Women's (3902) in Southeast core; single washrooms (3904, 3906).",
+    "accessibility": "Accessible stalls in Southeast washrooms (3901/3902); accessible lecture hall tier entries; bridge connection to E3 with ramped threshold (caution: check E3 elevation match).",
+    "defaultEntranceId": "e5-3818",
+    "elevationMeters": 9.0,
+    "originalImageUrl": "/e5_flr3.png"
+  },
+  {
+    "floorNumber": 4,
+    "id": "e5-flr-4",
+    "title": "Engineering 5 \u2014 Fourth Floor",
+    "subTitle": "Electrical & Computer Engineering & Roof Garden",
+    "drawingNumber": "053E5_04FLR",
+    "drawingRevisionDate": "April 2022",
+    "scale": "1:300",
+    "buildingNumber": "53",
+    "imageUrl": "/e5_flr4_map.svg",
+    "pdfAsset": "/assets/aistudio/053E5_04FLR_f9c8ff84.pdf",
+    "primaryDepartments": [
+      "Electrical and Computer Engineering (ECE)",
+      "Waterloo Centre for Automotive Research (WATCar)"
+    ],
+    "keyHighlights": [
+      "ECE Department Conference Room & Colloquium Suite (4101)",
+      "Power & Energy Systems Research Laboratory (4021)",
+      "Quantum Computing & Spintronics Research Lab (4108)",
+      "Wireless Communications & Information Theory Lab (4028)",
+      "Roof Garden & Outdoor Terrace Overlook",
+      "Bridge canopy walkway (3815)"
+    ],
+    "washroomsSummary": "Men's (4901) & Women's (4902) in Southeast core; single washrooms (4904, 4906).",
+    "accessibility": "Full elevator access; accessible washroom stalls; wide corridors throughout ECE research wings.",
+    "defaultEntranceId": "e5-4801",
+    "elevationMeters": 13.5,
+    "originalImageUrl": "/e5_flr4.png"
+  },
+  {
+    "floorNumber": 5,
+    "id": "e5-flr-5",
+    "title": "Engineering 5 \u2014 Fifth Floor",
+    "subTitle": "Dean of Engineering Suite & Faculty Administration",
+    "drawingNumber": "053E5_05FLR",
+    "drawingRevisionDate": "August 2023",
+    "scale": "1:300",
+    "buildingNumber": "53",
+    "imageUrl": "/e5_flr5_map.svg",
+    "pdfAsset": "/assets/aistudio/053E5_05FLR_31b8c6c8.pdf",
+    "primaryDepartments": [
+      "Dean of Engineering Executive Office",
+      "Faculty of Engineering Advancement & Alumni",
+      "Engineering Graduate Studies & Research"
+    ],
+    "keyHighlights": [
+      "Dean of Engineering Executive Boardroom (5101)",
+      "Faculty of Engineering Executive Leadership Suites (5102-5104)",
+      "Engineering Advancement & Industry Partnerships (5106-5108)",
+      "Engineering Graduate Studies Administration (5121)",
+      "Engineering Planning & Space Allocation (5128)",
+      "Engineering 7 (E7) North Elevated Passage"
+    ],
+    "washroomsSummary": "Men's (5901) & Women's (5902) in Southeast core; single washrooms (5904, 5906).",
+    "accessibility": "Barrier-free automatic door operators on executive suites; accessible elevator core and washrooms.",
+    "defaultEntranceId": "e5-5801",
+    "elevationMeters": 18.0,
+    "originalImageUrl": "/e5_flr5.png"
+  },
+  {
+    "floorNumber": 6,
+    "id": "e5-flr-6",
+    "title": "Engineering 5 \u2014 Sixth Floor",
+    "subTitle": "Systems Design Engineering & Biomedical Engineering",
+    "drawingNumber": "053E5_06FLR",
+    "drawingRevisionDate": "October 2026",
+    "scale": "1:300",
+    "buildingNumber": "53",
+    "imageUrl": "/e5_flr6_map.svg",
+    "pdfAsset": "/assets/aistudio/053E5_06FLR_2c58d931.pdf",
+    "primaryDepartments": [
+      "Systems Design Engineering (SYDE)",
+      "Biomedical Engineering (BME)"
+    ],
+    "keyHighlights": [
+      "Systems Design Teaching Laboratory (6005)",
+      "Systems Design Undergraduate Electronics Workshop (6012)",
+      "Undergraduate Design Workshop & Prototyping (6013)",
+      "Collaborative Design Studios & Capstone Workspace (6006, 6008)",
+      "Human Factors & Ergonomics Research Lab (6007)",
+      "Biomechanics & Movement Analysis Lab (6002)",
+      "Engineering 7 (E7) North Upper Overpass"
+    ],
+    "washroomsSummary": "Men's (6901) & Women's (6902) in Southeast core; single washrooms (6904, 6906).",
+    "accessibility": "Elevators 6801/6802 directly serve level 6 lobby 6101; barrier-free accessible washroom stalls.",
+    "defaultEntranceId": "e5-6801",
+    "elevationMeters": 22.5,
+    "originalImageUrl": "/e5_flr6.png"
+  }
+]
