@@ -40,7 +40,9 @@ const outlines = { link: readShapefile(`${dir}/Polygons/GIS_MAINBUILDING_LINKS`)
 const s = JSON.parse(readFileSync('data/store.json', 'utf8')) as { floorImports: FloorImport[] };
 const imports = s.floorImports.filter((f) => f.published && f.rooms.length && georefOfImport(f));
 for (const f of imports) { const p = `data/networks/${f.id.replace(/[^\w-]/g, '_')}.json`; if (existsSync(p)) f.autoHallways = decodeNetwork(JSON.parse(readFileSync(p, 'utf8'))); }
-const floorsOf = (b: string) => imports.filter((f) => f.buildingId === b).map((f) => {
+// A top floor with no stairs or elevator is a rooftop penthouse (ESC 4): seen from above it overlaps the link, but no link reaches it.
+const hasWayUp = (f: FloorImport) => f.rooms.some((r) => r.category === 'stairs' || r.category === 'elevator');
+const floorsOf = (b: string) => imports.filter((f) => f.buildingId === b).filter((f, _, all) => all.length === 1 || hasWayUp(f) || f.floorNumber < Math.max(...all.map((x) => x.floorNumber))).map((f) => {
   const g = georefOfImport(f)!, plan = importToPlan(f, b, imports.filter((x) => x.buildingId === b));
   // Only the floor's main hallway network: a link on a cut-off piece leaves every trip a straight line.
   const hs = plan.hallways, idx = new Map(hs.map((h, i) => [h.id, i])), par = hs.map((_, i) => i);
