@@ -34598,10 +34598,10 @@
       0
      ],
      "lngLat": [
-      -80.54436557531476,
-      43.47079225732204
+      -80.54437308823175,
+      43.47078945506333
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -34609,10 +34609,10 @@
       0
      ],
      "lngLat": [
-      -80.54315261753577,
-      43.47121491705457
+      -80.54311331941327,
+      43.47124827870947
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -34620,10 +34620,10 @@
       3091
      ],
      "lngLat": [
-      -80.542705420486,
-      43.47053004045045
+      -80.54262780991907,
+      43.470536946941145
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -34631,15 +34631,15 @@
       3091
      ],
      "lngLat": [
-      -80.54391837826498,
-      43.47010738071792
+      -80.54388757873755,
+      43.47007812329501
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit via B2-02-mwe6lnji, orientation checked (kept): outline 86% as placed vs 85% turned, entrances 2.5 m vs 15.5 m (1 on the drawing, 2 in OSM)",
+   "alignmentFrom": "auto:outline-fit via B2-02-mwe6lnji",
    "autoHallwaysAt": "2026-11-17T02:17:14.308Z",
    "autoNodes": 1724,
    "styledImageUrl": "/uploads/B2-01-mwe6ll7n-styled.png"
@@ -35456,10 +35456,10 @@
       0
      ],
      "lngLat": [
-      -80.54436567599029,
-      43.470794173014525
+      -80.54437324164641,
+      43.47079146007889
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%). Draft: not surveyed."
     },
     {
      "px": [
@@ -35467,10 +35467,10 @@
       0
      ],
      "lngLat": [
-      -80.54315574304368,
-      43.47121577873276
+      -80.54311661439604,
+      43.47124913952641
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%). Draft: not surveyed."
     },
     {
      "px": [
@@ -35478,10 +35478,10 @@
       3091
      ],
      "lngLat": [
-      -80.54270966119853,
-      43.47053261005035
+      -80.54263231564872,
+      43.470539581652766
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%). Draft: not surveyed."
     },
     {
      "px": [
@@ -35489,15 +35489,15 @@
       3091
      ],
      "lngLat": [
-      -80.54391959414512,
-      43.47011100433212
+      -80.54388894289907,
+      43.47008190220525
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit, orientation checked (kept): outline 86% as placed vs 85% turned, entrances 2.5 m vs 15.5 m (1 on the drawing, 2 in OSM)",
+   "alignmentFrom": "auto:outline-fit",
    "autoHallwaysAt": "2026-11-17T02:17:04.495Z",
    "autoNodes": 2092,
    "styledImageUrl": "/uploads/B2-02-mwe6lnji-styled.png"
@@ -36122,10 +36122,10 @@
       0
      ],
      "lngLat": [
-      -80.54436216219152,
-      43.470794275288405
+      -80.5443695641398,
+      43.47079161400851
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -36133,10 +36133,10 @@
       0
      ],
      "lngLat": [
-      -80.5431522292449,
-      43.47121588100664
+      -80.54311293688943,
+      43.471249293456026
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -36144,10 +36144,10 @@
       3091
      ],
      "lngLat": [
-      -80.54270614739973,
-      43.47053271232423
+      -80.5426286381421,
+      43.4705397355824
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -36155,15 +36155,15 @@
       3091
      ],
      "lngLat": [
-      -80.54391608034635,
-      43.470111106606
+      -80.54388526539246,
+      43.47008205613487
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 86%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 91%), stacked on B2-02-mwe6lnji by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit via B2-02-mwe6lnji, orientation checked (kept): outline 86% as placed vs 85% turned, entrances 2.5 m vs 15.5 m (1 on the drawing, 2 in OSM)",
+   "alignmentFrom": "auto:outline-fit via B2-02-mwe6lnji",
    "autoHallwaysAt": "2026-11-17T02:17:56.132Z",
    "autoNodes": 4051,
    "styledImageUrl": "/uploads/B2-03-mwe6lqky-styled.png"
@@ -71498,52 +71498,52 @@
    "controlPoints": [
     {
      "px": [
-      736,
-      272
+      0,
+      0
      ],
      "lngLat": [
-      -80.5356059,
-      43.4706213
+      -80.5358303721326,
+      43.470544799761846
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 74%). Draft: check against the map."
+     "note": "Fitted to the OpenStreetMap outline (overlap 86%). Draft: not surveyed."
     },
     {
      "px": [
-      3824,
-      272
+      4000,
+      0
      ],
      "lngLat": [
-      -80.5349877,
-      43.4710334
+      -80.53501793265933,
+      43.471115596496574
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 74%). Draft: check against the map."
+     "note": "Fitted to the OpenStreetMap outline (overlap 86%). Draft: not surveyed."
     },
     {
      "px": [
-      3824,
-      2504
+      4000,
+      3091
      ],
      "lngLat": [
-      -80.53458,
-      43.470707
+      -80.53441399773514,
+      43.470656751192315
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 74%). Draft: check against the map."
+     "note": "Fitted to the OpenStreetMap outline (overlap 86%). Draft: not surveyed."
     },
     {
      "px": [
-      736,
-      2504
+      0,
+      3091
      ],
      "lngLat": [
-      -80.5351982,
-      43.4702949
+      -80.53522643720841,
+      43.47008595445758
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 74%). Draft: check against the map."
+     "note": "Fitted to the OpenStreetMap outline (overlap 86%). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:0.74, orientation checked (kept): outline 75% as placed vs 67% turned",
+   "alignmentFrom": "auto:outline-fit",
    "autoHallwaysAt": "2026-11-17T02:18:35.134Z",
    "autoNodes": 3891,
    "styledImageUrl": "/uploads/UWP_COMMONS-01-mwe6o7rf-styled.png"
@@ -92952,10 +92952,10 @@
       0
      ],
      "lngLat": [
-      -80.54473494563322,
-      43.47372366112561
+      -80.54379797634842,
+      43.474390111613964
      ],
-     "note": "Fitted inside the OpenStreetMap outline (93% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -92963,10 +92963,10 @@
       0
      ],
      "lngLat": [
-      -80.54561286669653,
-      43.473333246174455
+      -80.5452291966258,
+      43.473169205906366
      ],
-     "note": "Fitted inside the OpenStreetMap outline (93% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -92974,10 +92974,10 @@
       2588
      ],
      "lngLat": [
-      -80.54596094669206,
-      43.47374544941944
+      -80.54631110978403,
+      43.47384625864321
      ],
-     "note": "Fitted inside the OpenStreetMap outline (93% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -92985,10 +92985,10 @@
       2588
      ],
      "lngLat": [
-      -80.54508302562876,
-      43.4741358643706
+      -80.54487988950665,
+      43.47506716435081
      ],
-     "note": "Fitted inside the OpenStreetMap outline (93% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
@@ -92996,7 +92996,7 @@
    "autoHallwaysAt": "2026-11-17T02:19:09.795Z",
    "autoNodes": 6871,
    "styledImageUrl": "/uploads/BMH-01-mwe6pc30-styled.png",
-   "alignmentFrom": "auto:fitted inside outline"
+   "alignmentFrom": "auto:outline-fit via BMH-04-mwe6pnnq"
   },
   {
    "id": "BMH-02-mwe6pj6m",
@@ -95395,10 +95395,10 @@
       0
      ],
      "lngLat": [
-      -80.54704438981904,
-      43.47355654798866
+      -80.54386975651715,
+      43.47275591645201
      ],
-     "note": "Fitted inside the OpenStreetMap outline (85% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -95406,10 +95406,10 @@
       0
      ],
      "lngLat": [
-      -80.54520433648588,
-      43.47425166632324
+      -80.54554195614348,
+      43.473802365813434
      ],
-     "note": "Fitted inside the OpenStreetMap outline (85% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -95417,10 +95417,10 @@
       2588
      ],
      "lngLat": [
-      -80.54458459386056,
-      43.47338772081997
+      -80.54461595662401,
+      43.474592291806246
      ],
-     "note": "Fitted inside the OpenStreetMap outline (85% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -95428,10 +95428,10 @@
       2588
      ],
      "lngLat": [
-      -80.54642464719372,
-      43.47269260248538
+      -80.54294375699767,
+      43.47354584244483
      ],
-     "note": "Fitted inside the OpenStreetMap outline (85% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
@@ -95439,7 +95439,7 @@
    "autoHallwaysAt": "2026-11-17T02:19:02.011Z",
    "autoNodes": 4974,
    "styledImageUrl": "/uploads/BMH-02-mwe6pj6m-styled.png",
-   "alignmentFrom": "auto:fitted inside outline"
+   "alignmentFrom": "auto:outline-fit via BMH-04-mwe6pnnq"
   },
   {
    "id": "BMH-03-mwe6pm4d",
@@ -97151,10 +97151,10 @@
       0
      ],
      "lngLat": [
-      -80.54612044919214,
-      43.47349642474226
+      -80.54572712138307,
+      43.474737585446164
      ],
-     "note": "Fitted inside the OpenStreetMap outline (86% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -97162,10 +97162,10 @@
       0
      ],
      "lngLat": [
-      -80.54502882616545,
-      43.474010873007686
+      -80.54404429375006,
+      43.47369379331591
      ],
-     "note": "Fitted inside the OpenStreetMap outline (86% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -97173,10 +97173,10 @@
       2588
      ],
      "lngLat": [
-      -80.54457016250672,
-      43.47349833199151
+      -80.54496793513168,
+      43.47289884255473
      ],
-     "note": "Fitted inside the OpenStreetMap outline (86% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -97184,10 +97184,10 @@
       2588
      ],
      "lngLat": [
-      -80.54566178553341,
-      43.47298388372609
+      -80.54665076276467,
+      43.47394263468498
      ],
-     "note": "Fitted inside the OpenStreetMap outline (86% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
@@ -97195,7 +97195,7 @@
    "autoHallwaysAt": "2026-11-17T02:19:35.514Z",
    "autoNodes": 2708,
    "styledImageUrl": "/uploads/BMH-03-mwe6pm4d-styled.png",
-   "alignmentFrom": "auto:fitted inside outline"
+   "alignmentFrom": "auto:outline-fit via BMH-04-mwe6pnnq"
   },
   {
    "id": "BMH-04-mwe6pnnq",
@@ -97587,10 +97587,10 @@
       0
      ],
      "lngLat": [
-      -80.5444776288404,
-      43.473939749038735
+      -80.54445084227696,
+      43.47398551746316
      ],
-     "note": "Fitted inside the OpenStreetMap outline (92% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%). Draft: not surveyed."
     },
     {
      "px": [
@@ -97598,10 +97598,10 @@
       0
      ],
      "lngLat": [
-      -80.54599728959822,
-      43.472767433933946
+      -80.54593790014275,
+      43.472705650833234
      ],
-     "note": "Fitted inside the OpenStreetMap outline (92% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%). Draft: not surveyed."
     },
     {
      "px": [
@@ -97609,10 +97609,10 @@
       2588
      ],
      "lngLat": [
-      -80.54704248378255,
-      43.47348094807756
+      -80.54707205584957,
+      43.47340912323768
      ],
-     "note": "Fitted inside the OpenStreetMap outline (92% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%). Draft: not surveyed."
     },
     {
      "px": [
@@ -97620,17 +97620,17 @@
       2588
      ],
      "lngLat": [
-      -80.54552282302474,
-      43.474653263182354
+      -80.54558499798378,
+      43.474688989867616
      ],
-     "note": "Fitted inside the OpenStreetMap outline (92% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
    "autoHallwaysAt": "2026-11-17T02:19:17.384Z",
    "autoNodes": 6414,
-   "alignmentFrom": "auto:fitted inside outline",
+   "alignmentFrom": "auto:outline-fit",
    "styledImageUrl": "/uploads/BMH-04-mwe6pnnq-styled.png"
   },
   {
@@ -98002,10 +98002,10 @@
       0
      ],
      "lngLat": [
-      -80.54545454562707,
-      43.47254107893725
+      -80.5435445028713,
+      43.47342636148512
      ],
-     "note": "Fitted inside the OpenStreetMap outline (78% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -98013,10 +98013,10 @@
       0
      ],
      "lngLat": [
-      -80.54761328132061,
-      43.47386142606731
+      -80.54503156073707,
+      43.47214649485518
      ],
-     "note": "Fitted inside the OpenStreetMap outline (78% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -98024,10 +98024,10 @@
       2588
      ],
      "lngLat": [
-      -80.54643610708136,
-      43.474874999946714
+      -80.5461657164439,
+      43.472849967259634
      ],
-     "note": "Fitted inside the OpenStreetMap outline (78% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -98035,10 +98035,10 @@
       2588
      ],
      "lngLat": [
-      -80.5442773713878,
-      43.47355465281665
+      -80.54467865857812,
+      43.47412983388957
      ],
-     "note": "Fitted inside the OpenStreetMap outline (78% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 68%), stacked on BMH-04-mwe6pnnq by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
@@ -98046,7 +98046,7 @@
    "autoHallwaysAt": "2026-11-17T02:19:20.173Z",
    "autoNodes": 987,
    "styledImageUrl": "/uploads/BMH-B1-mwe6poes-styled.png",
-   "alignmentFrom": "auto:fitted inside outline"
+   "alignmentFrom": "auto:outline-fit via BMH-04-mwe6pnnq"
   },
   {
    "id": "OPT-01-mwe6priu",
@@ -103733,10 +103733,10 @@
       0
      ],
      "lngLat": [
-      -80.54368785270482,
-      43.46830056803824
+      -80.54378100741664,
+      43.46828435332772
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 71% as placed vs 72% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 81%), stacked on EV2-02-mwe6qe3i by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -103744,10 +103744,10 @@
       0
      ],
      "lngLat": [
-      -80.54265388154458,
-      43.468440431209686
+      -80.54269218187646,
+      43.46851951110247
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 71% as placed vs 72% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 81%), stacked on EV2-02-mwe6qe3i by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -103755,10 +103755,10 @@
       3091
      ],
      "lngLat": [
-      -80.54250539366278,
-      43.46785658039489
+      -80.5424422629741,
+      43.46790458173118
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 71% as placed vs 72% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 81%), stacked on EV2-02-mwe6qe3i by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -103766,15 +103766,15 @@
       3091
      ],
      "lngLat": [
-      -80.54353936482302,
-      43.46771671722344
+      -80.54353108851427,
+      43.46766942395644
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 71% as placed vs 72% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 81%), stacked on EV2-02-mwe6qe3i by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit via EV2-02-mwe6qe3i, orientation checked (turned 180): the sheet's north arrow and key map; outline 71% as placed vs 72% turned",
+   "alignmentFrom": "auto:outline-fit via EV2-02-mwe6qe3i",
    "autoHallwaysAt": "2026-11-17T02:19:13.439Z",
    "autoNodes": 2361,
    "styledImageUrl": "/uploads/EV2-01-mwe6q739-styled.png"
@@ -104591,10 +104591,10 @@
       0
      ],
      "lngLat": [
-      -80.54351609435369,
-      43.467714233716954
+      -80.54350570497506,
+      43.4676686581142
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 71% as placed vs 72% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 81%). Draft: not surveyed."
     },
     {
      "px": [
@@ -104602,10 +104602,10 @@
       0
      ],
      "lngLat": [
-      -80.54366458223772,
-      43.46829808451113
+      -80.54375562387743,
+      43.46828358748547
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 71% as placed vs 72% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 81%). Draft: not surveyed."
     },
     {
      "px": [
@@ -104613,10 +104613,10 @@
       4000
      ],
      "lngLat": [
-      -80.54263061105566,
-      43.46843794768133
+      -80.54266679833727,
+      43.46851874526022
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 71% as placed vs 72% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 81%). Draft: not surveyed."
     },
     {
      "px": [
@@ -104624,15 +104624,15 @@
       4000
      ],
      "lngLat": [
-      -80.54248212317162,
-      43.46785409688716
+      -80.5424168794349,
+      43.46790381588894
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 71% as placed vs 72% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 81%). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit, orientation checked (turned 180): the sheet's north arrow and key map; outline 71% as placed vs 72% turned",
+   "alignmentFrom": "auto:outline-fit",
    "autoHallwaysAt": "2026-11-17T02:20:06.712Z",
    "autoNodes": 5869,
    "styledImageUrl": "/uploads/EV2-02-mwe6qe3i-styled.png"
@@ -121498,10 +121498,10 @@
       0
      ],
      "lngLat": [
-      -80.54906668802064,
-      43.47594588518834
+      -80.54818122197862,
+      43.47269466768044
      ],
-     "note": "Fitted inside the OpenStreetMap outline (92% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 71%). Draft: not surveyed."
     },
     {
      "px": [
@@ -121509,10 +121509,10 @@
       0
      ],
      "lngLat": [
-      -80.54764340174508,
-      43.47537925147598
+      -80.55361530678375,
+      43.47535977835921
      ],
-     "note": "Fitted inside the OpenStreetMap outline (92% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 71%). Draft: not surveyed."
     },
     {
      "px": [
@@ -121520,10 +121520,10 @@
       2588
      ],
      "lngLat": [
-      -80.5481486062535,
-      43.47471100601879
+      -80.55125504194888,
+      43.4779283370083
      ],
-     "note": "Fitted inside the OpenStreetMap outline (92% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 71%). Draft: not surveyed."
     },
     {
      "px": [
@@ -121531,15 +121531,15 @@
       2588
      ],
      "lngLat": [
-      -80.54957189252907,
-      43.47527763973115
+      -80.54582095714375,
+      43.47526322632953
      ],
-     "note": "Fitted inside the OpenStreetMap outline (92% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 71%). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:fitted inside outline",
+   "alignmentFrom": "auto:outline-fit",
    "autoHallwaysAt": "2026-11-17T02:19:43.822Z",
    "autoNodes": 3729,
    "styledImageUrl": "/uploads/CIF-01-mwe6rh50-styled.png"
@@ -122556,10 +122556,10 @@
       0
      ],
      "lngLat": [
-      -80.5519684186004,
-      43.473011663266576
+      -80.55355583523057,
+      43.47148784135363
      ],
-     "note": "Fitted inside the OpenStreetMap outline (40% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 27%). Draft: not surveyed."
     },
     {
      "px": [
@@ -122567,10 +122567,10 @@
       0
      ],
      "lngLat": [
-      -80.55075832494842,
-      43.47144354579284
+      -80.55254174867407,
+      43.47224839145947
      ],
-     "note": "Fitted inside the OpenStreetMap outline (40% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 27%). Draft: not surveyed."
     },
     {
      "px": [
@@ -122578,10 +122578,10 @@
       3091
      ],
      "lngLat": [
-      -80.5524280659116,
-      43.47076492603057
+      -80.55173733353088,
+      43.471675858297964
      ],
-     "note": "Fitted inside the OpenStreetMap outline (40% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 27%). Draft: not surveyed."
     },
     {
      "px": [
@@ -122589,10 +122589,10 @@
       3091
      ],
      "lngLat": [
-      -80.55363815956356,
-      43.47233304350431
+      -80.55275142008739,
+      43.47091530819211
      ],
-     "note": "Fitted inside the OpenStreetMap outline (40% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 27%). Draft: not surveyed."
     }
    ],
    "reviewed": false,
@@ -122600,7 +122600,7 @@
    "autoHallwaysAt": "2026-11-17T02:19:53.029Z",
    "autoNodes": 7437,
    "styledImageUrl": "/uploads/MKV-00-mwe6rskr-styled.png",
-   "alignmentFrom": "auto:fitted inside outline"
+   "alignmentFrom": "auto:outline-fit"
   },
   {
    "id": "TC-01-mwe6rvm3",
@@ -145322,10 +145322,10 @@
       0
      ],
      "lngLat": [
-      -80.5439226168095,
-      43.47000595864724
+      -80.54393644587987,
+      43.46996482769704
      ],
-     "note": "Fitted inside the OpenStreetMap outline (95% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%). Draft: not surveyed."
     },
     {
      "px": [
@@ -145333,10 +145333,10 @@
       0
      ],
      "lngLat": [
-      -80.54427299068504,
-      43.470530202176825
+      -80.54431367122501,
+      43.47050415668115
      ],
-     "note": "Fitted inside the OpenStreetMap outline (95% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%). Draft: not surveyed."
     },
     {
      "px": [
@@ -145344,10 +145344,10 @@
       4000
      ],
      "lngLat": [
-      -80.54315650148746,
-      43.470923210464804
+      -80.54317291604123,
+      43.47092989152041
      ],
-     "note": "Fitted inside the OpenStreetMap outline (95% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%). Draft: not surveyed."
     },
     {
      "px": [
@@ -145355,15 +145355,15 @@
       4000
      ],
      "lngLat": [
-      -80.54280612761191,
-      43.47039896693522
+      -80.54279569069608,
+      43.4703905625363
      ],
-     "note": "Fitted inside the OpenStreetMap outline (95% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:fitted inside outline",
+   "alignmentFrom": "auto:outline-fit",
    "autoHallwaysAt": "2026-11-17T02:21:38.302Z",
    "autoNodes": 4975,
    "styledImageUrl": "/uploads/STC-01-mwe73up7-styled.png"
@@ -145971,10 +145971,10 @@
       0
      ],
      "lngLat": [
-      -80.54437301434565,
-      43.4705024654275
+      -80.54432597470816,
+      43.47050595577821
      ],
-     "note": "Fitted inside the OpenStreetMap outline (97% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -145982,10 +145982,10 @@
       0
      ],
      "lngLat": [
-      -80.54313598000368,
-      43.47096483771556
+      -80.5431624044207,
+      43.47094020531426
      ],
-     "note": "Fitted inside the OpenStreetMap outline (97% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -145993,10 +145993,10 @@
       2588
      ],
      "lngLat": [
-      -80.54272376688893,
-      43.470383992642404
+      -80.54277763456865,
+      43.47039008975046
      ],
-     "note": "Fitted inside the OpenStreetMap outline (97% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -146004,15 +146004,15 @@
       2588
      ],
      "lngLat": [
-      -80.54396080123088,
-      43.46992162035435
+      -80.54394120485611,
+      43.46995584021442
      ],
-     "note": "Fitted inside the OpenStreetMap outline (97% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:fitted inside outline",
+   "alignmentFrom": "auto:outline-fit via STC-01-mwe73up7",
    "autoHallwaysAt": "2026-11-17T02:20:56.065Z",
    "autoNodes": 2845,
    "styledImageUrl": "/uploads/STC-02-mwe74gkk-styled.png"
@@ -146434,10 +146434,10 @@
       0
      ],
      "lngLat": [
-      -80.5444521091161,
-      43.470509587320535
+      -80.5439512621321,
+      43.46971753454368
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -146445,10 +146445,10 @@
       0
      ],
      "lngLat": [
-      -80.5431113872451,
-      43.47100535572734
+      -80.5444956796104,
+      43.470512973142704
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -146456,10 +146456,10 @@
       2588
      ],
      "lngLat": [
-      -80.54266940089677,
-      43.470375824543915
+      -80.54379138346633,
+      43.47077017463108
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -146467,10 +146467,10 @@
       2588
      ],
      "lngLat": [
-      -80.54401012276776,
-      43.46988005613711
+      -80.54324696598802,
+      43.46997473603206
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
@@ -146478,7 +146478,7 @@
    "autoHallwaysAt": "2026-11-17T02:22:25.624Z",
    "autoNodes": 3040,
    "styledImageUrl": "/uploads/STC-03-mwe75a0f-styled.png",
-   "alignmentFrom": "auto:fitted inside outline"
+   "alignmentFrom": "auto:outline-fit via STC-01-mwe73up7"
   },
   {
    "id": "STC-04-mwe762pk",
@@ -146833,10 +146833,10 @@
       0
      ],
      "lngLat": [
-      -80.54460308672734,
-      43.4705109620779
+      -80.54300514973198,
+      43.470397158318384
      ],
-     "note": "Fitted inside the OpenStreetMap outline (97% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -146844,10 +146844,10 @@
       0
      ],
      "lngLat": [
-      -80.54313618233468,
-      43.47103018978161
+      -80.54408886715659,
+      43.46999271022109
      ],
-     "note": "Fitted inside the OpenStreetMap outline (97% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -146855,10 +146855,10 @@
       2588
      ],
      "lngLat": [
-      -80.5426732816061,
-      43.47034141004416
+      -80.54444723123446,
+      43.470505072756005
      ],
-     "note": "Fitted inside the OpenStreetMap outline (97% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -146866,10 +146866,10 @@
       2588
      ],
      "lngLat": [
-      -80.54414018599877,
-      43.46982218234046
+      -80.54336351380987,
+      43.4709095208533
      ],
-     "note": "Fitted inside the OpenStreetMap outline (97% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
@@ -146877,7 +146877,7 @@
    "autoHallwaysAt": "2026-11-17T02:21:19.724Z",
    "autoNodes": 2657,
    "styledImageUrl": "/uploads/STC-04-mwe762pk-styled.png",
-   "alignmentFrom": "auto:fitted inside outline"
+   "alignmentFrom": "auto:outline-fit via STC-01-mwe73up7"
   },
   {
    "id": "STC-05-mwe76h6s",
@@ -147043,10 +147043,10 @@
       0
      ],
      "lngLat": [
-      -80.54470382353182,
-      43.47052486783348
+      -80.5449877197202,
+      43.4702786308415
      ],
-     "note": "Fitted inside the OpenStreetMap outline (94% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -147054,10 +147054,10 @@
       0
      ],
      "lngLat": [
-      -80.54303287238491,
-      43.47110652650143
+      -80.54389829851968,
+      43.47068520761299
      ],
-     "note": "Fitted inside the OpenStreetMap outline (94% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -147065,10 +147065,10 @@
       2588
      ],
      "lngLat": [
-      -80.54251431334184,
-      43.47032193733665
+      -80.54353804831507,
+      43.47017014843316
      ],
-     "note": "Fitted inside the OpenStreetMap outline (94% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -147076,10 +147076,10 @@
       2588
      ],
      "lngLat": [
-      -80.54418526448875,
-      43.4697402786687
+      -80.54462746951559,
+      43.469763571661666
      ],
-     "note": "Fitted inside the OpenStreetMap outline (94% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
@@ -147087,7 +147087,7 @@
    "autoHallwaysAt": "2026-11-17T02:21:41.725Z",
    "autoNodes": 1288,
    "styledImageUrl": "/uploads/STC-05-mwe76h6s-styled.png",
-   "alignmentFrom": "auto:fitted inside outline"
+   "alignmentFrom": "auto:outline-fit via STC-01-mwe73up7"
   },
   {
    "id": "STC-B1-mwe76ow8",
@@ -147487,10 +147487,10 @@
       0
      ],
      "lngLat": [
-      -80.54446962356369,
-      43.47049990238242
+      -80.54432056049734,
+      43.470501883530446
      ],
-     "note": "Fitted inside the OpenStreetMap outline (96% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -147498,10 +147498,10 @@
       0
      ],
      "lngLat": [
-      -80.54315940226994,
-      43.47098439237055
+      -80.54317980531356,
+      43.47092761836971
      ],
-     "note": "Fitted inside the OpenStreetMap outline (96% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -147509,10 +147509,10 @@
       2588
      ],
      "lngLat": [
-      -80.54272747083236,
-      43.47036918262464
+      -80.54280257996842,
+      43.47038828938559
      ],
-     "note": "Fitted inside the OpenStreetMap outline (96% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -147520,15 +147520,15 @@
       2588
      ],
      "lngLat": [
-      -80.5440376921261,
-      43.469884692636505
+      -80.5439433351522,
+      43.46996255454633
      ],
-     "note": "Fitted inside the OpenStreetMap outline (96% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:fitted inside outline",
+   "alignmentFrom": "auto:outline-fit via STC-01-mwe73up7",
    "autoHallwaysAt": "2026-11-17T02:21:19.840Z",
    "autoNodes": 11654,
    "styledImageUrl": "/uploads/STC-B1-mwe76ow8-styled.png"
@@ -147672,10 +147672,10 @@
       0
      ],
      "lngLat": [
-      -80.54460030864807,
-      43.470415868884714
+      -80.54427823184814,
+      43.4704200913896
      ],
-     "note": "Fitted inside the OpenStreetMap outline (89% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -147683,10 +147683,10 @@
       0
      ],
      "lngLat": [
-      -80.5431877728115,
-      43.4710032642754
+      -80.54312606911252,
+      43.470850083577254
      ],
-     "note": "Fitted inside the OpenStreetMap outline (89% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -147694,10 +147694,10 @@
       2588
      ],
      "lngLat": [
-      -80.54266409937811,
-      43.47034001309999
+      -80.54274507151392,
+      43.470305361303296
      ],
-     "note": "Fitted inside the OpenStreetMap outline (89% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -147705,15 +147705,15 @@
       2588
      ],
      "lngLat": [
-      -80.5440766352147,
-      43.469752617709304
+      -80.54389723424954,
+      43.46987536911565
      ],
-     "note": "Fitted inside the OpenStreetMap outline (89% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 82%), stacked on STC-01-mwe73up7 by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:fitted inside outline, scale from STC-04-mwe762pk",
+   "alignmentFrom": "auto:outline-fit via STC-01-mwe73up7",
    "autoHallwaysAt": "2026-11-17T02:22:35.041Z",
    "autoNodes": 424,
    "styledImageUrl": "/uploads/STC-MB-mwe76sso-styled.png"
@@ -151156,10 +151156,10 @@
       0
      ],
      "lngLat": [
-      -80.54319714024054,
-      43.46850281302507
+      -80.54319127762751,
+      43.46851902262304
      ],
-     "note": "Fitted inside the OpenStreetMap outline (79% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%). Draft: not surveyed."
     },
     {
      "px": [
@@ -151167,10 +151167,10 @@
       0
      ],
      "lngLat": [
-      -80.54270285483585,
-      43.46778330843743
+      -80.54266909891976,
+      43.467738876152396
      ],
-     "note": "Fitted inside the OpenStreetMap outline (79% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%). Draft: not surveyed."
     },
     {
      "px": [
@@ -151178,10 +151178,10 @@
       2588
      ],
      "lngLat": [
-      -80.54334427973333,
-      43.467551208992404
+      -80.54335996450934,
+      43.46749196572248
      ],
-     "note": "Fitted inside the OpenStreetMap outline (79% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%). Draft: not surveyed."
     },
     {
      "px": [
@@ -151189,15 +151189,15 @@
       2588
      ],
      "lngLat": [
-      -80.543838565138,
-      43.46827071358003
+      -80.54388214321706,
+      43.46827211219313
      ],
-     "note": "Fitted inside the OpenStreetMap outline (79% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:fitted inside outline",
+   "alignmentFrom": "auto:outline-fit",
    "autoHallwaysAt": "2026-11-17T02:21:44.190Z",
    "autoNodes": 7360,
    "styledImageUrl": "/uploads/EV3-01-mwe79047-styled.png"
@@ -152187,10 +152187,10 @@
       0
      ],
      "lngLat": [
-      -80.54313409868772,
-      43.468498411849296
+      -80.54299485651332,
+      43.466960591207446
      ],
-     "note": "Fitted inside the OpenStreetMap outline (76% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -152198,10 +152198,10 @@
       0
      ],
      "lngLat": [
-      -80.54273099767624,
-      43.46775572045452
+      -80.54347815684112,
+      43.46771586508008
      ],
-     "note": "Fitted inside the OpenStreetMap outline (76% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -152209,10 +152209,10 @@
       2588
      ],
      "lngLat": [
-      -80.54339309317909,
-      43.46756643806793
+      -80.54280931908802,
+      43.46794439452167
      ],
-     "note": "Fitted inside the OpenStreetMap outline (76% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -152220,15 +152220,15 @@
       2588
      ],
      "lngLat": [
-      -80.54379619419056,
-      43.4683091294627
+      -80.54232601876022,
+      43.467189120649046
      ],
-     "note": "Fitted inside the OpenStreetMap outline (76% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:fitted inside outline",
+   "alignmentFrom": "auto:outline-fit via EV3-01-mwe79047",
    "autoHallwaysAt": "2026-11-17T02:22:12.114Z",
    "autoNodes": 5707,
    "styledImageUrl": "/uploads/EV3-02-mwe790ne-styled.png"
@@ -153089,10 +153089,10 @@
       0
      ],
      "lngLat": [
-      -80.54315948051772,
-      43.4685293971824
+      -80.54269466054201,
+      43.46808440424826
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -153100,10 +153100,10 @@
       0
      ],
      "lngLat": [
-      -80.54258923056625,
-      43.46769931510372
+      -80.54219785373603,
+      43.467333860817575
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -153111,10 +153111,10 @@
       2588
      ],
      "lngLat": [
-      -80.54332923323108,
-      43.467431545317254
+      -80.5428625036704,
+      43.467098946774875
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -153122,10 +153122,10 @@
       2588
      ],
      "lngLat": [
-      -80.54389948318254,
-      43.46826162739593
+      -80.54335931047642,
+      43.46784949020556
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
@@ -153133,7 +153133,7 @@
    "autoHallwaysAt": "2026-11-17T02:21:50.306Z",
    "autoNodes": 2286,
    "styledImageUrl": "/uploads/EV3-03-mwe792ku-styled.png",
-   "alignmentFrom": "auto:fitted inside outline"
+   "alignmentFrom": "auto:outline-fit via EV3-01-mwe79047"
   },
   {
    "id": "EV3-04-mwe794dr",
@@ -154063,10 +154063,10 @@
       0
      ],
      "lngLat": [
-      -80.54314617527544,
-      43.46853462280574
+      -80.54321709293492,
+      43.467857853601636
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -154074,10 +154074,10 @@
       0
      ],
      "lngLat": [
-      -80.5425512044155,
-      43.46768715765262
+      -80.54220617259064,
+      43.468235294365364
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -154085,10 +154085,10 @@
       2588
      ],
      "lngLat": [
-      -80.54330670376643,
-      43.467407779776806
+      -80.54187202252943,
+      43.46775742744301
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -154096,10 +154096,10 @@
       2588
      ],
      "lngLat": [
-      -80.54390167462637,
-      43.468255244929935
+      -80.5428829428737,
+      43.46737998667928
      ],
-     "note": "Fitted inside the OpenStreetMap outline (98% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 79%), stacked on EV3-01-mwe79047 by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
@@ -154107,7 +154107,7 @@
    "autoHallwaysAt": "2026-11-17T02:23:16.650Z",
    "autoNodes": 2348,
    "styledImageUrl": "/uploads/EV3-04-mwe794dr-styled.png",
-   "alignmentFrom": "auto:fitted inside outline"
+   "alignmentFrom": "auto:outline-fit via EV3-01-mwe79047"
   },
   {
    "id": "RA2-01-mwe794vr",
@@ -164279,10 +164279,10 @@
       0
      ],
      "lngLat": [
-      -80.54198641967,
-      43.474659871087255
+      -80.54204186819308,
+      43.474606754422545
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%). Draft: not surveyed."
     },
     {
      "px": [
@@ -164290,10 +164290,10 @@
       0
      ],
      "lngLat": [
-      -80.54111280379713,
-      43.47485175702419
+      -80.54113335520191,
+      43.47488457286966
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%). Draft: not surveyed."
     },
     {
      "px": [
@@ -164301,10 +164301,10 @@
       2588
      ],
      "lngLat": [
-      -80.54094246538303,
-      43.47443874198948
+      -80.54088646009139,
+      43.474454945895346
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%). Draft: not surveyed."
     },
     {
      "px": [
@@ -164312,15 +164312,15 @@
       2588
      ],
      "lngLat": [
-      -80.5418160812559,
-      43.474246856052545
+      -80.54179497308256,
+      43.474177127448236
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:0.71, orientation checked (turned 180): the sheet's north arrow and key map; outline 78% as placed vs 80% turned",
+   "alignmentFrom": "auto:outline-fit",
    "autoHallwaysAt": "2026-11-17T02:22:35.400Z",
    "autoNodes": 6131,
    "styledImageUrl": "/uploads/EC2-01-mwe79gct-styled.png"
@@ -165002,10 +165002,10 @@
       0
      ],
      "lngLat": [
-      -80.54201409552077,
-      43.47465920227375
+      -80.54206654475314,
+      43.47460214073078
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -165013,10 +165013,10 @@
       0
      ],
      "lngLat": [
-      -80.54114059146505,
-      43.47485102616924
+      -80.54114894663206,
+      43.47488273736237
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -165024,10 +165024,10 @@
       2588
      ],
      "lngLat": [
-      -80.54097030809848,
-      43.47443806381994
+      -80.54089958257043,
+      43.47444881411831
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -165035,15 +165035,15 @@
       2588
      ],
      "lngLat": [
-      -80.54184381215418,
-      43.474246239924454
+      -80.54181718069152,
+      43.474168217486714
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:0.76, orientation checked (turned 180): the sheet's north arrow and key map; outline 78% as placed vs 80% turned",
+   "alignmentFrom": "auto:outline-fit via EC2-01-mwe79gct",
    "autoHallwaysAt": "2026-11-17T02:23:04.057Z",
    "autoNodes": 5955,
    "styledImageUrl": "/uploads/EC2-02-mwe79niw-styled.png"
@@ -165605,10 +165605,10 @@
       0
      ],
      "lngLat": [
-      -80.54201409552077,
-      43.47465920227375
+      -80.54204128571317,
+      43.47460694753165
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -165616,10 +165616,10 @@
       0
      ],
      "lngLat": [
-      -80.54114059146505,
-      43.47485102616924
+      -80.54113277272198,
+      43.474884765978764
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -165627,10 +165627,10 @@
       2588
      ],
      "lngLat": [
-      -80.54097030809848,
-      43.47443806381994
+      -80.54088587761147,
+      43.47445513900445
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -165638,15 +165638,15 @@
       2588
      ],
      "lngLat": [
-      -80.54184381215418,
-      43.474246239924454
+      -80.54179439060263,
+      43.47417732055733
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:0.76, orientation checked (turned 180): the sheet's north arrow and key map; outline 78% as placed vs 80% turned",
+   "alignmentFrom": "auto:outline-fit via EC2-01-mwe79gct",
    "autoHallwaysAt": "2026-11-17T02:22:17.604Z",
    "autoNodes": 3549,
    "styledImageUrl": "/uploads/EC2-03-mwe79tj2-styled.png"
@@ -166279,10 +166279,10 @@
       0
      ],
      "lngLat": [
-      -80.5420141553521,
-      43.47465916116177
+      -80.5420435447727,
+      43.47460771573378
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -166290,10 +166290,10 @@
       0
      ],
      "lngLat": [
-      -80.54114058975689,
-      43.474851034991396
+      -80.54113503178152,
+      43.4748855341809
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -166301,10 +166301,10 @@
       2588
      ],
      "lngLat": [
-      -80.54097026213883,
-      43.47443804353197
+      -80.540888136671,
+      43.47445590720658
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -166312,15 +166312,15 @@
       2588
      ],
      "lngLat": [
-      -80.54184382773404,
-      43.47424616970235
+      -80.54179664966216,
+      43.474178088759466
      ],
-     "note": "Turned 180 degrees: the sheet's north arrow and key map; outline 78% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 90%), stacked on EC2-01-mwe79gct by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:0.76, orientation checked (turned 180): the sheet's north arrow and key map; outline 78% as placed vs 80% turned",
+   "alignmentFrom": "auto:outline-fit via EC2-01-mwe79gct",
    "autoHallwaysAt": "2026-11-17T02:23:54.499Z",
    "autoNodes": 7241,
    "styledImageUrl": "/uploads/EC2-04-mwe79wjq-styled.png"
@@ -173471,10 +173471,10 @@
       0
      ],
      "lngLat": [
-      -80.53956836103588,
-      43.47353405465113
+      -80.53956104744776,
+      43.473548845571166
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -173482,10 +173482,10 @@
       0
      ],
      "lngLat": [
-      -80.5388819077821,
-      43.472595559667084
+      -80.53884188244439,
+      43.47254469722365
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -173493,10 +173493,10 @@
       2588
      ],
      "lngLat": [
-      -80.53971318390361,
-      43.472270866007115
+      -80.53973119017277,
+      43.47220467523117
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -173504,15 +173504,15 @@
       2588
      ],
      "lngLat": [
-      -80.54039963715739,
-      43.47320936099116
+      -80.54045035517615,
+      43.47320882357868
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v, orientation checked (turned 180): outline 72% as placed vs 80% turned",
+   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v",
    "autoHallwaysAt": "2026-11-17T02:23:11.725Z",
    "autoNodes": 3527,
    "styledImageUrl": "/uploads/E7-01-mwe7bitl-styled.png"
@@ -174693,10 +174693,10 @@
       0
      ],
      "lngLat": [
-      -80.53956989460018,
-      43.47353265347553
+      -80.53956269818738,
+      43.47354736406271
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -174704,10 +174704,10 @@
       0
      ],
      "lngLat": [
-      -80.53888344134113,
-      43.47259415849784
+      -80.53884353318401,
+      43.47254321571519
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -174715,10 +174715,10 @@
       2588
      ],
      "lngLat": [
-      -80.5397147174761,
-      43.4722694648438
+      -80.53973284091238,
+      43.472203193722706
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -174726,15 +174726,15 @@
       2588
      ],
      "lngLat": [
-      -80.54040117073515,
-      43.473207959821494
+      -80.54045200591577,
+      43.473207342070225
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v, orientation checked (turned 180): outline 72% as placed vs 80% turned",
+   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v",
    "autoHallwaysAt": "2026-11-17T02:23:18.029Z",
    "autoNodes": 3255,
    "styledImageUrl": "/uploads/E7-02-mwe7bs30-styled.png"
@@ -175974,10 +175974,10 @@
       0
      ],
      "lngLat": [
-      -80.53957248117179,
-      43.473532473322756
+      -80.53956545486595,
+      43.47354719009422
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -175985,10 +175985,10 @@
       0
      ],
      "lngLat": [
-      -80.53888602791191,
-      43.4725939783461
+      -80.53884628986256,
+      43.472543041746704
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -175996,10 +175996,10 @@
       2588
      ],
      "lngLat": [
-      -80.53971730404903,
-      43.47226928469301
+      -80.53973559759095,
+      43.47220301975422
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -176007,15 +176007,15 @@
       2588
      ],
      "lngLat": [
-      -80.54040375730891,
-      43.47320777966968
+      -80.54045476259432,
+      43.47320716810173
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v, orientation checked (turned 180): outline 72% as placed vs 80% turned",
+   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v",
    "autoHallwaysAt": "2026-11-17T02:23:02.460Z",
    "autoNodes": 3950,
    "styledImageUrl": "/uploads/E7-03-mwe7ceq4-styled.png"
@@ -177110,10 +177110,10 @@
       0
      ],
      "lngLat": [
-      -80.5395718259564,
-      43.473531787114055
+      -80.53956476578742,
+      43.47354645482496
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -177121,10 +177121,10 @@
       0
      ],
      "lngLat": [
-      -80.53888537269404,
-      43.472593292140395
+      -80.53884560078404,
+      43.47254230647744
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -177132,10 +177132,10 @@
       2588
      ],
      "lngLat": [
-      -80.5397166488375,
-      43.472268598490096
+      -80.53973490851243,
+      43.47220228448496
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -177143,15 +177143,15 @@
       2588
      ],
      "lngLat": [
-      -80.54040310209986,
-      43.47320709346377
+      -80.54045407351579,
+      43.47320643283247
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v, orientation checked (turned 180): outline 72% as placed vs 80% turned",
+   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v",
    "autoHallwaysAt": "2026-11-17T02:24:09.419Z",
    "autoNodes": 4908,
    "styledImageUrl": "/uploads/E7-04-mwe7dcz7-styled.png"
@@ -178330,10 +178330,10 @@
       0
      ],
      "lngLat": [
-      -80.53957186496787,
-      43.47353341771719
+      -80.53956478677095,
+      43.473548191517864
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -178341,10 +178341,10 @@
       0
      ],
      "lngLat": [
-      -80.5388854117115,
-      43.47259492273627
+      -80.53884562176758,
+      43.47254404317035
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -178352,10 +178352,10 @@
       2588
      ],
      "lngLat": [
-      -80.53971668783963,
-      43.47227022907923
+      -80.53973492949596,
+      43.47220402117786
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -178363,15 +178363,15 @@
       2588
      ],
      "lngLat": [
-      -80.54040314109601,
-      43.473208724060136
+      -80.54045409449932,
+      43.473208169525385
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v, orientation checked (turned 180): outline 72% as placed vs 80% turned",
+   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v",
    "autoHallwaysAt": "2026-11-17T02:23:18.708Z",
    "autoNodes": 4639,
    "styledImageUrl": "/uploads/E7-05-mwe7e1qh-styled.png"
@@ -179892,10 +179892,10 @@
       0
      ],
      "lngLat": [
-      -80.53957147447038,
-      43.47353307987148
+      -80.53956437519487,
+      43.47354782904853
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%). Draft: not surveyed."
     },
     {
      "px": [
@@ -179903,10 +179903,10 @@
       0
      ],
      "lngLat": [
-      -80.5388850212128,
-      43.47259458489204
+      -80.5388452101915,
+      43.472543680701015
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%). Draft: not surveyed."
     },
     {
      "px": [
@@ -179914,10 +179914,10 @@
       2588
      ],
      "lngLat": [
-      -80.53971629734404,
-      43.47226989123636
+      -80.53973451791988,
+      43.47220365870852
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%). Draft: not surveyed."
     },
     {
      "px": [
@@ -179925,15 +179925,15 @@
       2588
      ],
      "lngLat": [
-      -80.54040275060163,
-      43.47320838621581
+      -80.54045368292324,
+      43.47320780705604
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit, orientation checked (turned 180): outline 72% as placed vs 80% turned",
+   "alignmentFrom": "auto:outline-fit",
    "autoHallwaysAt": "2026-11-17T02:23:23.255Z",
    "autoNodes": 3591,
    "styledImageUrl": "/uploads/E7-06-mwe7e96v-styled.png"
@@ -181320,10 +181320,10 @@
       0
      ],
      "lngLat": [
-      -80.539571660122,
-      43.47353577005223
+      -80.53956453897408,
+      43.473550695095156
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -181331,10 +181331,10 @@
       0
      ],
      "lngLat": [
-      -80.53888520687428,
-      43.47259727506083
+      -80.5388453739707,
+      43.472546546747644
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -181342,10 +181342,10 @@
       2588
      ],
      "lngLat": [
-      -80.53971648298027,
-      43.472272581393995
+      -80.53973468169907,
+      43.47220652475515
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -181353,15 +181353,15 @@
       2588
      ],
      "lngLat": [
-      -80.54040293622798,
-      43.4732110763854
+      -80.54045384670245,
+      43.47321067310266
      ],
-     "note": "Turned 180 degrees: outline 72% as placed vs 80% turned. Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 85%), stacked on E7-06-mwe7e96v by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v, orientation checked (turned 180): outline 72% as placed vs 80% turned",
+   "alignmentFrom": "auto:outline-fit via E7-06-mwe7e96v",
    "autoHallwaysAt": "2026-11-17T02:23:08.130Z",
    "autoNodes": 3793,
    "styledImageUrl": "/uploads/E7-07-mwe7ehol-styled.png"
@@ -182787,10 +182787,10 @@
       0
      ],
      "lngLat": [
-      -80.54102728332325,
-      43.46956888710286
+      -80.5410400497734,
+      43.46957791983574
      ],
-     "note": "Fitted inside the OpenStreetMap outline (66% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 72%). Draft: not surveyed."
     },
     {
      "px": [
@@ -182798,10 +182798,10 @@
       0
      ],
      "lngLat": [
-      -80.54145308830789,
-      43.470058658492995
+      -80.5413877715521,
+      43.470086950071284
      ],
-     "note": "Fitted inside the OpenStreetMap outline (66% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 72%). Draft: not surveyed."
     },
     {
      "px": [
@@ -182809,10 +182809,10 @@
       3091
      ],
      "lngLat": [
-      -80.54093159019955,
-      43.47029745581031
+      -80.54084896440993,
+      43.47028377304729
      ],
-     "note": "Fitted inside the OpenStreetMap outline (66% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 72%). Draft: not surveyed."
     },
     {
      "px": [
@@ -182820,15 +182820,15 @@
       3091
      ],
      "lngLat": [
-      -80.5405057852149,
-      43.46980768442017
+      -80.54050124263125,
+      43.46977474281175
      ],
-     "note": "Fitted inside the OpenStreetMap outline (66% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 72%). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:fitted inside outline",
+   "alignmentFrom": "auto:outline-fit",
    "autoHallwaysAt": "2026-11-17T02:23:27.066Z",
    "autoNodes": 748,
    "styledImageUrl": "/uploads/GH-01-mwe7f1w8-styled.png"
@@ -182913,10 +182913,10 @@
       0
      ],
      "lngLat": [
-      -80.54051292747252,
-      43.469690800424004
+      -80.54131426189541,
+      43.46981505613517
      ],
-     "note": "Fitted inside the OpenStreetMap outline (62% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 72%), stacked on GH-01-mwe7f1w8 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -182924,10 +182924,10 @@
       0
      ],
      "lngLat": [
-      -80.54108569188287,
-      43.46934045801676
+      -80.54157221581971,
+      43.470192675125105
      ],
-     "note": "Fitted inside the OpenStreetMap outline (62% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 72%), stacked on GH-01-mwe7f1w8 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -182935,10 +182935,10 @@
       4000
      ],
      "lngLat": [
-      -80.54171039548095,
-      43.46987837678768
+      -80.54090284686924,
+      43.47043719153658
      ],
-     "note": "Fitted inside the OpenStreetMap outline (62% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 72%), stacked on GH-01-mwe7f1w8 by the walls. Draft: not surveyed."
     },
     {
      "px": [
@@ -182946,10 +182946,10 @@
       4000
      ],
      "lngLat": [
-      -80.54113763107061,
-      43.47022871919493
+      -80.54064489294494,
+      43.47005957254665
      ],
-     "note": "Fitted inside the OpenStreetMap outline (62% inside). Draft: not surveyed."
+     "note": "Fitted to the OpenStreetMap outline (overlap 72%), stacked on GH-01-mwe7f1w8 by the walls. Draft: not surveyed."
     }
    ],
    "reviewed": false,
@@ -182957,7 +182957,7 @@
    "autoHallwaysAt": "2026-11-17T02:23:31.428Z",
    "autoNodes": 976,
    "styledImageUrl": "/uploads/GH-02-mwe7f41l-styled.png",
-   "alignmentFrom": "auto:fitted inside outline"
+   "alignmentFrom": "auto:outline-fit via GH-01-mwe7f1w8"
   }
  ],
  "kv": {
