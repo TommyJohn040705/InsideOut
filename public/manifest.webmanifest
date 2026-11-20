@@ -1,7 +1,7 @@
 {
-  "name": "FloorNav",
-  "short_name": "FloorNav",
-  "description": "Indoor maps and directions for campus buildings",
+  "name": "InsideOut: UWaterloo campus navigation",
+  "short_name": "InsideOut",
+  "description": "Indoor and outdoor directions across the University of Waterloo campus",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

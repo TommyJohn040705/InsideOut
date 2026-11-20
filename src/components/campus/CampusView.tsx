@@ -528,7 +528,7 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
         <div className="pointer-events-auto mx-auto md:mx-0 w-full md:w-[400px]">
           <div className="h-12 bg-white rounded-2xl shadow-md ring-1 ring-slate-200 flex items-center gap-2 px-3">
             <Search className="w-5 h-5 text-slate-500 shrink-0" />
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search buildings or rooms (E5 3101, DC, SLC)"
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search buildings or rooms (MC 2065, DC 1301, SLC)"
               aria-label="Search campus buildings and rooms" className="flex-1 min-w-0 bg-transparent outline-none text-sm font-medium placeholder:text-slate-400" />
             {query && <button aria-label="Clear search" onClick={() => setQuery('')}><X className="w-4 h-4 text-slate-500" /></button>}
           </div>
