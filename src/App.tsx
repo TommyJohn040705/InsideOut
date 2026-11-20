@@ -28,6 +28,7 @@ import { readTripWords } from './utils/tellInWords';
 import { buildingById } from './campus/campusData';
 import { calculateIndoorRoute } from './utils/pathfinding';
 import { speakGuidance } from './utils/speech';
+import { startStepCounter, STEP_M } from './utils/stepCounter';
 import { FloorPlanEditorModal } from './components/FloorPlanEditorModal';
 import { RoomReport, loadReports, saveReports, reportLabel, routeClosures } from './utils/reports';
 import { E5_VERTICAL_LINKS } from './data/e5/e5DataLoader';
@@ -417,6 +418,22 @@ export default function App() {
     setFollow(true);
   };
 
+  // Real steps (phone motion sensor) move the dot; the fixed-speed walk stays as a demo until the first step.
+  const routeRef = useRef(route); routeRef.current = route;
+  const stopStepsRef = useRef<(() => void) | null>(null);
+  const [stepsLive, setStepsLive] = useState(false);
+  useEffect(() => () => stopStepsRef.current?.(), []);
+  const onRealStep = () => {
+    const r = routeRef.current;
+    if (!r || walkedRef.current >= r.totalDistanceMeters) return;
+    setPlaying(false); setStepsLive(true);
+    const d = Math.min(r.totalDistanceMeters, walkedRef.current + STEP_M);
+    walkedRef.current = d; setWalked(d); syncStep(r, d);
+    if (d >= r.totalDistanceMeters && voiceRef.current) speakGuidance('You have arrived.');
+  };
+  const stopSteps = () => { stopStepsRef.current?.(); stopStepsRef.current = null; setStepsLive(false); };
+  // Call from a tap, so iPhone can ask for motion permission.
+  const followSteps = () => { stopSteps(); if (isMobile) startStepCounter(onRealStep).then((stop) => { stopStepsRef.current = stop; }); };
   const startNavigation = () => {
     if (!route) return;
     walkedRef.current = 0; setWalked(0); stepRef.current = 0; setStepIndex(0); spokenRef.current = -1;
@@ -424,8 +441,9 @@ export default function App() {
     setInspected(null); setSearchOpen(false); setQuery('');
     setIsNavigating(true); setPlaying(true); setFollow(true);
     if (voice) speakGuidance(route.spokenOverview);
+    followSteps();
   };
-  const endNavigation = () => { setIsNavigating(false); setPlaying(false); setTimeout(frameView, 80); };
+  const endNavigation = () => { stopSteps(); setIsNavigating(false); setPlaying(false); setTimeout(frameView, 80); };
 
   const showRoom = (r: RoomPOI) => {
     if (r.floor) goFloor(r.floor);
@@ -1020,15 +1038,17 @@ export default function App() {
     }
     if (inspected) return roomCard(inspected, () => setInspected(null));
     if (showWay && route && startRoom && endRoom) {
-      return <DirectionsView route={route} end={endRoom} current={stepIndex} onPick={(i) => jumpToStep(i)}
-        onEnd={() => { setShowWay(false); setEndRoom(null); }}
+      return <>
+        <p role="status" className="px-4 pt-1 text-[11px] font-semibold text-slate-600">{stepsLive ? 'Following your steps (about 0.7 m each). Scan a room sign if you get off track.' : 'Start walking: the next step comes up as you go. Or tap Next.'}</p>
+        <DirectionsView route={route} end={endRoom} current={stepIndex} onPick={(i) => jumpToStep(i)}
+        onEnd={() => { stopSteps(); setShowWay(false); setEndRoom(null); }}
         onChangeDestination={() => { setShowWay(false); openSearch('to'); }}
-        onReport={() => openUpdate(endRoom)} />;
+        onReport={() => openUpdate(endRoom)} /></>;
     }
     return <FindForm buildingName={currentPlan.buildingName || buildingCode(currentPlan)} start={startRoom} end={endRoom} route={route} routeError={routeError}
       accessible={isAccessibleOnly} onToggleAccessible={() => setIsAccessibleOnly((v) => !v)}
       onPickStart={() => openSearch('start')} onPickEnd={() => openSearch('to')} onScan={() => setScannerOpen(true)}
-      onNearest={(n) => goNearest(n)} onShowWay={() => { setShowWay(true); jumpToStep(0); setSheetFull(true); }}
+      onNearest={(n) => goNearest(n)} onShowWay={() => { setShowWay(true); jumpToStep(0); setSheetFull(true); followSteps(); }}
       onWords={(text) => {
         const w = readTripWords(text, allRooms);
         if (w.start) { setStartRoom(w.start); manualLocation(w.start); }
@@ -1133,6 +1153,7 @@ export default function App() {
       {/* bottom */}
       {isNavigating && route ? (
         <div className="absolute bottom-0 left-0 right-0 p-3 pb-[max(12px,env(safe-area-inset-bottom))]">
+          <p role="status" className="mb-1.5 text-center text-[11px] font-semibold text-slate-600">{stepsLive ? 'Following your steps (about 0.7 m each). Scan a room sign if the dot drifts.' : 'Start walking: the dot follows your steps. Demo walk until then.'}</p>
           <NavFooter route={route} walked={walked} playing={playing} onPlayPause={() => setPlaying((p) => !p)}
             onRestart={() => { walkedRef.current = 0; setWalked(0); jumpToStep(0); setPlaying(true); }} onEnd={endNavigation}
             voice={voice} onVoice={() => setVoice((v) => !v)} />
