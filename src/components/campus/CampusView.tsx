@@ -600,6 +600,11 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
         <button onClick={locate} aria-label="Show my location" className="w-10 h-10 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 flex items-center justify-center"><LocateFixed className="w-5 h-5 text-slate-700" /></button>
       </div>
 
+      {!adapter && !mapError && (
+        <div role="status" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:translate-x-0 md:left-[calc(50%+100px)] px-4 py-2 rounded-full bg-white/95 shadow-md ring-1 ring-slate-200 text-sm font-semibold text-slate-700 flex items-center gap-2 pointer-events-none">
+          <span className="w-3 h-3 rounded-full border-2 border-slate-300 border-t-blue-600 animate-spin" /> Loading the campus map…
+        </div>
+      )}
       {mapError && <div role="alert" className="absolute left-3 right-3 top-[76px] md:left-auto md:right-3 md:top-64 md:w-[360px] bg-red-50 text-red-900 ring-1 ring-red-200 rounded-xl p-3 text-xs font-medium">{mapError}</div>}
 
       {!classesOpen && !tripPanel && !card && !studioOpen && !query.trim() && (
