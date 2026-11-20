@@ -20,9 +20,20 @@ export interface BuildingLink {
 }
 export const BUILDING_LINKS = buildingLinksJson as unknown as BuildingLink[];
 /** Buildings connected indoors to this one (a trip through connections may pass through any of them). */
-export const linkedBuildings = (id: string) => [...new Set(BUILDING_LINKS.flatMap((l) => (l.a.building === id ? [l.b.building] : l.b.building === id ? [l.a.building] : [])))];
+export const linkedBuildings = (id: string, depth = 1): string[] => {
+  const seen = new Set([id]); let edge = [id];
+  for (let d = 0; d < depth; d++) {
+    edge = [...new Set(edge.flatMap((x) => BUILDING_LINKS.flatMap((l) => (l.a.building === x ? [l.b.building] : l.b.building === x ? [l.a.building] : []))))].filter((x) => !seen.has(x));
+    edge.forEach((x) => seen.add(x));
+  }
+  seen.delete(id); return [...seen];
+};
+/** Longest chain of building connections an indoor trip may follow (UW's links and tunnels run several buildings deep). */
+export const MAX_LINKS = 4;
 /** An indoor trip through connections is preferred unless it is this much longer than going outside. */
-const INDOOR_PREFERENCE = 1.3;
+export const INDOOR_PREFERENCE = 1.3;
+/** In rain, snow or extreme cold or heat, an indoor trip is preferred up to this much longer. */
+export const BAD_WEATHER_INDOOR_PREFERENCE = 2;
 
 export interface IndoorSite {
   buildingId: string;
@@ -110,13 +121,15 @@ export interface TripEnd {
 }
 
 export type TripLeg =
-  | { kind: 'indoor'; buildingId: string; route: NavigationRoute; door?: DoorLink }
+  | { kind: 'indoor'; buildingId: string; route: NavigationRoute; door?: DoorLink; from: RoomPOI; to: RoomPOI }
   | { kind: 'outdoor'; route: OutdoorRoute; from: string; to: string };
 
 export interface Trip {
   legs: TripLeg[];
   notes: string[];
   totalM: number;
+  /** Metres walked outside. */
+  outdoorM: number;
   /** Everything drawable on the campus map, in order: indoor (door floors), outdoor, indoor. */
   line: LngLat[];
 }
@@ -168,8 +181,16 @@ function candidateDoors(buildingId: string, accessible: boolean, toward: LngLat 
   return doors.slice(0, 4);
 }
 
-export function planTrip(g: OutdoorGraph, sites: Record<string, IndoorSite>, from: TripEnd, to: TripEnd, accessible: boolean): Trip | { error: string } {
+export interface TripOptions {
+  /** How much longer an indoor trip through connections may be before going outside wins. */
+  indoorPreference?: number;
+  /** Shown with the trip when the weather changed the choice (e.g. "Rain, 4 °C"). */
+  weather?: string;
+}
+
+export function planTrip(g: OutdoorGraph, sites: Record<string, IndoorSite>, from: TripEnd, to: TripEnd, accessible: boolean, opts: TripOptions = {}): Trip | { error: string } {
   const notes: string[] = [];
+  const pref = opts.indoorPreference ?? INDOOR_PREFERENCE;
   const fs = from.buildingId ? sites[from.buildingId] : undefined;
   const ts = to.buildingId ? sites[to.buildingId] : undefined;
 
@@ -177,13 +198,18 @@ export function planTrip(g: OutdoorGraph, sites: Record<string, IndoorSite>, fro
   if (from.buildingId && from.buildingId === to.buildingId && fs && from.room && to.room) {
     const r = indoor(fs, from.room, to.room, accessible);
     if (!r) return { error: `No indoor route between those rooms in ${nameOf(from.buildingId)}.` };
-    return { legs: [{ kind: 'indoor', buildingId: from.buildingId, route: r }], notes, totalM: r.totalDistanceMeters, line: [] };
+    return { legs: [{ kind: 'indoor', buildingId: from.buildingId, route: r, from: from.room, to: to.room }], notes, totalM: r.totalDistanceMeters, outdoorM: 0, line: [] };
   }
 
   // Connected buildings: stay indoors through the connection when that is not much longer.
   const through = fs && ts && from.room && to.room ? indoorThroughLinks(sites, from, to, accessible) : null;
   const viaOutside = outsideTrip();
-  if (through && (!('legs' in viaOutside) || through.totalM <= viaOutside.totalM * INDOOR_PREFERENCE)) return through;
+  if (through && (!('legs' in viaOutside) || through.totalM <= viaOutside.totalM * pref)) {
+    if (opts.weather && 'legs' in viaOutside && through.totalM > viaOutside.totalM * INDOOR_PREFERENCE)
+      through.notes.unshift(`${opts.weather}: staying indoors, ${Math.round(through.totalM - viaOutside.totalM)} m longer than walking ${Math.round(viaOutside.outdoorM)} m outside.`);
+    return through;
+  }
+  if (opts.weather && 'legs' in viaOutside && viaOutside.outdoorM > 0) viaOutside.notes.unshift(`${opts.weather}: ${Math.round(viaOutside.outdoorM)} m of this trip is outside${through ? '' : ' (no indoor connection joins these buildings)'}.`);
   return viaOutside;
 
   function outsideTrip(): Trip | { error: string } {
@@ -218,7 +244,7 @@ export function planTrip(g: OutdoorGraph, sites: Record<string, IndoorSite>, fro
       const legs: TripLeg[] = [];
       const line: LngLat[] = [];
       if (inA && fl) {
-        legs.push({ kind: 'indoor', buildingId: from.buildingId!, route: inA, door: fl });
+        legs.push({ kind: 'indoor', buildingId: from.buildingId!, route: inA, door: fl, from: from.room!, to: fl.room });
         const seg = inA.floorSegments.find((s) => s.floor === fl.room.floor);
         const gA = fs!.georef(fl.room.floor!);
         if (seg && gA) line.push(...seg.waypoints.map((p) => gA.pctToLngLat(p)));
@@ -226,12 +252,12 @@ export function planTrip(g: OutdoorGraph, sites: Record<string, IndoorSite>, fro
       line.push(...out.coords);
       legs.push({ kind: 'outdoor', route: out, from: fd ? doorName(fd, from.buildingId!) : from.label, to: doorName(td, to.buildingId!) });
       if (inC && tl) {
-        legs.push({ kind: 'indoor', buildingId: to.buildingId!, route: inC, door: tl });
+        legs.push({ kind: 'indoor', buildingId: to.buildingId!, route: inC, door: tl, from: tl.room, to: to.room! });
         const seg = inC.floorSegments.find((s) => s.floor === tl.room.floor);
         const gC = ts!.georef(tl.room.floor!);
         if (seg && gC) line.push(...seg.waypoints.map((p) => gC.pctToLngLat(p)));
       }
-      best = { legs, notes: [], totalM: total, line };
+      best = { legs, notes: [], totalM: total, outdoorM: out.distanceM, line };
     }
   }
   if (!best) {
@@ -258,13 +284,19 @@ export function indoorThroughLinks(sites: Record<string, IndoorSite>, from: Trip
   const A = from.buildingId!, B = to.buildingId!;
   const ends = (l: BuildingLink, x: string) => (l.a.building === x ? [l.a, l.b] : [l.b, l.a]);
   const linksOf = (x: string) => links.filter((l) => (l.a.building === x || l.b.building === x) && sites[l.a.building] && sites[l.b.building]);
-  // Chains of links: A-B directly, or A-X-B.
+  // Chains of links from A to B, up to MAX_LINKS long, never visiting a building twice.
   const chains: BuildingLink[][] = [];
-  for (const l of linksOf(A)) {
-    const [, far] = ends(l, A);
-    if (far.building === B) chains.push([l]);
-    else for (const m of linksOf(far.building)) { const [, far2] = ends(m, far.building); if (far2.building === B) chains.push([l, m]); }
-  }
+  const walk = (x: string, chain: BuildingLink[], seen: Set<string>) => {
+    for (const l of linksOf(x)) {
+      const [, far] = ends(l, x);
+      if (seen.has(far.building)) continue;
+      if (far.building === B) chains.push([...chain, l]);
+      else if (chain.length + 1 < MAX_LINKS) walk(far.building, [...chain, l], new Set([...seen, far.building]));
+    }
+  };
+  walk(A, [], new Set([A]));
+  // Shortest chains first: with many chains, only the 40 with fewest links are walked.
+  chains.sort((p, q) => p.length - q.length).splice(40);
   // The connection's map position, on that building's indoor map.
   const spot = (e: BuildingLink['a'], other: string): RoomPOI | null => { const g = sites[e.building].georef(e.floor); return g ? ({ id: `link-${e.building}-${e.floor}-${other}`, name: `Connection to ${other}`, category: 'other', coords: g.lngLatToPct(e.at), floor: e.floor } as RoomPOI) : null; };
   let best: Trip | null = null;
@@ -278,19 +310,19 @@ export function indoorThroughLinks(sites: Record<string, IndoorSite>, from: Trip
       const exit = spot(near, far.building), entry = spot(far, near.building);
       const r = exit && entry ? indoor(sites[building], here, exit, accessible) : null;
       if (!r || !entry) { ok = false; break; }
-      legs.push({ kind: 'indoor', buildingId: building, route: r });
+      legs.push({ kind: 'indoor', buildingId: building, route: r, from: here, to: exit! });
       total += r.totalDistanceMeters + l.gapM;
       building = far.building; here = entry;
     }
     if (!ok) continue;
     const last = indoor(sites[building], here, to.room!, accessible);
     if (!last) continue;
-    legs.push({ kind: 'indoor', buildingId: building, route: last });
+    legs.push({ kind: 'indoor', buildingId: building, route: last, from: here, to: to.room! });
     total += last.totalDistanceMeters;
     if (best && total >= best.totalM) continue;
     best = {
       // Drawn on the campus map: every leg's walk, floor by floor, on that building's map.
-      legs, totalM: Math.round(total),
+      legs, totalM: Math.round(total), outdoorM: 0,
       line: legs.flatMap((l) => l.kind === 'indoor' ? l.route.floorSegments.flatMap((s) => { const g = sites[l.buildingId].georef(s.floor); return g ? s.waypoints.map((w) => g.pctToLngLat(w)) : []; }) : []),
       notes: [
         `Stays indoors: through the ${chain.map((l) => `${l.kind === 'tunnel' ? 'tunnel' : 'connection'} ${l.a.building}–${l.b.building} (floor ${l.a.floor === l.b.floor ? l.a.floor : l.a.floor + '/' + l.b.floor})`).join(' and ')}.`,

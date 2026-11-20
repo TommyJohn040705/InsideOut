@@ -8,10 +8,12 @@ interface Props {
   onClose: () => void;
   activeFloor: number;
   allRooms: RoomPOI[];
+  /** Building code shown with rooms (MC, DC…); E5's posted checkpoint codes only appear in E5. */
+  buildingCode: string;
   onConfirmCheckpoint: (checkpoint: QRCheckpoint | { roomId: string; roomNumber: string; name: string; floor: number; coords: { x: number; y: number } }) => void;
 }
 
-export function CameraSignScannerModal({ open, onClose, activeFloor, allRooms, onConfirmCheckpoint }: Props) {
+export function CameraSignScannerModal({ open, onClose, activeFloor, allRooms, buildingCode, onConfirmCheckpoint }: Props) {
   const [mode, setMode] = useState<'camera' | 'upload' | 'simulate'>('camera');
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
@@ -170,7 +172,7 @@ export function CameraSignScannerModal({ open, onClose, activeFloor, allRooms, o
       setIsUniqueMatch(Boolean(data.isUniqueMatch));
 
       if ((!data.candidates || data.candidates.length === 0) && !data.qrCode) {
-        setErrorMsg(`Visible text: "${data.rawText || 'unclear'}". No matching E5 room or checkpoint was found. Try selecting from the simulator or taking a closer photo.`);
+        setErrorMsg(`Visible text: "${data.rawText || 'unclear'}". No matching ${buildingCode} room or checkpoint was found. Try selecting from the simulator or taking a closer photo.`);
       }
     } catch {
       // Local fallback parsing
@@ -261,7 +263,7 @@ export function CameraSignScannerModal({ open, onClose, activeFloor, allRooms, o
                   </span>
                   <div className="flex justify-between items-end">
                     <span className="text-[10px] text-white/70">Level {activeFloor}</span>
-                    <span className="text-[10px] text-white/70">Waterloo E5</span>
+                    <span className="text-[10px] text-white/70">Waterloo {buildingCode}</span>
                   </div>
                 </div>
               </div>
@@ -323,7 +325,7 @@ export function CameraSignScannerModal({ open, onClose, activeFloor, allRooms, o
                   <Sparkles className="w-6 h-6 text-blue-600 animate-spin" />
                   <div>
                     <p className="font-bold text-sm">Analyzing signage text with AI...</p>
-                    <p className="text-xs text-blue-700">Extracting room numbers and matching with E5 directory</p>
+                    <p className="text-xs text-blue-700">Extracting room numbers and matching with the {buildingCode} directory</p>
                   </div>
                 </div>
               )}
@@ -354,7 +356,7 @@ export function CameraSignScannerModal({ open, onClose, activeFloor, allRooms, o
                     <span>High-Confidence Match (Unique Sign)</span>
                   </div>
                   <p className="text-sm font-extrabold text-emerald-950">
-                    E5 {candidates[0].roomNumber} · {candidates[0].name}
+                    {buildingCode} {candidates[0].roomNumber} · {candidates[0].name}
                   </p>
                   <p className="text-xs text-emerald-700">Level {candidates[0].floor} · {candidates[0].reason}</p>
                   <button
@@ -381,7 +383,7 @@ export function CameraSignScannerModal({ open, onClose, activeFloor, allRooms, o
                         className="w-full text-left p-3 hover:bg-blue-50 flex items-center justify-between transition-colors"
                       >
                         <div>
-                          <p className="font-bold text-sm text-slate-900">E5 {c.roomNumber} · {c.name}</p>
+                          <p className="font-bold text-sm text-slate-900">{buildingCode} {c.roomNumber} · {c.name}</p>
                           <p className="text-xs text-slate-500">Floor {c.floor} · {c.reason}</p>
                         </div>
                         <span className="text-xs font-semibold px-2 py-1 rounded bg-slate-100 text-slate-700">
@@ -403,7 +405,7 @@ export function CameraSignScannerModal({ open, onClose, activeFloor, allRooms, o
           )}
 
           {/* App-defined checkpoint list */}
-          {(mode === 'simulate' || !capturedImage) && (
+          {buildingCode === 'E5' && (mode === 'simulate' || !capturedImage) && (
             <div className="space-y-3 pt-2">
               <div className="flex items-center justify-between">
                 <p className="text-xs font-bold uppercase tracking-wider text-slate-500">

@@ -66,6 +66,7 @@ const KIND_WORDS: Record<string, string> = {
   professional_office: 'office professor faculty staff',
   residence_common_area: 'residence housing front desk',
   library_directory: 'library floor directory',
+  shower_changeroom: 'shower showers change changeroom changing locker lockers',
 };
 const SOURCE_WORDS: Record<string, string> = {
   mathlabs: 'mfcf math computing',
