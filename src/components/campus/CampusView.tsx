@@ -5,7 +5,7 @@
  * (E5's traced drawings or a published floor-plan import), never from per-building UI.
  */
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Search, X, Layers, DoorOpen, Lock, LocateFixed, Footprints, Accessibility, AlertTriangle, BarChart3, ChevronRight, FileText, Eye, Navigation2, ArrowUpDown, ExternalLink, CalendarDays, Box } from 'lucide-react';
+import { Search, X, Layers, DoorOpen, Lock, LocateFixed, Footprints, Accessibility, AlertTriangle, BarChart3, ChevronRight, FileText, Eye, Navigation2, ArrowUpDown, ExternalLink, CalendarDays, Box, Share2 } from 'lucide-react';
 import { FloorPlanData, NavigationRoute, RoomPOI } from '../../types/navigation';
 import {
   BUILDINGS, CAMPUS_CENTER, COVERAGE_LABEL, GAP_LABEL, FLOOR_STATUS_LABEL, FOOTPRINTS, INDOOR, CampusBuilding, CampusFloor,
@@ -73,6 +73,9 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   const [studioPreview, setStudioPreview] = useState<FloorOverlay | null>(null);
   const [opacity, setOpacity] = useState(0.95);
   const [user, setUser] = useState<LngLat | null>(null);
+  const [accuracyM, setAccuracyM] = useState<number | null>(null);
+  const watchId = useRef<number | null>(null);
+  useEffect(() => () => { if (watchId.current != null) navigator.geolocation?.clearWatch(watchId.current); }, []);
   // OpenStreetMap indoor level being shown, and a room found by search on it.
   const [osmLevel, setOsmLevel] = useState<string | null>(null);
   const [osmRoom, setOsmRoom] = useState<OsmRoomHit | null>(null);
@@ -172,9 +175,9 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
     if (g && routeHere && destination && (destination.floor ?? floor) === floor) markers.push({ id: 'dest', lngLat: g.pctToLngLat(destination.coords), label: destination.roomNumber || destination.name, kind: 'destination' });
     adapter.setIndoorVector(selected && osmLevel != null && !site ? osmIndoorGeoJSON(selected.id, osmLevel) : null);
     if (osmRoom && selected?.id === osmRoom.building.id && osmRoom.level === osmLevel) markers.push({ id: 'osmroom', lngLat: osmRoom.center, label: osmRoom.ref || osmRoom.name || 'Room', kind: 'destination' });
-    if (user) markers.push({ id: 'user', lngLat: user, label: 'You (GPS)', kind: 'user' });
+    if (user) markers.push({ id: 'user', lngLat: user, label: accuracyM ? `You (GPS ±${Math.round(accuracyM)} m)` : 'You (GPS)', kind: 'user' });
     adapter.setMarkers(markers);
-  }, [adapter, site, floor, route, destination, entrances, user, selected, osmLevel, osmRoom, studioPreview, trip]);
+  }, [adapter, site, floor, route, destination, entrances, user, accuracyM, selected, osmLevel, osmRoom, studioPreview, trip]);
 
   const search = (q0: string): Hit[] => {
     const q = q0.trim();
@@ -233,12 +236,15 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
     else { setSelectedId(h.b.id); setFloor(null); setWalk(null); }
   };
 
+  /** Live location: follows you while the app is open (first fix flies the map there). */
   const locate = () => {
     if (!navigator.geolocation) { setWalk('This browser has no location support.'); return; }
-    navigator.geolocation.getCurrentPosition(
-      (p) => { const at: LngLat = [p.coords.longitude, p.coords.latitude]; setUser(at); adapter?.flyTo(at, 17); },
-      () => setWalk('Location permission was not granted.'),
-      { enableHighAccuracy: true, timeout: 10000 },
+    if (watchId.current != null) { if (user) adapter?.flyTo(user, 18); return; }
+    let first = true;
+    watchId.current = navigator.geolocation.watchPosition(
+      (p) => { const at: LngLat = [p.coords.longitude, p.coords.latitude]; setUser(at); setAccuracyM(p.coords.accuracy); if (first) { first = false; adapter?.flyTo(at, 18); } },
+      () => { setWalk('Location permission was not granted.'); if (watchId.current != null) navigator.geolocation.clearWatch(watchId.current); watchId.current = null; },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 2000 },
     );
   };
 
@@ -260,14 +266,46 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   useEffect(() => { if (tripOpen) runTrip(tripFrom, tripTo, stepFree); }, [tripFrom, tripTo, stepFree, sites, weather]);
 
   /** Directions to a timetable room ("MC 2065"): the mapped room if there is one, else its building. */
-  const directionsToRoom = (room: string) => {
+  /** A place from a short text ("MC 2065", "DC"): the exact mapped room, else any room, else the building. */
+  const resolvePlace = (room: string): Hit | undefined => {
     const hs = search(room);
     const num = (room.split(' ')[1] || '').toUpperCase();
     const exact = (x: Hit) => (x.kind === 'room' && (x.room.roomNumber || '').toUpperCase() === num) || (x.kind === 'osmroom' && (x.r.ref || '').toUpperCase() === num);
     const h = hs.find(exact) || hs.find((x) => x.kind === 'room' || x.kind === 'osmroom') || hs.find((x) => x.kind === 'building' && (x.b.code || '').toUpperCase() === room.split(' ')[0].toUpperCase()) || hs.find((x) => x.kind === 'building');
+    return h;
+  };
+  const directionsToRoom = (room: string) => {
+    const h = resolvePlace(room);
     setClassesOpen(false);
     if (!h) { setWalk(`${room} is not on the campus map.`); return; }
     openTripTo(toTripEnd(h));
+  };
+  // Shared links: ?from=MC%203068&to=DC%201301 opens those directions.
+  const placeQuery = (e: TripEnd | null) => { const b = e?.buildingId ? buildingById(e.buildingId) : null; return b?.code ? [b.code, e!.room?.roomNumber].filter(Boolean).join(' ') : null; };
+  const opened = useRef(false);
+  useEffect(() => {
+    if (opened.current || !imports.length) return; // wait for the imported floors (most buildings)
+    const q = new URLSearchParams(location.search), f = q.get('from'), t = q.get('to');
+    if (!t) return;
+    opened.current = true;
+    (async () => {
+    // Load both buildings' indoor maps first, so rooms resolve to routable rooms.
+    const ids = [f, t].map((x) => BUILDINGS.find((b) => (b.code || '').toUpperCase() === (x || '').split(' ')[0].toUpperCase())?.id).filter(Boolean) as string[];
+    if (onNeedNetworks && await onNeedNetworks(ids)) { opened.current = false; return; }
+    const th = resolvePlace(t), fh = f ? resolvePlace(f) : undefined;
+    if (!th) { setWalk(`${t} is not on the campus map.`); return; }
+    if (fh) setTripFrom(toTripEnd(fh));
+    openTripTo(toTripEnd(th));
+    })();
+  }, [sites]);
+  const shareTrip = async () => {
+    const f = placeQuery(tripFrom), t = placeQuery(tripTo);
+    if (!t) return;
+    const url = `${location.origin}${location.pathname}?${new URLSearchParams({ ...(f ? { from: f } : {}), to: t })}`;
+    try {
+      if (navigator.share) await navigator.share({ title: 'InsideOut directions', text: `Directions ${f ? `from ${f} ` : ''}to ${t}`, url });
+      else { await navigator.clipboard.writeText(url); setTripMsg('Link copied.'); }
+    } catch { /* share sheet closed */ }
   };
   const openTripTo = (to: TripEnd) => {
     setTripOpen(true); setTripTo(to);
@@ -445,7 +483,8 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
       {tripMsg && <p role="status" className="text-xs text-slate-700 bg-slate-50 rounded-lg p-2">{tripMsg}</p>}
       {trip && (
         <div className="space-y-2">
-          <div className="font-bold">{Math.round(trip.totalM)} m · about {Math.max(1, Math.round(trip.totalM / 70))} min<span className="font-medium text-slate-500 text-xs"> · {trip.outdoorM ? `${Math.round(trip.outdoorM)} m outside` : 'all indoors'}</span></div>
+          <div className="flex items-start gap-2"><div className="font-bold flex-1">{Math.round(trip.totalM)} m · about {Math.max(1, Math.round(trip.totalM / 70))} min<span className="font-medium text-slate-500 text-xs"> · {trip.outdoorM ? `${Math.round(trip.outdoorM)} m outside` : 'all indoors'}</span></div>
+            {placeQuery(tripTo) && <button onClick={shareTrip} aria-label="Share these directions" className="h-8 px-2.5 rounded-lg ring-1 ring-slate-200 text-xs font-semibold flex items-center gap-1"><Share2 className="w-3.5 h-3.5" /> Share</button>}</div>
           <ol className="space-y-1.5 text-sm">
             {trip.legs.map((l, i) => (
               <li key={i} className="flex gap-2">
