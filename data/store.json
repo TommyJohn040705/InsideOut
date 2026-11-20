@@ -25339,52 +25339,52 @@
    "controlPoints": [
     {
      "px": [
-      1800,
-      216
+      0,
+      0
      ],
      "lngLat": [
-      -80.5426961,
-      43.4698599
+      -80.54326600196751,
+      43.46968583179753
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 94%). Draft: check against the map."
+     "note": "Stacked on LIB-03-mwe6kvmu by its stairs and elevators (7 of 7 line up within 4 m). Draft: not surveyed."
     },
     {
      "px": [
-      3720,
-      216
+      4000,
+      0
      ],
      "lngLat": [
-      -80.5421447,
-      43.4700575
+      -80.54214840310273,
+      43.47014055959785
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 94%). Draft: check against the map."
+     "note": "Stacked on LIB-03-mwe6kvmu by its stairs and elevators (7 of 7 line up within 4 m). Draft: not surveyed."
     },
     {
      "px": [
-      3720,
-      2304
+      4000,
+      2588
      ],
      "lngLat": [
-      -80.5418506,
-      43.4696193
+      -80.54174520387396,
+      43.469612060528696
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 94%). Draft: check against the map."
+     "note": "Stacked on LIB-03-mwe6kvmu by its stairs and elevators (7 of 7 line up within 4 m). Draft: not surveyed."
     },
     {
      "px": [
-      1800,
-      2304
+      0,
+      2588
      ],
      "lngLat": [
-      -80.542402,
-      43.4694217
+      -80.54286280273872,
+      43.46915733272836
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 94%). Draft: check against the map."
+     "note": "Stacked on LIB-03-mwe6kvmu by its stairs and elevators (7 of 7 line up within 4 m). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:0.94, orientation checked (kept): the sheet's north arrow and key map; outline 98% as placed vs 98% turned",
+   "alignmentFrom": "auto:shaft-stack via LIB-03-mwe6kvmu",
    "autoHallwaysAt": "2026-11-17T02:16:33.176Z",
    "autoNodes": 2496,
    "styledImageUrl": "/uploads/LIB-01-mwe6kqye-styled.png"
@@ -59094,10 +59094,10 @@
       0
      ],
      "lngLat": [
-      -80.54623581106365,
-      43.471467361635085
+      -80.54440085102155,
+      43.472601713012295
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 72%), stacked on SLC-B1-mwe6n5tg by the walls. Draft: not surveyed."
+     "note": "Stacked on SLC-02-mwe6n0er by its stairs and elevators (7 of 8 line up within 4 m). Draft: not surveyed."
     },
     {
      "px": [
@@ -59105,10 +59105,10 @@
       0
      ],
      "lngLat": [
-      -80.54560876758863,
-      43.472876864573124
+      -80.54499376846805,
+      43.47118451489555
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 72%), stacked on SLC-B1-mwe6n5tg by the walls. Draft: not surveyed."
+     "note": "Stacked on SLC-02-mwe6n0er by its stairs and elevators (7 of 8 line up within 4 m). Draft: not surveyed."
     },
     {
      "px": [
@@ -59116,10 +59116,10 @@
       2588
      ],
      "lngLat": [
-      -80.54436065061888,
-      43.47258067461285
+      -80.54624888577204,
+      43.471465002722525
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 72%), stacked on SLC-B1-mwe6n5tg by the walls. Draft: not surveyed."
+     "note": "Stacked on SLC-02-mwe6n0er by its stairs and elevators (7 of 8 line up within 4 m). Draft: not surveyed."
     },
     {
      "px": [
@@ -59127,17 +59127,17 @@
       2588
      ],
      "lngLat": [
-      -80.5449876940939,
-      43.47117117167482
+      -80.54565596832555,
+      43.47288220083928
      ],
-     "note": "Fitted to the OpenStreetMap outline (overlap 72%), stacked on SLC-B1-mwe6n5tg by the walls. Draft: not surveyed."
+     "note": "Stacked on SLC-02-mwe6n0er by its stairs and elevators (7 of 8 line up within 4 m). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
    "autoHallwaysAt": "2026-11-17T02:17:39.664Z",
    "autoNodes": 2442,
-   "alignmentFrom": "auto:outline-fit via SLC-B1-mwe6n5tg",
+   "alignmentFrom": "auto:shaft-stack via SLC-02-mwe6n0er",
    "styledImageUrl": "/uploads/SLC-03-mwe6n2nw-styled.png"
   },
   {
@@ -134247,52 +134247,52 @@
    "controlPoints": [
     {
      "px": [
-      336,
-      896
+      0,
+      0
      ],
      "lngLat": [
-      -80.5446854,
-      43.4714803
+      -80.54463903768816,
+      43.470536138676636
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 73%). Draft: check against the map."
+     "note": "Stacked on QNC-02-mwe7149t by its stairs and elevators (8 of 8 line up within 4 m). Draft: not surveyed."
     },
     {
      "px": [
-      2464,
-      896
+      2588,
+      0
      ],
      "lngLat": [
-      -80.5439316,
-      43.471743
+      -80.54512669110032,
+      43.471183840008734
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 73%). Draft: check against the map."
+     "note": "Stacked on QNC-02-mwe7149t by its stairs and elevators (8 of 8 line up within 4 m). Draft: not surveyed."
     },
     {
      "px": [
-      2464,
-      3584
+      2588,
+      4000
      ],
      "lngLat": [
-      -80.5434773,
-      43.4710473
+      -80.5437374697366,
+      43.47172788386753
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 73%). Draft: check against the map."
+     "note": "Stacked on QNC-02-mwe7149t by its stairs and elevators (8 of 8 line up within 4 m). Draft: not surveyed."
     },
     {
      "px": [
-      336,
-      3584
+      0,
+      4000
      ],
      "lngLat": [
-      -80.5442312,
-      43.4707846
+      -80.54324981632443,
+      43.47108018253544
      ],
-     "note": "Automatic fit of the drawing outline to the OpenStreetMap footprint (overlap 73%). Draft: check against the map."
+     "note": "Stacked on QNC-02-mwe7149t by its stairs and elevators (8 of 8 line up within 4 m). Draft: not surveyed."
     }
    ],
    "reviewed": false,
    "published": true,
-   "alignmentFrom": "auto:0.73",
+   "alignmentFrom": "auto:shaft-stack via QNC-02-mwe7149t",
    "autoHallwaysAt": "2026-11-17T02:21:32.716Z",
    "autoNodes": 4461,
    "styledImageUrl": "/uploads/QNC-03-mwe719oz-styled.png"
