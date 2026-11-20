@@ -1,0 +1,10 @@
+#!/bin/sh
+# Blocks pushing straight to main (for people and AIs alike). Work on a branch and open a pull request.
+# Installed by: git config core.hooksPath scripts/hooks
+while read local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_ref" = "refs/heads/main" ]; then
+    echo "Blocked: pushing directly to main. Push your branch and open a pull request instead." >&2
+    exit 1
+  fi
+done
+exit 0

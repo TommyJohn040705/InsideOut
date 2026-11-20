@@ -41,6 +41,15 @@ describe('room-to-room trip', () => {
     expect(t.notes.join(' ')).toMatch(/not been walked/);
   });
 
+  it('names an E7 door once in the outdoor leg without repeating the building code', () => {
+    const t = planTrip(g, sites, { buildingId: 'DC', label: 'DC' }, { buildingId: 'E7', label: 'E7' }, false);
+    if ('error' in t) throw new Error(t.error);
+    const outdoor = t.legs.find((l) => l.kind === 'outdoor');
+    if (!outdoor || outdoor.kind !== 'outdoor') throw new Error('no outdoor leg');
+    expect(outdoor.to).toBe('E7 South Exit');
+    expect(outdoor.to).not.toMatch(/E7 E7/);
+  });
+
   it('refuses multi-floor routes in buildings with no mapped stairs or elevators', () => {
     // E5's floors without their stairs and elevators: nothing joins the two floors.
     const fake = SAMPLE_FLOOR_PLANS.slice(0, 2).map((p) => ({ ...p, buildingId: 'import-X', rooms: p.rooms.filter((r) => r.category !== 'elevator' && r.category !== 'stairs') }));
