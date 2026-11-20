@@ -12,11 +12,12 @@ import {
   buildingById, buildingLabel, coverageOf, coverageSummary, entrancesOf, searchBuildings,
   osmIndoorGeoJSON, osmLevelName, searchOsmRooms, OsmRoomHit,
 } from '../../campus/campusData';
-import type { LngLat } from '../../campus/georef';
+import { distanceM, type LngLat } from '../../campus/georef';
 import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_MAP_ID, MAP_PROVIDER } from '../../campus/map/config';
 import type { CampusMapAdapter, FloorOverlay, MapMarker, MapProvider } from '../../campus/map/types';
 import { FloorImport, floorLabelOf, importStatus } from '../../campus/floorImports';
-import { indoorSites, planTrip, Trip, TripEnd, linkedBuildings } from '../../campus/tripPlanner';
+import { indoorSites, planTrip, Trip, TripEnd, linkedBuildings, MAX_LINKS, BAD_WEATHER_INDOOR_PREFERENCE } from '../../campus/tripPlanner';
+import { campusWeather, type CampusWeather } from '../../campus/weather';
 import type { ManualShaft } from '../../campus/floorImports';
 import { DEV_MODE } from '../../devMode';
 import { loadOutdoorGraph } from '../../campus/outdoorRoute';
@@ -58,7 +59,10 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   const [adapter, setAdapter] = useState<CampusMapAdapter | null>(null);
   const [provider, setProvider] = useState<MapProvider>(MAP_PROVIDER);
   const [mapError, setMapError] = useState<string | null>(null);
-  const [selectedId, setSelectedId] = useState<string | null>(route ? 'E5' : null);
+  const [selectedId, setSelectedId] = useState<string | null>(() => (route && destination
+    // Back from an indoor route: select the building that route ends in.
+    ? Object.values(indoorSites(plans, imports, shaftLinks)).find((s) => s.plans.some((p) => p.rooms.some((r) => r.id === destination.id)))?.buildingId ?? null
+    : null));
   const [floor, setFloor] = useState<number | null>(route?.toFloor ?? null);
   const [query, setQuery] = useState('');
   const [coverageOpen, setCoverageOpen] = useState(false);
@@ -78,6 +82,8 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   const [stepFree, setStepFree] = useState(false);
   const [trip, setTrip] = useState<Trip | null>(null);
   const [tripMsg, setTripMsg] = useState<string | null>(null);
+  const [weather, setWeather] = useState<CampusWeather | null>(null);
+  useEffect(() => { campusWeather().then(setWeather); }, []);
 
   const sites = useMemo(() => indoorSites(plans, imports, shaftLinks), [plans, imports, shaftLinks]);
   const selected = selectedId ? buildingById(selectedId) : null;
@@ -236,15 +242,16 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
     setTripMsg('Finding a route…');
     // Newly loaded indoor networks change `sites`, which re-runs this trip with them.
     // Also every building connected to the start: an indoor trip through connections may pass through one.
-    if (onNeedNetworks && await onNeedNetworks([from.buildingId, to.buildingId, ...(from.buildingId ? linkedBuildings(from.buildingId) : [])].filter(Boolean) as string[])) return;
+    if (onNeedNetworks && await onNeedNetworks([from.buildingId, to.buildingId, ...(from.buildingId ? linkedBuildings(from.buildingId, MAX_LINKS - 1) : [])].filter(Boolean) as string[])) return;
     const g = await loadOutdoorGraph();
-    const t = planTrip(g, sites, from, to, sf);
+    const w = weather ?? await campusWeather();
+    const t = planTrip(g, sites, from, to, sf, w?.bad ? { indoorPreference: BAD_WEATHER_INDOOR_PREFERENCE, weather: w.label } : {});
     if ('error' in t) { setTripMsg(t.error); return; }
     setTrip(t); setTripMsg(null);
     const dest = to.buildingId ? buildingById(to.buildingId) : null;
     if (dest) { setSelectedId(dest.id); const last = t.legs[t.legs.length - 1]; if (last.kind === 'indoor' && last.door) setFloor(last.door.room.floor ?? null); }
   };
-  useEffect(() => { if (tripOpen) runTrip(tripFrom, tripTo, stepFree); }, [tripFrom, tripTo, stepFree, sites]);
+  useEffect(() => { if (tripOpen) runTrip(tripFrom, tripTo, stepFree); }, [tripFrom, tripTo, stepFree, sites, weather]);
 
   const openTripTo = (to: TripEnd) => {
     setTripOpen(true); setTripTo(to);
@@ -269,7 +276,8 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   const pickList = useMemo(() => Object.values(sites)
     .map((s) => ({ s, b: buildingById(s.buildingId) }))
     .filter((x) => x.b && x.s.plans.length)
-    .sort((x, y) => (x.s.buildingId === 'E5' ? -1 : y.s.buildingId === 'E5' ? 1 : (x.b!.name || x.s.buildingId).localeCompare(y.b!.name || y.s.buildingId))), [sites]);
+    // Nearest first once we know where you are, else A to Z.
+    .sort((x, y) => user && x.b!.center && y.b!.center ? distanceM(user, x.b!.center as LngLat) - distanceM(user, y.b!.center as LngLat) : (x.b!.name || x.s.buildingId).localeCompare(y.b!.name || y.s.buildingId)), [sites, user]);
   const enter = (s: (typeof pickList)[number]['s']) => {
     const floors = s.plans.map((p) => p.floorNumber).sort((a, b) => a - b);
     onOpenIndoor(s.appBuildingId, floors.find((f) => f >= 1) ?? floors[0]);
@@ -413,10 +421,11 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
       <button onClick={() => setStepFree((v) => !v)} aria-pressed={stepFree} className={`w-full h-9 rounded-full text-xs font-semibold flex items-center justify-center gap-1.5 ring-1 ${stepFree ? 'bg-emerald-50 text-emerald-800 ring-emerald-300' : 'bg-white text-slate-700 ring-slate-200'}`}>
         <Accessibility className="w-4 h-4" /> {stepFree ? 'Step-free: no steps, elevators only' : 'Steps allowed'}
       </button>
+      {weather && <p className={`text-[11px] rounded-lg px-2 py-1 ${weather.bad ? 'bg-sky-50 text-sky-800' : 'text-slate-500'}`}>Now on campus: {weather.label}{weather.bad ? ' — routes stay indoors through connections and tunnels when they can.' : ''}</p>}
       {tripMsg && <p role="status" className="text-xs text-slate-700 bg-slate-50 rounded-lg p-2">{tripMsg}</p>}
       {trip && (
         <div className="space-y-2">
-          <div className="font-bold">{Math.round(trip.totalM)} m · about {Math.max(1, Math.round(trip.totalM / 70))} min</div>
+          <div className="font-bold">{Math.round(trip.totalM)} m · about {Math.max(1, Math.round(trip.totalM / 70))} min<span className="font-medium text-slate-500 text-xs"> · {trip.outdoorM ? `${Math.round(trip.outdoorM)} m outside` : 'all indoors'}</span></div>
           <ol className="space-y-1.5 text-sm">
             {trip.legs.map((l, i) => (
               <li key={i} className="flex gap-2">
@@ -426,7 +435,7 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
                     ? <>Walk {Math.round(l.route.distanceM)} m outside from {l.from} to {l.to}.</>
                     : <>Inside {l.buildingId}: {l.route.fromName} (floor {l.route.fromFloor}) to {l.route.toName} (floor {l.route.toFloor}), {Math.round(l.route.totalDistanceMeters)} m, {l.route.steps.length} steps.
                         {/* first leg leaves the start building (room -> door); a later leg enters the destination (door -> room) */}
-                        <button className="ml-1 text-blue-700 font-semibold" onClick={() => onRouteIndoor(sites[l.buildingId].appBuildingId, i === 0 && l.door ? tripFrom!.room! : l.door ? l.door.room : tripFrom!.room!, i === 0 && l.door ? l.door.room : tripTo!.room!, stepFree)}>Open turn-by-turn</button></>}
+                        <button className="ml-1 text-blue-700 font-semibold" onClick={() => onRouteIndoor(sites[l.buildingId].appBuildingId, l.from, l.to, stepFree)}>Open turn-by-turn</button></>}
                 </span>
               </li>
             ))}
