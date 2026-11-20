@@ -5,7 +5,7 @@
  * (E5's traced drawings or a published floor-plan import), never from per-building UI.
  */
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Search, X, Layers, DoorOpen, Lock, LocateFixed, Footprints, Accessibility, AlertTriangle, BarChart3, ChevronRight, FileText, Eye, Navigation2, ArrowUpDown, ExternalLink } from 'lucide-react';
+import { Search, X, Layers, DoorOpen, Lock, LocateFixed, Footprints, Accessibility, AlertTriangle, BarChart3, ChevronRight, FileText, Eye, Navigation2, ArrowUpDown, ExternalLink, CalendarDays } from 'lucide-react';
 import { FloorPlanData, NavigationRoute, RoomPOI } from '../../types/navigation';
 import {
   BUILDINGS, CAMPUS_CENTER, COVERAGE_LABEL, GAP_LABEL, FLOOR_STATUS_LABEL, FOOTPRINTS, INDOOR, CampusBuilding, CampusFloor,
@@ -18,6 +18,8 @@ import type { CampusMapAdapter, FloorOverlay, MapMarker, MapProvider } from '../
 import { FloorImport, floorLabelOf, importStatus } from '../../campus/floorImports';
 import { indoorSites, planTrip, Trip, TripEnd, linkedBuildings, MAX_LINKS, BAD_WEATHER_INDOOR_PREFERENCE } from '../../campus/tripPlanner';
 import { campusWeather, type CampusWeather } from '../../campus/weather';
+import { loadClasses } from '../../campus/schedule';
+import { MyClasses, NextClassChip } from './MyClasses';
 import type { ManualShaft } from '../../campus/floorImports';
 import { DEV_MODE } from '../../devMode';
 import { loadOutdoorGraph } from '../../campus/outdoorRoute';
@@ -83,6 +85,8 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   const [trip, setTrip] = useState<Trip | null>(null);
   const [tripMsg, setTripMsg] = useState<string | null>(null);
   const [weather, setWeather] = useState<CampusWeather | null>(null);
+  const [classes, setClasses] = useState(loadClasses);
+  const [classesOpen, setClassesOpen] = useState(false);
   useEffect(() => { campusWeather().then(setWeather); }, []);
 
   const sites = useMemo(() => indoorSites(plans, imports, shaftLinks), [plans, imports, shaftLinks]);
@@ -253,6 +257,16 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   };
   useEffect(() => { if (tripOpen) runTrip(tripFrom, tripTo, stepFree); }, [tripFrom, tripTo, stepFree, sites, weather]);
 
+  /** Directions to a timetable room ("MC 2065"): the mapped room if there is one, else its building. */
+  const directionsToRoom = (room: string) => {
+    const hs = search(room);
+    const num = (room.split(' ')[1] || '').toUpperCase();
+    const exact = (x: Hit) => (x.kind === 'room' && (x.room.roomNumber || '').toUpperCase() === num) || (x.kind === 'osmroom' && (x.r.ref || '').toUpperCase() === num);
+    const h = hs.find(exact) || hs.find((x) => x.kind === 'room' || x.kind === 'osmroom') || hs.find((x) => x.kind === 'building' && (x.b.code || '').toUpperCase() === room.split(' ')[0].toUpperCase()) || hs.find((x) => x.kind === 'building');
+    setClassesOpen(false);
+    if (!h) { setWalk(`${room} is not on the campus map.`); return; }
+    openTripTo(toTripEnd(h));
+  };
   const openTripTo = (to: TripEnd) => {
     setTripOpen(true); setTripTo(to);
     if (!tripFrom && user) setTripFrom({ at: user, label: 'My location (GPS)' });
@@ -284,6 +298,7 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   };
   const picker = (
     <div className="bg-white rounded-2xl shadow-lg ring-1 ring-slate-200 p-4 space-y-2">
+      {classes.length > 0 && <NextClassChip classes={classes} onDirections={directionsToRoom} />}
       <p className="text-lg font-extrabold text-slate-900">Which building are you in?</p>
       <p className="text-sm text-slate-600">Tap it on the map, or pick it here. Search above to find a room.</p>
       <ul className={isMobile ? 'max-h-[34dvh] overflow-y-auto -mx-1 space-y-1.5' : 'max-h-[60dvh] overflow-y-auto -mx-1 space-y-1.5'}>
@@ -524,18 +539,25 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
         {DEV_MODE && <button onClick={() => setCoverageOpen(true)} className="h-10 px-3 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 text-xs font-bold flex items-center gap-1.5"><BarChart3 className="w-4 h-4" /> Coverage</button>}
         <button onClick={() => setTripOpen(true)} className="h-10 px-3 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 text-xs font-bold flex items-center gap-1.5"><Navigation2 className="w-4 h-4" /> Directions</button>
         {DEV_MODE && <button onClick={() => setStudioOpen(true)} className="h-10 px-3 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 text-xs font-bold flex items-center gap-1.5"><FileText className="w-4 h-4" /> Floor plans</button>}
+        <button onClick={() => { setClassesOpen(true); setTripOpen(false); }} className="h-10 px-3 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 text-xs font-bold flex items-center gap-1.5"><CalendarDays className="w-4 h-4" /> My classes</button>
         <button onClick={locate} aria-label="Show my location" className="w-10 h-10 rounded-2xl bg-white shadow-md ring-1 ring-slate-200 flex items-center justify-center"><LocateFixed className="w-5 h-5 text-slate-700" /></button>
       </div>
 
       {mapError && <div role="alert" className="absolute left-3 right-3 top-[76px] md:left-auto md:right-3 md:top-64 md:w-[360px] bg-red-50 text-red-900 ring-1 ring-red-200 rounded-xl p-3 text-xs font-medium">{mapError}</div>}
 
-      {!tripPanel && !card && !studioOpen && !query.trim() && (
+      {!classesOpen && !tripPanel && !card && !studioOpen && !query.trim() && (
         <div className={isMobile ? 'absolute left-0 right-0 bottom-0 p-3 pb-[max(12px,env(safe-area-inset-bottom))]' : 'absolute left-3 top-[76px] w-[400px]'}>
           {picker}
         </div>
       )}
 
-      {(tripPanel || card) && (
+      {classesOpen && !tripPanel && (
+        <div className={isMobile ? 'absolute left-0 right-0 bottom-0 p-3 pb-[max(12px,env(safe-area-inset-bottom))]' : 'absolute left-3 top-[76px] w-[400px]'}>
+          <MyClasses classes={classes} onChange={setClasses} onDirections={directionsToRoom} onClose={() => setClassesOpen(false)} />
+        </div>
+      )}
+
+      {!classesOpen && (tripPanel || card) && (
         <div className={isMobile ? 'absolute left-0 right-0 bottom-0 p-3 pb-[max(12px,env(safe-area-inset-bottom))]' : 'absolute left-3 top-[76px] w-[400px] space-y-2'}>
           {tripPanel || card}
         </div>
