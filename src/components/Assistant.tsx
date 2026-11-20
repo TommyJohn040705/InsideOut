@@ -15,6 +15,8 @@ interface Msg {
   sources?: { title: string; url: string }[];
   offline?: boolean;
   toolExecuted?: string;
+  /** Which AI answered: "Gemini" or "Local AI (llama3.2)". */
+  ai?: string;
 }
 
 interface Props {
@@ -259,6 +261,7 @@ export function Assistant({
           text: botText.trim() || 'Done.',
           room: targetRoom,
           toolExecuted: toolCalls.length > 0 ? toolCalls.map((c) => c.name).join(', ') : undefined,
+          ai: typeof data.ai === 'string' ? data.ai : undefined,
         },
       ]);
     } catch {
@@ -328,6 +331,7 @@ export function Assistant({
                 )}
               >
                 <p className="whitespace-pre-line">{m.text}</p>
+                {m.ai && <div className="mt-1 text-[10px] font-semibold text-slate-400">{m.ai}</div>}
 
                 {m.toolExecuted && (
                   <div className="mt-1.5 flex items-center gap-1 text-[11px] font-mono font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">

@@ -729,6 +729,30 @@ Return strictly valid JSON.`;
   }
 });
 
+/* ---------------- Local AI (Ollama, github.com/ollama/ollama): runs on this computer, no key, no data leaves it ---------------- */
+const OLLAMA_URL = process.env.OLLAMA_URL || 'http://127.0.0.1:11434';
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'llama3.2';
+/** Gemini tool declarations (Type.OBJECT, Type.STRING…) as JSON Schema for Ollama. */
+function toJsonSchema(x: any): any {
+  if (Array.isArray(x)) return x.map(toJsonSchema);
+  if (!x || typeof x !== 'object') return x;
+  return Object.fromEntries(Object.entries(x).map(([k, v]) => [k, k === 'type' && typeof v === 'string' ? v.toLowerCase() : toJsonSchema(v)]));
+}
+async function localChat(system: string, message: string, tools: any[]) {
+  const r = await fetch(`${OLLAMA_URL}/api/chat`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: AbortSignal.timeout(60_000),
+    body: JSON.stringify({
+      model: OLLAMA_MODEL, stream: false, options: { temperature: 0.2 },
+      messages: [{ role: 'system', content: system }, { role: 'user', content: message }],
+      tools: tools.map((t) => ({ type: 'function', function: toJsonSchema(t) })),
+    }),
+  });
+  if (!r.ok) throw new Error(`Ollama ${r.status}: ${(await r.text()).slice(0, 200)}`);
+  const m = (await r.json()).message || {};
+  const toolCalls = (m.tool_calls || []).map((c: any) => ({ name: c.function?.name, args: typeof c.function?.arguments === 'string' ? JSON.parse(c.function.arguments) : c.function?.arguments || {} }));
+  return { answer: m.content || (toolCalls.length ? 'Showing it on the map.' : ''), toolCalls, ai: `Local AI (${OLLAMA_MODEL})` };
+}
+
 /**
  * POST /api/assistant-chat
  * Structured tool-calling agent for natural indoor wayfinding
@@ -739,10 +763,6 @@ app.post('/api/assistant-chat', async (req: Request, res: Response) => {
     if (!message) {
       return res.status(400).json({ error: 'message is required' });
     }
-    if (!process.env.GEMINI_API_KEY) {
-      return res.status(503).json({ error: 'GEMINI_API_KEY is not configured on server' });
-    }
-
     const toolDeclarations = [
       {
         name: 'getCurrentIndoorPosition',
@@ -905,6 +925,18 @@ Directory:
 ${Array.isArray(directory) ? directory.slice(0, 400).map((r: any) => `${r.roomNumber || r.id}: ${r.name}${r.category ? ` [${r.category}]` : ''} (L${r.floor})`).join(', ') : ''}
 `;
 
+    // Local AI (Ollama) when chosen with AI_PROVIDER=local, when there is no Gemini key, or when Gemini fails.
+    const wantLocal = process.env.AI_PROVIDER === 'local' || !process.env.GEMINI_API_KEY;
+    if (!wantLocal) {
+      try { return res.json(await geminiChat()); }
+      catch (e: any) { console.warn('Gemini assistant failed, trying the local AI:', e?.message || e); }
+    }
+    try { return res.json(await localChat(systemPrompt, String(message), toolDeclarations)); }
+    catch (e: any) {
+      return res.status(503).json({ error: `No AI available: ${wantLocal ? '' : 'Gemini failed and '}the local AI (Ollama at ${OLLAMA_URL}) did not answer: ${e?.message || e}`, offline: true });
+    }
+
+    async function geminiChat() {
     const response = await generateContent({
       model: 'gemini-3.8-flash',
       contents: [
@@ -924,10 +956,11 @@ ${Array.isArray(directory) ? directory.slice(0, 400).map((r: any) => `${r.roomNu
       args: fc.args || {},
     }));
 
-    return res.json({
-      answer: textPart || (toolCalls.length > 0 ? 'Executing request on the map...' : 'How can I help you navigate E5?'),
-      toolCalls,
-    });
+    return {
+      answer: textPart || (toolCalls.length > 0 ? 'Executing request on the map...' : 'How can I help you find your way?'),
+      toolCalls, ai: 'Gemini',
+    };
+    }
   } catch (error: any) {
     console.error('Error in /api/assistant-chat:', error?.message || error);
     return res.status(503).json({
