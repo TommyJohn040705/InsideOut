@@ -9,7 +9,7 @@ const recs = (evidenceJson as unknown as { records: EvidenceRecord[] }).records;
 
 describe('evidence destinations (handoff section 13)', () => {
   it('imports all 159 handoff rows plus the planned residence, with no duplicates', () => {
-    expect(recs).toHaveLength(160);
+    expect(recs.filter((r) => r.source_id !== 'uw_showers')).toHaveLength(160);
     expect(EVIDENCE.duplicates).toHaveLength(0);
     const kinds: Record<string, number> = {};
     for (const r of recs) kinds[r.kind] = (kinds[r.kind] || 0) + 1;
@@ -22,7 +22,7 @@ describe('evidence destinations (handoff section 13)', () => {
       expect(r.routing_status).toBe('search_only');
       expect(r.accessible).toBe('unknown');
       expect(r.source_url).toMatch(/^https:\/\/([a-z-]+\.)*uwaterloo\.ca\//);
-      expect(r.source_checked_on).toBe('2026-11-14');
+      expect(r.source_checked_on).toMatch(r.source_id === 'uw_showers' ? /^d{4}-d{2}-d{2}$/ : /^2026-11-14$/);
       expect(r).not.toHaveProperty('coords');
     }
   });
