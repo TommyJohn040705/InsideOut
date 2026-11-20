@@ -144,7 +144,8 @@ function indoor(site: IndoorSite, a: RoomPOI, b: RoomPOI, accessible: boolean): 
   } catch { return null; }
 }
 
-const doorName = (d: CampusEntrance, b: string) => `${nameOf(b)} ${d.name || (d.kind === 'main' ? 'main entrance' : 'entrance')}`;
+// "E7 South Exit", not "E7 E7 South Exit" when the entrance name already starts with the building code.
+const doorName = (d: CampusEntrance, b: string) => { const n = d.name || (d.kind === 'main' ? 'main entrance' : 'entrance'); return n.toUpperCase().startsWith(nameOf(b).toUpperCase() + ' ') ? n : `${nameOf(b)} ${n}`; };
 
 /** A building's short name for messages: its code, else its name, never an internal id. */
 const nameOf = (id: string) => { const b = buildingById(id); return b?.code || b?.name || id; };

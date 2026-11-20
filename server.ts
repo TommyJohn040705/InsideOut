@@ -928,7 +928,8 @@ ${Array.isArray(directory) ? directory.slice(0, 400).map((r: any) => `${r.roomNu
     // Local AI (Ollama) when chosen with AI_PROVIDER=local, when there is no Gemini key, or when Gemini fails.
     const wantLocal = process.env.AI_PROVIDER === 'local' || !process.env.GEMINI_API_KEY;
     if (!wantLocal) {
-      try { return res.json(await geminiChat()); }
+      // A stuck Gemini call must not leave the user waiting: after 12 s the local AI answers instead.
+      try { return res.json(await Promise.race([geminiChat(), new Promise<never>((_, no) => setTimeout(() => no(new Error('Gemini took over 12 s')), 12_000))])); }
       catch (e: any) { console.warn('Gemini assistant failed, trying the local AI:', e?.message || e); }
     }
     try { return res.json(await localChat(systemPrompt, String(message), toolDeclarations)); }
