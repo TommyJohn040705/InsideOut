@@ -5,7 +5,7 @@
  * (E5's traced drawings or a published floor-plan import), never from per-building UI.
  */
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Search, X, Layers, DoorOpen, Lock, LocateFixed, Footprints, Accessibility, AlertTriangle, BarChart3, ChevronRight, FileText, Eye, Navigation2, ArrowUpDown, ExternalLink, CalendarDays } from 'lucide-react';
+import { Search, X, Layers, DoorOpen, Lock, LocateFixed, Footprints, Accessibility, AlertTriangle, BarChart3, ChevronRight, FileText, Eye, Navigation2, ArrowUpDown, ExternalLink, CalendarDays, Box } from 'lucide-react';
 import { FloorPlanData, NavigationRoute, RoomPOI } from '../../types/navigation';
 import {
   BUILDINGS, CAMPUS_CENTER, COVERAGE_LABEL, GAP_LABEL, FLOOR_STATUS_LABEL, FOOTPRINTS, INDOOR, CampusBuilding, CampusFloor,
@@ -20,6 +20,7 @@ import { indoorSites, planTrip, Trip, TripEnd, linkedBuildings, MAX_LINKS, BAD_W
 import { campusWeather, type CampusWeather } from '../../campus/weather';
 import { loadClasses } from '../../campus/schedule';
 import { MyClasses, NextClassChip } from './MyClasses';
+import { Building3D } from './Building3D';
 import type { ManualShaft } from '../../campus/floorImports';
 import { DEV_MODE } from '../../devMode';
 import { loadOutdoorGraph } from '../../campus/outdoorRoute';
@@ -87,6 +88,7 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   const [weather, setWeather] = useState<CampusWeather | null>(null);
   const [classes, setClasses] = useState(loadClasses);
   const [classesOpen, setClassesOpen] = useState(false);
+  const [show3D, setShow3D] = useState(false);
   useEffect(() => { campusWeather().then(setWeather); }, []);
 
   const sites = useMemo(() => indoorSites(plans, imports, shaftLinks), [plans, imports, shaftLinks]);
@@ -389,6 +391,9 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
       </div>
 
       <div className="flex gap-2">
+        {site && siteFloors.some((f) => site.georef(f)) && (
+          <button onClick={() => setShow3D(true)} aria-label="Show floors in 3D" className="h-10 px-3 rounded-xl ring-1 ring-slate-200 text-sm font-bold flex items-center gap-1.5 hover:bg-slate-50"><Box className="w-4 h-4" /> 3D</button>
+        )}
         {site && (
           <button onClick={() => onOpenIndoor(site.appBuildingId, floor ?? siteFloors[0])} className="flex-1 h-10 rounded-xl bg-slate-900 text-white text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-slate-800">
             Indoor navigator <ChevronRight className="w-4 h-4" />
@@ -567,6 +572,10 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
         <div className={isMobile ? 'fixed inset-x-0 bottom-0 top-1/3 z-40 p-2' : 'absolute right-3 top-3 bottom-3 w-[420px] z-40'}>
           <FloorPlanStudio buildingId={selectedId} imports={imports} onChanged={onImportsChanged} shaftLinks={shaftLinks || {}} onShaftLinksChanged={onShaftLinksChanged} adapter={adapter} onPreview={setStudioPreview} onClose={() => setStudioOpen(false)} />
         </div>
+      )}
+
+      {show3D && site && selected && (
+        <Building3D site={site} name={selected.name || selected.code || selected.id} highlightFloor={floor} onOpenFloor={(f) => { setShow3D(false); onOpenIndoor(site.appBuildingId, f); }} onClose={() => setShow3D(false)} />
       )}
 
       {coverageOpen && (
