@@ -730,7 +730,7 @@ export default function App() {
           floor: currentPlan.floorNumber, type: issue.type as RoomReport['type'], details: issue.details, createdAt: new Date().toISOString(), confirmations: 1,
         }, ...l])}
       />
-      <CameraSignScannerModal open={scannerOpen} onClose={() => setScannerOpen(false)} activeFloor={currentPlan.floorNumber} allRooms={allRooms} onConfirmCheckpoint={handleConfirmCheckpoint} />
+      <CameraSignScannerModal open={scannerOpen} onClose={() => setScannerOpen(false)} activeFloor={currentPlan.floorNumber} allRooms={allRooms} buildingCode={buildingCode(currentPlan)} onConfirmCheckpoint={handleConfirmCheckpoint} />
       <GoogleMapsHandoffModal open={handoffOpen} onClose={() => setHandoffOpen(false)} targetDestination={endRoom} onSelectEntrance={handleSelectEntrance} />
       <CorrectionsAuditModal open={auditModalOpen} onClose={() => setAuditModalOpen(false)} activeFloor={currentPlan.floorNumber} allRooms={allRooms}
         onApplyOverride={(roomId, patch) => { const r = allRooms.find((x) => x.id === roomId); if (r) updateRoom({ ...r, ...patch }); }} />

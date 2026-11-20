@@ -21,6 +21,8 @@ import { campusWeather, type CampusWeather } from '../../campus/weather';
 import { loadClasses } from '../../campus/schedule';
 import { MyClasses, NextClassChip } from './MyClasses';
 import { Building3D } from './Building3D';
+import { buildingAt, footprintsOf } from '../../campus/whereAmI';
+const FOOTPRINT_LIST = footprintsOf(FOOTPRINTS);
 import type { ManualShaft } from '../../campus/floorImports';
 import { DEV_MODE } from '../../devMode';
 import { loadOutdoorGraph } from '../../campus/outdoorRoute';
@@ -75,6 +77,10 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   const [user, setUser] = useState<LngLat | null>(null);
   const [accuracyM, setAccuracyM] = useState<number | null>(null);
   const watchId = useRef<number | null>(null);
+  /** The building GPS puts you in (or right next to). */
+  const here = useMemo(() => (user ? buildingAt(user, accuracyM, FOOTPRINT_LIST) : null), [user, accuracyM]);
+  const hereB = here ? buildingById(here.id) : null;
+  const myPlace = (): TripEnd | null => (user ? { ...(here ? { buildingId: here.id } : {}), at: user, label: hereB ? `My location (${here!.inside ? 'in' : 'next to'} ${hereB.code || hereB.name})` : 'My location (GPS)' } : null);
   useEffect(() => () => { if (watchId.current != null) navigator.geolocation?.clearWatch(watchId.current); }, []);
   // OpenStreetMap indoor level being shown, and a room found by search on it.
   const [osmLevel, setOsmLevel] = useState<string | null>(null);
@@ -309,7 +315,7 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   };
   const openTripTo = (to: TripEnd) => {
     setTripOpen(true); setTripTo(to);
-    if (!tripFrom && user) setTripFrom({ at: user, label: 'My location (GPS)' });
+    if (!tripFrom && user) setTripFrom(myPlace());
   };
 
   // Google's walking directions remain available as a second opinion when a key is set.
@@ -338,6 +344,13 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
   };
   const picker = (
     <div className="bg-white rounded-2xl shadow-lg ring-1 ring-slate-200 p-4 space-y-2">
+      {hereB && (
+        <div className="flex items-center gap-2 bg-emerald-50 ring-1 ring-emerald-200 rounded-xl p-2.5 text-sm">
+          <LocateFixed className="w-5 h-5 text-emerald-700 shrink-0" />
+          <span className="flex-1 min-w-0"><b>{here!.inside ? "You're in" : "You're next to"} {hereB.code || hereB.name}</b><span className="block text-xs text-slate-600">GPS{accuracyM ? ` ±${Math.round(accuracyM)} m` : ''}. Inside, scan a room sign to pinpoint your spot.</span></span>
+          {sites[hereB.id] && <button onClick={() => { const s = sites[hereB.id]; const fl = [...new Set(s.plans.map((p) => p.floorNumber))].sort((a, b) => a - b); onOpenIndoor(s.appBuildingId, fl.find((f) => f >= 1) ?? fl[0]); }} className="h-9 px-3 rounded-lg bg-emerald-600 text-white text-xs font-bold shrink-0">Open</button>}
+        </div>
+      )}
       {classes.length > 0 && <NextClassChip classes={classes} onDirections={directionsToRoom} />}
       <p className="text-lg font-extrabold text-slate-900">Which building are you in?</p>
       <p className="text-sm text-slate-600">Tap it on the map, or pick it here. Search above to find a room.</p>
@@ -455,7 +468,7 @@ export function CampusView({ plans, imports, onImportsChanged, onNeedNetworks, s
         <input autoFocus value={tripQ.q} onChange={(e) => setTripQ({ which, q: e.target.value })} placeholder={which === 'from' ? 'From: building or room (DC, E5 2108)' : 'To: building or room (E5 3101)'}
           aria-label={which === 'from' ? 'Trip start' : 'Trip destination'} className="w-full h-10 px-3 rounded-xl bg-slate-100 text-sm outline-none ring-2 ring-blue-500" />
         <ul className="absolute z-10 left-0 right-0 mt-1 bg-white rounded-xl shadow-xl ring-1 ring-slate-200 overflow-hidden divide-y divide-slate-100">
-          {which === 'from' && user && <li><button className="w-full text-left px-3 py-2 text-sm hover:bg-slate-50" onClick={() => { setTripFrom({ at: user, label: 'My location (GPS)' }); setTripQ(null); }}>My location (GPS)</button></li>}
+          {which === 'from' && user && <li><button className="w-full text-left px-3 py-2 text-sm hover:bg-slate-50" onClick={() => { setTripFrom(myPlace()); setTripQ(null); }}>{myPlace()?.label}</button></li>}
           {tripHits.map((h, i) => <li key={i}><button className="w-full text-left px-3 py-2 text-sm hover:bg-slate-50" onClick={() => { (which === 'from' ? setTripFrom : setTripTo)(toTripEnd(h)); setTripQ(null); }}>{hitLabel(h)}</button></li>)}
         </ul>
       </div>
